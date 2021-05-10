@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/mainTop"
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:orientation="vertical">
@@ -23,7 +24,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_launcher_background"
-                tools:ignore="VectorDrawableCompat" />
+                tools:ignore="VectorDrawableCompat"
+                android:contentDescription="mainIcon" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,7 +35,7 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -58,12 +60,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/mainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnTest"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_margin="10dp"
@@ -71,7 +74,7 @@
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnChat"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_margin="10dp"
@@ -84,7 +87,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btnDiary"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -93,7 +96,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/btnBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
