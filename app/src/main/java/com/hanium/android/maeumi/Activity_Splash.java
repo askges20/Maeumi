@@ -20,7 +20,7 @@ public class Activity_Splash extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 1000);   //1초 뒤 메인으로 이동
+        }, 3000);   //3초 뒤 메인으로 이동
     }
 
     @Override
