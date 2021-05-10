@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "783811154662",
+    "project_id": "maeumi-3384f",
+    "storage_bucket": "maeumi-3384f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783811154662:android:951a3d1a46403fa9546127",
+        "android_client_info": {
+          "package_name": "com.hanium.android.maeumi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783811154662-p8sbtr1skna5g1tdkg0po6mqq8gjumsk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP9fNE7QT0VWBX4PbXVooxvrvqoMT80Zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783811154662-p8sbtr1skna5g1tdkg0po6mqq8gjumsk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
