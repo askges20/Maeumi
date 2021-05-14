@@ -27,7 +27,7 @@
         <activity android:name=".ChatBot"></activity>
         <activity android:name=".Board"></activity>
         <activity android:name=".Profile"></activity>
-
+        <activity android:name=".DiaryContent"></activity>
 
     </application>
 
