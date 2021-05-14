@@ -19,6 +19,7 @@ public class Activity_Splash extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
+                System.out.println("Splash Splash");
             }
         }, 3000);   //3초 뒤 메인으로 이동
     }

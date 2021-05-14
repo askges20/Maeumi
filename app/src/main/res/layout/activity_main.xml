@@ -54,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="마음 온도 5도" />
+                android:text="마음 온도 5도"
+                android:onClick="goToProfile"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -71,7 +72,8 @@
             android:layout_height="100dp"
             android:layout_margin="10dp"
             android:text="테스트 하기"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:onClick="goToSelfTest"/>
 
         <Button
             android:id="@+id/btnChat"
@@ -79,7 +81,8 @@
             android:layout_height="100dp"
             android:layout_margin="10dp"
             android:text="상담하기"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:onClick="goToChatBot"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,7 +96,8 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:text="나만의\n일기장"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:onClick="goToDiary"/>
 
             <Button
                 android:id="@+id/btnBoard"
@@ -102,7 +106,8 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:text="게시판"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:onClick="goToBoard"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
