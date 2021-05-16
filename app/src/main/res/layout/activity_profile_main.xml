@@ -1,12 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Profile Main" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="마이페이지"
+            android:background="#C4C4C4"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--마음 온도-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#C4C4C4"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="마음 온도\n5"
+                    android:textSize="20sp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="3dp"
+                        android:background="#FA8072"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <!--게시글 작성 내역-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#C4C4C4"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="게시글 작성 내역"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"/>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_margin="3dp"
+                        android:layout_width="200dp"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="어제 맞은 썰 푼다...."/>
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="이모티콘" />
+
+                    <Button
+                        android:layout_width="65dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="수정" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!--프로필-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#C4C4C4"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_margin="5dp"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="프로필"/>
+
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="수정" />
+
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                    <TextView
+                        android:layout_margin="3dp"
+                        android:layout_width="200dp"
+                        android:layout_height="20dp"
+                        android:text="이름: 홍길동"/>
+
+                    <TextView
+                        android:layout_margin="3dp"
+                        android:layout_width="200dp"
+                        android:layout_height="20dp"
+                        android:text="학교: 고등학교"/>
+
+                    <TextView
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:text="성별: 남"/>
+
+                   <TextView
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:text="전화번호: 010-0000-0000"/>
+
+                    <TextView
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:text="닉네임: 길동이"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>

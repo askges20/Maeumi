@@ -26,7 +26,7 @@
         <activity android:name=".SelfTest"></activity>
         <activity android:name=".ChatBot"></activity>
         <activity android:name=".Board"></activity>
-        <activity android:name=".Profile"></activity>
+        <activity android:name="profile.Profile"></activity>
         <activity android:name=".DiaryContent"></activity>
 
     </application>
