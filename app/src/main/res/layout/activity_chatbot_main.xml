@@ -1,12 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="ChatBot Main" />
-</LinearLayout>
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:gravity="center"
+        android:text="상담하기"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <TextView
+        android:id="@+id/sangdamINFO"
+        android:layout_width="340dp"
+        android:layout_height="200dp"
+        android:layout_gavity="center"
+        android:text="상담 안내"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="123dp"
+        android:gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/sangdamStart"
+        android:layout_width="340dp"
+        android:layout_height="100dp"
+        android:layout_gavity="center"
+        android:text="상담 진행하기"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="347dp"
+        android:onClick="goToChatBotStart"/>
+
+    <Button
+        android:id="@+id/sangdamRecord"
+        android:layout_width="340dp"
+        android:layout_height="100dp"
+        android:layout_gavity="center"
+        android:text="이전 상담 내역"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="506dp"
+        android:onClick="goTochatBotRecord"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

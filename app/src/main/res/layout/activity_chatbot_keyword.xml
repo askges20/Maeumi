@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonYES"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="네. 맞습니다."
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="234dp" />
+
+    <ImageView
+        android:id="@+id/MaeumiLOGO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/resource__"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="136dp" />
+
+    <TextView
+        android:id="@+id/KeyWordOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="키워드가 맞습니까?"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="192dp" />
+
+    <Button
+        android:id="@+id/buttonNO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아니오. 틀립니다."
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="282dp" />
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:gravity="center"
+        android:text="상담하기"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
