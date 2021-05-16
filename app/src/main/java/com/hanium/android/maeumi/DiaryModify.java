@@ -9,6 +9,4 @@ public class DiaryModify extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_modify);
     }
-
-
 }
