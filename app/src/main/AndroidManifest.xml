@@ -10,7 +10,10 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-        <activity android:name=".test_result"></activity>
+        <activity android:name=".selftest"></activity>
+        <activity android:name=".test_result" />
+        <activity android:name=".mainselftest" />
+        <activity android:name=".testfirst" />
         <activity android:name=".testclick" /> <!-- 로딩 화면 -->
         <activity android:name=".Activity_Splash">
             <intent-filter>

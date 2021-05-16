@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class selftest extends AppCompatActivity {
 
     private Button button4;
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, testclick.class);
+                Intent intent = new Intent(selftest.this, com.example.myapplication.testclick.class);
                 startActivity(intent); //액티비티 이동
             }
         });
