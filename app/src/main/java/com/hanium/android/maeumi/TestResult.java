@@ -1,10 +1,10 @@
 package com.hanium.android.maeumi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class test_result extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class TestResult extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

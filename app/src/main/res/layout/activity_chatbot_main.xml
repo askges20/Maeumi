@@ -1,18 +1,16 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="92dp"
-        android:gravity="center"
         android:text="상담하기"
-        android:textAlignment="center"
         android:textSize="80sp"
         tools:layout_editor_absoluteX="4dp"
         tools:layout_editor_absoluteY="3dp" />
@@ -21,36 +19,27 @@
         android:id="@+id/sangdamINFO"
         android:layout_width="340dp"
         android:layout_height="200dp"
-        android:layout_gavity="center"
         android:text="상담 안내"
-        android:textAlignment="center"
         android:textSize="20dp"
         tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="123dp"
-        android:gravity="center_horizontal" />
+        tools:layout_editor_absoluteY="123dp"/>
 
     <Button
         android:id="@+id/sangdamStart"
         android:layout_width="340dp"
         android:layout_height="100dp"
-        android:layout_gavity="center"
         android:text="상담 진행하기"
         android:textSize="20dp"
-        android:textAlignment="center"
         tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="347dp"
-        android:onClick="goToChatBotStart"/>
+        tools:layout_editor_absoluteY="347dp"/>
 
     <Button
         android:id="@+id/sangdamRecord"
         android:layout_width="340dp"
         android:layout_height="100dp"
-        android:layout_gavity="center"
         android:text="이전 상담 내역"
         android:textSize="20dp"
-        android:textAlignment="center"
         tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="506dp"
-        android:onClick="goTochatBotRecord"/>
+        tools:layout_editor_absoluteY="506dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
