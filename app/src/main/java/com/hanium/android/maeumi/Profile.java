@@ -1,4 +1,4 @@
-package profile;
+package com.hanium.android.maeumi;
 
 import android.app.Activity;
 import android.os.Bundle;

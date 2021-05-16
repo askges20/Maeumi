@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Chatbot extends Activity {
+public class ChatBot extends Activity {
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -13,7 +13,7 @@ public class Chatbot extends Activity {
     }
 
     public void goToChatBotStart(View view){
-        Intent intent = new Intent(Chatbot.this, ChatBotStart.class);
+        Intent intent = new Intent(ChatBot.this, ChatBotStart.class);
         startActivity(intent);
         System.out.println("Move To ChatBotStart");
     }
