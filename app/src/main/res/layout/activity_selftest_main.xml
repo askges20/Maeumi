@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity_main" >
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:text="설문조사"
+        android:textColor="#000000"
+        app:backgroundTint="#AAA9A9" />
 
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="331dp"
+        android:text="
+       테스트 안내 (진행시간, 항목수 등 안내사항)"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:text="지난 설문조사 결과보기"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:backgroundTint="#8A8984" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:text="설문조사 시작"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:backgroundTint="#F44336" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="self test main" />
+        android:textColor="#000000"
+        app:backgroundTint="#AAA9A9" />
 </LinearLayout>

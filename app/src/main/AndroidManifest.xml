@@ -7,28 +7,25 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Maeumi"
-        android:screenOrientation="portrait">
-
-        <!-- 로딩 화면 -->
+        android:theme="@style/Theme.Maeumi">
+        <activity android:name=".test_result"></activity>
+        <activity android:name=".testclick" /> <!-- 로딩 화면 -->
         <activity android:name=".Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- 메인 화면 -->
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Diary"></activity>
-        <activity android:name=".SelfTest"></activity>
-        <activity android:name=".ChatBot"></activity>
-        <activity android:name=".Board"></activity>
-        <activity android:name=".Profile"></activity>
-        <activity android:name=".DiaryContent"></activity>
-
+        </activity> <!-- 메인 화면 -->
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Diary" />
+        <activity android:name=".SelfTest" />
+        <activity android:name=".ChatBot" />
+        <activity android:name=".Board" />
+        <activity android:name=".Profile" />
+        <activity android:name=".DiaryContent" />
     </application>
 
 </manifest>
