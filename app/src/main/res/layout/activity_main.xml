@@ -16,6 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="130dp"
+            android:layout_weight="0.5"
             android:orientation="horizontal">
 
             <ImageView
@@ -23,9 +24,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:contentDescription="mainIcon"
                 app:srcCompat="@drawable/ic_launcher_background"
-                tools:ignore="VectorDrawableCompat"
-                android:contentDescription="mainIcon" />
+                tools:ignore="VectorDrawableCompat" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,6 +47,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="8"
             android:background="@color/teal_200"
             android:orientation="vertical">
 
@@ -54,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:onClick="goToProfile"
                 android:text="마음 온도 5도" />
         </LinearLayout>
 
@@ -63,35 +66,48 @@
         android:id="@+id/mainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btnTest"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:text="테스트 하기"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/btnChat"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:text="상담하기"
-            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnTest"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:onClick="goToSelfTest"
+                android:text="테스트 하기"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/btnChat"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:onClick="goToChatBot"
+                android:text="상담하기"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnDiary"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:onClick="goToDiary"
                 android:text="나만의\n일기장"
                 android:textSize="24sp" />
 
@@ -99,8 +115,10 @@
                 android:id="@+id/btnBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:onClick="goToBoard"
                 android:text="게시판"
                 android:textSize="24sp" />
         </LinearLayout>
