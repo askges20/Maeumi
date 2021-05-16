@@ -17,7 +17,7 @@
         android:id="@+id/MaeumiLOGO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/resource__"
+        app:srcCompat="@drawable/MaeumiLOGO"
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="136dp" />
 

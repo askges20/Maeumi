@@ -19,10 +19,10 @@
         tools:layout_editor_absoluteY="3dp" />
 
     <ImageView
-        android:id="@+id/MaeumiLOGO"
+        android:id="@+id/maeumiLOGO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/resource__"
+        app:srcCompat="@drawable/maeumilogo"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="111dp" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="질문하기"
         tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="206dp">
+        tools:layout_editor_absoluteY="206dp"/>
 
     <Button
         android:id="@+id/button_toBoard"
