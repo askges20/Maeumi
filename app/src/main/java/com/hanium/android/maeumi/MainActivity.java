@@ -23,18 +23,23 @@ public class MainActivity extends AppCompatActivity {
 
         //firebase 연동 테스트
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("Hello, World!");
+        DatabaseReference myRef = database.getReference("일기");
+        //myRef.setValue("Hello, World!");    //데이터 1개가 계속 수정
+        myRef.child("title").push().setValue("제목");
+        myRef.child("content").push().setValue("내용");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
+
+                /*
+                String value = dataSnapshot.getValue(String.class);   //myRef.setValue("Hello, World!");일 때
+                Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
                 System.out.println("Value is: " + value);
+                 */
             }
 
             @Override

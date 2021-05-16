@@ -30,19 +30,46 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <CalendarView
-            android:id="@+id/myCalendar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/diaryContentBtn"
+            <CalendarView
+                android:id="@+id/myCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="일기 내용 페이지로 이동"
-            android:onClick="goToDiaryContent"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/diaryContentBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:onClick="goToDiaryContent"
+                android:padding="15dp"
+                android:text="일기 내용"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/diaryWriteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:onClick="goToDiaryWrite"
+                android:padding="15dp"
+                android:text="작성하기"
+                android:textSize="20sp" />
+        </LinearLayout>
 
     </LinearLayout>
 

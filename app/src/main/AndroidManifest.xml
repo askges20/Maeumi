@@ -18,13 +18,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
         <activity android:name=".Diary" />
+        <activity android:name=".DiaryContent" />
+        <activity android:name=".DiaryModify" />
+        <activity android:name=".DiaryWrite" />
+
         <activity android:name=".ChatBot" />
         <activity android:name=".Board" />
         <activity android:name=".Profile" />
-        <activity android:name=".DiaryContent" />
-        <activity android:name=".SelfTest"></activity>
-        <activity android:name=".mainselftest" />
+        <activity android:name=".SelfTest"/>
         <activity android:name=".TestResult" />
         <activity android:name=".TestClick" />
     </application>
