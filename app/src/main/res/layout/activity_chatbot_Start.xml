@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatBotStart">
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:gravity="center"
+        android:text="상담하기"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <Button
+        android:id="@+id/button_Q"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="질문하기"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="206dp">
+
+    <TextView
+        android:id="@+id/WhatHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="무엇을 도와드릴까요?"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="168dp" />
+
+    <Button
+        android:id="@+id/button_toBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="익명 게시판이란?"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="313dp" />
+
+    <Button
+        android:id="@+id/button_toDiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나만의 일기장이란?"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="254dp" />
+
+    <ImageView
+        android:id="@+id/MaeumiLOGO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/resource__"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="111dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

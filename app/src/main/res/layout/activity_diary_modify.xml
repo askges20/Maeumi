@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DiaryContent">
+    tools:context=".DiaryModify">
+
 
     <LinearLayout
         android:id="@+id/mainTop"
@@ -54,21 +55,6 @@
                     android:text="2021.05.15"
                     android:textSize="16sp" />
 
-                <Button
-                    android:id="@+id/modifyDiaryBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="수정"
-                    android:onClick="goToDiaryModify"/>
-
-                <Button
-                    android:id="@+id/deleteDiaryBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="삭제"
-                    android:onClick="showDeleteDialog"/>
             </LinearLayout>
 
             <LinearLayout
@@ -77,14 +63,14 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/diaryTitle"
+                <EditText
+                    android:id="@+id/editTextTextPersonName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:text="오늘은 좋은 하루였다."
-                    android:textSize="20sp" />
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="제목" />
 
                 <Button
                     android:id="@+id/dailyEmoticon"
@@ -102,13 +88,46 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dailyContent"
+            <EditText
+                android:id="@+id/editTextTextMultiLine"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="10"
                 android:background="#ECECEC"
-                android:padding="10dp"
-                android:text="오늘은 정말 좋은 하루였다." />
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:padding="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:text="수정"
+                    android:onClick="processModify"/>
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="목록으로"
+                    android:onClick="goToBack"/>
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

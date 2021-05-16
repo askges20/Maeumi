@@ -3,6 +3,8 @@ package com.hanium.android.maeumi;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.hanium.android.maeumi.R;
+
 public class Profile extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
