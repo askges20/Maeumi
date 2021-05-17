@@ -132,10 +132,11 @@
                         android:text="이모티콘" />
 
                     <Button
+                        android:onClick="deleteConfirm"
                         android:layout_width="65dp"
                         android:layout_height="40dp"
                         android:gravity="center"
-                        android:text="수정" />
+                        android:text="삭제" />
 
                 </LinearLayout>
 
