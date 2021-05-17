@@ -19,17 +19,17 @@
         </activity>
         <activity android:name=".MainActivity" />
 
-        <activity android:name=".Diary" />
-        <activity android:name=".DiaryContent" />
-        <activity android:name=".DiaryModify" />
-        <activity android:name=".DiaryWrite" />
+        <activity android:name=".view.diary.Diary" />
+        <activity android:name=".view.diary.DiaryContent" />
+        <activity android:name=".view.diary.DiaryModify" />
+        <activity android:name=".view.diary.DiaryWrite" />
 
-        <activity android:name=".ChatBot" />
-        <activity android:name=".Board" />
-        <activity android:name=".Profile" />
-        <activity android:name=".SelfTest"/>
-        <activity android:name=".TestResult" />
-        <activity android:name=".TestClick" />
+        <activity android:name=".view.chatbot.ChatBot" />
+        <activity android:name=".view.board.Board" />
+        <activity android:name=".view.profile.Profile" />
+        <activity android:name=".view.selftest.SelfTest"/>
+        <activity android:name=".view.selftest.TestResult" />
+        <activity android:name=".view.selftest.TestClick" />
     </application>
 
 </manifest>

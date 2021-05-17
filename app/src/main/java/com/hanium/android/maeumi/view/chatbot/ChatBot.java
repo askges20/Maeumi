@@ -1,9 +1,11 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.chatbot;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.hanium.android.maeumi.R;
 
 public class ChatBot extends Activity {
     @Override

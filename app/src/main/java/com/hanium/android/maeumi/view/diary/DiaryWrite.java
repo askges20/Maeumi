@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.diary;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.hanium.android.maeumi.R;
 
 public class DiaryWrite extends Activity {
     TextView date;

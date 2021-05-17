@@ -12,6 +12,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.view.board.Board;
+import com.hanium.android.maeumi.view.chatbot.ChatBot;
+import com.hanium.android.maeumi.view.diary.Diary;
+import com.hanium.android.maeumi.view.selftest.SelfTest;
+import com.hanium.android.maeumi.view.profile.Profile;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.diary;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.widget.CalendarView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import com.hanium.android.maeumi.R;
 
 import java.util.Calendar;
 

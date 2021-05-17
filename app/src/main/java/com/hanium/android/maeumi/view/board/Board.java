@@ -1,7 +1,9 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.board;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.hanium.android.maeumi.R;
 
 public class Board extends Activity {
     @Override
