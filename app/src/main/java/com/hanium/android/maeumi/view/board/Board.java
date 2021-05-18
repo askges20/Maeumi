@@ -27,7 +27,7 @@ public class Board extends AppCompatActivity {
     public void goToBoardWrite(View view){
         Intent intent = new Intent(Board.this, BoardWrite.class);
         startActivity(intent);
-        System.out.println("Move To BoardWrite");
+        System.out.println("자유게시판 게시글 작성");
     }
 
 
@@ -50,5 +50,4 @@ public class Board extends AppCompatActivity {
             });
             popupMenu.show();
         }
-    ;
 }
