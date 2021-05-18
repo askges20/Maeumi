@@ -58,6 +58,7 @@ public class ProfileEdit extends AppCompatActivity {
                 }else{
                     System.out.println("닉네임 변경 "+alias.getText());
                 }
+                finish();
             }
         });
 
