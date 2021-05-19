@@ -88,7 +88,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/diaryContentText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

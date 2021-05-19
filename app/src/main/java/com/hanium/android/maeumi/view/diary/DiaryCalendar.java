@@ -13,7 +13,7 @@ import com.hanium.android.maeumi.R;
 
 import java.util.Calendar;
 
-public class Diary extends Activity {
+public class DiaryCalendar extends Activity {
     CalendarView calendarView;
     int year;
     int month;
@@ -34,17 +34,17 @@ public class Diary extends Activity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                Diary.this.year = year;
-                Diary.this.month = month + 1;
-                Diary.this.dayOfMonth = dayOfMonth;
+                DiaryCalendar.this.year = year;
+                DiaryCalendar.this.month = month + 1;
+                DiaryCalendar.this.dayOfMonth = dayOfMonth;
                 String date = year + "/" + (month+1) + "/" + (dayOfMonth);
-                Toast.makeText(Diary.this, date, Toast.LENGTH_SHORT).show();    //선택한 날짜 toast
+                Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();    //선택한 날짜 toast
             }
         });
     }
 
     public void goToDiaryContent(View view){
-        Intent intent = new Intent(Diary.this, DiaryContent.class);
+        Intent intent = new Intent(DiaryCalendar.this, DiaryContent.class);
         intent.putExtra("연", year);
         intent.putExtra("월", month);
         intent.putExtra("일", dayOfMonth);
@@ -53,7 +53,7 @@ public class Diary extends Activity {
     }
 
     public void goToDiaryWrite(View view){
-        Intent intent = new Intent(Diary.this, DiaryWrite.class);
+        Intent intent = new Intent(DiaryCalendar.this, DiaryWrite.class);
         intent.putExtra("연", year);
         intent.putExtra("월", month);
         intent.putExtra("일", dayOfMonth);

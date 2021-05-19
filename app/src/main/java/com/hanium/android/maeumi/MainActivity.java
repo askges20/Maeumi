@@ -14,9 +14,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
-import com.hanium.android.maeumi.view.diary.Diary;
-import com.hanium.android.maeumi.view.selftest.SelfTest;
+import com.hanium.android.maeumi.view.diary.DiaryCalendar;
 import com.hanium.android.maeumi.view.profile.Profile;
+import com.hanium.android.maeumi.view.selftest.SelfTest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToDiary(View view){
-        Intent intent = new Intent(MainActivity.this, Diary.class);
+        Intent intent = new Intent(MainActivity.this, DiaryCalendar.class);
         startActivity(intent);
         System.out.println("Move To Diary");
     }
