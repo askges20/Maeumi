@@ -20,4 +20,10 @@ public class ChatBot extends Activity {
         System.out.println("Move To ChatBotStart");
     }
 
+    public void goToChatBotRecord(View view){
+        Intent intent = new Intent(ChatBot.this, ChatBotRecord.class);
+        startActivity(intent);
+        System.out.println("Move To ChatBotRecord");
+    }
+
 }
