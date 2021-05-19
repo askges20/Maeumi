@@ -22,7 +22,7 @@ public class ChatBotStart extends AppCompatActivity {
         startActivity(intent);
         System.out.println("Move To Diary");
     }
-    public void goTogoToBoardAnonymous(View view){
+    public void goToBoardAnonymous(View view){
         Intent intent = new Intent(ChatBotStart.this, BoardAnonymous.class);
         startActivity(intent);
         System.out.println("Move To BoardAnonymous");

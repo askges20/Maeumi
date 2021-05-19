@@ -66,7 +66,7 @@
             android:text="나만의 일기장이란?"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="254dp"
-            android:onClick="goToDiary/>  <!-- 다이어리로 넘어가고 싶다.. -->
+            android:onClick="goToDiary"/>  <!-- 다이어리로 넘어가고 싶다.. -->
     </LinearLayout> <!-- 얜 왜이럴까요?-->
 
 
