@@ -15,7 +15,7 @@ public class ChatBotRecord extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot_record);
     }
-    public void deleteRecordConfirm(View view){
+    public void deleteReordConfirm(View view){
         new AlertDialog.Builder(this)
                 .setTitle("게시글 삭제")
                 .setMessage("게시글을 삭제하시겠습니까?")

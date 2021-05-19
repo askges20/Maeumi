@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
 public class BoardAnonymous extends AppCompatActivity {
@@ -19,6 +18,12 @@ public class BoardAnonymous extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_anonymous);
     }
+    public void goToBoardAnonymous(View view){
+        Intent intent = new Intent(BoardAnonymous.this, Board.class);
+        startActivity(intent);
+        System.out.println("Move To BoardAnonymous");
+    }
+
 
     public void goToBoard(View view){
         Intent intent = new Intent(BoardAnonymous.this, Board.class);

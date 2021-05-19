@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_weight="1"
     tools:context=".view.chatbot.ChatBotStart">
 
     <TextView
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="92dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:text="상담하기"
         android:textAlignment="center"
@@ -18,51 +20,54 @@
         tools:layout_editor_absoluteX="4dp"
         tools:layout_editor_absoluteY="3dp" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/maeumi_logo" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/maeumiLOGO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/maeumi_logo"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="111dp" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/maeumi_logo" />
 
-    <TextView
-        android:id="@+id/WhatHelp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="무엇을 도와드릴까요?"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="168dp" />
 
-    <Button
-        android:id="@+id/button_Q"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="질문하기"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="206dp"/>
+        <TextView
+            android:id="@+id/WhatHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="무엇을 도와드릴까요?"
+            tools:layout_editor_absoluteX="29dp"
+            tools:layout_editor_absoluteY="168dp" />
 
-    <Button
-        android:id="@+id/button_toBoard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="익명 게시판이란?"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="313dp" />
+        <Button
+            android:id="@+id/button_Q"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="질문하기"
+            tools:layout_editor_absoluteX="29dp"
+            tools:layout_editor_absoluteY="206dp" />
 
-    <Button
-        android:id="@+id/button_toDiary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="나만의 일기장이란?"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="254dp" />
+        <Button
+            android:id="@+id/button_toBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="익명 게시판이란?"
+            tools:layout_editor_absoluteX="29dp"
+            tools:layout_editor_absoluteY="313dp"
+            android:onClick="goToBoardAnonymous"/> <!-- 익게로 넘어가고싶다..-->
+
+
+        <Button
+            android:id="@+id/button_toDiary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나만의 일기장이란?"
+            tools:layout_editor_absoluteX="29dp"
+            tools:layout_editor_absoluteY="254dp"
+            android:onClick="goToDiary/>  <!-- 다이어리로 넘어가고 싶다.. -->
+    </LinearLayout> <!-- 얜 왜이럴까요?-->
 
 
 </LinearLayout>
