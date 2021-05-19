@@ -17,6 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DiaryWrite extends Activity {
+    FirebaseDatabase database;
+    DatabaseReference diaryRef;
+
     TextView date;
     EditText diaryTitleText;
     EditText diaryContentText;
@@ -24,6 +27,7 @@ public class DiaryWrite extends Activity {
     int year;
     int month;
     int dayOfMonth;
+    String dateStr; //20210519 형식
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,36 +38,32 @@ public class DiaryWrite extends Activity {
         Intent dateIntent = getIntent();
         year = dateIntent.getIntExtra("연", 1);
         month = dateIntent.getIntExtra("월", 1);
-        dayOfMonth = dateIntent.getIntExtra("일", 1);;
+        dayOfMonth = dateIntent.getIntExtra("일", 1);
         date = findViewById(R.id.writeDate);
         date.setText(year + "." + month + "." + dayOfMonth);
+        dateStr = "/" + year + month + dayOfMonth + "/";
 
         diaryTitleText = (EditText)findViewById(R.id.diaryTitleText);
         diaryContentText = (EditText)findViewById(R.id.diaryContentText);
+
+        database = FirebaseDatabase.getInstance();
+        diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것
     }
 
     //작성 완료 버튼 클릭 시 DB 반영   -> 추후 view가 아닌 다른 패키지로 옮길 예정
     public void processAdd(View view){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference diaryRef = database.getReference("일기장");
-
-        /*DB 반영 구현 중*/
 
         //작성한 일기 제목, 내용
         String diaryTitle = diaryTitleText.getText().toString();
         String diaryContent = diaryContentText.getText().toString();
 
-        Toast.makeText(DiaryWrite.this, diaryTitle, Toast.LENGTH_SHORT).show();
-        Toast.makeText(DiaryWrite.this, diaryContent, Toast.LENGTH_SHORT).show();
-
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> diaryValues = null;
-        Diary diary = new Diary(diaryTitle, diaryContent, 1);
+
+        Diary diary = new Diary(diaryTitle, diaryContent, 1);   //model Diary 객체
         diaryValues = diary.toMap();
-
-        childUpdates.put("/id/"+date, diaryValues);
+        childUpdates.put(dateStr, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
-
 
         Toast toastView = Toast.makeText(DiaryWrite.this, "작성 완료", Toast.LENGTH_SHORT);
         toastView.show();
