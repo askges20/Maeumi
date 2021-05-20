@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/banner"
         android:layout_width="match_parent"
@@ -19,7 +21,7 @@
         android:id="@+id/MaeumiLOGO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/MaeumiLOGO"
+        app:srcCompat="@drawable/maeumi_logo"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="121dp" />
     <EditText
@@ -49,7 +51,8 @@
         android:text="유사한 키워드"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="612dp" />
+        tools:layout_editor_absoluteY="612dp"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/KeyWordchamGO"
@@ -59,6 +62,7 @@
         android:textSize="20dp"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="182dp" />
+        tools:layout_editor_absoluteY="182dp"
+        android:gravity="center_horizontal" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

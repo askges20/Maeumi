@@ -10,25 +10,23 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-        <activity android:name=".selftest"></activity>
-        <activity android:name=".test_result" />
-        <activity android:name=".mainselftest" />
-        <activity android:name=".testfirst" />
-        <activity android:name=".testclick" /> <!-- 로딩 화면 -->
         <activity android:name=".Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 메인 화면 -->
+        </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".Diary" />
-        <activity android:name=".SelfTest" />
         <activity android:name=".ChatBot" />
         <activity android:name=".Board" />
         <activity android:name=".Profile" />
         <activity android:name=".DiaryContent" />
+        <activity android:name=".SelfTest"></activity>
+        <activity android:name=".mainselftest" />
+        <activity android:name=".TestResult" />
+        <activity android:name=".TestClick" />
     </application>
 
 </manifest>

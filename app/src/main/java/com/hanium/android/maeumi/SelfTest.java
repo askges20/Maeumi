@@ -14,7 +14,7 @@ public class selftest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.selftest);
+        setContentView(R.layout.activity_main);
 
         button4 = findViewById(R.id.button4);
         button4.setOnClickListener(new View.OnClickListener() {

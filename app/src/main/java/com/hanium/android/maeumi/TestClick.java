@@ -1,13 +1,13 @@
-package com.example.myapplication;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.hanium.android.maeumi;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class testclick extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class TestClick extends AppCompatActivity {
 
     private Button button7;
 
@@ -20,7 +20,7 @@ public class testclick extends AppCompatActivity {
         button7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(testclick.this, test_result.class);
+                Intent intent = new Intent(TestClick.this, TestResult.class);
                 startActivity(intent); //액티비티 이동
             }
         });
