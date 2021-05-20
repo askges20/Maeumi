@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_weight="1">
 
     <TextView
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="92dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:text="상담하기"
         android:textAlignment="center"
@@ -17,57 +19,69 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="3dp" />
 
-    <ImageView
-        android:id="@+id/MaeumiLOGO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/maeumi_logo"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="109dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="질문 응답"
-        android:textSize="50dp"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="150dp" />
+        <ImageView
+            android:id="@+id/MaeumiLOGO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/maeumi_logo"
+            tools:layout_editor_absoluteX="12dp"
+            tools:layout_editor_absoluteY="109dp" />
 
-    <EditText
-        android:id="@+id/editTextinput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="내용을 입력하시오"
-        app:layout_constraintEnd_toStartOf="@+id/button_send"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="673dp" />
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="질문 응답"
+            android:textSize="50dp"
+            tools:layout_editor_absoluteX="12dp"
+            tools:layout_editor_absoluteY="150dp" />
+        <Button
+            android:id="@+id/buttonFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="처음으로 돌아가기"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="268dp" />
 
-    <Button
-        android:id="@+id/button_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="입력"
-        tools:layout_editor_absoluteX="307dp"
-        tools:layout_editor_absoluteY="673dp" />
+        <Button
+            android:id="@+id/buttonEND"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상담 종료하기"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="228dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/editTextinput"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="내용을 입력하시오"
+            app:layout_constraintEnd_toStartOf="@+id/button_send"
+            app:layout_constraintHorizontal_bias="0.536"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="673dp" />
 
-    <Button
-        android:id="@+id/buttonFirst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="처음으로 돌아가기"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="268dp" />
-
-    <Button
-        android:id="@+id/buttonEND"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="상담 종료하기"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="228dp" />
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="입력"
+            tools:layout_editor_absoluteX="307dp"
+            tools:layout_editor_absoluteY="673dp" />
+    </LinearLayout>
 
 </LinearLayout>

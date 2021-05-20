@@ -1,15 +1,32 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.diary;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hanium.android.maeumi.R;
+
 public class DiaryModify extends Activity {
+    TextView date;
+    int year;
+    int month;
+    int dayOfMonth;
+
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_modify);
+
+        Intent dateIntent = getIntent();
+        year = dateIntent.getIntExtra("연", 1);
+        month = dateIntent.getIntExtra("월", 1);
+        dayOfMonth = dateIntent.getIntExtra("일", 1);;
+
+        date = findViewById(R.id.modifyDate);
+        date.setText(year + "/" + month + "/" + dayOfMonth);
     }
 
     public void processModify(View view){   //수정 버튼 클릭 시

@@ -1,9 +1,11 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.chatbot;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.hanium.android.maeumi.R;
 
 public class ChatBot extends Activity {
     @Override
@@ -16,6 +18,12 @@ public class ChatBot extends Activity {
         Intent intent = new Intent(ChatBot.this, ChatBotStart.class);
         startActivity(intent);
         System.out.println("Move To ChatBotStart");
+    }
+
+    public void goToChatBotRecord(View view){
+        Intent intent = new Intent(ChatBot.this, ChatBotRecord.class);
+        startActivity(intent);
+        System.out.println("Move To ChatBotRecord");
     }
 
 }
