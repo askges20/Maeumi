@@ -7,24 +7,36 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.model.Diary;
+import com.hanium.android.maeumi.view.board.Board;
+import com.hanium.android.maeumi.view.chatbot.ChatBot;
+import com.hanium.android.maeumi.view.chatbot.ChatBotStart;
+import com.hanium.android.maeumi.view.diary.DiaryCalendar;
 
 public class TestResult extends AppCompatActivity {
 
-    private Button button15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_result);
-
-
-        button15 = findViewById(R.id.button15);
-        button15.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TestResult.this, MainActivity.class);
-                startActivity(intent);//액티비티 이동
-            }
-        });
     }
+
+
+    public void goToChatBotStart(View view) {
+        Intent intent = new Intent(TestResult.this, ChatBotStart.class);
+        startActivity(intent);
+        System.out.println("Move To ChatBotStart");
+    }
+
+
+    public void goToBoard(View view){
+        Intent intent = new Intent(TestResult.this, Board.class);
+        startActivity(intent);
+        System.out.println("Move To Board");
+    }
+
+    }
+
 }

@@ -18,7 +18,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-
         <activity android:name=".view.diary.DiaryCalendar" />
         <activity android:name=".view.diary.DiaryContent" />
         <activity android:name=".view.diary.DiaryModify" />
@@ -30,11 +29,11 @@
         <activity android:name=".view.chatbot.ChatBotRecord" />
         <activity android:name=".view.chatbot.ChatBotStart" />
         <activity android:name=".view.board.Board" />
-        <activity android:name=".view.board.BoardAnonymous"/>
-        <activity android:name=".view.board.BoardWrite"/>
+        <activity android:name=".view.board.BoardAnonymous" />
+        <activity android:name=".view.board.BoardWrite" />
         <activity android:name=".view.profile.Profile" />
-        <activity android:name=".view.profile.ProfileEdit"/>
-        <activity android:name=".view.selftest.SelfTest"/>
+        <activity android:name=".view.profile.ProfileEdit" />
+        <activity android:name=".view.selftest.SelfTest" />
         <activity android:name=".view.selftest.TestResult" />
         <activity android:name=".view.selftest.TestClick" />
     </application>

@@ -88,8 +88,7 @@
         android:text="메인화면으로 가기"
         android:textColor="#000000"
         app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp" />
-
+        tools:textSize="18sp"
     <Button
         android:id="@+id/button16"
         android:layout_width="match_parent"
@@ -106,15 +105,17 @@
         android:text="게시글 작성하러 가기"
         android:textColor="#000000"
         app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp" />
+        tools:textSize="18sp"
+        android:onClick="goToBoard"/> <!-- 게시판으로 넘어가고싶다..-->
 
     <Button
         android:id="@+id/button18"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:text="상담하러 가기"
         android:textColor="#000000"
         app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp" />
+        tools:textSize="18sp"
+        android:onClick="goToChatBotStart"/> <!-- 테스트결과로 넘어가고싶다..-->
 
 </LinearLayout>
