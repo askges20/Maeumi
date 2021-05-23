@@ -10,6 +10,10 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="my_seletor.xml"/>
+
         <activity android:name=".Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +26,7 @@
         <activity android:name=".view.diary.DiaryContent" />
         <activity android:name=".view.diary.DiaryModify" />
         <activity android:name=".view.diary.DiaryWrite" />
+        <activity android:name=".view.diary.DiaryCalendarTest" />
         <activity android:name=".view.chatbot.ChatBot" />
         <activity android:name=".view.chatbot.ChatBotKeyWord" />
         <activity android:name=".view.chatbot.ChatBotKeyWordNO" />

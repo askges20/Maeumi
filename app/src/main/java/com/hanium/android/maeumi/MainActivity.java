@@ -50,34 +50,33 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
-    public void goToDiary(View view){
+    public void goToDiary(View view) {
         Intent intent = new Intent(MainActivity.this, DiaryCalendar.class);
         startActivity(intent);
         System.out.println("Move To Diary");
     }
 
-    public void goToSelfTest(View view){
+    public void goToSelfTest(View view) {
         Intent intent = new Intent(MainActivity.this, SelfTest.class);
         startActivity(intent);
         System.out.println("Move To SelfTest");
     }
 
-    public void goToChatBot(View view){
+    public void goToChatBot(View view) {
         Intent intent = new Intent(MainActivity.this, ChatBot.class);
         startActivity(intent);
         System.out.println("Move To ChatBot");
     }
 
-    public void goToBoard(View view){
+    public void goToBoard(View view) {
         Intent intent = new Intent(MainActivity.this, Board.class);
         startActivity(intent);
         System.out.println("Move To Board");
     }
 
-    public void goToProfile(View view){
+    public void goToProfile(View view) {
         Intent intent = new Intent(MainActivity.this, Profile.class);
         startActivity(intent);
         System.out.println("Move To Profile");
     }
-
 }
