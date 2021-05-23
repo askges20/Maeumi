@@ -39,4 +39,3 @@ public class TestResult extends AppCompatActivity {
 
     }
 
-}

@@ -88,7 +88,7 @@
         android:text="메인화면으로 가기"
         android:textColor="#000000"
         app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp"
+        tools:textSize="18sp"/>
     <Button
         android:id="@+id/button16"
         android:layout_width="match_parent"
