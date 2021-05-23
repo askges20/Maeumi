@@ -49,5 +49,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
 
-    implementation 'com.prolificinteractive:material-calendarview:1.4.3' //캘린더//
+    implementation 'com.github.prolificinteractive:material-calendarview:1.4.3' //캘린더//
 }
