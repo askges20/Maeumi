@@ -79,8 +79,6 @@ public class DiaryCalendarTest extends Activity {
         });
     }
 
-    public Context getApplicationContext() {
-    }
 
     private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
 
@@ -128,7 +126,7 @@ public class DiaryCalendarTest extends Activity {
                 return;
             }
 
-            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, MainActivity.this));
+            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
         }
     }
 }
