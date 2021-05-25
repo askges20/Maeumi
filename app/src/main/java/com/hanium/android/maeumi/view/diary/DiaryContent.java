@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,10 @@ import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Diary;
 
 public class DiaryContent extends Activity {
-    TextView date;
+    TextView dateText;  //날짜 텍스트
+    TextView titleText; //제목 텍스트
+    TextView contentText;   //내용 텍스트
+
     int year;
     int month;
     int dayOfMonth;
@@ -37,8 +39,11 @@ public class DiaryContent extends Activity {
         month = dateIntent.getIntExtra("월", 1);
         dayOfMonth = dateIntent.getIntExtra("일", 1);;
 
-        date = findViewById(R.id.contentDate);
-        date.setText(year + "/" + month + "/" + dayOfMonth);
+        dateText = findViewById(R.id.contentDate);
+        titleText = findViewById(R.id.diaryTitle);
+        contentText = findViewById(R.id.diaryContent);
+
+        dateText.setText(year + "/" + month + "/" + dayOfMonth);
 
         getData(year,month,dayOfMonth);
     }
@@ -88,11 +93,20 @@ public class DiaryContent extends Activity {
                 try{
                     Diary value = dataSnapshot.getValue(Diary.class);
                     System.out.println(year+""+month+""+dayOfMonth +" 일기조회");
+
                     System.out.println("Title: " + value.title);
+                    titleText.setText(value.title);
+
                     System.out.println("Content: " + value.content);
+                    contentText.setText(value.content);
+
                     System.out.println("EmoticonNum: " + value.emoticonNum);
-                }catch (Exception e){
+                    //이모티콘 view 추가한 후 작성할 예정
+
+                } catch (Exception e){  //해당 날짜 일기가 없는 경우
                     System.out.println("일기 없음");
+                    Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    finish();   //이전 페이지로 이동
                 }
             }
             @Override
