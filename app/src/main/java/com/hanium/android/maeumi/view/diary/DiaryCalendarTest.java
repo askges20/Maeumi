@@ -2,18 +2,15 @@ package com.hanium.android.maeumi.view.diary;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
-import android.os.Bundle;
 
-import com.hanium.android.maeumi.MainActivity;
+import androidx.annotation.NonNull;
+
 import com.hanium.android.maeumi.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -40,6 +37,7 @@ public class DiaryCalendarTest extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendartest);
 
+        //bind 대신 findViewById 이용
         MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
 
         materialCalendarView.state().edit()
@@ -50,14 +48,15 @@ public class DiaryCalendarTest extends Activity {
                 .commit();
 
         materialCalendarView.addDecorators(
-                new SunDayDecorator(),
-                new SaturDayDecorator(),
+                new SunDayDecorator(),  //토요일 색
+                new SaturDayDecorator(),    //일요일 색
                 oneDayDecorator);
 
         String[] result = {"2017,03,18","2017,04,18","2017,05,18","2017,06,18"};
 
         new ApiSimulator(result).executeOnExecutor(Executors.newSingleThreadExecutor());
 
+        //클릭 이벤트
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {

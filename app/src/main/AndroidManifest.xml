@@ -10,9 +10,11 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
+        <!--
         <meta-data
             android:name="com.google.android.actions"
             android:resource="my_seletor.xml"/>
+        -->
 
         <activity android:name=".Activity_Splash">
             <intent-filter>

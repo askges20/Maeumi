@@ -10,6 +10,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 
+import java.text.SimpleDateFormat;
+
 public class OneDayDecorator implements DayViewDecorator {
 
     private CalendarDay date;
@@ -29,11 +31,15 @@ public class OneDayDecorator implements DayViewDecorator {
         view.addSpan(new RelativeSizeSpan(1.4f));
         view.addSpan(new ForegroundColorSpan(Color.GREEN));
     }
-
-    /**
-     * We're changing the internals, so make sure to call {@linkplain MaterialCalendarView#invalidateDecorators()}
-     */
     public void setDate(Date date) {
-        this.date = CalendarDay.from(Date);
+        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+
+        int year = Integer.parseInt(yearFormat.format(date));
+        int month = Integer.parseInt(monthFormat.format(date));
+        int day = Integer.parseInt(dayFormat.format(date));
+
+        this.date = CalendarDay.from(year, month, day); //파라미터 : 년,월,일
     }
 }
