@@ -43,8 +43,8 @@ public class DiaryWrite extends Activity {
         date.setText(year + "." + month + "." + dayOfMonth);
         dateStr = "/" + year + month + dayOfMonth + "/";
 
-        diaryTitleText = (EditText)findViewById(R.id.diaryTitleText);
-        diaryContentText = (EditText)findViewById(R.id.diaryContentText);
+        diaryTitleText = (EditText)findViewById(R.id.diaryTitleWriteText);
+        diaryContentText = (EditText)findViewById(R.id.diaryContentWriteText);
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것

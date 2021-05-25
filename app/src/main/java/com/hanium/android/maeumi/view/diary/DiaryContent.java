@@ -17,7 +17,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Diary;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DiaryContent extends Activity {
+    FirebaseDatabase database;
+    DatabaseReference diaryRef;
+
     TextView dateText;  //날짜 텍스트
     TextView titleText; //제목 텍스트
     TextView contentText;   //내용 텍스트
@@ -25,9 +31,7 @@ public class DiaryContent extends Activity {
     int year;
     int month;
     int dayOfMonth;
-
-    FirebaseDatabase database;
-    DatabaseReference diaryRef;
+    String dateStr; //20210519 형식
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
@@ -44,8 +48,12 @@ public class DiaryContent extends Activity {
         contentText = findViewById(R.id.diaryContent);
 
         dateText.setText(year + "/" + month + "/" + dayOfMonth);
+        dateStr = "/" + year + month + dayOfMonth + "/";
 
         getData(year,month,dayOfMonth);
+
+        database = FirebaseDatabase.getInstance();
+        diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것
     }
 
     public void goToDiaryModify(View view){ //수정 버튼 클릭 시
@@ -53,6 +61,9 @@ public class DiaryContent extends Activity {
         intent.putExtra("연", year);
         intent.putExtra("월", month);
         intent.putExtra("일", dayOfMonth);
+
+        intent.putExtra("제목", titleText.getText());
+        intent.putExtra("내용", contentText.getText());
         startActivity(intent);
         System.out.println("Move To Modify Diary");
     }
@@ -63,7 +74,13 @@ public class DiaryContent extends Activity {
         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                Toast.makeText(DiaryContent.this,"네 클릭", Toast.LENGTH_SHORT).show();
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put(dateStr, null); //dnull이라 기존 데이터 삭제됨
+                diaryRef.updateChildren(childUpdates);
+
+                Toast toastView = Toast.makeText(DiaryContent.this, "삭제 완료", Toast.LENGTH_SHORT);
+                toastView.show();
+                finish();   //현재 액티비티 없애기
             }
         });
         dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
