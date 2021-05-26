@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Diary;
-import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,10 +53,6 @@ public class DiaryContent extends AppCompatActivity {
 
         getData(year,month,dayOfMonth);
 
-        DiaryViewModel viewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
-        viewModel.getDiaryData().observe(this, diary ->{
-            System.out.println("Testing From DiaryContent");
-        });
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것

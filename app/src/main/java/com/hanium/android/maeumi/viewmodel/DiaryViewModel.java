@@ -19,17 +19,33 @@ public class DiaryViewModel extends ViewModel {
     FirebaseDatabase database;
     DatabaseReference diaryRef;
 
-    private MutableLiveData<List<Diary>> diary;
-    public LiveData<List<Diary>> getDiaryData(){
-        if(diary == null){
-            diary = new MutableLiveData<List<Diary>>();
-            testData();
-        }
+//    private MutableLiveData<Class<Diary>> diary;
+//    public LiveData<Class<Diary>> getDiaryData(){
+//        if(diary == null){
+//            diary = new MutableLiveData<Class<Diary>>();
+//            System.out.println("1 - "+diary);
+//            testData();
+//        }
+//        System.out.println("2 - "+diary);
+//        return diary;
+//    }
+
+    private final MutableLiveData diary = new MutableLiveData<>();
+
+    public LiveData getLiveDataTest(){
         return diary;
     }
 
+    public void setLiveDataTest(String str){
+        diary.setValue(str);
+        System.out.println("setLiveDataTest --"+diary.getValue());
+    }
+
+
     private void testData(){
             System.out.println("Test From View Model");
+            System.out.println("3 - "+diary);
+          System.out.println("Test From View Model");
     }
 
 //     Firebase에서 일기 조회

@@ -1,6 +1,5 @@
 package com.hanium.android.maeumi.view.diary;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +7,15 @@ import android.widget.CalendarView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.util.Calendar;
 
-public class DiaryCalendar extends Activity {
+public class DiaryCalendar extends AppCompatActivity {
     CalendarView calendarView;
     int year;
     int month;
@@ -30,6 +32,8 @@ public class DiaryCalendar extends Activity {
         month = calendar.get(Calendar.MONTH)+1;
         dayOfMonth = calendar.get(Calendar.DATE);
 
+        DiaryViewModel viewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
+
         calendarView = (CalendarView) findViewById(R.id.myCalendar);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -38,7 +42,8 @@ public class DiaryCalendar extends Activity {
                 DiaryCalendar.this.month = month + 1;
                 DiaryCalendar.this.dayOfMonth = dayOfMonth;
                 String date = year + "/" + (month+1) + "/" + (dayOfMonth);
-                Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();    //선택한 날짜 toast
+                Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();//선택한 날짜 toast
+                viewModel.setLiveDataTest(date);
             }
         });
     }
