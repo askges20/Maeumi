@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -113,7 +114,6 @@ public class DiaryCalendarTest extends Activity {
             }
 
 
-
             return dates;
         }
 
@@ -124,7 +124,6 @@ public class DiaryCalendarTest extends Activity {
             if (isFinishing()) {
                 return;
             }
-
             materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
         }
     }
