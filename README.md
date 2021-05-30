@@ -8,10 +8,12 @@
 3) 일기장
 4) 게시판
 
+---
 <b>개발 환경</b> : Android Studio
 
 <b>서버 및 DB</b> : Google Firebase
 
+---
 <br>
 <b>개발 진행 상황 :</b>
 
