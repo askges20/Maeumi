@@ -13,6 +13,8 @@
 
 <b>서버 및 DB</b> : Google Firebase
 
+<b>챗봇 API</b> : Google DialogFlow
+
 ---
 <br>
 <b>개발 진행 상황 :</b>
