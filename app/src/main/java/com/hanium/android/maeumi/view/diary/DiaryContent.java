@@ -9,14 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Diary;
+import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +33,9 @@ public class DiaryContent extends AppCompatActivity {
     int dayOfMonth;
     String dateStr; //20210519 형식
 
+    private DiaryViewModel viewModel;
+    Diary diary;
+
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -42,7 +44,8 @@ public class DiaryContent extends AppCompatActivity {
         Intent dateIntent = getIntent();
         year = dateIntent.getIntExtra("연", 1);
         month = dateIntent.getIntExtra("월", 1);
-        dayOfMonth = dateIntent.getIntExtra("일", 1);;
+        dayOfMonth = dateIntent.getIntExtra("일", 1);
+        viewModel = new ViewModelProvider(this).get(DiaryViewModel.class);  //viewmodel
 
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
@@ -51,8 +54,17 @@ public class DiaryContent extends AppCompatActivity {
         dateText.setText(year + "/" + month + "/" + dayOfMonth);
         dateStr = "/" + year + month + dayOfMonth + "/";
 
-        getData(year,month,dayOfMonth);
-
+        //getData(year,month,dayOfMonth);
+        //viewmodel을 통해 해당 날짜 Diary 객체 받아옴
+        diary = viewModel.getSelectedDiary(year, month, dayOfMonth);
+        if (diary == null){ //해당 날짜 일기가 없다면
+            System.out.println("일기 없음");
+            Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+            finish();   //이전 페이지로 이동
+        } else {
+            //화면에 데이터 반영
+            setContentText(diary);
+        }
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것
@@ -77,7 +89,7 @@ public class DiaryContent extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put(dateStr, null); //dnull이라 기존 데이터 삭제됨
+                childUpdates.put(dateStr, null); //null이라 기존 데이터 삭제됨
                 diaryRef.updateChildren(childUpdates);
 
                 Toast toastView = Toast.makeText(DiaryContent.this, "삭제 완료", Toast.LENGTH_SHORT);
@@ -99,6 +111,16 @@ public class DiaryContent extends AppCompatActivity {
         toastView.show();
         finish();   //현재 액티비티 없애기
     }
+
+    //화면에 데이터 반영
+    public void setContentText(Diary diary){
+        titleText.setText(diary.title);
+        contentText.setText(diary.content);
+        //이모티콘 view 추가후 작성할 예정
+    }
+
+    /*
+
 
     // Firebase에서 일기 조회
     public void getData(int year,int month,int dayOfMonth){
@@ -135,4 +157,6 @@ public class DiaryContent extends AppCompatActivity {
             }
         });
     }
+
+     */
 }

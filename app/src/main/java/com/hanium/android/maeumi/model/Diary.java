@@ -8,7 +8,14 @@ import java.util.Map;
 
 @IgnoreExtraProperties
 public class Diary {
-    //일기 데이터
+    /*일기 데이터*/
+
+    //날짜
+    int year;
+    int month;
+    int dayOfMonth;
+
+    //제목, 내용, 이모티콘 번호
     public String title;
     public String content;
     public int emoticonNum;

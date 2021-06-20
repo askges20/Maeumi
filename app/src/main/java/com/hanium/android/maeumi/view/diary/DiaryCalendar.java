@@ -21,6 +21,8 @@ public class DiaryCalendar extends AppCompatActivity {
     int month;
     int dayOfMonth;
 
+    private DiaryViewModel viewModel;
+
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -32,7 +34,9 @@ public class DiaryCalendar extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH)+1;
         dayOfMonth = calendar.get(Calendar.DATE);
 
-        DiaryViewModel viewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
+        //ViewModel 불러오기
+        viewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
+        viewModel.getSelectedDiary(year, month, dayOfMonth);
 
         calendarView = (CalendarView) findViewById(R.id.myCalendar);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -43,7 +47,7 @@ public class DiaryCalendar extends AppCompatActivity {
                 DiaryCalendar.this.dayOfMonth = dayOfMonth;
                 String date = year + "/" + (month+1) + "/" + (dayOfMonth);
                 Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();//선택한 날짜 toast
-                viewModel.setLiveDataTest(date);
+                //viewModel.setLiveDataTest(date);
             }
         });
     }
