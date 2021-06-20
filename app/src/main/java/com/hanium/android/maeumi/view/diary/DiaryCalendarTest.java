@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 //@Bind(R.id.calendarView)
-    //MaterialCalendarView materialCalendarView;
+//MaterialCalendarView materialCalendarView;
 
 public class DiaryCalendarTest extends Activity {
 
