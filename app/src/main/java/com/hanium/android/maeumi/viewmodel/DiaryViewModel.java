@@ -1,7 +1,5 @@
 package com.hanium.android.maeumi.viewmodel;
 
-import androidx.lifecycle.ViewModel;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -9,102 +7,80 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.model.Diary;
 
-
-public class DiaryViewModel extends ViewModel {
+public class DiaryViewModel {
 
     FirebaseDatabase database;
     DatabaseReference diaryRef;
+    DiaryMiddleViewModel DiaryMiddleViewModel;
 
-    //LiveData 생성
-    //private MutableLiveData<Diary> currentDiary = new MutableLiveData<Diary>();
+    public static String calendarDate,fireDate;
 
-    //일반 Diary 객체
-    private Diary currentDiary = new Diary();
+    public static String title, content;
+    public static int emoticonNum;
 
-    public Diary getSelectedDiary(int year, int month, int day){
-        currentDiary = null;
+    // 조회 - 수정 삭제 / 작성
+    public DiaryViewModel() {
 
-        //firebase에서 해당 날짜 일기 검색
+    }
+
+    // FB 날짜 저장
+    public void setFireDate() {
+        fireDate = DiaryMiddleViewModel.getFBDate();
+        System.out.println("setFireDateVM-" + fireDate);
+    }
+
+    public String getFBDate() {
+        return this.fireDate;
+    }
+
+    // 캘린더 날짜 저장
+    public void setCalendarDate() {
+        calendarDate = DiaryMiddleViewModel.getCalendarDate();
+        System.out.println("setCalendarDateVM-" + calendarDate);
+    }
+
+    public String getCalendarDate() {
+        return this.calendarDate;
+    }
+
+    //일기 제목, 내용, 이모티콘 번호 조회
+    public String getTitle(){
+        return this.title;
+    }
+    public String getContent(){
+        return this.content;
+    }
+    public int getEmoticonNum(){
+        return this.emoticonNum;
+    }
+
+    //     Firebase에서 일기 조회
+    public void getDiaryFromFB(String date) {
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/아이디/"+year+month+day);
-
-        diaryRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                try{
-                    currentDiary = dataSnapshot.getValue(Diary.class);
-                    System.out.println(year+""+month+""+day +" 일기조회");
-                } catch (Exception e){  //해당 날짜 일기가 없는 경우
-                    System.out.println("일기 없음");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                System.out.println("Failed to read value."+ error.toException());
-            }
-        });
-
-        return currentDiary;    //찾은 일기 리턴
-    }
-
-
-
-//    private MutableLiveData<Class<Diary>> diary;
-//    public LiveData<Class<Diary>> getDiaryData(){
-//        if(diary == null){
-//            diary = new MutableLiveData<Class<Diary>>();
-//            System.out.println("1 - "+diary);
-//            testData();
-//        }
-//        System.out.println("2 - "+diary);
-//        return diary;
-//    }
-
-    //private final MutableLiveData diary = new MutableLiveData<>();
-
-
-    /*
-    public LiveData getLiveDataTest(){
-        return diary;
-    }
-
-    public void setLiveDataTest(String str){
-        diary.setValue(str);
-        System.out.println("setLiveDataTest --"+diary.getValue());
-    }
-
-    private void testData(){
-            System.out.println("Test From View Model");
-            System.out.println("3 - "+diary);
-          System.out.println("Test From View Model");
-    }
-     */
-
-//     Firebase에서 일기 조회
-    private void getData(int year,int month,int dayOfMonth){
-        database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/아이디/"+year+month+dayOfMonth);
+        diaryRef = database.getReference("/일기장/아이디/" + date);
 
         diaryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                try{
+                try {
                     Diary value = dataSnapshot.getValue(Diary.class);
-                    System.out.println(year+""+month+""+dayOfMonth +" 일기조회");
+                    System.out.println(date + " ViewModel 일기조회");
                     System.out.println("Title: " + value.title);
                     System.out.println("Content: " + value.content);
                     System.out.println("EmoticonNum: " + value.emoticonNum);
-                }catch (Exception e){
+                    title = value.title;
+                    content = value.content;
+                    emoticonNum = value.emoticonNum;
+                } catch (Exception e) {
                     System.out.println("일기 없음");
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                System.out.println("Failed to read value."+ error.toException());
+                System.out.println("Failed to read value." + error.toException());
             }
         });
     }

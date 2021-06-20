@@ -3,11 +3,9 @@ package com.hanium.android.maeumi.view.diary;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +26,7 @@ import java.util.concurrent.Executors;
 
 public class DiaryCalendarTest extends Activity {
 
-    String time,kcal,menu;
+    String time, kcal, menu;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     Cursor cursor;
     MaterialCalendarView materialCalendarView;
@@ -53,7 +51,7 @@ public class DiaryCalendarTest extends Activity {
                 new SaturDayDecorator(),    //일요일 색
                 oneDayDecorator);
 
-        String[] result = {"2017,03,18","2017,04,18","2017,05,18","2017,06,18"};
+        String[] result = {"2017,03,18", "2017,04,18", "2017,05,18", "2017,06,18"};
 
         new ApiSimulator(result).executeOnExecutor(Executors.newSingleThreadExecutor());
 
@@ -74,7 +72,7 @@ public class DiaryCalendarTest extends Activity {
                 Log.i("shot_Day test", shot_Day + "");
                 materialCalendarView.clearSelection();
 
-                Toast.makeText(getApplicationContext(), shot_Day , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), shot_Day, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,7 +82,7 @@ public class DiaryCalendarTest extends Activity {
 
         String[] Time_Result;
 
-        ApiSimulator(String[] Time_Result){
+        ApiSimulator(String[] Time_Result) {
             this.Time_Result = Time_Result;
         }
 
@@ -102,7 +100,7 @@ public class DiaryCalendarTest extends Activity {
             /*특정날짜 달력에 점표시해주는곳*/
             /*월은 0이 1월 년,일은 그대로*/
             //string 문자열인 Time_Result 을 받아와서 ,를 기준으로짜르고 string을 int 로 변환
-            for(int i = 0 ; i < Time_Result.length ; i ++){
+            for (int i = 0; i < Time_Result.length; i++) {
                 CalendarDay day = CalendarDay.from(calendar);
                 String[] time = Time_Result[i].split(",");
                 int year = Integer.parseInt(time[0]);
@@ -110,21 +108,23 @@ public class DiaryCalendarTest extends Activity {
                 int dayy = Integer.parseInt(time[2]);
 
                 dates.add(day);
-                calendar.set(year,month-1,dayy);
+                calendar.set(year, month - 1, dayy);
             }
 
 
             return dates;
         }
-
-        @Override
-        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
-            super.onPostExecute(calendarDays);
-
-            if (isFinishing()) {
-                return;
-            }
-            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
-        }
+//        @Override
+//        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+//            super.onPostExecute(calendarDays);
+//
+//            if (isFinishing()) {
+//                return;
+//
+//                public void addDecorator(EventDecorator); {
+//                    materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
+//                }
+//            }
+//        }
     }
 }

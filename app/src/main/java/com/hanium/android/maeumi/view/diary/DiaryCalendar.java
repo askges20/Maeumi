@@ -8,9 +8,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.util.Calendar;
@@ -21,7 +21,8 @@ public class DiaryCalendar extends AppCompatActivity {
     int month;
     int dayOfMonth;
 
-    private DiaryViewModel viewModel;
+    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
@@ -34,9 +35,6 @@ public class DiaryCalendar extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH)+1;
         dayOfMonth = calendar.get(Calendar.DATE);
 
-        //ViewModel 불러오기
-        viewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
-        viewModel.getSelectedDiary(year, month, dayOfMonth);
 
         calendarView = (CalendarView) findViewById(R.id.myCalendar);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -47,22 +45,24 @@ public class DiaryCalendar extends AppCompatActivity {
                 DiaryCalendar.this.dayOfMonth = dayOfMonth;
                 String date = year + "/" + (month+1) + "/" + (dayOfMonth);
                 Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();//선택한 날짜 toast
-                //viewModel.setLiveDataTest(date);
+                DiaryMiddleViewModel.setCalendarDate(year,month,dayOfMonth);
+                DiaryMiddleViewModel.setFBDate(year,month,dayOfMonth);
             }
         });
     }
 
     public void goToDiaryContent(View view){
         Intent intent = new Intent(DiaryCalendar.this, DiaryContent.class);
-        intent.putExtra("연", year);
-        intent.putExtra("월", month);
-        intent.putExtra("일", dayOfMonth);
+//        intent.putExtra("연", year);
+//        intent.putExtra("월", month);
+//        intent.putExtra("일", dayOfMonth);
         startActivity(intent);
         System.out.println("Move To Diary Content");
     }
 
     public void goToDiaryWrite(View view){
-        Intent intent = new Intent(DiaryCalendar.this, DiaryWrite.class);
+//        Intent intent = new Intent(DiaryCalendar.this, DiaryWrite.class);
+        Intent intent = new Intent(getApplicationContext(),DiaryWrite.class);
         intent.putExtra("연", year);
         intent.putExtra("월", month);
         intent.putExtra("일", dayOfMonth);
