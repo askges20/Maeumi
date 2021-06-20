@@ -7,103 +7,74 @@
     android:orientation="vertical"
     tools:context=".view.selftest.TestClick">
 
-    <Button
-        android:id="@+id/button6"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="설문조사"
-        app:backgroundTint="#B5B3B3" />
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:orientation="horizontal"
+        android:background="#C4C4C4"
+        android:weightSum="3">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="102dp"
-        android:layout_height="51dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="설문조사"
+            android:textSize="30sp"
+            android:gravity="center"/>
+    </LinearLayout>
 
-    <SeekBar
-        android:id="@+id/seekBar2"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="10"
-        android:progress="3" />
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/postTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1. 일주일 내에 친구에게 맞은 적이 있나요?"
-        android:textColor="#040404"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@drawable/maeumi_logo" />
 
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:text="없다." />
+        <SeekBar
+            android:id="@+id/seekBar2"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+    </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkBox4"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1~5번 있다." />
+        android:layout_height="0dp"
+        android:layout_weight="180"
+        android:orientation="vertical"
+        android:padding="50px"
+        android:weightSum="30">
 
-    <CheckBox
-        android:id="@+id/checkBox5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="5번 이상이다." />
+        <!--테스트 문항 리사이클러뷰 영역-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/testRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkBox6"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="자주 맞아서 10번 이상이다." />
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/postWriter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2. 친구라고 생각할 사람이 같은 반에 있나요?"
-        android:textColor="#040404"
-        android:textSize="18sp" />
+        <Button
+            android:id="@+id/finishBtn"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="결과보기"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:backgroundTint="#F44336"/>
 
-    <CheckBox
-        android:id="@+id/checkBox7"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:text="없다." />
-
-    <CheckBox
-        android:id="@+id/checkBox8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="5명 이상이다." />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3. 한달 이내에 친구에게 돈을 빌려준 후, 갚지 못한 돈이 있다."
-        android:textColor="#040404"
-        android:textSize="18sp" />
-
-    <CheckBox
-        android:id="@+id/checkBox9"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:text="없다." />
-
-    <CheckBox
-        android:id="@+id/checkBox10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="5만원 이상이다." />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="결과보기" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -7,45 +7,64 @@
     android:orientation="vertical"
     tools:context=".view.selftest.SelfTest" >
 
-    <Button
-        android:id="@+id/button"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:text="설문조사"
-        android:textColor="#000000"
-        app:backgroundTint="#AAA9A9" />
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:orientation="horizontal"
+        android:background="#C4C4C4"
+        android:weightSum="3">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="331dp"
-        android:text="
-       테스트 안내 (진행시간, 항목수 등 안내사항)"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="설문조사"
+            android:textSize="30sp"
+            android:gravity="center"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:text="지난 설문조사 결과보기"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:backgroundTint="#8A8984" />
+        android:layout_height="0dp"
+        android:layout_weight="180"
+        android:orientation="vertical"
+        android:padding="50px"
+        android:weightSum="30">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:text="설문조사 시작"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:backgroundTint="#F44336" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="테스트 안내 (진행시간, 항목수 등 안내사항)"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/button4"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        app:backgroundTint="#AAA9A9" />
+        android:layout_height="0dp"
+        android:layout_weight="65"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="지난 설문조사 결과보기"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:backgroundTint="#8A8984" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="설문조사 시작"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:backgroundTint="#F44336" />
+
+    </LinearLayout>
+
 </LinearLayout>
