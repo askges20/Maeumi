@@ -13,7 +13,7 @@ public class DiaryViewModel {
     DatabaseReference diaryRef;
     DiaryMiddleViewModel DiaryMiddleViewModel;
 
-    public static String calendarDate,fireDate;
+    public static String calendarDate, fireDate;
 
     public static String title, content;
     public static int emoticonNum;
@@ -23,34 +23,38 @@ public class DiaryViewModel {
 
     }
 
-    // FB 날짜 저장
-    public void setFireDate() {
+    // FireBase, 캘린더 날짜 저장
+    public void setDate() {
         fireDate = DiaryMiddleViewModel.getFBDate();
         System.out.println("setFireDateVM-" + fireDate);
-    }
 
-    public String getFBDate() {
-        return this.fireDate;
-    }
-
-    // 캘린더 날짜 저장
-    public void setCalendarDate() {
         calendarDate = DiaryMiddleViewModel.getCalendarDate();
         System.out.println("setCalendarDateVM-" + calendarDate);
     }
 
-    public String getCalendarDate() {
-        return this.calendarDate;
-    }
+//    public String getFBDate() {
+//        return this.fireDate;
+//    }
+
+
+//    public String getCalendarDate() {
+//        return this.calendarDate;
+//    }
 
     //일기 제목, 내용, 이모티콘 번호 조회
-    public String getTitle(){
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getTitle() {
         return this.title;
     }
-    public String getContent(){
+
+    public String getContent() {
         return this.content;
     }
-    public int getEmoticonNum(){
+
+    public int getEmoticonNum() {
         return this.emoticonNum;
     }
 
@@ -69,7 +73,7 @@ public class DiaryViewModel {
                     System.out.println("Title: " + value.title);
                     System.out.println("Content: " + value.content);
                     System.out.println("EmoticonNum: " + value.emoticonNum);
-                    title = value.title;
+                    setTitle(value.title);
                     content = value.content;
                     emoticonNum = value.emoticonNum;
                 } catch (Exception e) {

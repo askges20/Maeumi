@@ -45,8 +45,7 @@ public class DiaryCalendar extends AppCompatActivity {
                 DiaryCalendar.this.dayOfMonth = dayOfMonth;
                 String date = year + "/" + (month+1) + "/" + (dayOfMonth);
                 Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();//선택한 날짜 toast
-                DiaryMiddleViewModel.setCalendarDate(year,month,dayOfMonth);
-                DiaryMiddleViewModel.setFBDate(year,month,dayOfMonth);
+                DiaryMiddleViewModel.setDate(year,month,dayOfMonth);
             }
         });
     }
