@@ -5,8 +5,10 @@ public class DiaryMiddleViewModel {
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
-    public static String fireDate;
-    public static String calendarDate;
+    public static String calendarDate,fireDate;
+
+    public static String title, content;
+    public static int emoticonNum;
 
     public String year;
     public String month;
@@ -51,7 +53,7 @@ public class DiaryMiddleViewModel {
     // FB 조회 날짜 불러오기
     public void callFireDate() {
         if (this.fireDate != null) {
-            System.out.println("setDiaryDate-" + this.fireDate);
+            System.out.println("setFireDate-" + this.fireDate);
             DiaryViewModel.setFireDate();
         } else {
             System.out.println("Date is Null");
@@ -61,12 +63,19 @@ public class DiaryMiddleViewModel {
     // 일기 조회 날짜 불러오기
     public void callCalendarDate() {
         if (this.calendarDate != null) {
-            System.out.println("setDiaryDate-" + this.calendarDate);
+            System.out.println("setCalendarDate-" + this.calendarDate);
             DiaryViewModel.setCalendarDate();
         } else {
             System.out.println("Date is Null");
         }
     }
+
+    //일기 제목, 내용, 이모티콘 번호 조회
+    public String getContentFromViewModel(){
+        this.title = DiaryViewModel.getTitle();
+        return title;
+    }
+
 
     // 테스트
     public void getFromViewModel() {
@@ -75,3 +84,6 @@ public class DiaryMiddleViewModel {
     }
 
 }
+//title = DiaryViewModel.getTitle();
+//        content = DiaryViewModel.getContent();
+//        emoticonNum = DiaryViewModel.getEmoticonNum();

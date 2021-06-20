@@ -46,15 +46,16 @@ public class DiaryCalendar extends AppCompatActivity {
                 String date = year + "/" + (month+1) + "/" + (dayOfMonth);
                 Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();//선택한 날짜 toast
                 DiaryMiddleViewModel.setCalendarDate(year,month,dayOfMonth);
+                DiaryMiddleViewModel.setFBDate(year,month,dayOfMonth);
             }
         });
     }
 
     public void goToDiaryContent(View view){
         Intent intent = new Intent(DiaryCalendar.this, DiaryContent.class);
-        intent.putExtra("연", year);
-        intent.putExtra("월", month);
-        intent.putExtra("일", dayOfMonth);
+//        intent.putExtra("연", year);
+//        intent.putExtra("월", month);
+//        intent.putExtra("일", dayOfMonth);
         startActivity(intent);
         System.out.println("Move To Diary Content");
     }

@@ -12,11 +12,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Diary;
+import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DiaryModify extends Activity {
+
+    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    String testCalDate, testFireDate;
+
     FirebaseDatabase database;
     DatabaseReference diaryRef;
 
@@ -34,6 +39,9 @@ public class DiaryModify extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_modify);
 
+        testCalDate = DiaryMiddleViewModel.getCalendarDate();
+        testFireDate = DiaryMiddleViewModel.getFBDate();
+
         dateText = findViewById(R.id.modifyDate);
         titleText = findViewById(R.id.diaryTitleModifyText);
         contentText = findViewById(R.id.diaryContentModifyText);
@@ -46,8 +54,9 @@ public class DiaryModify extends Activity {
         titleText.setText(intent.getStringExtra("제목"));
         contentText.setText(intent.getStringExtra("내용"));
 
-        dateText.setText(year + "/" + month + "/" + dayOfMonth);
-        dateStr = "/" + year + month + dayOfMonth + "/";
+//        dateText.setText(year + "/" + month + "/" + dayOfMonth);
+//        dateStr = "/" + year + month + dayOfMonth + "/";
+        dateText.setText(testCalDate);
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것

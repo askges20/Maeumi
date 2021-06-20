@@ -3,7 +3,6 @@ package com.hanium.android.maeumi.view.diary;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,18 +114,17 @@ public class DiaryCalendarTest extends Activity {
 
             return dates;
         }
-        @Override
-        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
-            super.onPostExecute(calendarDays);
-
-            if (isFinishing()) {
-                return;
-
-                public void addDecorator (EventDecorator);
-                {
-                    materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
-                }
-            }
-        }
+//        @Override
+//        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+//            super.onPostExecute(calendarDays);
+//
+//            if (isFinishing()) {
+//                return;
+//
+//                public void addDecorator(EventDecorator); {
+//                    materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
+//                }
+//            }
+//        }
     }
 }

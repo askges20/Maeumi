@@ -28,6 +28,9 @@ public class DiaryContent extends AppCompatActivity {
     DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
+    String testCalDate, testFireDate;
+    String testTitle;
+
     FirebaseDatabase database;
     DatabaseReference diaryRef;
 
@@ -41,29 +44,27 @@ public class DiaryContent extends AppCompatActivity {
     String dateStr; //20210519 형식
 
     @Override
-    protected  void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_content);
 
-        System.out.println("Content Start");
-        DiaryMiddleViewModel.getFromViewModel();
-        System.out.println("Content Done");
+        testCalDate = DiaryMiddleViewModel.getCalendarDate();
+        testFireDate = DiaryMiddleViewModel.getFBDate();
 
-        Intent dateIntent = getIntent();
-        year = dateIntent.getIntExtra("연", 1);
-        month = dateIntent.getIntExtra("월", 1);
-        dayOfMonth = dateIntent.getIntExtra("일", 1);;
+//        Intent dateIntent = getIntent();
+//        year = dateIntent.getIntExtra("연", 1);
+//        month = dateIntent.getIntExtra("월", 1);
+//        dayOfMonth = dateIntent.getIntExtra("일", 1);;
 
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
 
 //        dateText.setText(year + "/" + month + "/" + dayOfMonth);
-        dateText.setText(DiaryViewModel.getCalendarDate());
-        dateStr = "/" + year + month + dayOfMonth + "/";
+        dateText.setText(testCalDate);
+//        dateStr = "/" + year + month + dayOfMonth + "/";
 
-        getData(year,month,dayOfMonth);
-
+        getData(testFireDate);
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것
@@ -112,9 +113,9 @@ public class DiaryContent extends AppCompatActivity {
     }
 
     // Firebase에서 일기 조회
-    public void getData(int year,int month,int dayOfMonth){
+    public void getData(String helloDate){
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/아이디/"+year+month+dayOfMonth);
+        diaryRef = database.getReference("/일기장/아이디/"+helloDate);
 
         diaryRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -122,7 +123,7 @@ public class DiaryContent extends AppCompatActivity {
 
                 try{
                     Diary value = dataSnapshot.getValue(Diary.class);
-                    System.out.println(year+""+month+""+dayOfMonth +" 일기조회");
+                    System.out.println(helloDate+" 일기조회");
 
                     System.out.println("Title: " + value.title);
                     titleText.setText(value.title);
