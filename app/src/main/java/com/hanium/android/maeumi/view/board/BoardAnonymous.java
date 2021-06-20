@@ -8,8 +8,12 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.model.Post;
+import com.hanium.android.maeumi.viewmodel.PostAdapter;
 
 public class BoardAnonymous extends AppCompatActivity {
 
@@ -17,18 +21,25 @@ public class BoardAnonymous extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_anonymous);
-    }
-    public void goToBoardAnonymous(View view){
-        Intent intent = new Intent(BoardAnonymous.this, Board.class);
-        startActivity(intent);
-        System.out.println("Move To BoardAnonymous");
-    }
 
+        RecyclerView recyclerView = findViewById(R.id.boardAnonymousRecyclerView);
+
+        //레이아웃 매니저로 배치 방법 설정
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        //어댑터를 이용해서 리사이클러뷰에 데이터 넘김
+        //추후 firebase 데이터와 연결할 것
+        PostAdapter adapter = new PostAdapter();
+        for (int i=0;i<10;i++)
+            adapter.addItem(new Post("제목입니다","작성자입니다","작성일자"));
+        recyclerView.setAdapter(adapter);
+    }
 
     public void goToBoard(View view){
         Intent intent = new Intent(BoardAnonymous.this, Board.class);
         startActivity(intent);
-        System.out.println("Move To Board");
+        System.out.println("자유게시판으로 이동");
     }
 
     public void goToBoardWrite(View view){

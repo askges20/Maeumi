@@ -20,8 +20,6 @@
             android:text="자유게시판"
             android:textSize="30sp"
             android:gravity="center"/>
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -68,7 +66,12 @@
         android:orientation="vertical"
         android:weightSum="30">
 
-
+        <!--게시물 리사이클러뷰 영역-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/boardRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
 
     </LinearLayout>
 
