@@ -17,11 +17,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Diary;
+import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
+import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DiaryContent extends AppCompatActivity {
+
+    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    DiaryViewModel DiaryViewModel = new DiaryViewModel();
+
     FirebaseDatabase database;
     DatabaseReference diaryRef;
 
@@ -39,6 +45,10 @@ public class DiaryContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_content);
 
+        System.out.println("Content Start");
+        DiaryMiddleViewModel.getFromViewModel();
+        System.out.println("Content Done");
+
         Intent dateIntent = getIntent();
         year = dateIntent.getIntExtra("연", 1);
         month = dateIntent.getIntExtra("월", 1);
@@ -48,7 +58,8 @@ public class DiaryContent extends AppCompatActivity {
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
 
-        dateText.setText(year + "/" + month + "/" + dayOfMonth);
+//        dateText.setText(year + "/" + month + "/" + dayOfMonth);
+        dateText.setText(DiaryViewModel.getCalendarDate());
         dateStr = "/" + year + month + dayOfMonth + "/";
 
         getData(year,month,dayOfMonth);
