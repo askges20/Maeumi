@@ -12,7 +12,7 @@ public class DiaryMiddleViewModel {
 
     public String year, month, day;
 
-    public String testDate;
+    public static String nullDiary;
 
     public DiaryMiddleViewModel() {
 
@@ -44,14 +44,47 @@ public class DiaryMiddleViewModel {
         return calendarDate;
     }
 
+    // 일기내용 클릭 시 일기 조회
+    public void getDiary() {
+        setDiaryData();
 
-    //일기 제목, 내용, 이모티콘 번호 조회
-    public String getContentFromViewModel() {
-//        this.title = DiaryViewModel.getTitle();
+    }
+
+    // 일기 제목, 내용, 이모티콘 번호 불러오기
+    public void setDiaryData() {
+        this.nullDiary = DiaryViewModel.getNullDiary();
+        System.out.println("nullDiary -- "+ this.nullDiary);
+        if (this.nullDiary != null) {
+            System.out.println(this.nullDiary);
+            this.title = DiaryViewModel.getTitle();
+            this.content = DiaryViewModel.getContent();
+            this.emoticonNum = DiaryViewModel.getEmoticonNum();
+        } else {
+            this.nullDiary = null;
+        }
+    }
+
+    public String getTitle() {
         return title;
     }
 
+
+    public String getContent() {
+        return content;
+    }
+
+    public int getEmoticonNum() {
+        return emoticonNum;
+    }
+
+    public String getNullDiary() {
+        return nullDiary;
+    }
+
+    // 일기 목록 초기화
+    public void clearDiary() {
+        this.title = null;
+        this.content = null;
+    }
+
 }
-//title = DiaryViewModel.getTitle();
-//        content = DiaryViewModel.getContent();
-//        emoticonNum = DiaryViewModel.getEmoticonNum();

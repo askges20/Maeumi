@@ -22,7 +22,6 @@ import java.util.Map;
 public class DiaryWrite extends AppCompatActivity {
 
     DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
-    DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     FirebaseDatabase database;
     DatabaseReference diaryRef;
@@ -41,18 +40,13 @@ public class DiaryWrite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
-        System.out.println("Write Start");
-        DiaryMiddleViewModel.getFromViewModel();
-        System.out.println("Write Done");
-
         //날짜 받아오기
         Intent dateIntent = getIntent();
         year = dateIntent.getIntExtra("연", 1);
         month = dateIntent.getIntExtra("월", 1);
         dayOfMonth = dateIntent.getIntExtra("일", 1);
         date = findViewById(R.id.writeDate);
-//        date.setText(year + "." + month + "." + dayOfMonth);
-        date.setText(DiaryViewModel.getCalendarDate());
+        date.setText(DiaryMiddleViewModel.getCalendarDate());
         dateStr = "/" + year + month + dayOfMonth + "/";
         diaryTitleText = (EditText)findViewById(R.id.diaryTitleWriteText);
         diaryContentText = (EditText)findViewById(R.id.diaryContentWriteText);

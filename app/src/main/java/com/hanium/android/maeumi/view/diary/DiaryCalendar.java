@@ -22,7 +22,6 @@ public class DiaryCalendar extends AppCompatActivity {
     int dayOfMonth;
 
     DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
-    DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
@@ -34,7 +33,6 @@ public class DiaryCalendar extends AppCompatActivity {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH)+1;
         dayOfMonth = calendar.get(Calendar.DATE);
-
 
         calendarView = (CalendarView) findViewById(R.id.myCalendar);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -52,15 +50,11 @@ public class DiaryCalendar extends AppCompatActivity {
 
     public void goToDiaryContent(View view){
         Intent intent = new Intent(DiaryCalendar.this, DiaryContent.class);
-//        intent.putExtra("연", year);
-//        intent.putExtra("월", month);
-//        intent.putExtra("일", dayOfMonth);
         startActivity(intent);
         System.out.println("Move To Diary Content");
     }
 
     public void goToDiaryWrite(View view){
-//        Intent intent = new Intent(DiaryCalendar.this, DiaryWrite.class);
         Intent intent = new Intent(getApplicationContext(),DiaryWrite.class);
         intent.putExtra("연", year);
         intent.putExtra("월", month);

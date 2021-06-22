@@ -17,6 +17,7 @@ public class DiaryViewModel {
 
     public static String title, content;
     public static int emoticonNum;
+    public static String nullDiary;
 
     // 조회 - 수정 삭제 / 작성
     public DiaryViewModel() {
@@ -30,33 +31,41 @@ public class DiaryViewModel {
 
         calendarDate = DiaryMiddleViewModel.getCalendarDate();
         System.out.println("setCalendarDateVM-" + calendarDate);
+
+        getDiaryFromFB(fireDate);
     }
 
-//    public String getFBDate() {
-//        return this.fireDate;
-//    }
-
-
-//    public String getCalendarDate() {
-//        return this.calendarDate;
-//    }
-
     //일기 제목, 내용, 이모티콘 번호 조회
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setEmoticonNum(int emoticonNum) {
+        this.emoticonNum = emoticonNum;
+    }
+
+    // Null Diary
+    public void setNullDiary(String data){
+        this.nullDiary = data;
+    }
+
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public String getContent() {
-        return this.content;
+        return content;
     }
 
     public int getEmoticonNum() {
         return this.emoticonNum;
     }
+
+    public String getNullDiary(){ return this.nullDiary;}
 
     //     Firebase에서 일기 조회
     public void getDiaryFromFB(String date) {
@@ -74,10 +83,12 @@ public class DiaryViewModel {
                     System.out.println("Content: " + value.content);
                     System.out.println("EmoticonNum: " + value.emoticonNum);
                     setTitle(value.title);
-                    content = value.content;
-                    emoticonNum = value.emoticonNum;
+                    setContent(value.content);
+                    setEmoticonNum(value.emoticonNum);
+                    setNullDiary("not Null");
                 } catch (Exception e) {
-                    System.out.println("일기 없음");
+                    System.out.println("error - "+ e);
+                    setNullDiary(null);
                 }
             }
 
