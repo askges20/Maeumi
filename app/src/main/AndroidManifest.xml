@@ -43,6 +43,7 @@
         <activity android:name=".view.selftest.SelfTest" />
         <activity android:name=".view.selftest.TestResult" />
         <activity android:name=".view.selftest.TestClick" />
+        <activity android:name=".view.diary.CustomAction" />
     </application>
 
 </manifest>

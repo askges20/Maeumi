@@ -14,7 +14,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Diary;
 import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
-import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.util.HashMap;
 import java.util.Map;

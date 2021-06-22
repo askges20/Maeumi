@@ -1,14 +1,15 @@
 package com.hanium.android.maeumi.view.diary;
 
 
-import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.hanium.android.maeumi.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -24,7 +25,7 @@ import java.util.concurrent.Executors;
 //@Bind(R.id.calendarView)
 //MaterialCalendarView materialCalendarView;
 
-public class DiaryCalendarTest extends Activity {
+public class DiaryCalendarTest extends AppCompatActivity {
 
     String time, kcal, menu;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
@@ -37,7 +38,9 @@ public class DiaryCalendarTest extends Activity {
         setContentView(R.layout.activity_calendartest);
 
         //bind 대신 findViewById 이용
-        MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView);
+        MaterialCalendarView materialCalendarView = findViewById(R.id.calendarView); //이걸하면 강제중지//
+       // materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendarView); //이걸하면 뭔 캘린더 테스트에 오늘날짜에 마음이로고가 백그라운드로 나옴. //
+
 
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -114,17 +117,15 @@ public class DiaryCalendarTest extends Activity {
 
             return dates;
         }
-//        @Override
-//        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
-//            super.onPostExecute(calendarDays);
-//
-//            if (isFinishing()) {
-//                return;
-//
+        @Override
+        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+            super.onPostExecute(calendarDays);
+
+            if (isFinishing()) {
+                return;
+            }
 //                public void addDecorator(EventDecorator); {
-//                    materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
-//                }
-//            }
-//        }
-    }
-}
+                    materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, DiaryCalendarTest.this));
+                }
+            }
+        }
