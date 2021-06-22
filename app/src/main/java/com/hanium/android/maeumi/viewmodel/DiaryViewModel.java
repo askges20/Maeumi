@@ -15,9 +15,8 @@ public class DiaryViewModel {
 
     public static String calendarDate, fireDate;
 
-    public static String title, content;
+    public static String title, content, nullDiary;
     public static int emoticonNum;
-    public static String nullDiary;
 
     // 조회 - 수정 삭제 / 작성
     public DiaryViewModel() {
@@ -27,11 +26,7 @@ public class DiaryViewModel {
     // FireBase, 캘린더 날짜 저장
     public void setDate() {
         fireDate = DiaryMiddleViewModel.getFBDate();
-        System.out.println("setFireDateVM-" + fireDate);
-
         calendarDate = DiaryMiddleViewModel.getCalendarDate();
-        System.out.println("setCalendarDateVM-" + calendarDate);
-
         getDiaryFromFB(fireDate);
     }
 
@@ -78,10 +73,6 @@ public class DiaryViewModel {
 
                 try {
                     Diary value = dataSnapshot.getValue(Diary.class);
-                    System.out.println(date + " ViewModel 일기조회");
-                    System.out.println("Title: " + value.title);
-                    System.out.println("Content: " + value.content);
-                    System.out.println("EmoticonNum: " + value.emoticonNum);
                     setTitle(value.title);
                     setContent(value.content);
                     setEmoticonNum(value.emoticonNum);

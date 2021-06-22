@@ -7,30 +7,27 @@ public class DiaryMiddleViewModel {
 
     public static String calendarDate, fireDate;
 
-    public static String title, content;
+    public static String title, content,nullDiary;
     public static int emoticonNum;
 
     public String year, month, day;
-
-    public static String nullDiary;
 
     public DiaryMiddleViewModel() {
 
     }
 
-    // Intent에서 생성된 날짜를 FireBase, 캘린더 날짜로 바꾸기
+    // Intent에서 생성된 날짜를 FireBase, 캘린더 날짜로 바꾸고 저장
     public void setDate(int year, int month, int day) {
         month = month + 1;
         this.year = Integer.toString(year);
         this.month = Integer.toString(month);
         this.day = Integer.toString(day);
 
+        // 날짜 형태 변경
         this.fireDate = this.year + this.month + this.day;
-        System.out.println("setFireDate-" + this.fireDate);
-
         this.calendarDate = this.year + "년 " + this.month + "월 " + this.day + "일";
-        System.out.println("setCalendarDate-" + this.calendarDate);
 
+        // ViewModel에 날짜 저장
         DiaryViewModel.setDate();
     }
 
@@ -53,14 +50,11 @@ public class DiaryMiddleViewModel {
     // 일기 제목, 내용, 이모티콘 번호 불러오기
     public void setDiaryData() {
         this.nullDiary = DiaryViewModel.getNullDiary();
-        System.out.println("nullDiary -- "+ this.nullDiary);
         if (this.nullDiary != null) {
             System.out.println(this.nullDiary);
             this.title = DiaryViewModel.getTitle();
             this.content = DiaryViewModel.getContent();
             this.emoticonNum = DiaryViewModel.getEmoticonNum();
-        } else {
-            this.nullDiary = null;
         }
     }
 

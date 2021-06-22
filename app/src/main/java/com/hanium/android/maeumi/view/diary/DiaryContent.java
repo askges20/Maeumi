@@ -27,8 +27,9 @@ public class DiaryContent extends AppCompatActivity {
 
     DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
 
-    String testCalDate, testFireDate;
-    String testTitle, testContent, nullDiary;
+    String diaryCalDate, diaryFireDate;
+    String diaryTitle, diaryContent, nullDiary;
+    int diaryEmoticonNum;
 
     FirebaseDatabase database;
     DatabaseReference diaryRef;
@@ -47,24 +48,25 @@ public class DiaryContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_content);
 
-        testCalDate = DiaryMiddleViewModel.getCalendarDate();
-        testFireDate = DiaryMiddleViewModel.getFBDate();
+        diaryCalDate = DiaryMiddleViewModel.getCalendarDate();
+        diaryFireDate = DiaryMiddleViewModel.getFBDate();
 
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
 
-        dateText.setText(testCalDate);
+        dateText.setText(diaryCalDate);
 
         DiaryMiddleViewModel.getDiary();
         nullDiary = DiaryMiddleViewModel.getNullDiary();
         ifNullDiary();
 
-        testTitle = DiaryMiddleViewModel.getTitle();
-        testContent = DiaryMiddleViewModel.getContent();
+        diaryTitle = DiaryMiddleViewModel.getTitle();
+        diaryContent = DiaryMiddleViewModel.getContent();
+        diaryEmoticonNum = DiaryMiddleViewModel.getEmoticonNum();
 
-        titleText.setText(testTitle);
-        contentText.setText(testContent);
+        titleText.setText(diaryTitle);
+        contentText.setText(diaryContent);
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것
