@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.hanium.android.maeumi"
-        minSdkVersion 15 //은혜 공기계 갤2라서 버전 하나 더 DOWN 시켰습니당.
+        minSdkVersion 26 //은혜 공기계 갤2라서 버전 하나 더 DOWN 시켰습니당.
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"

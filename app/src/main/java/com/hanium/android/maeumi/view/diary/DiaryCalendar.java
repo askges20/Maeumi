@@ -64,7 +64,7 @@ public class DiaryCalendar extends AppCompatActivity {
     }
 
     public void goToCalendarTest(View view){
-        Intent intent = new Intent(DiaryCalendar.this, DiaryCalendarTest.class);
+        Intent intent = new Intent(DiaryCalendar.this, CustomAction.class);
         startActivity(intent);
         System.out.println("Move To Diary Test");
     }
