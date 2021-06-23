@@ -64,10 +64,6 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
             }
         }
         return daysInMonthArray;
-    private String monthYearFromDate (LocalDate date)
-    {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
     }
 
     public void previousMonthAction (View view){
