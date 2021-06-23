@@ -69,7 +69,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
             if (i <= day0fweek || i > daysInMonth + day0fweek) {
                 dayInMonthArray.add("");
             } else {
-                dayInMonthArray.add(String.valueOf(i + day0fweek));
+                dayInMonthArray.add(String.valueOf(i - day0fweek));
             }
         }
         return dayInMonthArray;
@@ -88,10 +88,10 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
 
         @Override
         public void onItemClick ( int position, String dayText){
-            if (dayText.equals("")) {
+//            if (dayText.equals("")) {
                 String message = "Selected Date" + dayText + "" + monthYearFromDate(selectDate);
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            }
+//            }
 
         }
     }
