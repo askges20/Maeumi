@@ -28,6 +28,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         setContentView(R.layout.activity_custom);
         iniwigets();
         selectDate = LocalDate.now();
+        System.out.println("selectDate : "+selectDate);
         setMonthView();
     }
 
@@ -55,11 +56,14 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> dayInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
+        System.out.println("yearMonth : "+yearMonth);
 
         int daysInMonth = yearMonth.lengthOfMonth();
 
         LocalDate first0fMonth = selectDate.withDayOfMonth(1);
+        System.out.println("firstOfMonth : "+ first0fMonth);
         int day0fweek = first0fMonth.getDayOfWeek().getValue();
+        System.out.println("dayOfweek"+day0fweek);
 
         for (int i = 1; i <= 42; i++) {
             if (i <= day0fweek || i > daysInMonth + day0fweek) {
