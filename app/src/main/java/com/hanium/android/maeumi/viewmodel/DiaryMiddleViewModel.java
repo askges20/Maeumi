@@ -1,5 +1,7 @@
 package com.hanium.android.maeumi.viewmodel;
 
+import com.hanium.android.maeumi.model.Diary;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 
@@ -26,7 +28,7 @@ public class DiaryMiddleViewModel {
         this.year = this.oneTimeDate.substring(0, 4);
         this.month = this.oneTimeDate.substring(5, 7);
         this.day = dayPlusZero(date);
-        this.fireDate = this.year + this.month + this.day;
+        this.fireDate = this.year + this.month + this.day+"/";
         this.calendarDate = this.year + "년 " + this.month + "월 " + this.day + "일";
 
         // ViewModel에 날짜 저장
@@ -99,6 +101,12 @@ public class DiaryMiddleViewModel {
     public void clearDiary() {
         this.title = null;
         this.content = null;
+    }
+    
+    // 일기 작성
+    public void diaryWrite(String title, String content){
+        Diary value = new Diary(title,content,1,this.day);
+        DiaryViewModel.diaryWrite(value);
     }
 
 }

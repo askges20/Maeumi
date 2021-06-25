@@ -70,7 +70,7 @@ public class DiaryModify extends Activity {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> diaryValues = null;
 
-        Diary diary = new Diary(diaryTitle, diaryContent, 1,1);   //model Diary 객체
+        Diary diary = new Diary(diaryTitle, diaryContent, 1,"1");   //model Diary 객체
         diaryValues = diary.toMap();
         childUpdates.put(dateStr, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
