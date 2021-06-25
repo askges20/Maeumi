@@ -15,11 +15,12 @@
         android:weightSum="3">
 
         <TextView
+            android:id="@+id/boardNameText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="자유게시판"
-            android:textSize="30sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="게시판"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,22 +30,21 @@
         android:orientation="horizontal"
         android:weightSum="2.5">
 
-        <TextView
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:layout_weight="1"
+        <Button
+            android:id="@+id/freeBoardBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="자유게시판"/>
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="자유게시판" />
 
         <Button
-            android:onClick="goToBoardAnonymous"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:id="@+id/anonymousBoardBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="익명게시판"/>
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="익명게시판" />
 
         <Button
             android:onClick="onFilterClick"
@@ -58,38 +58,13 @@
 
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/board_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="200"
-        android:orientation="vertical"
-        android:weightSum="30">
+        android:layout_weight="230"
+        android:orientation="vertical"></LinearLayout>
 
-        <!--게시물 리사이클러뷰 영역-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/boardRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="30"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-
-        <Button
-            android:onClick="goToBoardWrite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="게시글 작성하기" />
-
-
-    </LinearLayout>
+    <!-- fragment -->
 
 </LinearLayout>
