@@ -34,6 +34,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         selectDate = LocalDate.now();
         setMonthView();
         // 월별 일기 조회 후 점 찍기
+        DiaryMiddleVieModel.setMaxDay(selectDate);
     }
 
 
@@ -81,6 +82,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
             selectDate = selectDate.minusMonths(1);
             // 월별 일기 조회 후 점 찍기
             System.out.println("previous Month - "+ selectDate);
+            DiaryMiddleVieModel.setMaxDay(selectDate);
             setMonthView();
         }
 
@@ -88,6 +90,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
             selectDate = selectDate.plusMonths(1);
             // 월별 일기 조회 후 점 찍기
             System.out.println("next Month- "+ selectDate);
+            DiaryMiddleVieModel.setMaxDay(selectDate);
             setMonthView();
         }
 

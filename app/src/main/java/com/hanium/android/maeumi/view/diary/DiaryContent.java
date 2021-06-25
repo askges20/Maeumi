@@ -25,9 +25,9 @@ import java.util.Map;
 
 public class DiaryContent extends AppCompatActivity {
 
-//    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
 //
-//    String diaryCalDate, diaryFireDate;
+    String diaryCalDate, diaryFireDate;
 //    String diaryTitle, diaryContent, nullDiary;
 //    int diaryEmoticonNum;
 
@@ -48,14 +48,14 @@ public class DiaryContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_content);
 
-//        diaryCalDate = DiaryMiddleViewModel.getCalendarDate();
+        diaryCalDate = DiaryMiddleViewModel.getCalendarDate();
 //        diaryFireDate = DiaryMiddleViewModel.getFBDate();
 
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
 
-//        dateText.setText(diaryCalDate);
+        dateText.setText(diaryCalDate);
 //
 //        DiaryMiddleViewModel.getDiary();
 //        nullDiary = DiaryMiddleViewModel.getNullDiary();

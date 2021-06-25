@@ -32,9 +32,11 @@ public class DiaryMiddleViewModel {
         // ViewModel에 날짜 저장
         DiaryViewModel.setDate();
     }
-    public void setMaxDay(LocalDate monthYear){
+
+    public void setMaxDay(LocalDate monthYear) {
         YearMonth yearMonth = YearMonth.from(monthYear);
         this.maxDay = yearMonth.lengthOfMonth();
+        System.out.println("Max Day - "+ this.maxDay);
     }
 
     public String dayPlusZero(String date) {
@@ -43,6 +45,7 @@ public class DiaryMiddleViewModel {
         }
         return date;
     }
+
     // FB 날짜 불러오기
     public static String getFBDate() {
         return fireDate;
@@ -52,8 +55,9 @@ public class DiaryMiddleViewModel {
     public static String getCalendarDate() {
         return calendarDate;
     }
+
     // 최대날짜 구하기
-    public static int getMaxDay(){
+    public static int getMaxDay() {
         return maxDay;
     }
 
