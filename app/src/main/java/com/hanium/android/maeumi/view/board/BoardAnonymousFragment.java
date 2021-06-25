@@ -39,7 +39,7 @@ public class BoardAnonymousFragment extends Fragment {
         //추후 firebase 데이터와 연결할 것
         PostAdapter adapter = new PostAdapter();
         for (int i = 0; i < 10; i++)
-            adapter.addItem(new Post("제목:익명게시판", "작성자", "작성일자"));
+            adapter.addItem(new Post("제목:익명게시판", "내용","작성자", "작성일자"));
         recyclerView.setAdapter(adapter);
 
         return view;

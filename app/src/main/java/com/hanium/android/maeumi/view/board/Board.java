@@ -82,8 +82,9 @@ public class Board extends AppCompatActivity {
 
     public void goToBoardWrite(View view) {
         Intent intent = new Intent(Board.this, BoardWrite.class);
+        intent.putExtra("타입",cur_fragment); //어떤 게시판에 작성할건지 전달
         startActivity(intent);
-        System.out.println("자유게시판 게시글 작성");
+        System.out.println("게시글 작성");
     }
 
     //정렬 클릭
