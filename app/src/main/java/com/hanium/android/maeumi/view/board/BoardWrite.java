@@ -69,8 +69,9 @@ public class BoardWrite extends AppCompatActivity {
     protected void addPost(String title, String content){
         database = FirebaseDatabase.getInstance();
 
-        String today = getToday();
-        String postNum = "아이디" + today; //나중에 게시글 번호?로 수정할 듯
+        String today = getToday();  //yyyyMMdd
+        String code = getCode();    //HHmmss
+        String postNum = "아이디" + code; //나중에 게시글 번호?로 수정할 듯
         String curDate = getCurrentDate();
 
         //게시판 종류
@@ -89,9 +90,15 @@ public class BoardWrite extends AppCompatActivity {
         boardRef.updateChildren(childUpdates);
     }
 
-    protected String getToday(){    //날짜
+    protected String getToday(){    //오늘 날짜 yyyyMMdd
         Date time = new Date();
         SimpleDateFormat format = new SimpleDateFormat ( "yyyyMMdd");
+        return format.format(time);
+    }
+
+    protected String getCode(){    //게시글 번호 용도
+        Date time = new Date();
+        SimpleDateFormat format = new SimpleDateFormat ( "HHmmss");
         return format.format(time);
     }
 
