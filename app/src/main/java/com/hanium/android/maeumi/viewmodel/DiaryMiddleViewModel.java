@@ -24,14 +24,16 @@ public class DiaryMiddleViewModel {
 
     // Intent에서 생성된 날짜를 FireBase, 캘린더 날짜로 바꾸고 저장
     public void setDate(LocalDate monthYear, String date) {
-        System.out.println("date - "+ date);
-        System.out.println("monthYear - "+ monthYear);
         this.oneTimeDate = monthYear.toString();
         this.year = this.oneTimeDate.substring(0, 4);
         this.month = this.oneTimeDate.substring(5, 7);
         this.day = dayPlusZero(date);
         this.fireDate = "/"+this.year + this.month + this.day+"/";
-        this.calendarDate = this.year + "년 " + this.month + "월 " + this.day + "일";
+        if(date == ""){
+            this.calendarDate = null;
+        }else{
+            this.calendarDate = this.year + "년 " + this.month + "월 " + this.day + "일";
+        }
 
         // ViewModel에 날짜 저장
         DiaryViewModel.setDate();
@@ -65,12 +67,6 @@ public class DiaryMiddleViewModel {
         return maxDay;
     }
 
-    // 일기내용 클릭 시 일기 조회
-    public void getMonthDiary() {
-        setDiaryData();
-
-    }
-
     // 일기 제목, 내용, 이모티콘 번호 불러오기
     public void setDiaryData() {
         this.nullDiary = DiaryViewModel.getNullDiary();
@@ -81,7 +77,6 @@ public class DiaryMiddleViewModel {
             this.emoticonNum = DiaryViewModel.getEmoticonNum();
         }
     }
-
     public String getTitle() {
         return title;
     }
@@ -99,16 +94,16 @@ public class DiaryMiddleViewModel {
         return nullDiary;
     }
 
-    // 일기 목록 초기화
-    public void clearDiary() {
-        this.title = null;
-        this.content = null;
-    }
     
-    // 일기 작성
+    // 일기 작성 & 수정
     public void diaryWrite(String title, String content){
         Diary value = new Diary(title,content,1,this.day);
         DiaryViewModel.diaryWrite(value);
+    }
+
+    // 일기 삭제
+    public void deleteDiary(){
+        DiaryViewModel.deleteDiary();
     }
 
 }

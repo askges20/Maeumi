@@ -41,7 +41,9 @@ public class DiaryWrite extends AppCompatActivity {
         diaryContentText = (EditText)findViewById(R.id.diaryContentWriteText);
         date.setText(diaryDate);
     }
+    // 빈곳 클릭 시 이벤트
     public void nullDate(){
+        System.out.println("nullDate - "+ diaryDate);
         if(diaryDate == null){
             Toast.makeText(DiaryWrite.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
             finish();

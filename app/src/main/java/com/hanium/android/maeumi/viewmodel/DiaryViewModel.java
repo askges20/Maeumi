@@ -23,7 +23,8 @@ public class DiaryViewModel {
     public static int emoticonNum;
     public static int maxDay;
 
-    // 조회 - 수정 삭제 / 작성
+    // [o] 개별 조회, 작성, 삭제
+    // [x] 월별 조회, 수정
     public DiaryViewModel() {
 
     }
@@ -33,10 +34,7 @@ public class DiaryViewModel {
         fireDate = DiaryMiddleViewModel.getFBDate();
         calendarDate = DiaryMiddleViewModel.getCalendarDate();
         maxDay = DiaryMiddleViewModel.getMaxDay();
-        System.out.println("fireDate - "+ fireDate);
-        System.out.println("calendarDate - "+ calendarDate);
-        System.out.println("Max Day - "+ maxDay);
-//        getDiaryFromFB(fireDate);
+        getDiaryFromFB(fireDate);
     }
 
     //일기 제목, 내용, 이모티콘 번호 조회
@@ -128,14 +126,14 @@ public class DiaryViewModel {
                     Diary value = dataSnapshot.getValue(Diary.class);
                     System.out.println("title- " + value.title);
                     System.out.println("date - " + value.date);
-//                    setTitle(value.title);
-//                    setContent(value.content);
-//                    setEmoticonNum(value.emoticonNum);
-//                    setNullDiary("not Null");
+                    setTitle(value.title);
+                    setContent(value.content);
+                    setEmoticonNum(value.emoticonNum);
+                    setNullDiary("Diary Not Null");
                 } catch (Exception e) {
                     System.out.println("error - " + e);
                     System.out.println("일기 없음");
-//                    setNullDiary(null);
+                    setNullDiary(null);
                 }
             }
             @Override
@@ -146,7 +144,7 @@ public class DiaryViewModel {
         });
     }
 
-    // 일기 작성
+    // 일기 작성 & 수정
     public void diaryWrite(Diary value){
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");
@@ -157,8 +155,17 @@ public class DiaryViewModel {
 
         Diary diary = new Diary(value.title, value.content, 1,value.date);   //model Diary 객체
         diaryValues = diary.toMap();
-        System.out.println("diaryValue- " + diaryValues);
         childUpdates.put(fireDate, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
+        diaryRef.updateChildren(childUpdates);
+    }
+
+    // 일기 삭제
+    public void deleteDiary(){
+        database = FirebaseDatabase.getInstance();
+        diaryRef = database.getReference("/일기장/아이디/");
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(fireDate, null); //dnull이라 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
     }
 }
