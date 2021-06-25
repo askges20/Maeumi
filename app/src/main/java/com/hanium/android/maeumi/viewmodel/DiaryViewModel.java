@@ -34,9 +34,6 @@ public class DiaryViewModel {
         fireDate = DiaryMiddleViewModel.getFBDate();
         calendarDate = DiaryMiddleViewModel.getCalendarDate();
         maxDay = DiaryMiddleViewModel.getMaxDay();
-        System.out.println("fireDate - "+ fireDate);
-        System.out.println("calendarDate - "+ calendarDate);
-        System.out.println("Max Day - "+ maxDay);
         getDiaryFromFB(fireDate);
     }
 
@@ -117,9 +114,6 @@ public class DiaryViewModel {
 
         }
     }
-    public void callDiaryFnc(){
-        getDiaryFromFB(fireDate);
-    }
     // 개별 일기 조회
     public void getDiaryFromFB(String date) {
         database = FirebaseDatabase.getInstance();
@@ -150,7 +144,7 @@ public class DiaryViewModel {
         });
     }
 
-    // 일기 작성
+    // 일기 작성 & 수정
     public void diaryWrite(Diary value){
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");
@@ -161,7 +155,6 @@ public class DiaryViewModel {
 
         Diary diary = new Diary(value.title, value.content, 1,value.date);   //model Diary 객체
         diaryValues = diary.toMap();
-        System.out.println("diaryValue- " + diaryValues);
         childUpdates.put(fireDate, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
     }

@@ -32,7 +32,6 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         setContentView(R.layout.activity_custom);
         iniwigets();
         selectDate = LocalDate.now();
-        System.out.println("selectDate : " + selectDate);
         setMonthView();
         // 월별 일기 조회 후 점 찍기
         DiaryMiddleViewModel.setMaxDay(selectDate);

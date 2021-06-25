@@ -27,7 +27,7 @@ public class DiaryContent extends AppCompatActivity {
 
     DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
 
-    String diaryCalDate, diaryFireDate;
+    String diaryCalDate;
     String diaryTitle, diaryContent, nullDiary;
     int diaryEmoticonNum;
 
@@ -35,9 +35,6 @@ public class DiaryContent extends AppCompatActivity {
     TextView titleText; //제목 텍스트
     TextView contentText;   //내용 텍스트
 
-    int year;
-    int month;
-    int dayOfMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -81,12 +78,6 @@ public class DiaryContent extends AppCompatActivity {
 
     public void goToDiaryModify(View view){ //수정 버튼 클릭 시
         Intent intent = new Intent(DiaryContent.this, DiaryModify.class);
-        intent.putExtra("연", year);
-        intent.putExtra("월", month);
-        intent.putExtra("일", dayOfMonth);
-
-        intent.putExtra("제목", titleText.getText());
-        intent.putExtra("내용", contentText.getText());
         startActivity(intent);
         System.out.println("Move To Modify Diary");
     }

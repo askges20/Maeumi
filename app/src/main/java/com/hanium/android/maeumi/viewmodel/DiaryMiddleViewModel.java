@@ -67,12 +67,6 @@ public class DiaryMiddleViewModel {
         return maxDay;
     }
 
-    // 일기내용 클릭 시 일기 조회
-    public void getMonthDiary() {
-//        setDiaryData();
-
-    }
-
     // 일기 제목, 내용, 이모티콘 번호 불러오기
     public void setDiaryData() {
         this.nullDiary = DiaryViewModel.getNullDiary();
@@ -83,7 +77,6 @@ public class DiaryMiddleViewModel {
             this.emoticonNum = DiaryViewModel.getEmoticonNum();
         }
     }
-
     public String getTitle() {
         return title;
     }
@@ -102,7 +95,7 @@ public class DiaryMiddleViewModel {
     }
 
     
-    // 일기 작성
+    // 일기 작성 & 수정
     public void diaryWrite(String title, String content){
         Diary value = new Diary(title,content,1,this.day);
         DiaryViewModel.diaryWrite(value);
