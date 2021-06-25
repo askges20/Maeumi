@@ -36,7 +36,6 @@
         <activity android:name=".view.chatbot.ChatBotRecord" />
         <activity android:name=".view.chatbot.ChatBotStart" />
         <activity android:name=".view.board.Board" />
-        <activity android:name=".view.board.BoardAnonymous" />
         <activity android:name=".view.board.BoardWrite" />
         <activity android:name=".view.profile.Profile" />
         <activity android:name=".view.profile.ProfileEdit" />

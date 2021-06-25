@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.view.board.BoardAnonymous;
+import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.diary.DiaryCalendar;
 
 public class ChatBotStart extends AppCompatActivity {
@@ -23,8 +23,9 @@ public class ChatBotStart extends AppCompatActivity {
         System.out.println("Move To Diary");
     }
     public void goToBoardAnonymous(View view){
-        Intent intent = new Intent(ChatBotStart.this, BoardAnonymous.class);
+        Intent intent = new Intent(ChatBotStart.this, Board.class);
         startActivity(intent);
-        System.out.println("Move To BoardAnonymous");
+        System.out.println("Move To Board");
+        //익명게시판으로 이동하도록 코드 추가 필요
     }
 }
