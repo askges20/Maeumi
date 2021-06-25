@@ -25,11 +25,11 @@ import java.util.Map;
 
 public class DiaryContent extends AppCompatActivity {
 
-    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
-
-    String diaryCalDate, diaryFireDate;
-    String diaryTitle, diaryContent, nullDiary;
-    int diaryEmoticonNum;
+//    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+//
+//    String diaryCalDate, diaryFireDate;
+//    String diaryTitle, diaryContent, nullDiary;
+//    int diaryEmoticonNum;
 
     FirebaseDatabase database;
     DatabaseReference diaryRef;
@@ -48,35 +48,35 @@ public class DiaryContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_content);
 
-        diaryCalDate = DiaryMiddleViewModel.getCalendarDate();
-        diaryFireDate = DiaryMiddleViewModel.getFBDate();
+//        diaryCalDate = DiaryMiddleViewModel.getCalendarDate();
+//        diaryFireDate = DiaryMiddleViewModel.getFBDate();
 
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
 
-        dateText.setText(diaryCalDate);
-
-        DiaryMiddleViewModel.getDiary();
-        nullDiary = DiaryMiddleViewModel.getNullDiary();
-        ifNullDiary();
-
-        diaryTitle = DiaryMiddleViewModel.getTitle();
-        diaryContent = DiaryMiddleViewModel.getContent();
-        diaryEmoticonNum = DiaryMiddleViewModel.getEmoticonNum();
-
-        titleText.setText(diaryTitle);
-        contentText.setText(diaryContent);
+//        dateText.setText(diaryCalDate);
+//
+//        DiaryMiddleViewModel.getDiary();
+//        nullDiary = DiaryMiddleViewModel.getNullDiary();
+//        ifNullDiary();
+//
+//        diaryTitle = DiaryMiddleViewModel.getTitle();
+//        diaryContent = DiaryMiddleViewModel.getContent();
+//        diaryEmoticonNum = DiaryMiddleViewModel.getEmoticonNum();
+//
+//        titleText.setText(diaryTitle);
+//        contentText.setText(diaryContent);
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것
     }
-    public void ifNullDiary(){
-        if (nullDiary == null){
-            Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
+//    public void ifNullDiary(){
+//        if (nullDiary == null){
+//            Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
+//    }
 
     public void goToDiaryModify(View view){ //수정 버튼 클릭 시
         Intent intent = new Intent(DiaryContent.this, DiaryModify.class);
@@ -117,7 +117,7 @@ public class DiaryContent extends AppCompatActivity {
     public void goToBack(View view){   //목록으로 버튼 클릭 시
         Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
         toastView.show();
-        DiaryMiddleViewModel.clearDiary();
+//        DiaryMiddleViewModel.clearDiary();
         finish();   //현재 액티비티 없애기
     }
 

@@ -12,14 +12,16 @@ public class Diary {
     public String title;
     public String content;
     public int emoticonNum;
+    public int date;
 
     public Diary(){
     }
 
-    public Diary(String title, String content, int emoticonNum){
+    public Diary(String title, String content, int emoticonNum,int date){
         this.title = title;
         this.content = content;
         this.emoticonNum = emoticonNum;
+        this.date = date;
     }
 
     @Exclude
