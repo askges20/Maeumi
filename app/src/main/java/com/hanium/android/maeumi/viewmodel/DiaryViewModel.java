@@ -151,17 +151,12 @@ public class DiaryViewModel {
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");
 
-        System.out.println("fireDate - "+ fireDate);
-        System.out.println("ViewModel- title - "+ value.title);
-        System.out.println("ViewModel- content - "+ value.content);
-        System.out.println("ViewModel- emoticonNum - "+ value.emoticonNum);
-        System.out.println("ViewModel- date - "+ value.date);
 
         Map<String, Object> childUpdates = new HashMap<>();
-        Map<String, Object> diaryValues;
+        Map<String, Object> diaryValues = null;
 
-//        Diary diary = new Diary(value.title, value.content, 1,value.date);   //model Diary 객체
-        diaryValues = value.toMap();
+        Diary diary = new Diary(value.title, value.content, 1,value.date);   //model Diary 객체
+        diaryValues = diary.toMap();
         System.out.println("diaryValue- " + diaryValues);
         childUpdates.put(fireDate, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);

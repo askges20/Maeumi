@@ -49,6 +49,7 @@ public class DiaryContent extends AppCompatActivity {
         setContentView(R.layout.activity_diary_content);
 
         diaryCalDate = DiaryMiddleViewModel.getCalendarDate();
+        nullDate();
 //        diaryFireDate = DiaryMiddleViewModel.getFBDate();
 
         dateText = findViewById(R.id.contentDate);
@@ -77,6 +78,12 @@ public class DiaryContent extends AppCompatActivity {
 //            finish();
 //        }
 //    }
+    public void nullDate(){
+        if(diaryCalDate == null){
+            Toast.makeText(DiaryContent.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
 
     public void goToDiaryModify(View view){ //수정 버튼 클릭 시
         Intent intent = new Intent(DiaryContent.this, DiaryModify.class);
