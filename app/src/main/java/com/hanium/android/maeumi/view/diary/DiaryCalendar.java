@@ -20,8 +20,10 @@ public class DiaryCalendar extends AppCompatActivity {
     int year;
     int month;
     int dayOfMonth;
+    String testDate = "20215";
 
-    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+//    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
@@ -43,9 +45,10 @@ public class DiaryCalendar extends AppCompatActivity {
                 DiaryCalendar.this.dayOfMonth = dayOfMonth;
                 String date = year + "/" + (month+1) + "/" + (dayOfMonth);
                 Toast.makeText(DiaryCalendar.this, date, Toast.LENGTH_SHORT).show();//선택한 날짜 toast
-                DiaryMiddleViewModel.setDate(year,month,dayOfMonth);
+//                DiaryMiddleViewModel.setDate(year,month,dayOfMonth);
             }
         });
+        DiaryViewModel.getDiaryFromFB(testDate);
     }
 
     public void goToDiaryContent(View view){

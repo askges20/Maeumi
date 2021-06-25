@@ -29,24 +29,26 @@ public class DiaryWrite extends AppCompatActivity {
     EditText diaryTitleText;
     EditText diaryContentText;
 
-    int year;
-    int month;
-    int dayOfMonth;
+    int year, month, dayOfMonth;
     String dateStr; //20210519 형식
+    String diaryDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
-        //날짜 받아오기
-        Intent dateIntent = getIntent();
-        year = dateIntent.getIntExtra("연", 1);
-        month = dateIntent.getIntExtra("월", 1);
-        dayOfMonth = dateIntent.getIntExtra("일", 1);
+        diaryDate = DiaryMiddleViewModel.getCalendarDate();
+
+//        //날짜 받아오기
+//        Intent dateIntent = getIntent();
+//        year = dateIntent.getIntExtra("연", 1);
+//        month = dateIntent.getIntExtra("월", 1);
+//        dayOfMonth = dateIntent.getIntExtra("일", 1);
         date = findViewById(R.id.writeDate);
-        date.setText(DiaryMiddleViewModel.getCalendarDate());
-        dateStr = "/" + year + month + dayOfMonth + "/";
+//        date.setText(DiaryMiddleViewModel.getCalendarDate());
+        date.setText(diaryDate);
+//        dateStr = "/" + year + month + dayOfMonth + "/";
         diaryTitleText = (EditText)findViewById(R.id.diaryTitleWriteText);
         diaryContentText = (EditText)findViewById(R.id.diaryContentWriteText);
 
@@ -61,13 +63,14 @@ public class DiaryWrite extends AppCompatActivity {
         String diaryTitle = diaryTitleText.getText().toString();
         String diaryContent = diaryContentText.getText().toString();
 
-        Map<String, Object> childUpdates = new HashMap<>();
-        Map<String, Object> diaryValues = null;
-
-        Diary diary = new Diary(diaryTitle, diaryContent, 1);   //model Diary 객체
-        diaryValues = diary.toMap();
-        childUpdates.put(dateStr, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
-        diaryRef.updateChildren(childUpdates);
+        DiaryMiddleViewModel.diaryWrite(diaryTitle,diaryContent);
+//        Map<String, Object> childUpdates = new HashMap<>();
+//        Map<String, Object> diaryValues = null;
+//
+//        Diary diary = new Diary(diaryTitle, diaryContent, 1,1);   //model Diary 객체
+//        diaryValues = diary.toMap();
+//        childUpdates.put(dateStr, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
+//        diaryRef.updateChildren(childUpdates);
 
         Toast toastView = Toast.makeText(DiaryWrite.this, "작성 완료", Toast.LENGTH_SHORT);
         toastView.show();

@@ -12,14 +12,16 @@ public class Diary {
     public String title;
     public String content;
     public int emoticonNum;
+    public String date;
 
     public Diary(){
     }
 
-    public Diary(String title, String content, int emoticonNum){
+    public Diary(String title, String content, int emoticonNum,String date){
         this.title = title;
         this.content = content;
         this.emoticonNum = emoticonNum;
+        this.date = date;
     }
 
     @Exclude
@@ -28,6 +30,7 @@ public class Diary {
         result.put("title", title);
         result.put("content", content);
         result.put("emoticonNum", emoticonNum);
+        result.put("date", date);
         return result;
     }
 }

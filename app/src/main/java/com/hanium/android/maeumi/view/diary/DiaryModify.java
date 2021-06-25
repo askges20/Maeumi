@@ -19,8 +19,8 @@ import java.util.Map;
 
 public class DiaryModify extends Activity {
 
-    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
-    String testCalDate, testFireDate;
+//    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+//    String testCalDate, testFireDate;
 
     FirebaseDatabase database;
     DatabaseReference diaryRef;
@@ -39,8 +39,8 @@ public class DiaryModify extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_modify);
 
-        testCalDate = DiaryMiddleViewModel.getCalendarDate();
-        testFireDate = DiaryMiddleViewModel.getFBDate();
+//        testCalDate = DiaryMiddleViewModel.getCalendarDate();
+//        testFireDate = DiaryMiddleViewModel.getFBDate();
 
         dateText = findViewById(R.id.modifyDate);
         titleText = findViewById(R.id.diaryTitleModifyText);
@@ -54,9 +54,9 @@ public class DiaryModify extends Activity {
         titleText.setText(intent.getStringExtra("제목"));
         contentText.setText(intent.getStringExtra("내용"));
 
-//        dateText.setText(year + "/" + month + "/" + dayOfMonth);
+        dateText.setText(year + "/" + month + "/" + dayOfMonth);
 //        dateStr = "/" + year + month + dayOfMonth + "/";
-        dateText.setText(testCalDate);
+//        dateText.setText(testCalDate);
 
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/아이디/");  //추후 로그인한 사용자의 아이디로 변경할 것
@@ -70,7 +70,7 @@ public class DiaryModify extends Activity {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> diaryValues = null;
 
-        Diary diary = new Diary(diaryTitle, diaryContent, 1);   //model Diary 객체
+        Diary diary = new Diary(diaryTitle, diaryContent, 1,"1");   //model Diary 객체
         diaryValues = diary.toMap();
         childUpdates.put(dateStr, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
