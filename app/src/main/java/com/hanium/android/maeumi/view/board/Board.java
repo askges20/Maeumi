@@ -73,6 +73,23 @@ public class Board extends AppCompatActivity {
     }
 
     /*
+    //firebase 데이터 조회하기
+    private void viewFirebaseDB() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference boardRef;
+
+        switch (cur_fragment){
+            case 1:
+                boardRef = database.getReference("/자유게시판/");
+                break;
+            case 2:
+                boardRef = database.getReference("/익명게시판/");
+                break;
+        }
+    }
+     */
+
+    /*
     public void goToBoardAnonymous(View view){
         Intent intent = new Intent(Board.this, BoardAnonymous.class);
         startActivity(intent);

@@ -7,10 +7,14 @@ public class Post {
 
     //게시물 firebase json 데이터 구조 확정되고 나서 변수, Getter, Setter 수정할 것
 
-    String title;       //제목
-    String content;     //내용
-    String writer;      //작성자
-    String writeDate;   //작성일자
+    public String title;       //제목
+    public String content;     //내용
+    public String writer;      //작성자
+    public String writeDate;   //작성일자
+
+    public Post(){
+
+    }
 
     public Post(String title, String content, String writer, String writeDate) {
         this.title = title;

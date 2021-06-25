@@ -12,12 +12,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
 import com.hanium.android.maeumi.viewmodel.PostAdapter;
 
 /*자유게시판 fragment*/
 public class BoardAnonymousFragment extends Fragment {
+
+    FirebaseDatabase database;
+    DatabaseReference freeBoardRef;
+    PostAdapter adapter = new PostAdapter();
 
     @Nullable
     @Override
@@ -27,6 +36,7 @@ public class BoardAnonymousFragment extends Fragment {
         View view = inflater.inflate(R.layout.board_anonymous_fragment, container, false);
         Context context = view.getContext();
 
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.boardAnonymousRecyclerView);
         recyclerView.setHasFixedSize(true);
 
@@ -35,12 +45,9 @@ public class BoardAnonymousFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        //어댑터를 이용해서 리사이클러뷰에 데이터 넘김
-        //추후 firebase 데이터와 연결할 것
-        PostAdapter adapter = new PostAdapter();
-        for (int i = 0; i < 10; i++)
-            adapter.addItem(new Post("제목:익명게시판", "내용","작성자", "작성일자"));
-        recyclerView.setAdapter(adapter);
+
+        getPostFromDB(); //DB에서 게시글 데이터 조회
+        recyclerView.setAdapter(adapter);   //리사이클러뷰에 어댑터 등록
 
         return view;
     }
@@ -48,5 +55,28 @@ public class BoardAnonymousFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    //Firebase에서 데이터 가져오기
+    private void getPostFromDB(){
+        database = FirebaseDatabase.getInstance();
+        freeBoardRef = database.getReference("/익명게시판/");
+        freeBoardRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
+                    for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
+                        adapter.addItem(snap.getValue(Post.class));
+                    }
+                }
+                adapter.notifyDataSetChanged(); //리스트 새로고침 알림
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.out.println("Failed to read value." + error.toException());
+            }
+        });
     }
 }
