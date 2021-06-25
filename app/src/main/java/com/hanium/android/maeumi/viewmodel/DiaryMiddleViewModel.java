@@ -108,4 +108,9 @@ public class DiaryMiddleViewModel {
         DiaryViewModel.diaryWrite(value);
     }
 
+    // 일기 삭제
+    public void deleteDiary(){
+        DiaryViewModel.deleteDiary();
+    }
+
 }

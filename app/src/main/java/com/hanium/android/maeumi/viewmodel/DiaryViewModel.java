@@ -23,8 +23,8 @@ public class DiaryViewModel {
     public static int emoticonNum;
     public static int maxDay;
 
-    // [o] 개별 조회, 작성
-    // [x] 월별 조회, 수정, 삭제
+    // [o] 개별 조회, 작성, 삭제
+    // [x] 월별 조회, 수정
     public DiaryViewModel() {
 
     }
@@ -163,6 +163,16 @@ public class DiaryViewModel {
         diaryValues = diary.toMap();
         System.out.println("diaryValue- " + diaryValues);
         childUpdates.put(fireDate, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
+        diaryRef.updateChildren(childUpdates);
+    }
+
+    // 일기 삭제
+    public void deleteDiary(){
+        database = FirebaseDatabase.getInstance();
+        diaryRef = database.getReference("/일기장/아이디/");
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(fireDate, null); //dnull이라 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
     }
 }

@@ -26,13 +26,10 @@ import java.util.Map;
 public class DiaryContent extends AppCompatActivity {
 
     DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
-//
+
     String diaryCalDate, diaryFireDate;
     String diaryTitle, diaryContent, nullDiary;
     int diaryEmoticonNum;
-
-    FirebaseDatabase database;
-    DatabaseReference diaryRef;
 
     TextView dateText;  //날짜 텍스트
     TextView titleText; //제목 텍스트
@@ -41,7 +38,6 @@ public class DiaryContent extends AppCompatActivity {
     int year;
     int month;
     int dayOfMonth;
-    String dateStr; //20210519 형식
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -101,9 +97,7 @@ public class DiaryContent extends AppCompatActivity {
         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put(dateStr, null); //dnull이라 기존 데이터 삭제됨
-                diaryRef.updateChildren(childUpdates);
+                DiaryMiddleViewModel.deleteDiary();
 
                 Toast toastView = Toast.makeText(DiaryContent.this, "삭제 완료", Toast.LENGTH_SHORT);
                 toastView.show();
@@ -113,7 +107,7 @@ public class DiaryContent extends AppCompatActivity {
         dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                Toast.makeText(DiaryContent.this,"아니오 클릭", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DiaryContent.this,"삭제 취소", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
