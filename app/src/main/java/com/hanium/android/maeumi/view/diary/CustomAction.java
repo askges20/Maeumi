@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
+import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -34,7 +35,9 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         selectDate = LocalDate.now();
         setMonthView();
         // 월별 일기 조회 후 점 찍기
-        DiaryMiddleViewModel.setMaxDay(selectDate);
+//        DiaryMiddleViewModel.setMaxDay(selectDate);
+//        DiaryViewModel.getMonthDiary();
+        DiaryMiddleViewModel.setCompareMonth(selectDate);
     }
 
     //activity_custom.xml 레이아웃 요소 연결
@@ -65,14 +68,11 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> dayInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
-        System.out.println("yearMonth : " + yearMonth);
 
         int daysInMonth = yearMonth.lengthOfMonth();
 
         LocalDate first0fMonth = selectDate.withDayOfMonth(1);  //해당 월의 첫번째 일
-        System.out.println("firstOfMonth : " + first0fMonth);
         int day0fweek = first0fMonth.getDayOfWeek().getValue();     //첫번째 일 (숫자)
-        System.out.println("dayOfweek" + day0fweek);
 
         for (int i = 1; i <= 42; i++) {
             if (i <= day0fweek || i > daysInMonth + day0fweek) {    //달력 범위 벗어나는 부분 빈문자열 처리
@@ -89,7 +89,9 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         selectDate = selectDate.minusMonths(1);
         // 월별 일기 조회 후 점 찍기
         System.out.println("previous Month - " + selectDate);
-        DiaryMiddleViewModel.setMaxDay(selectDate);
+        DiaryMiddleViewModel.setChangeCompareMonth(selectDate);
+        System.out.println("Array - "+DiaryMiddleViewModel.getHelloMonthDiary());
+//        DiaryMiddleViewModel.setMaxDay(selectDate);
         setMonthView();
     }
 
@@ -98,7 +100,9 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         selectDate = selectDate.plusMonths(1);
         // 월별 일기 조회 후 점 찍기
         System.out.println("next Month- " + selectDate);
-        DiaryMiddleViewModel.setMaxDay(selectDate);
+        DiaryMiddleViewModel.setChangeCompareMonth(selectDate);
+//        DiaryMiddleViewModel.setMaxDay(selectDate);
+        System.out.println("Array - "+DiaryMiddleViewModel.getHelloMonthDiary());
         setMonthView();
     }
 

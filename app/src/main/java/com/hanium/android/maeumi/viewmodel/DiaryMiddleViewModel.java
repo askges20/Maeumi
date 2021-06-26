@@ -4,6 +4,7 @@ import com.hanium.android.maeumi.model.Diary;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.ArrayList;
 
 public class DiaryMiddleViewModel {
 
@@ -15,8 +16,9 @@ public class DiaryMiddleViewModel {
     public static String title, content, nullDiary;
     public static int emoticonNum;
 
-    public static String day, year, month, oneTimeDate;
-    public static int maxDay;
+    public static String day, year, month, oneTimeDate, oneTimeMonth,compareMonth;
+
+    public static ArrayList<String> dates = new ArrayList<>();
 
     public DiaryMiddleViewModel() {
 
@@ -28,7 +30,7 @@ public class DiaryMiddleViewModel {
         this.year = this.oneTimeDate.substring(0, 4);
         this.month = this.oneTimeDate.substring(5, 7);
         this.day = dayPlusZero(date);
-        this.fireDate = "/"+this.year + this.month + this.day+"/";
+        this.fireDate = "/"+ this.year + this.month + this.day+"/";
         if(date == ""){
             this.calendarDate = null;
         }else{
@@ -39,10 +41,28 @@ public class DiaryMiddleViewModel {
         DiaryViewModel.setDate();
     }
 
-    public void setMaxDay(LocalDate monthYear) {
-        YearMonth yearMonth = YearMonth.from(monthYear);
-        this.maxDay = yearMonth.lengthOfMonth();
-        System.out.println("Max Day - "+ this.maxDay);
+    public void setCompareMonth(LocalDate selectDate){
+        System.out.println("selectDate : " + selectDate);
+        this.oneTimeMonth = selectDate.toString();
+        this.compareMonth = this.oneTimeMonth.replace("-","");
+        this.compareMonth = this.compareMonth.substring(0,6);
+
+        DiaryViewModel.setCompareDate(this.compareMonth);
+    }
+    public void setChangeCompareMonth(LocalDate selectDate){
+        System.out.println("selectDate : " + selectDate);
+        this.oneTimeMonth = selectDate.toString();
+        this.compareMonth = this.oneTimeMonth.replace("-","");
+        this.compareMonth = this.compareMonth.substring(0,6);
+
+        DiaryViewModel.setChangeCompareDate(this.compareMonth);
+    }
+
+    public void setHelloMonthDiary(){
+        this.dates = DiaryViewModel.getHelloMonthDiary();
+    }
+    public ArrayList getHelloMonthDiary(){
+        return dates;
     }
 
     public String dayPlusZero(String date) {
@@ -63,9 +83,9 @@ public class DiaryMiddleViewModel {
     }
 
     // 최대날짜 구하기
-    public static int getMaxDay() {
-        return maxDay;
-    }
+//    public static int getMaxDay() {
+//        return maxDay;
+//    }
 
     // 일기 제목, 내용, 이모티콘 번호 불러오기
     public void setDiaryData() {

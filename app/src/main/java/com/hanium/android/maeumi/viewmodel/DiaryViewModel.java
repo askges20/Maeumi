@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.model.Diary;
+import com.hanium.android.maeumi.model.Post;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,14 +18,15 @@ public class DiaryViewModel {
     DatabaseReference diaryRef;
     DiaryMiddleViewModel DiaryMiddleViewModel;
 
-    public static String calendarDate, fireDate;
+    public static String calendarDate, fireDate, compareMonth;
 
     public static String title, content, nullDiary;
     public static int emoticonNum;
-    public static int maxDay;
 
-    // [o] 개별 조회, 작성, 삭제
-    // [x] 월별 조회, 수정
+    public static ArrayList<String> dates = new ArrayList<>();
+
+    // [o] 개별 조회, 작성, 삭제, 수정
+    // [x] 월별 조회
     public DiaryViewModel() {
 
     }
@@ -33,8 +35,22 @@ public class DiaryViewModel {
     public void setDate() {
         fireDate = DiaryMiddleViewModel.getFBDate();
         calendarDate = DiaryMiddleViewModel.getCalendarDate();
-        maxDay = DiaryMiddleViewModel.getMaxDay();
+//        maxDay = DiaryMiddleViewModel.getMaxDay();
         getDiaryFromFB(fireDate);
+//        getMonthDiary();
+    }
+    public void setCompareDate(String date){
+        this.compareMonth = date;
+//        System.out.println("compare Month "+this.compareMonth);
+
+        getMonthDiary();
+    }
+    public void setChangeCompareDate(String date){
+        dates.clear();
+        this.compareMonth = date;
+//        System.out.println("compare Month "+this.compareMonth);
+
+        getMonthDiary();
     }
 
     //일기 제목, 내용, 이모티콘 번호 조회
@@ -71,48 +87,58 @@ public class DiaryViewModel {
         return this.nullDiary;
     }
 
-    public ArrayList setMonthDiary(){
-        ArrayList<Integer> dates = new ArrayList<>();
 
-
+    public void setMonthDiary(String date){
+        dates.add(date);
+        System.out.println(dates);
+    }
+    public ArrayList getHelloMonthDiary(){
         return dates;
     }
 
+    // 월별 일기
+    public void compareMonth(String compareDate,String FbDate,DataSnapshot dateSnap){
+        System.out.println("Hello Compare Date - "+compareDate);
+        System.out.println("FbDate Date - "+ FbDate.substring(0,6));
+        if(compareDate == FbDate.substring(0,6)){
+            System.out.println(dateSnap.getValue());
+        }
+    }
+
+
     // Firebase에서 월별 일기 조회
-    public void getMonthDiary(String date) {
+    public void getMonthDiary() {
         database = FirebaseDatabase.getInstance();
+        diaryRef = database.getReference("/일기장/아이디/");
 
-        for (int num = 1; num <= 30; num++) {
-            diaryRef = database.getReference("/일기장/아이디/" + date + num);
-            System.out.println("5월" + num + " 일 일기조회");
+        diaryRef.addValueEventListener(new ValueEventListener() {
 
-            diaryRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    try {
-                        Diary value = dataSnapshot.getValue(Diary.class);
-                        System.out.println("title- " + value.title);
-                        System.out.println("date - " + value.date);
-//                        dates.add(value.date);
-//                    setTitle(value.title);
-//                    setContent(value.content);
-//                    setEmoticonNum(value.emoticonNum);
-//                    setNullDiary("not Null");
-                    } catch (Exception e) {
-                        System.out.println("error - " + e);
-                        System.out.println("일기 없음");
-//                    setNullDiary(null);
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
+//                    compareMonth(compareMonth,dateSnap.getKey(),dateSnap);
+//                    System.out.println("compareMonth - "+compareMonth);
+//                    System.out.println("dateSnap - "+dateSnap.getKey().substring(0,6));
+                    if(compareMonth.equals(dateSnap.getKey().substring(0,6))){
+                        Diary testValue = dateSnap.getValue(Diary.class);
+//                        System.out.println(testValue.date);
+                        setMonthDiary(testValue.date);
+                    }
+
+                    for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
+//                        adapter.addItem(snap.getValue(Post.class));
+//                        System.out.println("Second snap- "+snap);
                     }
                 }
+//                adapter.notifyDataSetChanged(); //리스트 새로고침 알림
+            }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    System.out.println("Failed to read value." + error.toException());
-                }
-            });
-
-        }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.out.println("Failed to read value." + error.toException());
+            }
+        });
     }
     // 개별 일기 조회
     public void getDiaryFromFB(String date) {
