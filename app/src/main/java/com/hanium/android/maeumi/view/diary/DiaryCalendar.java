@@ -23,7 +23,7 @@ public class DiaryCalendar extends AppCompatActivity {
     String testDate = "20215";
 
 //    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
-    DiaryViewModel DiaryViewModel = new DiaryViewModel();
+//    DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
@@ -48,7 +48,7 @@ public class DiaryCalendar extends AppCompatActivity {
 //                DiaryMiddleViewModel.setDate(year,month,dayOfMonth);
             }
         });
-        DiaryViewModel.getDiaryFromFB(testDate);
+//        DiaryViewModel.getDiaryFromFB(testDate);
     }
 
     public void goToDiaryContent(View view){

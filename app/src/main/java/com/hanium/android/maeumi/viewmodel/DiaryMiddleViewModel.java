@@ -1,6 +1,7 @@
 package com.hanium.android.maeumi.viewmodel;
 
 import com.hanium.android.maeumi.model.Diary;
+import com.hanium.android.maeumi.view.diary.CustomAction;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 
 public class DiaryMiddleViewModel {
 
-
-    DiaryViewModel DiaryViewModel = new DiaryViewModel();
+    CustomAction customAction;
+    DiaryViewModel DiaryViewModel = new DiaryViewModel(this);
 
     public static String calendarDate, fireDate;
 
@@ -22,6 +23,10 @@ public class DiaryMiddleViewModel {
 
     public DiaryMiddleViewModel() {
 
+    }
+
+    public DiaryMiddleViewModel(CustomAction custom){
+        this.customAction = custom;
     }
 
     // Intent에서 생성된 날짜를 FireBase, 캘린더 날짜로 바꾸고 저장
@@ -57,12 +62,21 @@ public class DiaryMiddleViewModel {
 
         DiaryViewModel.setChangeCompareDate(this.compareMonth);
     }
+    public void setTestDiaryDate(String date){
+        if(date == null){
+            System.out.println("DATE IS NULL");
+        }else{
+            System.out.println("date - "+date);
+        }
+    }
 
     public void setHelloMonthDiary(){
         this.dates = DiaryViewModel.getHelloMonthDiary();
+        customAction.setDates(this.dates);
+        System.out.println("hello - "+ this.dates);
     }
     public ArrayList getHelloMonthDiary(){
-        return dates;
+        return DiaryViewModel.getHelloMonthDiary();
     }
 
     public String dayPlusZero(String date) {

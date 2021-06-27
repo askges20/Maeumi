@@ -24,8 +24,9 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
     private RecyclerView calendarRecyclerView;
     private LocalDate selectDate;
 
-    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel(this);
 
+    public static ArrayList<String> dates = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,13 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
 //        DiaryMiddleViewModel.setMaxDay(selectDate);
 //        DiaryViewModel.getMonthDiary();
         DiaryMiddleViewModel.setCompareMonth(selectDate);
+        //dates = DiaryMiddleViewModel.getHelloMonthDiary();
+        //System.out.println("나와라"+dates);
+    }
+
+    public void setDates(ArrayList<String> dates){
+        this.dates = dates;
+        System.out.println("!!!!!!!!!!!"+this.dates);
     }
 
     //activity_custom.xml 레이아웃 요소 연결
@@ -90,7 +98,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         // 월별 일기 조회 후 점 찍기
         System.out.println("previous Month - " + selectDate);
         DiaryMiddleViewModel.setChangeCompareMonth(selectDate);
-        System.out.println("Array - "+DiaryMiddleViewModel.getHelloMonthDiary());
+//        DiaryMiddleViewModel.setHelloMonthDiary();
 //        DiaryMiddleViewModel.setMaxDay(selectDate);
         setMonthView();
     }
@@ -102,7 +110,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         System.out.println("next Month- " + selectDate);
         DiaryMiddleViewModel.setChangeCompareMonth(selectDate);
 //        DiaryMiddleViewModel.setMaxDay(selectDate);
-        System.out.println("Array - "+DiaryMiddleViewModel.getHelloMonthDiary());
+//        DiaryMiddleViewModel.setHelloMonthDiary();
         setMonthView();
     }
 

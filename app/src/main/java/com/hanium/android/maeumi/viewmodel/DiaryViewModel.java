@@ -18,7 +18,7 @@ public class DiaryViewModel {
     DatabaseReference diaryRef;
     DiaryMiddleViewModel DiaryMiddleViewModel;
 
-    public static String calendarDate, fireDate, compareMonth;
+    public static String calendarDate, fireDate, compareMonth, testDate;
 
     public static String title, content, nullDiary;
     public static int emoticonNum;
@@ -27,8 +27,8 @@ public class DiaryViewModel {
 
     // [o] 개별 조회, 작성, 삭제, 수정
     // [x] 월별 조회
-    public DiaryViewModel() {
-
+    public DiaryViewModel(DiaryMiddleViewModel middle) {
+        this.DiaryMiddleViewModel = middle;
     }
 
     // FireBase, 캘린더 날짜 저장
@@ -88,11 +88,14 @@ public class DiaryViewModel {
     }
 
 
-    public void setMonthDiary(String date){
-        dates.add(date);
-        System.out.println(dates);
-    }
+//    public void setMonthDiary(String date){
+//        System.out.println("ViewModel - "+ date);
+//        this.testDate = date;
+//        DiaryMiddleViewModel.setTestDiaryDate(this.testDate);
+//    }
+
     public ArrayList getHelloMonthDiary(){
+        System.out.println("hdhdhdhdhd "+dates);
         return dates;
     }
 
@@ -123,7 +126,8 @@ public class DiaryViewModel {
                     if(compareMonth.equals(dateSnap.getKey().substring(0,6))){
                         Diary testValue = dateSnap.getValue(Diary.class);
 //                        System.out.println(testValue.date);
-                        setMonthDiary(testValue.date);
+                        dates.add(testValue.date);
+//                        System.out.println(dates);
                     }
 
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
@@ -131,7 +135,8 @@ public class DiaryViewModel {
 //                        System.out.println("Second snap- "+snap);
                     }
                 }
-//                adapter.notifyDataSetChanged(); //리스트 새로고침 알림
+                getHelloMonthDiary();
+                DiaryMiddleViewModel.setHelloMonthDiary();
             }
 
             @Override
