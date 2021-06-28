@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.time.LocalDate;
@@ -19,12 +18,12 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class CustomAction extends AppCompatActivity implements CalendarAdapter.OnItemListener {
+public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnItemListener {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectDate;
 
-    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel(this);
+    DiaryViewModel DiaryViewModel = new DiaryViewModel(this);
 
     public static ArrayList<String> dates = new ArrayList<>();
 
@@ -36,16 +35,12 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         selectDate = LocalDate.now();
         setMonthView();
         // 월별 일기 조회 후 점 찍기
-//        DiaryMiddleViewModel.setMaxDay(selectDate);
-//        DiaryViewModel.getMonthDiary();
-        DiaryMiddleViewModel.setCompareMonth(selectDate);
-        //dates = DiaryMiddleViewModel.getHelloMonthDiary();
-        //System.out.println("나와라"+dates);
+        DiaryViewModel.setCompareMonth(selectDate);
     }
 
-    public void setDates(ArrayList<String> dates){
+    public void setDates(ArrayList<String> dates) {
         this.dates = dates;
-        System.out.println("!!!!!!!!!!!"+this.dates);
+        System.out.println("월별 일기 내역 " + this.dates);
     }
 
     //activity_custom.xml 레이아웃 요소 연결
@@ -97,9 +92,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         selectDate = selectDate.minusMonths(1);
         // 월별 일기 조회 후 점 찍기
         System.out.println("previous Month - " + selectDate);
-        DiaryMiddleViewModel.setChangeCompareMonth(selectDate);
-//        DiaryMiddleViewModel.setHelloMonthDiary();
-//        DiaryMiddleViewModel.setMaxDay(selectDate);
+        DiaryViewModel.setChangeCompareMonth(selectDate);
         setMonthView();
     }
 
@@ -108,9 +101,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
         selectDate = selectDate.plusMonths(1);
         // 월별 일기 조회 후 점 찍기
         System.out.println("next Month- " + selectDate);
-        DiaryMiddleViewModel.setChangeCompareMonth(selectDate);
-//        DiaryMiddleViewModel.setMaxDay(selectDate);
-//        DiaryMiddleViewModel.setHelloMonthDiary();
+        DiaryViewModel.setChangeCompareMonth(selectDate);
         setMonthView();
     }
 
@@ -118,8 +109,7 @@ public class CustomAction extends AppCompatActivity implements CalendarAdapter.O
     @Override
     public void onItemClick(int position, String dayText) {
         // 클릭 날짜 표시 [x]
-        // ViewModel에 날짜 저장 [o]
-        DiaryMiddleViewModel.setDate(selectDate, dayText);
+        DiaryViewModel.setDate(selectDate, dayText);
         String message = "Selected Date" + dayText + " " + monthYearFromDate(selectDate);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }

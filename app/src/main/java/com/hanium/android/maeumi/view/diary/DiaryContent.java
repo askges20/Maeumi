@@ -10,22 +10,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.model.Diary;
-import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class DiaryContent extends AppCompatActivity {
 
-    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     String diaryCalDate;
     String diaryTitle, diaryContent, nullDiary;
@@ -41,20 +31,20 @@ public class DiaryContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_content);
 
-        DiaryMiddleViewModel.setDiaryData();
-        diaryCalDate = DiaryMiddleViewModel.getCalendarDate();
+        DiaryViewModel.setDiaryData();
+        diaryCalDate = DiaryViewModel.getCalendarDate();
         nullDate();
 
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
 
-        nullDiary = DiaryMiddleViewModel.getNullDiary();
+        nullDiary = DiaryViewModel.getNullDiary();
         ifNullDiary();
 
-        diaryTitle = DiaryMiddleViewModel.getTitle();
-        diaryContent = DiaryMiddleViewModel.getContent();
-        diaryEmoticonNum = DiaryMiddleViewModel.getEmoticonNum();
+        diaryTitle = DiaryViewModel.getTitle();
+        diaryContent = DiaryViewModel.getContent();
+        diaryEmoticonNum = DiaryViewModel.getEmoticonNum();
 
         dateText.setText(diaryCalDate);
         titleText.setText(diaryTitle);
@@ -88,7 +78,7 @@ public class DiaryContent extends AppCompatActivity {
         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                DiaryMiddleViewModel.deleteDiary();
+                DiaryViewModel.deleteDiary();
 
                 Toast toastView = Toast.makeText(DiaryContent.this, "삭제 완료", Toast.LENGTH_SHORT);
                 toastView.show();

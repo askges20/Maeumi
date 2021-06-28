@@ -1,6 +1,5 @@
 package com.hanium.android.maeumi.view.diary;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,18 +8,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.model.Diary;
-import com.hanium.android.maeumi.viewmodel.DiaryMiddleViewModel;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 public class DiaryWrite extends AppCompatActivity {
 
-    DiaryMiddleViewModel DiaryMiddleViewModel = new DiaryMiddleViewModel();
+    DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     TextView date;
     EditText diaryTitleText;
@@ -33,7 +26,7 @@ public class DiaryWrite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
-        diaryDate = DiaryMiddleViewModel.getCalendarDate();
+        diaryDate = DiaryViewModel.getCalendarDate();
         nullDate();
 
         date = findViewById(R.id.writeDate);
@@ -57,7 +50,7 @@ public class DiaryWrite extends AppCompatActivity {
         String diaryTitle = diaryTitleText.getText().toString();
         String diaryContent = diaryContentText.getText().toString();
 
-        DiaryMiddleViewModel.diaryWrite(diaryTitle,diaryContent);
+        DiaryViewModel.diaryWrite(diaryTitle,diaryContent);
 
         Toast toastView = Toast.makeText(DiaryWrite.this, "작성 완료", Toast.LENGTH_SHORT);
         toastView.show();

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.view.board.Board;
-import com.hanium.android.maeumi.view.diary.DiaryCalendar;
 
 public class ChatBotStart extends AppCompatActivity {
 

@@ -24,11 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".view.diary.DiaryCalendar" />
         <activity android:name=".view.diary.DiaryContent" />
         <activity android:name=".view.diary.DiaryModify" />
         <activity android:name=".view.diary.DiaryWrite" />
-        <activity android:name=".view.diary.DiaryCalendarTest" />
         <activity android:name=".view.chatbot.ChatBot" />
         <activity android:name=".view.chatbot.ChatBotKeyWord" />
         <activity android:name=".view.chatbot.ChatBotKeyWordNO" />
@@ -42,7 +40,7 @@
         <activity android:name=".view.selftest.SelfTest" />
         <activity android:name=".view.selftest.TestResult" />
         <activity android:name=".view.selftest.TestClick" />
-        <activity android:name=".view.diary.CustomAction" />
+        <activity android:name=".view.diary.DiaryMain" />
     </application>
 
 </manifest>
