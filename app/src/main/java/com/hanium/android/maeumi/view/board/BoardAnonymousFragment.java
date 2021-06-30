@@ -109,6 +109,7 @@ public class BoardAnonymousFragment extends Fragment {
         intent.putExtra("content", item.getContent());
         intent.putExtra("writeDate",item.getWriteDate());
         intent.putExtra("writer",item.getWriter());
+        intent.putExtra("boardType", "anonymous");
         startActivity(intent);
     }
 }

@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hanium.android.maeumi.R;
 
 public class PostContent extends AppCompatActivity {
+    String title, content, writeDate, writer, boardType;
+
     TextView titleText; //제목 텍스트
     TextView contentText;   //내용 텍스트
     TextView dateText;  //날짜 텍스트
@@ -29,15 +31,27 @@ public class PostContent extends AppCompatActivity {
         writerText = findViewById(R.id.postWriterText);
 
         Intent prevIntent = getIntent();
-        titleText.setText(prevIntent.getStringExtra("title"));
-        contentText.setText(prevIntent.getStringExtra("content"));
-        dateText.setText(prevIntent.getStringExtra("writeDate"));
-        writerText.setText(prevIntent.getStringExtra("writer"));
+        title = prevIntent.getStringExtra("title");
+        titleText.setText(title);
+        content = prevIntent.getStringExtra("content");
+        contentText.setText(content);
+        writeDate = prevIntent.getStringExtra("writeDate");
+        dateText.setText(writeDate);
+        writer = prevIntent.getStringExtra("writer");
+        writerText.setText(writer);
+        boardType = prevIntent.getStringExtra("boardType");
     }
 
     public void goToPostModify(View view){ //수정 버튼 클릭 시
-        //Intent intent = new Intent(PostContent.this, PostModify.class);
-        //startActivity(intent);
+        Intent intent = new Intent(PostContent.this, PostModify.class);
+
+        intent.putExtra("title", title);
+        intent.putExtra("content", content);
+        intent.putExtra("writeDate", writeDate);
+        intent.putExtra("writer", writer);
+        intent.putExtra("boardType", boardType);
+
+        startActivity(intent);
         System.out.println("Move To Modify Post");
     }
 

@@ -36,6 +36,7 @@
         <activity android:name=".view.board.Board" />
         <activity android:name=".view.board.BoardWrite" />
         <activity android:name=".view.board.PostContent"/>
+        <activity android:name=".view.board.PostModify"/>
         <activity android:name=".view.profile.Profile" />
         <activity android:name=".view.profile.ProfileEdit" />
         <activity android:name=".view.selftest.SelfTest" />

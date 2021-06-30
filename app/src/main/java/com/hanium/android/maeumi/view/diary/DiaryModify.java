@@ -1,7 +1,6 @@
 package com.hanium.android.maeumi.view.diary;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -55,9 +54,8 @@ public class DiaryModify extends Activity {
         Toast toastView = Toast.makeText(DiaryModify.this, "수정 완료", Toast.LENGTH_SHORT);
         toastView.show();
 
-        // 다시 일기장 메인 화면으로 이동
-        Intent intent = new Intent(DiaryModify.this, DiaryMain.class);
-        startActivity(intent);
+        // 일기장 메인 화면으로 이동
+        finish();
     }
 
     public void goToBack(View view){   //목록으로 버튼 클릭 시
