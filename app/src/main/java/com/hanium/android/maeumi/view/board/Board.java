@@ -54,7 +54,7 @@ public class Board extends AppCompatActivity {
         switch (fragment) {
             case 1:
                 // 첫번째 fragment(자유게시판) 호출
-                BoardFreeFragment freeFragment = new BoardFreeFragment();
+                BoardFreeFragment freeFragment = new BoardFreeFragment(this);
                 transaction.replace(R.id.board_fragment_container, freeFragment);
                 transaction.commit();
                 cur_fragment = fragment_1;  //현재 fragment 번호 업데이트
@@ -63,7 +63,7 @@ public class Board extends AppCompatActivity {
 
             case 2:
                 // 두번째 fragment(익명게시판) 호출
-                BoardAnonymousFragment anonymousFragment = new BoardAnonymousFragment();
+                BoardAnonymousFragment anonymousFragment = new BoardAnonymousFragment(this);
                 transaction.replace(R.id.board_fragment_container, anonymousFragment);
                 transaction.commit();
                 cur_fragment = fragment_2; //현재 fragment 번호 업데이트

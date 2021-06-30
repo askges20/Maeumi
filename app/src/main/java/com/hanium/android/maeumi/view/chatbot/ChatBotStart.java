@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.view.board.Board;
+import com.hanium.android.maeumi.view.diary.DiaryMain;
 
 public class ChatBotStart extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class ChatBotStart extends AppCompatActivity {
         setContentView(R.layout.activity_chatbot_start);
     }
     public void goToDiary(View view){
-        Intent intent = new Intent(ChatBotStart.this, DiaryCalendar.class);
+        Intent intent = new Intent(ChatBotStart.this, DiaryMain.class);
         startActivity(intent);
         System.out.println("Move To Diary");
     }

@@ -1,6 +1,7 @@
 package com.hanium.android.maeumi.view.board;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.OnPostItemClickListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
 import com.hanium.android.maeumi.viewmodel.PostAdapter;
@@ -26,7 +28,13 @@ public class BoardFreeFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference freeBoardRef;
-    PostAdapter adapter = new PostAdapter();
+    PostAdapter adapter;
+
+    Board board;    //Intent
+
+    public BoardFreeFragment(Board board){
+        this.board = board;
+    }
 
     @Nullable
     @Override
@@ -45,9 +53,12 @@ public class BoardFreeFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        adapter = new PostAdapter();
+
 
         getPostFromDB(); //DB에서 게시글 데이터 조회
         recyclerView.setAdapter(adapter);   //리사이클러뷰에 어댑터 등록
+        addListener();  //리스너 추가
 
         return view;
     }
@@ -78,5 +89,27 @@ public class BoardFreeFragment extends Fragment {
                 System.out.println("Failed to read value." + error.toException());
             }
         });
+    }
+
+    //카드별 클릭 이벤트 추가
+    private void addListener(){
+        adapter.setOnItemClickListener(new OnPostItemClickListener() {
+            @Override
+            public void onItemClick(PostAdapter.ViewHolder holder, View view, int position) {
+                Post item = adapter.getItem(position);
+                goToPostContent(item);
+                //Toast.makeText(getContext(), "아이템 선택됨: "+item.getContent(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //게시글 내용 페이지로 이동
+    private void goToPostContent(Post item){
+        Intent intent = new Intent(board, PostContent.class);
+        intent.putExtra("title", item.getTitle());
+        intent.putExtra("content", item.getContent());
+        intent.putExtra("writeDate",item.getWriteDate());
+        intent.putExtra("writer",item.getWriter());
+        startActivity(intent);
     }
 }

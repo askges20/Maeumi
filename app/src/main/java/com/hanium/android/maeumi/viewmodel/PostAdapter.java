@@ -8,13 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hanium.android.maeumi.OnPostItemClickListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
 
 import java.util.ArrayList;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements OnPostItemClickListener {
     ArrayList<Post> items = new ArrayList<Post>();
+    OnPostItemClickListener listener;
 
     @NonNull
     @Override
@@ -22,7 +24,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.board_item, viewGroup, false);
 
-        return new ViewHolder(itemView);
+        return new ViewHolder(itemView, this);
     }
 
     @Override
@@ -36,17 +38,38 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return items.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    public void setOnItemClickListener(OnPostItemClickListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if(listener != null){
+            listener.onItemClick(holder, view, position);
+        }
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView titleView;
         TextView writerView;
         TextView dateView;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(View itemView, final OnPostItemClickListener listener){
             super(itemView);
 
             titleView = itemView.findViewById(R.id.postTitle);
             writerView = itemView.findViewById(R.id.postWriter);
-            dateView = itemView.findViewById(R.id.postDate);
+            dateView = itemView.findViewById(R.id.postDateText);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(listener!=null){
+                        listener.onItemClick(ViewHolder.this, view, position);
+                    }
+                }
+            });
         }
 
         public void setItem(Post item){
