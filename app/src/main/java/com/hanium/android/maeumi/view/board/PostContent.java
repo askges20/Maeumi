@@ -1,5 +1,6 @@
 package com.hanium.android.maeumi.view.board;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hanium.android.maeumi.R;
 
 public class PostContent extends AppCompatActivity {
+    public static Activity PostContent_Activity;
+
     String title, content, writeDate, writer, boardType;
 
     TextView titleText; //제목 텍스트
@@ -24,6 +27,7 @@ public class PostContent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_content);
+        PostContent_Activity = this;
 
         titleText = findViewById(R.id.postTitleText);
         contentText = findViewById(R.id.postContentText);

@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PostModify extends Activity {
+    PostContent prevActivity;    //수정하는 게시글 내용 페이지
+
     FirebaseDatabase database;
     DatabaseReference diaryRef;
 
@@ -28,6 +30,7 @@ public class PostModify extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_modify);
+        prevActivity = (PostContent)PostContent.PostContent_Activity;   //이전 액티비티
 
         titleText = findViewById(R.id.postTitleText);
         contentText = findViewById(R.id.postContentText);
@@ -67,6 +70,7 @@ public class PostModify extends Activity {
 
         Toast toastView = Toast.makeText(PostModify.this, "수정 완료", Toast.LENGTH_SHORT);
         toastView.show();
+        prevActivity.finish();  //게시글 내용 페이지도 동시에 닫기
         finish();
     }
 
