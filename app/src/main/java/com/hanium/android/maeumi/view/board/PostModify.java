@@ -19,7 +19,7 @@ public class PostModify extends Activity {
     PostContent prevActivity;    //수정하는 게시글 내용 페이지
 
     FirebaseDatabase database;
-    DatabaseReference diaryRef;
+    DatabaseReference postRef;
 
     String postTitle, postContent, postDate, postWriter, boardType;
 
@@ -55,9 +55,9 @@ public class PostModify extends Activity {
         database = FirebaseDatabase.getInstance();
         String date = postDate.substring(0,4)+postDate.substring(5,7)+postDate.substring(8,10);
         if (boardType.equals("free"))
-            diaryRef = database.getReference("/자유게시판/"+date+"/");
+            postRef = database.getReference("/자유게시판/"+date+"/");
         else
-            diaryRef = database.getReference("/익명게시판/"+date+"/");
+            postRef = database.getReference("/익명게시판/"+date+"/");
 
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
@@ -66,7 +66,7 @@ public class PostModify extends Activity {
         Post post = new Post(newTitle, newContent, postWriter, postDate);   //model Diary 객체
         postValues = post.toMap();
         childUpdates.put("아이디"+time, postValues);
-        diaryRef.updateChildren(childUpdates);
+        postRef.updateChildren(childUpdates);
 
         Toast toastView = Toast.makeText(PostModify.this, "수정 완료", Toast.LENGTH_SHORT);
         toastView.show();

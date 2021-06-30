@@ -11,10 +11,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PostContent extends AppCompatActivity {
     public static Activity PostContent_Activity;
+
+    FirebaseDatabase database;
+    DatabaseReference postRef;
 
     String title, content, writeDate, writer, boardType;
 
@@ -24,7 +32,7 @@ public class PostContent extends AppCompatActivity {
     TextView writerText;    //작성자 텍스트
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_content);
         PostContent_Activity = this;
@@ -46,7 +54,7 @@ public class PostContent extends AppCompatActivity {
         boardType = prevIntent.getStringExtra("boardType");
     }
 
-    public void goToPostModify(View view){ //수정 버튼 클릭 시
+    public void goToPostModify(View view) { //수정 버튼 클릭 시
         Intent intent = new Intent(PostContent.this, PostModify.class);
 
         intent.putExtra("title", title);
@@ -59,13 +67,25 @@ public class PostContent extends AppCompatActivity {
         System.out.println("Move To Modify Post");
     }
 
-    public void showDeleteDialog(View view){    //삭제 버튼 클릭 시
+    public void showDeleteDialog(View view) {    //삭제 버튼 클릭 시
         AlertDialog.Builder dialog = new AlertDialog.Builder(PostContent.this);
         dialog.setMessage("작성하신 글을 삭제하시겠습니까?");
         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                //DiaryViewModel.deletePost();
+
+                //DB에서 삭제
+                database = FirebaseDatabase.getInstance();
+                String date = writeDate.substring(0, 4) + writeDate.substring(5, 7) + writeDate.substring(8, 10);
+                if (boardType.equals("free"))
+                    postRef = database.getReference("/자유게시판/"+date+"/");
+                else
+                    postRef = database.getReference("/익명게시판/"+date+"/");
+                String time = writeDate.substring(11,13)+writeDate.substring(14,16)+writeDate.substring(17,19);
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("아이디"+time, null);
+                postRef.updateChildren(childUpdates);
+
 
                 Toast toastView = Toast.makeText(PostContent.this, "삭제 완료", Toast.LENGTH_SHORT);
                 toastView.show();
@@ -75,13 +95,13 @@ public class PostContent extends AppCompatActivity {
         dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                Toast.makeText(PostContent.this,"삭제 취소", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PostContent.this, "삭제 취소", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
     }
 
-    public void goToBack(View view){   //목록으로 버튼 클릭 시
+    public void goToBack(View view) {   //목록으로 버튼 클릭 시
         Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
         toastView.show();
         finish();   //현재 액티비티 없애기
