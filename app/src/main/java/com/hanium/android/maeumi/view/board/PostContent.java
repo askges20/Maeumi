@@ -6,17 +6,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
+import com.hanium.android.maeumi.viewmodel.CommentAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,8 +35,11 @@ public class PostContent extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference postRef;
     DatabaseReference commentRef;
+    CommentAdapter commentAdapter;
 
     String title, content, writeDate, writer, boardType;
+
+    ListView commentList; //댓글 목록
 
     TextView titleText; //제목 텍스트
     TextView contentText;   //내용 텍스트
@@ -66,6 +75,26 @@ public class PostContent extends AppCompatActivity {
         writer = prevIntent.getStringExtra("writer");
         writerText.setText(writer);
         boardType = prevIntent.getStringExtra("boardType");
+
+        //댓글
+        commentAdapter = new CommentAdapter(this);
+        getCommentFromDB();
+        commentList = findViewById(R.id.commentListView);
+
+        //리스트뷰 높이 계산
+        int totalHeight = 0;
+        for (int i=0; i<commentAdapter.getCount(); i++){
+           View listItem = commentAdapter.getView(i, null, commentList);
+           listItem.measure(0, 0);
+           totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = commentList.getLayoutParams();
+        params.height = totalHeight + (commentList.getDividerHeight() * (commentAdapter.getCount() - 1));
+        commentList.setLayoutParams(params);
+
+        commentList.setAdapter(commentAdapter);
+        commentList.setVerticalScrollBarEnabled(false);
     }
 
     public void goToPostModify(View view) { //수정 버튼 클릭 시
@@ -145,5 +174,25 @@ public class PostContent extends AppCompatActivity {
             childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
         }
+    }
+
+    private void getCommentFromDB(){    //DB에서 댓글 데이터 가져오기
+        database = FirebaseDatabase.getInstance();
+        String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
+        commentRef = database.getReference("/댓글/"+postCode+"/");
+        commentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snap : dataSnapshot.getChildren()) { //하위 구조
+                        commentAdapter.addItem(snap.getValue(Comment.class));
+                    }
+                commentAdapter.notifyDataSetChanged(); //리스트 새로고침 알림
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.out.println("Failed to read value." + error.toException());
+            }
+        });
     }
 }

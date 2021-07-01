@@ -7,6 +7,10 @@ public class Comment {
     public String writer;   //작성자 아이디
     public String content;  //댓글 내용
     public String writeDate;    //작성일자
+    
+    public Comment(){
+
+    }
 
     public Comment(String writer, String content, String writeDate) {
         this.writer = writer;

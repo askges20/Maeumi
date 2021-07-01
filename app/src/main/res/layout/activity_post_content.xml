@@ -9,8 +9,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,9 +27,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:gravity="left"
                     android:orientation="vertical">
 
@@ -103,10 +102,16 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
+                        android:layout_height="1dp"
                         android:layout_marginVertical="15dp"
                         android:background="#D6D6D6" />
                 </LinearLayout>
+
+                <ListView
+                    android:id="@+id/commentListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -116,7 +121,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:scrollbars="none">
 
         <EditText
             android:id="@+id/writtenCommentText"
