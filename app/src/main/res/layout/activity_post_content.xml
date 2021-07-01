@@ -7,125 +7,135 @@
     android:orientation="vertical"
     tools:context=".view.board.PostContent">
 
-    <LinearLayout
-        android:id="@+id/postView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="7"
-            android:background="#EDEDED"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/postWriterText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:text="작성자" />
-
-                <TextView
-                    android:id="@+id/postDateText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:text="2021/01/01"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/postTitleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:text="제목"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/postContentText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="10"
-                android:background="#ECECEC"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:padding="15dp"
-                android:text="게시글 내용" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <Button
-                    android:id="@+id/modifyPostBtn"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="0dp"
                     android:layout_weight="1"
-                    android:onClick="goToPostModify"
-                    android:text="수정하기" />
+                    android:gravity="left"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/deletePostBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:onClick="showDeleteDialog"
-                    android:text="삭제하기" />
+                    <TextView
+                        android:id="@+id/postWriterText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:text="작성자"
+                        android:textSize="16sp" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:onClick="goToBack"
-                    android:text="목록으로"/>
+                    <TextView
+                        android:id="@+id/postDateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:text="2021/01/01"
+                        android:textSize="16sp"
+                        tools:layout_marginBottom="15dp" />
+
+                    <TextView
+                        android:id="@+id/postTitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:text="제목"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/postContentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="start|top"
+                        android:inputType="textMultiLine"
+                        android:paddingVertical="15dp"
+                        android:text="게시글 내용"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/modifyPostBtn"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:onClick="goToPostModify"
+                            android:text="수정" />
+
+                        <Button
+                            android:id="@+id/deletePostBtn"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="5dp"
+                            android:onClick="showDeleteDialog"
+                            android:text="삭제" />
+
+                        <!--
+                        <Button
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:onClick="goToBack"
+                            android:text="목록" />
+                        -->
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginVertical="15dp"
+                        android:background="#D6D6D6" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/writtenCommentText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="4"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="댓글" />
+
+        <Button
+            android:id="@+id/addCommentBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="addComment"
+            android:text="등록" />
     </LinearLayout>
 
 </LinearLayout>
