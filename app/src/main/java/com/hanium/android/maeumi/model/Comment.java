@@ -1,16 +1,17 @@
 package com.hanium.android.maeumi.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Comment {
     public String writer;   //작성자 아이디
     public String content;  //댓글 내용
     public String writeDate;    //작성일자
-    public String postCode; //게시글 번호(코드)
 
-    public Comment(String writer, String content, String writeDate, String postCode) {
+    public Comment(String writer, String content, String writeDate) {
         this.writer = writer;
         this.content = content;
         this.writeDate = writeDate;
-        this.postCode = postCode;
     }
 
     public String getWriter() {
@@ -37,11 +38,11 @@ public class Comment {
         this.writeDate = writeDate;
     }
 
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("writer", writer);
+        result.put("content", content);
+        result.put("writeDate", writeDate);
+        return result;
     }
 }

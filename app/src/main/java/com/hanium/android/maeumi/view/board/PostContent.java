@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.model.Post;
+import com.hanium.android.maeumi.model.Comment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -121,26 +121,28 @@ public class PostContent extends AppCompatActivity {
     }
 
     public void addComment(View view) {  //댓글 등록 버튼 클릭 이벤트
-        String comment = writtenCommentText.getText().toString();
-        if (comment.equals("")) //내용을 작성하지 않은 경우
+        String commentContent = writtenCommentText.getText().toString();
+        if (commentContent.equals("")) //내용을 작성하지 않은 경우
             Toast.makeText(this, "댓글을 입력해주세요", Toast.LENGTH_SHORT).show();
         else {
-            commentRef = database.getReference("/댓글/");
+            String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
+            commentRef = database.getReference("/댓글/"+postCode+"/");
 
             //댓글 작성 일자
             Date time = new Date();
-            SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
-            String addTime = format.format(time);
+            SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+            String addTime = format1.format(time);
 
             Map<String, Object> childUpdates = new HashMap<>();
             Map<String, Object> commentValues = null;
 
-            Post post = new Post(title, content, "아이디", addTime);
-            commentValues = post.toMap();
+            Comment comment = new Comment("아이디", commentContent, addTime);
+            commentValues = comment.toMap();
             System.out.println("commentValue- " + commentValues);
 
-            String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
-            childUpdates.put(postCode, commentValues);
+            SimpleDateFormat format2 = new SimpleDateFormat ( "HHmmss");
+            String commentNum = "아이디" + format2.format(time);
+            childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
         }
     }
