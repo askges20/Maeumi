@@ -18,29 +18,32 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import static com.hanium.android.maeumi.view.diary.CalendarUtils.daysInMonthArray;
+import static com.hanium.android.maeumi.view.diary.CalendarUtils.monthYearFromDate;
+
 public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnItemListener {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private LocalDate selectDate;
+//    private LocalDate selectDate;
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel(this);
 
-    public static ArrayList<String> dates = new ArrayList<>();
+    public static ArrayList<String> diaryDates = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
         iniwigets();
-        selectDate = LocalDate.now();
+        CalendarUtils.selectDate = LocalDate.now();
+        DiaryViewModel.setCompareMonth(CalendarUtils.selectDate);
+
         setMonthView();
-        // 월별 일기 조회 후 점 찍기
-        DiaryViewModel.setCompareMonth(selectDate);
     }
 
     public void setDates(ArrayList<String> dates) {
-        this.dates = dates;
-        System.out.println("월별 일기 내역 " + this.dates);
+        this.diaryDates = dates;
+        System.out.println("월별 일기 내역 " + this.diaryDates);
     }
 
     //activity_custom.xml 레이아웃 요소 연결
@@ -49,18 +52,18 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         monthYearText = findViewById(R.id.monthYearTV);
     }
 
-    //캘린더 상단 년,월 (m월 yyyy)
-    private String monthYearFromDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
-    }
+//    //캘린더 상단 년,월 (m월 yyyy)
+//    public static String monthYearFromDate(LocalDate date) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+//        return date.format(formatter);
+//    }
 
     //캘린더 새로고침
     private void setMonthView() {
-        monthYearText.setText(monthYearFromDate(selectDate));
-        ArrayList<String> daysInMonth = daysInMonthArray(selectDate);   //선택한 날짜의 일들 구하기
+        monthYearText.setText(monthYearFromDate(CalendarUtils.selectDate));
+        ArrayList<String> daysInMonth = daysInMonthArray(CalendarUtils.selectDate);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth,this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
 
         calendarRecyclerView.setLayoutManager(layoutManager);
@@ -68,40 +71,38 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     }
 
     //선택한 날짜의 월 구하기
-    private ArrayList<String> daysInMonthArray(LocalDate date) {
-        ArrayList<String> dayInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
-
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        LocalDate first0fMonth = selectDate.withDayOfMonth(1);  //해당 월의 첫번째 일
-        int day0fweek = first0fMonth.getDayOfWeek().getValue();     //첫번째 일 (숫자)
-
-        for (int i = 1; i <= 42; i++) {
-            if (i <= day0fweek || i > daysInMonth + day0fweek) {    //달력 범위 벗어나는 부분 빈문자열 처리
-                dayInMonthArray.add("");
-            } else {
-                dayInMonthArray.add(String.valueOf(i - day0fweek));
-            }
-        }
-        return dayInMonthArray;
-    }
+//    public static ArrayList<String> daysInMonthArray(LocalDate date) {
+//        ArrayList<String> dayInMonthArray = new ArrayList<>();
+//        YearMonth yearMonth = YearMonth.from(date);
+//
+//        int daysInMonth = yearMonth.lengthOfMonth();
+//
+//        LocalDate first0fMonth = CalendarUtils.selectDate.withDayOfMonth(1);  //해당 월의 첫번째 일
+//        int day0fweek = first0fMonth.getDayOfWeek().getValue();     //첫번째 일 (숫자)
+//
+//        for (int i = 1; i <= 42; i++) {
+//            if (i <= day0fweek || i > daysInMonth + day0fweek) {    //달력 범위 벗어나는 부분 빈문자열 처리
+//                dayInMonthArray.add("");
+//            } else {
+//                dayInMonthArray.add(String.valueOf(i - day0fweek));
+//            }
+//        }
+//        return dayInMonthArray;
+//    }
 
     //이전 달 캘린더로 이동
     public void previousMonthAction(View view) {
-        selectDate = selectDate.minusMonths(1);
-        // 월별 일기 조회 후 점 찍기
-        System.out.println("previous Month - " + selectDate);
-        DiaryViewModel.setChangeCompareMonth(selectDate);
+        CalendarUtils.selectDate = CalendarUtils.selectDate.minusMonths(1);
+        DiaryViewModel.setChangeCompareMonth(CalendarUtils.selectDate);
+
         setMonthView();
     }
 
     //다음 달 캘린더로 이동
     public void nextMonthAction(View view) {
-        selectDate = selectDate.plusMonths(1);
-        // 월별 일기 조회 후 점 찍기
-        System.out.println("next Month- " + selectDate);
-        DiaryViewModel.setChangeCompareMonth(selectDate);
+        CalendarUtils.selectDate = CalendarUtils.selectDate.plusMonths(1);
+        DiaryViewModel.setChangeCompareMonth(CalendarUtils.selectDate);
+
         setMonthView();
     }
 
@@ -109,8 +110,8 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     @Override
     public void onItemClick(int position, String dayText) {
         // 클릭 날짜 표시 [x]
-        DiaryViewModel.setDate(selectDate, dayText);
-        String message = "Selected Date" + dayText + " " + monthYearFromDate(selectDate);
+        DiaryViewModel.setDate(CalendarUtils.selectDate, dayText);
+        String message = "선택한 날짜 : " + dayText + " " + monthYearFromDate(CalendarUtils.selectDate);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 

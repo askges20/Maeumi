@@ -11,11 +11,13 @@ import com.hanium.android.maeumi.R;
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
     public final TextView day0fMonth;
+    public final View parentView;
     private final CalendarAdapter.OnItemListener onItemListener;
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener)
     {
         super(itemView);
         day0fMonth = itemView.findViewById(R.id.cellDayText);
+        parentView = itemView.findViewById(R.id.parentView);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
     }

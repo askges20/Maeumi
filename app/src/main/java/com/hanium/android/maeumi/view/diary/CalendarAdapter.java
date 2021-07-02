@@ -1,5 +1,6 @@
 package com.hanium.android.maeumi.view.diary;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,17 @@ import java.util.ArrayList;
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
+    private final ArrayList<String> days0fMonth;
+    private final OnItemListener onItemListener;
+    public  ArrayList<String> testMonth = new ArrayList<>();
+
     public CalendarAdapter(ArrayList<String> days0fMonth, OnItemListener onItemListener) {
         this.days0fMonth = days0fMonth;
         this.onItemListener = onItemListener;
+        testMonth.add("2");
+        testMonth.add("21");
+        testMonth.add("15");
     }
-
-    private final ArrayList<String> days0fMonth;
-    private final OnItemListener onItemListener;
 
     @NonNull
     @Override
@@ -35,7 +40,17 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
+//        System.out.println("hello  - "+ testMonth);
+//        System.out.println(days0fMonth.get(position).getClass());
         holder.day0fMonth.setText(days0fMonth.get(position));
+
+        // 조건 비교 후 배경 색칠
+        for (int i=0;i<testMonth.size();i++){
+//            System.out.println("testMonth - "+ testMonth.get(i));
+            if(days0fMonth.get(position).equals(testMonth.get(i))){
+                holder.parentView.setBackgroundColor(Color.GRAY);
+            }
+        }
     }
     @Override
     public int getItemCount()
