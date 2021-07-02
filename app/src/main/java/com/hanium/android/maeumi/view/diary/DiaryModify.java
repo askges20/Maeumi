@@ -14,14 +14,10 @@ public class DiaryModify extends Activity {
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
-    String diaryCalDate;
-    String diaryTitle, diaryContent;
+    String diaryCalDate,diaryTitle, diaryContent;
     int diaryEmoticonNum;
 
-    TextView dateText;
-    EditText titleText;
-    EditText contentText;
-
+    TextView dateText ,titleText,contentText;  //날짜, 제목, 내용
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){

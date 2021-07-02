@@ -130,8 +130,6 @@ public class DiaryModel {
                     setEmoticonNum(value.emoticonNum);
                     setNullDiary("Diary Not Null");
                 } catch (Exception e) {
-                    System.out.println("error - " + e);
-                    System.out.println("일기 없음");
                     setNullDiary(null);
                 }
             }

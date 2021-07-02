@@ -17,14 +17,10 @@ public class DiaryContent extends AppCompatActivity {
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
-    String diaryCalDate;
-    String diaryTitle, diaryContent, nullDiary;
+    String diaryCalDate,diaryTitle, diaryContent, nullDiary;
     int diaryEmoticonNum;
 
-    TextView dateText;  //날짜 텍스트
-    TextView titleText; //제목 텍스트
-    TextView contentText;   //내용 텍스트
-
+    TextView dateText ,titleText,contentText;  //날짜, 제목, 내용
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -59,7 +55,6 @@ public class DiaryContent extends AppCompatActivity {
     }
     // 빈곳 클릭 시 이벤트
     public void nullDate(){
-        System.out.println("nullDate - "+ diaryCalDate);
         if(diaryCalDate == null){
             Toast.makeText(DiaryContent.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
             finish();
@@ -69,7 +64,6 @@ public class DiaryContent extends AppCompatActivity {
     public void goToDiaryModify(View view){ //수정 버튼 클릭 시
         Intent intent = new Intent(DiaryContent.this, DiaryModify.class);
         startActivity(intent);
-        System.out.println("Move To Modify Diary");
     }
 
     public void showDeleteDialog(View view){    //삭제 버튼 클릭 시

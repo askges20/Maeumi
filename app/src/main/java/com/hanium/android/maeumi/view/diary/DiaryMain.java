@@ -90,14 +90,12 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     public void diaryContent(View view) {
         Intent intent = new Intent(getApplicationContext(), DiaryContent.class);
         startActivity(intent);
-        System.out.println("Move To Diary Content");
     }
 
     //일기 작성 페이지로 이동
     public void diaryWrite(View view) {
         Intent intent = new Intent(getApplicationContext(), DiaryWrite.class);
         startActivity(intent);
-        System.out.println("Move To Diary Write");
     }
 }
 
