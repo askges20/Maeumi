@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
@@ -59,10 +60,23 @@ public class CommentAdapter extends BaseAdapter {
         content.setText(items.get(position).getContent());
         writeDate.setText(items.get(position).getWriteDate());
 
+        TextView deleteBtn = view.findViewById(R.id.commentDeleteBtn);
+        deleteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), position+" : "+getItem(position).getContent(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 
     public void setItem(int position, Comment item){
         items.set(position, item);
     }
+
+    public void clearList(){
+        items.clear();
+    }
+
 }

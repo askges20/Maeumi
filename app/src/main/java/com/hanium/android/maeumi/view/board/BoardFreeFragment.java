@@ -76,6 +76,7 @@ public class BoardFreeFragment extends Fragment {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                adapter.clearList();    //데이터 중복 출력 문제 해결을 위해 리스트 초기화 후 다시 받아옴
                 for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                         adapter.addItem(snap.getValue(Post.class));

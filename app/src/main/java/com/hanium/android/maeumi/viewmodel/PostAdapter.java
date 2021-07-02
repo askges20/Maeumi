@@ -38,60 +38,64 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         return items.size();
     }
 
-    public void setOnItemClickListener(OnPostItemClickListener listener){
+    public void setOnItemClickListener(OnPostItemClickListener listener) {
         this.listener = listener;
     }
 
     @Override
     public void onItemClick(ViewHolder holder, View view, int position) {
-        if(listener != null){
+        if (listener != null) {
             listener.onItemClick(holder, view, position);
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
         TextView writerView;
         TextView dateView;
 
-        public ViewHolder(View itemView, final OnPostItemClickListener listener){
+        public ViewHolder(View itemView, final OnPostItemClickListener listener) {
             super(itemView);
 
             titleView = itemView.findViewById(R.id.postTitle);
             writerView = itemView.findViewById(R.id.postWriter);
             dateView = itemView.findViewById(R.id.postDateText);
 
-            itemView.setOnClickListener(new View.OnClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    if(listener!=null){
+                    if (listener != null) {
                         listener.onItemClick(ViewHolder.this, view, position);
                     }
                 }
             });
         }
 
-        public void setItem(Post item){
+        public void setItem(Post item) {
             titleView.setText(item.getTitle());
             writerView.setText(item.getWriter());
             dateView.setText(item.getWriteDate());
         }
     }
 
-    public void addItem(Post item){
+    public void addItem(Post item) {
         items.add(item);
     }
 
-    public void setItems(ArrayList<Post> items){
+    public void setItems(ArrayList<Post> items) {
         this.items = items;
     }
 
-    public Post getItem(int position){
+    public Post getItem(int position) {
         return items.get(position);
     }
 
-    public void setItem(int position, Post item){
+    public void setItem(int position, Post item) {
         items.set(position, item);
+    }
+
+    public void clearList(){
+        items.clear();
     }
 }

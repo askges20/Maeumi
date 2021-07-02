@@ -83,6 +83,7 @@ public class PostContent extends AppCompatActivity {
 
         commentList.setAdapter(commentAdapter);
         commentList.setVerticalScrollBarEnabled(false);
+
     }
 
     public void goToPostModify(View view) { //수정 버튼 클릭 시
@@ -171,6 +172,7 @@ public class PostContent extends AppCompatActivity {
         commentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                commentAdapter.clearList(); //데이터 중복 출력 문제 해결을 위해 리스트 초기화 후 다시 받아옴
                 for (DataSnapshot snap : dataSnapshot.getChildren()) { //하위 구조
                         commentAdapter.addItem(snap.getValue(Comment.class));
                     }
