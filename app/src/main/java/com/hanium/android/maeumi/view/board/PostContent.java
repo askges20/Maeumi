@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -49,6 +50,8 @@ public class PostContent extends AppCompatActivity {
     EditText writtenCommentText;    //댓글 작성칸
     Button addCommentBtn;   //댓글 등록 버튼
 
+    InputMethodManager imm; //키보드 제어
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,8 @@ public class PostContent extends AppCompatActivity {
 
         commentList.setAdapter(commentAdapter);
         commentList.setVerticalScrollBarEnabled(false);
+
+        imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
     }
 
@@ -162,6 +167,9 @@ public class PostContent extends AppCompatActivity {
             String commentNum = "아이디" + format2.format(time);
             childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
+
+            writtenCommentText.setText(""); //댓글 작성 칸 비우기
+            imm.hideSoftInputFromWindow(writtenCommentText.getWindowToken(), 0);    //키보드 닫기
         }
     }
 
