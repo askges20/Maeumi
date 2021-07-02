@@ -83,7 +83,7 @@ public class DiaryModel {
         return this.nullDiary;
     }
 
-    public ArrayList getHelloMonthDiary() {
+    public ArrayList getMonthDiaryDates() {
         return dates;
     }
 
@@ -105,8 +105,7 @@ public class DiaryModel {
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                     }
                 }
-                getHelloMonthDiary();
-                DiaryViewModel.setHelloMonthDiary();
+                DiaryViewModel.setMonthDiaryDates();
             }
 
             @Override

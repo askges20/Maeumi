@@ -27,6 +27,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
 //    private LocalDate selectDate;
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel(this);
+    CalendarAdapter calendarAdapter;
 
     public static ArrayList<String> diaryDates = new ArrayList<>();
 
@@ -43,7 +44,9 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
 
     public void setDates(ArrayList<String> dates) {
         this.diaryDates = dates;
-        System.out.println("월별 일기 내역 " + this.diaryDates);
+        calendarAdapter.testSetDates(this.diaryDates);
+        setMonthView();
+//        System.out.println("월별 일기 내역 " + this.diaryDates);
     }
 
     //activity_custom.xml 레이아웃 요소 연결
@@ -63,11 +66,20 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectDate));
         ArrayList<String> daysInMonth = daysInMonthArray(CalendarUtils.selectDate);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth,this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+//        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth,this);
 
-        calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
+
+        try {
+//            Thread.sleep(3000);
+            calendarAdapter = new CalendarAdapter(daysInMonth,this);
+
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+            calendarRecyclerView.setLayoutManager(layoutManager);
+            calendarRecyclerView.setAdapter(calendarAdapter);
+        }catch (Exception e){
+            System.out.println("error : "+ e.getMessage());
+        }
+
     }
 
     //선택한 날짜의 월 구하기
@@ -94,7 +106,6 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     public void previousMonthAction(View view) {
         CalendarUtils.selectDate = CalendarUtils.selectDate.minusMonths(1);
         DiaryViewModel.setChangeCompareMonth(CalendarUtils.selectDate);
-
         setMonthView();
     }
 
@@ -102,7 +113,6 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     public void nextMonthAction(View view) {
         CalendarUtils.selectDate = CalendarUtils.selectDate.plusMonths(1);
         DiaryViewModel.setChangeCompareMonth(CalendarUtils.selectDate);
-
         setMonthView();
     }
 

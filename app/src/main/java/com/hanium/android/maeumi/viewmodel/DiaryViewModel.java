@@ -2,7 +2,6 @@ package com.hanium.android.maeumi.viewmodel;
 
 import com.hanium.android.maeumi.model.Diary;
 import com.hanium.android.maeumi.model.DiaryModel;
-import com.hanium.android.maeumi.view.diary.CalendarUtils;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
 
 import java.time.LocalDate;
@@ -21,6 +20,7 @@ public class DiaryViewModel {
     public static String day, year, month, oneTimeDate, oneTimeMonth, compareMonth;
 
     public static ArrayList<String> dates = new ArrayList<>();
+
     public DiaryViewModel() {
 
     }
@@ -62,8 +62,8 @@ public class DiaryViewModel {
         DiaryModel.setChangeCompareDate(this.compareMonth);
     }
 
-    public void setHelloMonthDiary() {
-        this.dates = DiaryModel.getHelloMonthDiary();
+    public void setMonthDiaryDates() {
+        this.dates = DiaryModel.getMonthDiaryDates();
         DiaryMain.setDates(this.dates);
     }
 
