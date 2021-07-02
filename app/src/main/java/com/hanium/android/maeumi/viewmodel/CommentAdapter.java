@@ -6,21 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
+import com.hanium.android.maeumi.view.board.PostContent;
 
 import java.util.ArrayList;
 
 public class CommentAdapter extends BaseAdapter {
-    Context mContext = null;
-    LayoutInflater mLayoutInflater = null;
+    Context mContext;
+    LayoutInflater mLayoutInflater;
+    PostContent postContent;
+
     ArrayList<Comment> items = new ArrayList<Comment>();
 
-    public CommentAdapter(Context context) {
+    public CommentAdapter(Context context, PostContent postContent) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(mContext);
+        this.postContent = postContent;
     }
 
     public int getItemCount() {
@@ -58,13 +61,14 @@ public class CommentAdapter extends BaseAdapter {
 
         writer.setText(items.get(position).getWriter());
         content.setText(items.get(position).getContent());
-        writeDate.setText(items.get(position).getWriteDate());
+        writeDate.setText(items.get(position).getWriteDate().substring(0, 10));
 
         TextView deleteBtn = view.findViewById(R.id.commentDeleteBtn);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), position+" : "+getItem(position).getContent(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), position+" : "+getItem(position).getContent(), Toast.LENGTH_SHORT).show();
+                postContent.deleteComment(getItem(position));
             }
         });
 

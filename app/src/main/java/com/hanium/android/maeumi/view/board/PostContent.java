@@ -80,7 +80,7 @@ public class PostContent extends AppCompatActivity {
         boardType = prevIntent.getStringExtra("boardType");
 
         //댓글
-        commentAdapter = new CommentAdapter(this);
+        commentAdapter = new CommentAdapter(this, this);
         getCommentFromDB();
         commentList = findViewById(R.id.commentListView);
 
@@ -149,11 +149,11 @@ public class PostContent extends AppCompatActivity {
             Toast.makeText(this, "댓글을 입력해주세요", Toast.LENGTH_SHORT).show();
         else {
             String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
-            commentRef = database.getReference("/댓글/"+postCode+"/");
+            commentRef = database.getReference("/댓글/" + postCode + "/");
 
             //댓글 작성 일자
             Date time = new Date();
-            SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String addTime = format1.format(time);
 
             Map<String, Object> childUpdates = new HashMap<>();
@@ -163,7 +163,7 @@ public class PostContent extends AppCompatActivity {
             commentValues = comment.toMap();
             System.out.println("commentValue- " + commentValues);
 
-            SimpleDateFormat format2 = new SimpleDateFormat ( "HHmmss");
+            SimpleDateFormat format2 = new SimpleDateFormat("HHmmss");
             String commentNum = "아이디" + format2.format(time);
             childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
@@ -173,17 +173,17 @@ public class PostContent extends AppCompatActivity {
         }
     }
 
-    private void getCommentFromDB(){    //DB에서 댓글 데이터 가져오기
+    private void getCommentFromDB() {    //DB에서 댓글 데이터 가져오기
         database = FirebaseDatabase.getInstance();
         String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
-        commentRef = database.getReference("/댓글/"+postCode+"/");
+        commentRef = database.getReference("/댓글/" + postCode + "/");
         commentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 commentAdapter.clearList(); //데이터 중복 출력 문제 해결을 위해 리스트 초기화 후 다시 받아옴
                 for (DataSnapshot snap : dataSnapshot.getChildren()) { //하위 구조
-                        commentAdapter.addItem(snap.getValue(Comment.class));
-                    }
+                    commentAdapter.addItem(snap.getValue(Comment.class));
+                }
                 commentAdapter.notifyDataSetChanged(); //리스트 새로고침 알림
                 setListViewHeight();    //데이터를 다 받아온 후 리스트뷰 높이 계산, 적용
             }
@@ -196,9 +196,9 @@ public class PostContent extends AppCompatActivity {
     }
 
     //리스트뷰 높이 계산 (ScrollView 안에 있기 때문에 높이 계산이 별도로 필요)
-    private void setListViewHeight(){
+    private void setListViewHeight() {
         int totalHeight = 0;
-        for (int i=0; i<commentAdapter.getCount(); i++){
+        for (int i = 0; i < commentAdapter.getCount(); i++) {
             View listItem = commentAdapter.getView(i, null, commentList);
             listItem.measure(0, 0);
             totalHeight += listItem.getMeasuredHeight();
@@ -208,5 +208,39 @@ public class PostContent extends AppCompatActivity {
         params.height = totalHeight + (commentList.getDividerHeight() * (commentAdapter.getCount() - 1));
         commentList.setLayoutParams(params);
         commentList.requestLayout();
+    }
+
+    //댓글 삭제 버튼 클릭 시
+    public void deleteComment(Comment comment){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("댓글을 삭제하시겠습니까?");
+        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                processDeleteComment(comment);  //댓글 삭제 진행
+            }
+        });
+        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                //댓글 삭제 취소
+            }
+        });
+        dialog.show();
+    }
+
+    public void processDeleteComment(Comment comment) { //삭제할 댓글을 파라미터로 받음
+
+        database = FirebaseDatabase.getInstance();
+        String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
+        commentRef = database.getReference("/댓글/" + postCode + "/");
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        String commentDate = comment.writeDate;
+        String commentNum = "아이디" + commentDate.substring(11, 13) + commentDate.substring(14, 16) + commentDate.substring(17, 19);
+
+        childUpdates.put(commentNum, null); //DB에서 삭제
+        commentRef.updateChildren(childUpdates);
+        commentAdapter.notifyDataSetChanged();
     }
 }
