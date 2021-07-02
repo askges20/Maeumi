@@ -80,7 +80,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
     }
 
     public void addItem(Post item) {
-        items.add(item);
+        //items.add(item);
+        items.add(0, item); //최신글부터 정렬하도록
     }
 
     public void setItems(ArrayList<Post> items) {
