@@ -81,18 +81,6 @@ public class PostContent extends AppCompatActivity {
         getCommentFromDB();
         commentList = findViewById(R.id.commentListView);
 
-        //리스트뷰 높이 계산
-        int totalHeight = 0;
-        for (int i=0; i<commentAdapter.getCount(); i++){
-           View listItem = commentAdapter.getView(i, null, commentList);
-           listItem.measure(0, 0);
-           totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = commentList.getLayoutParams();
-        params.height = totalHeight + (commentList.getDividerHeight() * (commentAdapter.getCount() - 1));
-        commentList.setLayoutParams(params);
-
         commentList.setAdapter(commentAdapter);
         commentList.setVerticalScrollBarEnabled(false);
     }
@@ -187,6 +175,7 @@ public class PostContent extends AppCompatActivity {
                         commentAdapter.addItem(snap.getValue(Comment.class));
                     }
                 commentAdapter.notifyDataSetChanged(); //리스트 새로고침 알림
+                setListViewHeight();    //데이터를 다 받아온 후 리스트뷰 높이 계산, 적용
             }
 
             @Override
@@ -194,5 +183,20 @@ public class PostContent extends AppCompatActivity {
                 System.out.println("Failed to read value." + error.toException());
             }
         });
+    }
+
+    //리스트뷰 높이 계산 (ScrollView 안에 있기 때문에 높이 계산이 별도로 필요)
+    private void setListViewHeight(){
+        int totalHeight = 0;
+        for (int i=0; i<commentAdapter.getCount(); i++){
+            View listItem = commentAdapter.getView(i, null, commentList);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = commentList.getLayoutParams();
+        params.height = totalHeight + (commentList.getDividerHeight() * (commentAdapter.getCount() - 1));
+        commentList.setLayoutParams(params);
+        commentList.requestLayout();
     }
 }

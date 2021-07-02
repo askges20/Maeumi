@@ -110,8 +110,7 @@
                 <ListView
                     android:id="@+id/commentListView"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -131,8 +130,8 @@
             android:layout_margin="10dp"
             android:layout_weight="4"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="댓글" />
+            android:hint="댓글을 입력하세요"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/addCommentBtn"
