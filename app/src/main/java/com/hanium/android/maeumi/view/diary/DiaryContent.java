@@ -17,8 +17,7 @@ public class DiaryContent extends AppCompatActivity {
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
-    String diaryCalDate,diaryTitle, diaryContent, nullDiary;
-    int diaryEmoticonNum;
+    String diaryCalDate,diaryTitle, diaryContent, nullDiary,diaryEmoticonNum;
 
     TextView dateText ,titleText,contentText;  //날짜, 제목, 내용
 

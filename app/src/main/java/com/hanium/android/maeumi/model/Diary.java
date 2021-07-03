@@ -11,13 +11,13 @@ public class Diary {
     //일기 데이터
     public String title;
     public String content;
-    public int emoticonNum;
+    public String emoticonNum;
     public String date;
 
     public Diary(){
     }
 
-    public Diary(String title, String content, int emoticonNum,String date){
+    public Diary(String title, String content, String emoticonNum,String date){
         this.title = title;
         this.content = content;
         this.emoticonNum = emoticonNum;

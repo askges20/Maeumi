@@ -2,8 +2,10 @@ package com.hanium.android.maeumi.view.diary;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,10 +16,9 @@ public class DiaryModify extends Activity {
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
-    String diaryCalDate,diaryTitle, diaryContent;
-    int diaryEmoticonNum;
+    String diaryCalDate,diaryTitle, diaryContent,diaryEmoticonNum,diaryEmoticon;
 
-    TextView dateText ,titleText,contentText;  //날짜, 제목, 내용
+    TextView dateText ,titleText,contentText,emoticon;  //날짜, 제목, 내용
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
@@ -27,6 +28,7 @@ public class DiaryModify extends Activity {
         diaryCalDate = DiaryViewModel.getCalendarDate();
 
         dateText = findViewById(R.id.modifyDate);
+        emoticon = findViewById(R.id.emoticon);
         titleText = findViewById(R.id.diaryTitleModifyText);
         contentText = findViewById(R.id.diaryContentModifyText);
 
@@ -45,18 +47,42 @@ public class DiaryModify extends Activity {
         String diaryTitle = titleText.getText().toString();
         String diaryContent = contentText.getText().toString();
 
-        DiaryViewModel.diaryWrite(diaryTitle,diaryContent);
-
-        Toast toastView = Toast.makeText(DiaryModify.this, "수정 완료", Toast.LENGTH_SHORT);
-        toastView.show();
-
-        // 일기장 메인 화면으로 이동
-        finish();
+        if(diaryEmoticon == null || diaryEmoticon == ""){
+            Toast toastView = Toast.makeText(DiaryModify.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
+            toastView.show();
+        }else{
+            DiaryViewModel.diaryWrite(diaryTitle,diaryContent,diaryEmoticon);
+            Toast toastView = Toast.makeText(DiaryModify.this, "작성 완료", Toast.LENGTH_SHORT);
+            toastView.show();
+            finish();   //현재 액티비티 없애기
+        }
     }
 
     public void goToBack(View view){   //목록으로 버튼 클릭 시
         Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
         toastView.show();
         finish();   //현재 액티비티 없애기
+    }
+    public void onFilterClick(final View view) {
+        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
+        getMenuInflater().inflate(R.menu.diary_popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.action_menu1) {
+                    emoticon.setText("좋음");
+                    diaryEmoticon = "1";
+                } else if (menuItem.getItemId() == R.id.action_menu2) {
+                    emoticon.setText("평범");
+                    diaryEmoticon = "2";
+                } else {
+                    emoticon.setText("나쁨");
+                    diaryEmoticon = "3";
+                }
+
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 }

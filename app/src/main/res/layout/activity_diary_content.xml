@@ -70,12 +70,15 @@
                     android:text="제목"
                     android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/dailyEmoticon"
+                <TextView
+                    android:id="@+id/emoticon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="이모티콘" />
+                    android:layout_weight="3"
+                    android:text="기분"
+                    android:ems="2"
+                    android:textSize="20dp"
+                    android:gravity="center"/>
             </LinearLayout>
         </LinearLayout>
 

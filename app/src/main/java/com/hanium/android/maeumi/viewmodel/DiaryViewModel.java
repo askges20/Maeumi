@@ -14,8 +14,7 @@ public class DiaryViewModel {
 
     public static String calendarDate, fireDate;
 
-    public static String title, content, nullDiary;
-    public static int emoticonNum;
+    public static String title, content, nullDiary,emoticonNum;
 
     public static String day, year, month, oneTimeDate, oneTimeMonth, compareMonth;
 
@@ -103,7 +102,7 @@ public class DiaryViewModel {
         return content;
     }
 
-    public int getEmoticonNum() {
+    public String getEmoticonNum() {
         return emoticonNum;
     }
 
@@ -113,8 +112,8 @@ public class DiaryViewModel {
 
 
     // 일기 작성 & 수정
-    public void diaryWrite(String title, String content) {
-        Diary value = new Diary(title, content, 1, this.day);
+    public void diaryWrite(String title, String content,String diaryEmoticon) {
+        Diary value = new Diary(title, content, diaryEmoticon, this.day);
         DiaryModel.diaryWrite(value);
     }
 

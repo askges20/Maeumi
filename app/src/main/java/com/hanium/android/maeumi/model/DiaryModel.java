@@ -20,8 +20,7 @@ public class DiaryModel {
 
     public static String calendarDate, fireDate, compareMonth, testDate;
 
-    public static String title, content, nullDiary;
-    public static int emoticonNum;
+    public static String title, content, nullDiary,emoticonNum;
 
     public static ArrayList<String> dates = new ArrayList<>();
 
@@ -58,7 +57,7 @@ public class DiaryModel {
         this.content = content;
     }
 
-    public void setEmoticonNum(int emoticonNum) {
+    public void setEmoticonNum(String emoticonNum) {
         this.emoticonNum = emoticonNum;
     }
 
@@ -75,7 +74,7 @@ public class DiaryModel {
         return content;
     }
 
-    public int getEmoticonNum() {
+    public String getEmoticonNum() {
         return this.emoticonNum;
     }
 
@@ -151,7 +150,7 @@ public class DiaryModel {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> diaryValues = null;
 
-        Diary diary = new Diary(value.title, value.content, 1, value.date);   //model Diary 객체
+        Diary diary = new Diary(value.title, value.content, value.emoticonNum, value.date);   //model Diary 객체
         diaryValues = diary.toMap();
         childUpdates.put(fireDate, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
