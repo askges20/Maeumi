@@ -18,7 +18,7 @@ public class DiaryModel {
     DatabaseReference diaryRef;
     DiaryViewModel DiaryViewModel;
 
-    public static String calendarDate, fireDate, compareMonth, testDate;
+    public static String calendarDate, fireDate, compareMonth, monthlyDate;
 
     public static String title, content, nullDiary,emoticonNum;
 
@@ -99,7 +99,8 @@ public class DiaryModel {
                 for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
                     if (compareMonth.equals(dateSnap.getKey().substring(0, 6))) {
                         Diary testValue = dateSnap.getValue(Diary.class);
-                        dates.add(testValue.date);
+                        monthlyDate = testValue.date + testValue.emoticonNum;
+                        dates.add(monthlyDate);
                     }
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                     }

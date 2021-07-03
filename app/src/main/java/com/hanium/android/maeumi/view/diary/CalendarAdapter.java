@@ -23,7 +23,8 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         this.days0fMonth = days0fMonth;
         this.onItemListener = onItemListener;
     }
-    public void SetDates(ArrayList<String> data){
+
+    public void SetDates(ArrayList<String> data) {
         this.diaryDates = data;
     }
 
@@ -38,32 +39,39 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         holder.day0fMonth.setText(days0fMonth.get(position));
 
         // 1 ~ 9일 까지 앞에 0 붙이기
-        if(days0fMonth.get(position).length()==1){
-            compareDate =  "0"+days0fMonth.get(position);
-        }else{
+        if (days0fMonth.get(position).length() == 1) {
+            compareDate = "0" + days0fMonth.get(position);
+        } else {
             compareDate = days0fMonth.get(position);
         }
-
         // 조건 비교 후 배경 색칠
-        for (int i=0;i<diaryDates.size();i++){
-            if(compareDate.equals(diaryDates.get(i))){
-                holder.parentView.setBackgroundColor(Color.GRAY);
+        for (int i = 0; i < diaryDates.size(); i++) {
+            if (compareDate.equals(diaryDates.get(i).substring(0, 2))) {
+                switch (diaryDates.get(i).substring(diaryDates.get(i).length() - 1)) {
+                    case "1":
+                        holder.parentView.setBackgroundColor(Color.YELLOW);
+                        break;
+                    case "2":
+                        holder.parentView.setBackgroundColor(Color.GREEN);
+                        break;
+                    case "3":
+                        holder.parentView.setBackgroundColor(Color.GRAY);
+                        break;
+                }
             }
         }
     }
+
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return days0fMonth.size();
     }
 
-    public interface OnItemListener
-    {
+    public interface OnItemListener {
         void onItemClick(int position, String dayText);
     }
 }
