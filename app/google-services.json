@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "783811154662",
-    "project_id": "maeumi-3384f",
-    "storage_bucket": "maeumi-3384f.appspot.com"
+    "project_number": "111310885023",
+    "firebase_url": "https://maeumi-qwb9-default-rtdb.firebaseio.com",
+    "project_id": "maeumi-qwb9",
+    "storage_bucket": "maeumi-qwb9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:783811154662:android:951a3d1a46403fa9546127",
+        "mobilesdk_app_id": "1:111310885023:android:80f0d04f86f3a69e4e92aa",
         "android_client_info": {
           "package_name": "com.hanium.android.maeumi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "783811154662-p8sbtr1skna5g1tdkg0po6mqq8gjumsk.apps.googleusercontent.com",
+          "client_id": "111310885023-8f6ho0csa9nel5teibj3n1ud8qc0248j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBP9fNE7QT0VWBX4PbXVooxvrvqoMT80Zg"
+          "current_key": "AIzaSyCQ-6-YtUcPrXeptWqsyVaBWNd5NfJNzN0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "783811154662-p8sbtr1skna5g1tdkg0po6mqq8gjumsk.apps.googleusercontent.com",
+              "client_id": "111310885023-8f6ho0csa9nel5teibj3n1ud8qc0248j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
