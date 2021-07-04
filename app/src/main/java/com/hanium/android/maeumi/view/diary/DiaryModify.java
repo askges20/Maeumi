@@ -20,9 +20,7 @@ public class DiaryModify extends Activity {
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
     String diaryCalDate,diaryTitle, diaryContent,diaryEmoticonNum,diaryEmoticon;
-
-    TextView dateText ,titleText,contentText,emoticon;  //날짜, 제목, 내용
-
+    TextView dateText ,titleText,contentText,emoticon;
     LinearLayout mainContent;
 
     @Override
@@ -73,7 +71,6 @@ public class DiaryModify extends Activity {
             DiaryViewModel.diaryWrite(diaryTitle,diaryContent,diaryEmoticon);
             Toast toastView = Toast.makeText(DiaryModify.this, "작성 완료", Toast.LENGTH_SHORT);
             toastView.show();
-//            finish();   //현재 액티비티 없애기
             Intent intent = new Intent(DiaryModify.this, DiaryMain.class);
             startActivity(intent);
         }

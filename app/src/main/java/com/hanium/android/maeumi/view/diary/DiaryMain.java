@@ -31,7 +31,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom);
+        setContentView(R.layout.activity_diary_main);
         iniwigets();
         CalendarUtils.selectDate = LocalDate.now();
         DiaryViewModel.setCompareMonth(CalendarUtils.selectDate);
@@ -45,7 +45,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         setMonthView();
     }
 
-    //activity_custom.xml 레이아웃 요소 연결
+    //activity_diary_main.xml.xml 레이아웃 요소 연결
     private void iniwigets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);

@@ -20,10 +20,9 @@ public class DiaryWrite extends AppCompatActivity {
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 
-    TextView date,emoticon;
-    EditText diaryTitleText,diaryContentText;
-
-    String diaryDate, diaryEmoticon;
+    TextView dateText,emoticon;
+    EditText titleText,contentText;
+    String diaryCalDate, diaryEmoticon;
     LinearLayout mainContent;
 
     @Override
@@ -31,30 +30,29 @@ public class DiaryWrite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
-        diaryDate = DiaryViewModel.getCalendarDate();
+        diaryCalDate = DiaryViewModel.getCalendarDate();
         nullDate();
 
-        date = findViewById(R.id.writeDate);
+        dateText = findViewById(R.id.writeDate);
         emoticon = findViewById(R.id.emoticon);
         mainContent = findViewById(R.id.mainContent);
-        diaryTitleText = (EditText)findViewById(R.id.diaryTitleWriteText);
-        diaryContentText = (EditText)findViewById(R.id.diaryContentWriteText);
-        date.setText(diaryDate);
+        titleText = (EditText)findViewById(R.id.diaryTitleWriteText);
+        contentText = (EditText)findViewById(R.id.diaryContentWriteText);
+        dateText.setText(diaryCalDate);
     }
     // 빈곳 클릭 시 이벤트
     public void nullDate(){
-        if(diaryDate == null){
+        if(diaryCalDate == null){
             Toast.makeText(DiaryWrite.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
 
-    //작성 완료 버튼 클릭 시 DB 반영   -> 추후 view가 아닌 다른 패키지로 옮길 예정
     public void processAdd(View view){
 
         //작성한 일기 제목, 내용
-        String diaryTitle = diaryTitleText.getText().toString();
-        String diaryContent = diaryContentText.getText().toString();
+        String diaryTitle = titleText.getText().toString();
+        String diaryContent = contentText.getText().toString();
 
         if(diaryEmoticon == null || diaryEmoticon == ""){
             Toast toastView = Toast.makeText(DiaryWrite.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
