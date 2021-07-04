@@ -3,8 +3,11 @@ package com.hanium.android.maeumi.view.diary;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +22,8 @@ public class DiaryContent extends AppCompatActivity {
 
     String diaryCalDate,diaryTitle, diaryContent, nullDiary,diaryEmoticonNum;
 
-    TextView dateText ,titleText,contentText;  //날짜, 제목, 내용
+    TextView dateText ,titleText,contentText,emoticon; //날짜, 제목, 내용
+    LinearLayout mainContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -33,6 +37,8 @@ public class DiaryContent extends AppCompatActivity {
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
+        emoticon = findViewById(R.id.emoticon);
+        mainContent = findViewById(R.id.mainContent);
 
         nullDiary = DiaryViewModel.getNullDiary();
         ifNullDiary();
@@ -44,6 +50,20 @@ public class DiaryContent extends AppCompatActivity {
         dateText.setText(diaryCalDate);
         titleText.setText(diaryTitle);
         contentText.setText(diaryContent);
+        switch (diaryEmoticonNum){
+            case "1":
+                emoticon.setText("좋음");
+                mainContent.setBackgroundColor(Color.YELLOW);
+                break;
+            case "2":
+                emoticon.setText("평범");
+                mainContent.setBackgroundColor(Color.GREEN);
+                break;
+            case "3":
+                emoticon.setText("나쁨");
+                mainContent.setBackgroundColor(Color.GRAY);
+                break;
+        }
     }
     // 일기 없을 때 이벤트
     public void ifNullDiary(){

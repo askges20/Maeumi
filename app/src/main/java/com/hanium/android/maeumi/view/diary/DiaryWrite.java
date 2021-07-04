@@ -1,9 +1,11 @@
 package com.hanium.android.maeumi.view.diary;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ public class DiaryWrite extends AppCompatActivity {
     EditText diaryTitleText,diaryContentText;
 
     String diaryDate, diaryEmoticon;
+    LinearLayout mainContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -33,6 +36,7 @@ public class DiaryWrite extends AppCompatActivity {
 
         date = findViewById(R.id.writeDate);
         emoticon = findViewById(R.id.emoticon);
+        mainContent = findViewById(R.id.mainContent);
         diaryTitleText = (EditText)findViewById(R.id.diaryTitleWriteText);
         diaryContentText = (EditText)findViewById(R.id.diaryContentWriteText);
         date.setText(diaryDate);
@@ -77,12 +81,15 @@ public class DiaryWrite extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.action_menu1) {
                     emoticon.setText("좋음");
                     diaryEmoticon = "1";
+                    mainContent.setBackgroundColor(Color.YELLOW);
                 } else if (menuItem.getItemId() == R.id.action_menu2) {
                     emoticon.setText("평범");
                     diaryEmoticon = "2";
+                    mainContent.setBackgroundColor(Color.GREEN);
                 } else {
                     emoticon.setText("나쁨");
                     diaryEmoticon = "3";
+                    mainContent.setBackgroundColor(Color.GRAY);
                 }
 
                 return false;
