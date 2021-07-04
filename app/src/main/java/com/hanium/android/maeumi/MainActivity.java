@@ -6,8 +6,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.view.board.Board;
@@ -18,22 +16,14 @@ import com.hanium.android.maeumi.view.selftest.SelfTest;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseDatabase database;
-    DatabaseReference myRef;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         System.out.println("Main Main");
-
-        FirebaseApp.getInstance().delete(); //[DEFAULT] 라는 이름의 FirebaseApp을 가져와서 삭제
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setApplicationId("1:111310885023:android:80f0d04f86f3a69e4e92aa")
-                .setDatabaseUrl("https://maeumi-qwb9-default-rtdb.firebaseio.com").build();
-        FirebaseApp.initializeApp(this, options);   //직접 Firebase DB url 지정
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference();
 
         System.out.println("데이터베이스 :" + database);
         System.out.println("레퍼런스 : " + myRef);
@@ -42,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     public void goToDiary(View view) {
         Intent intent = new Intent(MainActivity.this, DiaryMain.class);
         startActivity(intent);
-        myRef.setValue("Hello, World!");
         System.out.println("Move To Diary");
     }
 
