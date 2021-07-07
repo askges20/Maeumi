@@ -10,12 +10,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-        <!--
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="my_seletor.xml"/>
-        -->
-
+        <activity android:name=".SingUpActivity"/>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,8 +31,8 @@
         <activity android:name=".view.chatbot.ChatBotStart" />
         <activity android:name=".view.board.Board" />
         <activity android:name=".view.board.BoardWrite" />
-        <activity android:name=".view.board.PostContent"/>
-        <activity android:name=".view.board.PostModify"/>
+        <activity android:name=".view.board.PostContent" />
+        <activity android:name=".view.board.PostModify" />
         <activity android:name=".view.profile.Profile" />
         <activity android:name=".view.profile.ProfileEdit" />
         <activity android:name=".view.selftest.SelfTest" />
