@@ -36,7 +36,7 @@ public class ChatBotStart extends AppCompatActivity implements BotReply {
 
     RecyclerView chatView;
     ChatAdapter chatAdapter;
-    List<Message> messageList = new ArrayList<>();
+    List<Message> messageList = new ArrayList<>();  //채팅 내역
     EditText editMessage;
     ImageButton btnSend;
 
@@ -58,28 +58,29 @@ public class ChatBotStart extends AppCompatActivity implements BotReply {
         chatAdapter = new ChatAdapter(messageList, this);
         chatView.setAdapter(chatAdapter);
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                String message = editMessage.getText().toString();
+        btnSend.setOnClickListener(new View.OnClickListener() { //전송 버튼 리스너
+            @Override
+            public void onClick(View view) {
+                String message = editMessage.getText().toString();  //입력된 문장
                 if (!message.isEmpty()) {
-                    messageList.add(new Message(message, false));
-                    editMessage.setText("");
-                    sendMessageToBot(message);
+                    messageList.add(new Message(message, false));   //채팅 내역에 추가
+                    editMessage.setText("");    //채팅 입력칸 비우기
+                    sendMessageToBot(message);  //채팅 전송
                     Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
                     Objects.requireNonNull(chatView.getLayoutManager())
                             .scrollToPosition(messageList.size() - 1);
-                } else {
+                } else {    //입력 문장이 없으면
                     Toast.makeText(ChatBotStart.this, "Please enter text!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        setUpBot();
+        setUpBot(); //Dialogflow Bot 세팅
     }
 
     private void setUpBot() {
         try {
-            InputStream stream = this.getResources().openRawResource(R.raw.credential);
+            InputStream stream = this.getResources().openRawResource(R.raw.credential); //Dialogflow 정보 JSON 파일
             GoogleCredentials credentials = GoogleCredentials.fromStream(stream)
                     .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
             String projectId = ((ServiceAccountCredentials) credentials).getProjectId();
@@ -96,21 +97,21 @@ public class ChatBotStart extends AppCompatActivity implements BotReply {
         }
     }
 
-    private void sendMessageToBot(String message) {
+    private void sendMessageToBot(String message) { //Dialogflow Bot에 채팅 전송
         QueryInput input = QueryInput.newBuilder()
-                .setText(TextInput.newBuilder().setText(message).setLanguageCode("en-US")).build();
-        new SendMessageInBg(this, sessionName, sessionsClient, input).execute();
+                .setText(TextInput.newBuilder().setText(message).setLanguageCode("ko-KR")).build();
+        new SendMessageInBg(this, sessionName, sessionsClient, input).execute();    //helpers의 SendMessageInBg.java
     }
 
     @Override
     public void callback(DetectIntentResponse returnResponse) {
-        if(returnResponse!=null) {
+        if (returnResponse != null) {
             String botReply = returnResponse.getQueryResult().getFulfillmentText();
-            if(!botReply.isEmpty()){
+            if (!botReply.isEmpty()) {
                 messageList.add(new Message(botReply, true));
                 chatAdapter.notifyDataSetChanged();
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
-            }else {
+            } else {
                 Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
             }
         } else {

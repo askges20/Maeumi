@@ -1,8 +1,8 @@
 package com.hanium.android.maeumi;
 
 public class Message {
-    private String message;
-    private boolean isReceived;
+    private String message; //채팅 내용
+    private boolean isReceived; //사용자가 보낸 채팅인지 Dialogflow가 보낸 채팅인지 구분
 
     public Message(String message, boolean isReceived) {
         this.message = message;
