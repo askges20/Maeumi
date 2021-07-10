@@ -35,17 +35,20 @@ public class SingUpActivity extends AppCompatActivity {
         name = findViewById(R.id.userName);
 
     }
-    public void onSignUpClick(View view){
+
+    public void onSignUpClick(View view) {
 
         userEmail = email.getText().toString();
         userPassword = password.getText().toString();
         userName = name.getText().toString();
 
-        if (userEmail.equals("") || userPassword.equals("") || userName.equals("")){
-            Toast.makeText(SingUpActivity.this,"빈 칸을 채워주세요.",Toast.LENGTH_LONG).show();
-        }else{
-            createUser(userEmail,userPassword,userName);
-
+        if (userEmail.equals("") || userPassword.equals("") || userName.equals("")) {
+            Toast.makeText(SingUpActivity.this, "빈 칸을 채워주세요.", Toast.LENGTH_LONG).show();
+        } else if (userPassword.length() < 6) {
+            Toast.makeText(SingUpActivity.this, "비밀번호는 6자 이상으로 입력해주세요!", Toast.LENGTH_LONG).show();
+            //이 외에도 문자, 숫자, 특수기호 포함했는지 유효성 검사 추가 필요
+        } else {
+            createUser(userEmail, userPassword, userName);
         }
     }
 
@@ -53,7 +56,7 @@ public class SingUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener( SingUpActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(SingUpActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -63,22 +66,22 @@ public class SingUpActivity extends AppCompatActivity {
                             String uid = user.getUid();
                             String name = userName;
 
-                            HashMap<Object,String> hashMap = new HashMap<>();
-                            hashMap.put("uid",uid);
-                            hashMap.put("email",email);
-                            hashMap.put("name",name);
+                            HashMap<Object, String> hashMap = new HashMap<>();
+                            hashMap.put("uid", uid);
+                            hashMap.put("email", email);
+                            hashMap.put("name", name);
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference reference = database.getReference("Users");
                             reference.child(uid).setValue(hashMap);
 
-                            Toast.makeText(SingUpActivity.this,"회원가입 성공",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SingUpActivity.this, "회원가입 성공", Toast.LENGTH_LONG).show();
 
-                            Intent intent = new Intent(SingUpActivity.this,LoginActivity.class);
+                            Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
                             // 계정이 중복된 경우
-                            Toast.makeText(SingUpActivity.this,"동일한 아이디가 존재합니다.",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SingUpActivity.this, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
