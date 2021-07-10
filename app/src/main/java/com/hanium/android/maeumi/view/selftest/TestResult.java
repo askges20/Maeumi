@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.view.board.Board;
-import com.hanium.android.maeumi.view.chatbot.ChatBotStart;
+import com.hanium.android.maeumi.view.chatbot.ChatBot;
 
 public class TestResult extends AppCompatActivity {
 
@@ -20,17 +20,17 @@ public class TestResult extends AppCompatActivity {
 
 
     public void goToChatBotStart(View view) {
-        Intent intent = new Intent(TestResult.this, ChatBotStart.class);
+        Intent intent = new Intent(TestResult.this, ChatBot.class);
         startActivity(intent);
         System.out.println("Move To ChatBotStart");
     }
 
 
-    public void goToBoard(View view){
+    public void goToBoard(View view) {
         Intent intent = new Intent(TestResult.this, Board.class);
         startActivity(intent);
         System.out.println("Move To Board");
     }
 
-    }
+}
 

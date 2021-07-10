@@ -30,8 +30,6 @@
         <activity android:name=".view.chatbot.ChatBotKeyWord" />
         <activity android:name=".view.chatbot.ChatBotKeyWordNO" />
         <activity android:name=".view.chatbot.ChatBotKeyWordYES" />
-        <activity android:name=".view.chatbot.ChatBotRecord" />
-        <activity android:name=".view.chatbot.ChatBotStart" />
         <activity android:name=".view.board.Board" />
         <activity android:name=".view.board.BoardWrite" />
         <activity android:name=".view.board.PostContent" />
