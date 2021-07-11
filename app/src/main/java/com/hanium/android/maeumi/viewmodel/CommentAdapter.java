@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.view.board.PostContent;
@@ -55,13 +56,14 @@ public class CommentAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.comment_item, null);
-        TextView writer = view.findViewById(R.id.commentWriterText);
-        TextView content = view.findViewById(R.id.commentContentText);
-        TextView writeDate = view.findViewById(R.id.commentWriteDate);
+        TextView writerText = view.findViewById(R.id.commentWriterText);
+        TextView contentText = view.findViewById(R.id.commentContentText);
+        TextView writeDateText = view.findViewById(R.id.commentWriteDate);
 
-        writer.setText(items.get(position).getWriter());
-        content.setText(items.get(position).getContent());
-        writeDate.setText(items.get(position).getWriteDate().substring(0, 10));
+        Comment comment = items.get(position);  //해당 댓글
+        writerText.setText(comment.getWriter());
+        contentText.setText(comment.getContent());
+        writeDateText.setText(comment.getWriteDate().substring(0, 10));
 
         TextView deleteBtn = view.findViewById(R.id.commentDeleteBtn);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
@@ -71,6 +73,11 @@ public class CommentAdapter extends BaseAdapter {
                 postContent.deleteComment(getItem(position));
             }
         });
+
+        //자신이 작성한 댓글이 아니면 삭제 버튼이 없음
+        if (!LoginUser.getInstance().getUid().equals(comment.getWriterUid())){
+            deleteBtn.setVisibility(View.GONE);
+        }
 
         return view;
     }

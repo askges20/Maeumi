@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,7 +164,7 @@ public class PostContent extends AppCompatActivity {
         if (commentContent.equals("")) //내용을 작성하지 않은 경우
             Toast.makeText(this, "댓글을 입력해주세요", Toast.LENGTH_SHORT).show();
         else {
-            String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
+            String postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
             commentRef = database.getReference("/댓글/" + postCode + "/");
 
             //댓글 작성 일자
@@ -176,12 +175,13 @@ public class PostContent extends AppCompatActivity {
             Map<String, Object> childUpdates = new HashMap<>();
             Map<String, Object> commentValues = null;
 
-            Comment comment = new Comment("아이디", commentContent, addTime);
+            LoginUser loginUser = LoginUser.getInstance();
+            Comment comment = new Comment(loginUser.getName(), commentContent, addTime, loginUser.getUid());
             commentValues = comment.toMap();
             System.out.println("commentValue- " + commentValues);
 
             SimpleDateFormat format2 = new SimpleDateFormat("HHmmss");
-            String commentNum = "아이디" + format2.format(time);
+            String commentNum = format2.format(time) + LoginUser.getInstance().getUid();
             childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
 
@@ -192,7 +192,7 @@ public class PostContent extends AppCompatActivity {
 
     private void getCommentFromDB() {    //DB에서 댓글 데이터 가져오기
         database = FirebaseDatabase.getInstance();
-        String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
+        String postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
         commentRef = database.getReference("/댓글/" + postCode + "/");
         commentRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -249,12 +249,12 @@ public class PostContent extends AppCompatActivity {
     public void processDeleteComment(Comment comment) { //삭제할 댓글을 파라미터로 받음
 
         database = FirebaseDatabase.getInstance();
-        String postCode = "아이디" + writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
+        String postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
         commentRef = database.getReference("/댓글/" + postCode + "/");
         Map<String, Object> childUpdates = new HashMap<>();
 
         String commentDate = comment.writeDate;
-        String commentNum = "아이디" + commentDate.substring(11, 13) + commentDate.substring(14, 16) + commentDate.substring(17, 19);
+        String commentNum = commentDate.substring(11, 13) + commentDate.substring(14, 16) + commentDate.substring(17, 19) + LoginUser.getInstance().getUid();
 
         childUpdates.put(commentNum, null); //DB에서 삭제
         commentRef.updateChildren(childUpdates);
