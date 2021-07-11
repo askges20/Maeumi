@@ -4,6 +4,10 @@ public class Question {
     int num;
     String content;
 
+    public Question() {
+
+    }
+
     public Question(int num, String content) {
         this.num = num;
         this.content = content;
