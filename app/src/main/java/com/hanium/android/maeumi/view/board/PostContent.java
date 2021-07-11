@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
-import com.hanium.android.maeumi.viewmodel.CommentAdapter;
+import com.hanium.android.maeumi.adapters.CommentAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

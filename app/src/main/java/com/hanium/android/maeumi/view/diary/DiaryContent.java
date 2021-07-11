@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
@@ -22,7 +23,7 @@ public class DiaryContent extends AppCompatActivity {
 
     String diaryCalDate,diaryTitle, diaryContent, nullDiary,diaryEmoticonNum;
     TextView dateText ,titleText,contentText,emoticon;
-    LinearLayout mainContent;
+    ConstraintLayout mainContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

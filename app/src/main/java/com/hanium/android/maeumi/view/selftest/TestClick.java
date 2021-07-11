@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Question;
-import com.hanium.android.maeumi.viewmodel.QuestionAdapter;
+import com.hanium.android.maeumi.adapters.QuestionAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

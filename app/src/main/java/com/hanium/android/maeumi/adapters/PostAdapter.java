@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi.viewmodel;
+package com.hanium.android.maeumi.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hanium.android.maeumi.OnPostItemClickListener;
+import com.hanium.android.maeumi.interfaces.OnPostItemClickListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
 

@@ -18,10 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hanium.android.maeumi.OnPostItemClickListener;
+import com.hanium.android.maeumi.interfaces.OnPostItemClickListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
-import com.hanium.android.maeumi.viewmodel.PostAdapter;
+import com.hanium.android.maeumi.adapters.PostAdapter;
 
 /*익명게시판 fragment*/
 public class BoardAnonymousFragment extends Fragment {

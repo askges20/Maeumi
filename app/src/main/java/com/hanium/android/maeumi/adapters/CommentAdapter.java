@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi.viewmodel;
+package com.hanium.android.maeumi.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
