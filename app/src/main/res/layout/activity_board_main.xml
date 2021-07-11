@@ -11,7 +11,6 @@
         android:layout_height="0dp"
         android:layout_weight="50"
         android:orientation="horizontal"
-        android:background="#C4C4C4"
         android:weightSum="3">
 
         <TextView
@@ -27,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2.5">
 
@@ -45,15 +45,6 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="익명게시판" />
-
-        <Button
-            android:onClick="onFilterClick"
-            android:id="@+id/filterBtn"
-            android:layout_margin="5dp"
-            android:layout_weight="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="정렬"/>
 
 
     </LinearLayout>

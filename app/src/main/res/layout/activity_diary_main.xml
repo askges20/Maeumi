@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,116 +10,128 @@
     tools:context=".view.diary.DiaryMain" >
 
     <LinearLayout
+        android:id="@+id/diaryTop"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="0.8">
+        android:paddingVertical="30dp"
+        app:layout_constraintBottom_toTopOf="@id/diaryDays"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="전"
-            android:textColor="@color/blue"
-            android:background="@color/white"
-            android:textStyle="bold"
+            android:backgroundTint="@color/white"
             android:onClick="previousMonthAction"
-            android:textSize="20sp"/>
+            android:text="◀"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/monthYearTV"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="Feb 2021"
-            android:textSize="20sp"
+            android:layout_weight="2"
             android:gravity="center"
-            android:textColor="@color/black"/>
+            android:text="Feb 2021"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="후"
-            android:textColor="@color/blue"
-            android:background="@color/white"
-            android:textStyle="bold"
+            android:backgroundTint="@color/white"
             android:onClick="nextMonthAction"
-            android:textSize="20sp"/>
+            android:text="▶"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/diaryDays"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="0.5">
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toTopOf="@id/diaryCalendarView"
+        app:layout_constraintTop_toBottomOf="@id/diaryTop">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SUN"
-            android:textColor="@color/gray"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:text="일"
+            android:textColor="#FF665B"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="MON"
-            android:textColor="@color/gray"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:text="월"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TUE"
-            android:textColor="@color/gray"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:text="화"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="WED"
-            android:textColor="@color/gray"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:text="수"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="THUR"
-            android:textColor="@color/gray"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:text="목"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="FRI"
-            android:textColor="@color/gray"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:text="금"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SAT"
-            android:textColor="@color/gray"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:text="토"
+            android:textColor="#6EAFFF"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/diaryCalendarView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
+        app:layout_constraintBottom_toTopOf="@id/diaryBtns"
+        app:layout_constraintTop_toBottomOf="@id/diaryDays">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendarRecyclerView"
@@ -129,11 +141,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/diaryBtns"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_weight="0.7">
+        android:orientation="horizontal"
+        android:paddingVertical="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <Button
             android:id="@+id/diaryContentBtn"
@@ -141,8 +156,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:padding="10dp"
             android:onClick="diaryContent"
+            android:padding="10dp"
             android:text="일기 내용"
             android:textSize="15sp" />
 
@@ -152,10 +167,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
-            android:padding="10dp"
             android:onClick="diaryWrite"
+            android:padding="10dp"
             android:text="작성하기"
             android:textSize="15sp" />
 
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

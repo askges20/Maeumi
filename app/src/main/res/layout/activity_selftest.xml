@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/testConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.selftest.SelfTest" >
+    tools:context=".view.selftest.SelfTest">
 
     <LinearLayout
+        android:id="@+id/testTopBar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50"
+        android:layout_height="120dp"
         android:orientation="horizontal"
-        android:background="#C4C4C4"
-        android:weightSum="3">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="설문조사"
-            android:textSize="30sp"
-            android:gravity="center"/>
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/testGuide"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="180"
         android:orientation="vertical"
         android:padding="50px"
-        android:weightSum="30">
+        app:layout_constraintBottom_toTopOf="@id/testMenu"
+        app:layout_constraintTop_toBottomOf="@id/testTopBar">
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="테스트 안내 (진행시간, 항목수 등 안내사항)"
@@ -42,13 +42,16 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/testMenu"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="65"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/testGuide">
 
         <Button
-            android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:text="지난 설문조사 결과보기"
@@ -57,9 +60,10 @@
             app:backgroundTint="#8A8984" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/startTestBtn"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginTop="10dp"
             android:text="설문조사 시작"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -67,4 +71,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

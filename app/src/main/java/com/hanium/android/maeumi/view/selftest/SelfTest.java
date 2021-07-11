@@ -11,15 +11,15 @@ import com.hanium.android.maeumi.R;
 
 public class SelfTest extends AppCompatActivity {
 
-    private Button button3;
+    private Button startTestBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selftest);
 
-        button3 = findViewById(R.id.button3);
-        button3.setOnClickListener(new View.OnClickListener() {
+        startTestBtn = findViewById(R.id.startTestBtn);
+        startTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelfTest.this, TestClick.class);

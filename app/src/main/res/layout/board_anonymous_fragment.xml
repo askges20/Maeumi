@@ -31,10 +31,11 @@
         >
 
         <Button
-            android:onClick="goToBoardWrite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="게시글 작성하기" />
+            android:onClick="goToBoardWrite"
+            android:padding="10dp"
+            android:text="글 쓰기" />
 
     </LinearLayout>
 </LinearLayout>

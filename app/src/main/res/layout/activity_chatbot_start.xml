@@ -21,10 +21,11 @@
             android:id="@+id/editMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:ems="10"
+            android:hint="채팅을 입력하세요"
             android:inputType="textPersonName"
             android:padding="10dp"
-            android:hint="채팅을 입력하세요"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSend"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,18 +43,35 @@
             app:tint="#43A047" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:id="@+id/chatbotTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/constraintLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="상담하기"
+            android:textSize="24sp" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/chatView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        tools:listitem="@layout/adapter_message_one"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/chatbotTopBar"
         app:stackFromEnd="true"
         tools:itemCount="2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/constraintLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteY="1dp" />
+        tools:listitem="@layout/adapter_message_one" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

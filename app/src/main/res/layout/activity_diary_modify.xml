@@ -9,7 +9,7 @@
     tools:context=".view.diary.DiaryModify">
 
     <LinearLayout
-        android:id="@+id/mainTop"
+        android:id="@+id/diaryMainTop"
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:orientation="vertical">

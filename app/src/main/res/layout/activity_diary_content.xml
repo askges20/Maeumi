@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/mainContent"
     tools:context=".view.diary.DiaryContent">
 
     <LinearLayout
-        android:id="@+id/mainTop"
+        android:id="@+id/diaryMainTop"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:orientation="vertical">
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView3"
@@ -24,132 +26,123 @@
     </LinearLayout>
 
     <LinearLayout
-        android:padding="20dp"
+        android:id="@+id/diaryMainContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/diaryMainTop">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="7"
+            android:background="@drawable/border_outline"
             android:orientation="vertical"
             android:padding="10dp">
 
+            <TextView
+                android:id="@+id/contentDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="2021/01/01"
+                android:textSize="16sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:padding="5dp"
-                    android:background="#EDEDED"
-                    android:id="@+id/contentDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:text="2021/01/01"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
+                android:layout_height="30dp"
                 android:layout_marginTop="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_marginRight="3dp"
-                    android:padding="5dp"
                     android:id="@+id/diaryTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
                     android:layout_weight="3"
                     android:gravity="center_vertical"
+                    android:padding="5dp"
                     android:text="제목"
-                    android:background="#EDEDED"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:padding="5dp"
                     android:id="@+id/emoticon"
-                    android:background="#EDEDED"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="기분"
+                    android:layout_weight="1"
                     android:ems="2"
-                    android:textSize="15sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="기분"
+                    android:textSize="15sp" />
             </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="2"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/diaryContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="10"
-                android:background="#ECECEC"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:padding="15dp"
-                android:text="일기 내용" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/modifyDiaryBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:onClick="goToDiaryModify"
-                    android:text="수정하기" />
+                <TextView
+                    android:id="@+id/diaryContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="10"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:padding="15dp"
+                    android:text="일기 내용" />
 
-                <Button
-                    android:id="@+id/deleteDiaryBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="showDeleteDialog"
-                    android:text="삭제하기" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:onClick="goToBack"
-                    android:text="목록으로"/>
+                    <Button
+                        android:id="@+id/modifyDiaryBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:onClick="goToDiaryModify"
+                        android:text="수정하기" />
+
+                    <Button
+                        android:id="@+id/deleteDiaryBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:onClick="showDeleteDialog"
+                        android:text="삭제하기" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:onClick="goToBack"
+                        android:text="목록으로" />
+                </LinearLayout>
+
             </LinearLayout>
-
         </LinearLayout>
+
+
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
