@@ -10,8 +10,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
 
@@ -69,9 +75,14 @@ public class BoardWrite extends AppCompatActivity {
     protected void addPost(String title, String content){
         database = FirebaseDatabase.getInstance();
 
+        //로그인한 사용자
+        LoginUser loginUser = LoginUser.getInstance();
+        String loginUserUid = loginUser.getUid();
+        String loginUserName = loginUser.getName();
+
         String today = getToday();  //yyyyMMdd
         String code = getCode();    //HHmmss
-        String postNum = "아이디" + code; //나중에 게시글 번호?로 수정할 듯
+        String postNum = code + loginUserUid; //작성자 Uid + 시간 조합해서 게시글 번호 생성
         String curDate = getCurrentDate();
 
         //게시판 종류
@@ -83,7 +94,7 @@ public class BoardWrite extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
 
-        Post post = new Post(title, content, "아이디", curDate);   //model Post 객체
+        Post post = new Post(title, content, loginUserName, curDate, loginUserUid);   //model Post 객체
         postValues = post.toMap();
         System.out.println("postValue- " + postValues);
         childUpdates.put(postNum, postValues);

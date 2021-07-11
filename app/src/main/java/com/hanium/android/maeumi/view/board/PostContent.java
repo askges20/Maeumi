@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.viewmodel.CommentAdapter;
@@ -38,7 +41,7 @@ public class PostContent extends AppCompatActivity {
     DatabaseReference commentRef;
     CommentAdapter commentAdapter;
 
-    String title, content, writeDate, writer, boardType;
+    String title, content, writeDate, writer, writerUid, boardType;
 
     ListView commentList; //댓글 목록
 
@@ -46,6 +49,9 @@ public class PostContent extends AppCompatActivity {
     TextView contentText;   //내용 텍스트
     TextView dateText;  //날짜 텍스트
     TextView writerText;    //작성자 텍스트
+
+    Button modifyPostBtn;   //게시글 수정 버튼
+    Button deletePostBtn;   //게시글 삭제 버튼
 
     EditText writtenCommentText;    //댓글 작성칸
     Button addCommentBtn;   //댓글 등록 버튼
@@ -65,6 +71,9 @@ public class PostContent extends AppCompatActivity {
         dateText = findViewById(R.id.postDateText);
         writerText = findViewById(R.id.postWriterText);
 
+        modifyPostBtn = findViewById(R.id.modifyPostBtn);
+        deletePostBtn = findViewById(R.id.deletePostBtn);
+
         writtenCommentText = findViewById(R.id.writtenCommentText);
         addCommentBtn = findViewById(R.id.addCommentBtn);
 
@@ -77,7 +86,13 @@ public class PostContent extends AppCompatActivity {
         dateText.setText(writeDate);
         writer = prevIntent.getStringExtra("writer");
         writerText.setText(writer);
+        writerUid = prevIntent.getStringExtra("writerUid");
         boardType = prevIntent.getStringExtra("boardType");
+
+        if (!LoginUser.getInstance().getUid().equals(writerUid)){ //로그인한 사용자와 글 작성자의 Uid가 다르면
+            modifyPostBtn.setVisibility(View.GONE); //수정 버튼 없음
+            deletePostBtn.setVisibility(View.GONE); //삭제 버튼 없음
+        }
 
         //댓글
         commentAdapter = new CommentAdapter(this, this);
@@ -111,6 +126,8 @@ public class PostContent extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int i) {
 
+                String loginUserUid = LoginUser.getInstance().getUid();  //로그인한 사용자의 Uid
+
                 //DB에서 삭제
                 String date = writeDate.substring(0, 4) + writeDate.substring(5, 7) + writeDate.substring(8, 10);
                 if (boardType.equals("free"))
@@ -119,7 +136,7 @@ public class PostContent extends AppCompatActivity {
                     postRef = database.getReference("/익명게시판/" + date + "/");
                 String time = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
                 Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put("아이디" + time, null);
+                childUpdates.put(time + loginUserUid, null);
                 postRef.updateChildren(childUpdates);
 
 

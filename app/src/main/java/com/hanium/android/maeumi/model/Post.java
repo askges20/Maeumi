@@ -11,16 +11,18 @@ public class Post {
     public String content;     //내용
     public String writer;      //작성자
     public String writeDate;   //작성일자
+    public String writerUid;    //작성자 uid
 
     public Post(){
 
     }
 
-    public Post(String title, String content, String writer, String writeDate) {
+    public Post(String title, String content, String writer, String writeDate, String writerUid) {
         this.title = title;
         this.content = content;
         this.writer = writer;
         this.writeDate = writeDate;
+        this.writerUid = writerUid;
     }
 
     public Map<String, Object> toMap(){
@@ -29,6 +31,7 @@ public class Post {
         result.put("content", content);
         result.put("writer", writer);
         result.put("writeDate", writeDate);
+        result.put("writerUid", writerUid);
         return result;
     }
 
@@ -62,5 +65,13 @@ public class Post {
 
     public void setWriteDate(String writeDate) {
         this.writeDate = writeDate;
+    }
+
+    public String getWriterUid() {
+        return writerUid;
+    }
+
+    public void setWriterUid(String writerUid) {
+        this.writerUid = writerUid;
     }
 }

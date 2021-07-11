@@ -23,7 +23,7 @@ import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
 import com.hanium.android.maeumi.viewmodel.PostAdapter;
 
-/*자유게시판 fragment*/
+/*익명게시판 fragment*/
 public class BoardAnonymousFragment extends Fragment {
 
     FirebaseDatabase database;
@@ -110,6 +110,7 @@ public class BoardAnonymousFragment extends Fragment {
         intent.putExtra("content", item.getContent());
         intent.putExtra("writeDate",item.getWriteDate());
         intent.putExtra("writer",item.getWriter());
+        intent.putExtra("writerUid",item.getWriterUid());
         intent.putExtra("boardType", "anonymous");
         startActivity(intent);
     }

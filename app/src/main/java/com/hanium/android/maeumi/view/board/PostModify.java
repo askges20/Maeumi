@@ -3,12 +3,14 @@ package com.hanium.android.maeumi.view.board;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
 
@@ -63,9 +65,9 @@ public class PostModify extends Activity {
         Map<String, Object> postValues = null;
 
         String time = postDate.substring(11,13)+postDate.substring(14,16)+postDate.substring(17,19);
-        Post post = new Post(newTitle, newContent, postWriter, postDate);   //model Diary 객체
+        Post post = new Post(newTitle, newContent, postWriter, postDate, LoginUser.getInstance().getUid());   //model Diary 객체
         postValues = post.toMap();
-        childUpdates.put("아이디"+time, postValues);
+        childUpdates.put(time + LoginUser.getInstance().getUid(), postValues);
         postRef.updateChildren(childUpdates);
 
         Toast toastView = Toast.makeText(PostModify.this, "수정 완료", Toast.LENGTH_SHORT);

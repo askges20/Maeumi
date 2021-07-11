@@ -111,6 +111,7 @@ public class BoardFreeFragment extends Fragment {
         intent.putExtra("content", item.getContent());
         intent.putExtra("writeDate",item.getWriteDate());
         intent.putExtra("writer",item.getWriter());
+        intent.putExtra("writerUid",item.getWriterUid());
         intent.putExtra("boardType", "free");
         startActivity(intent);
     }
