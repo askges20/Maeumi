@@ -52,9 +52,9 @@
         android:padding="50px"
         android:weightSum="30">
 
-        <!--테스트 문항 리사이클러뷰 영역-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/testRecyclerView"
+        <!--테스트 문항 영역-->
+        <ListView
+            android:id="@+id/questionListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />

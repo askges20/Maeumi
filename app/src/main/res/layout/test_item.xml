@@ -18,35 +18,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="40px">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/quesitonText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="질문"
                 android:textSize="18sp" />
 
             <RadioGroup
+                android:id="@+id/optionGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <RadioButton
+                    android:id="@+id/option1"
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
                     android:text="전혀 없음" />
 
                 <RadioButton
+                    android:id="@+id/option2"
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
                     android:text="약간" />
 
                 <RadioButton
+                    android:id="@+id/option3"
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
                     android:text="상당히" />
 
                 <RadioButton
+                    android:id="@+id/option4"
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
                     android:text="아주 심함" />
