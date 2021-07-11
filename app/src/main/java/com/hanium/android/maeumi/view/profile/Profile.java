@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 
 public class Profile extends Activity {
@@ -35,23 +36,10 @@ public class Profile extends Activity {
         loginUserNameText = findViewById(R.id.loginUserNameText);
         loginUserEmailText = findViewById(R.id.loginUserEmailText);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();    //현재 로그인한 사용자
-        loginUserUid = user.getUid();   //사용자 Uid
+        LoginUser loginUser = LoginUser.getInstance();
 
-        database = FirebaseDatabase.getInstance();
-        userRef = database.getReference("/Users/" + loginUserUid + "/");
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                loginUserNameText.setText("이름 : " + snapshot.child("name").getValue(String.class)); //사용자 이름 표시
-                loginUserEmailText.setText("이메일 : " + snapshot.child("email").getValue(String.class));  //사용자 이메일 표시
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
+        loginUserNameText.setText("이름 : " + loginUser.getName());
+        loginUserEmailText.setText("이메일 : " + loginUser.getEmail());
     }
 
     public void goToProfileEdit(View view){

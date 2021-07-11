@@ -9,8 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ActivitySplash extends AppCompatActivity {
+    FirebaseDatabase database;
+    DatabaseReference userRef;
     private static final String TAG = "splash";
 
     @Override
@@ -22,9 +29,31 @@ public class ActivitySplash extends AppCompatActivity {
         handler.postDelayed(new Runnable(){
             @Override
             public void run(){
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) { //로그인 기록이 있는 사용자
-                    Log.d(TAG, "로그인 계정 : " + user.getUid());
+                FirebaseUser userFromFB = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (userFromFB != null) { //로그인 기록이 있는 사용자
+                    Log.d(TAG, "로그인 계정 : " + userFromFB.getUid());
+
+                    String loginUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); //로그인한 계정의 uid
+                    LoginUser user = LoginUser.getInstance();    //싱글톤 패턴
+                    user.setUid(loginUserUid);  //사용자 uid
+
+                    //DB에서 사용자 정보 가져와서 싱글톤 객체에 저장
+                    database = FirebaseDatabase.getInstance();
+                    userRef = database.getReference("/Users/" + loginUserUid + "/");
+                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            user.setName(snapshot.child("name").getValue(String.class)); //사용자 이름
+                            user.setEmail(snapshot.child("email").getValue(String.class));  //사용자 이메일
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+
+                        }
+                    });
+
                     startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
                 } else {    //로그인 기록이 없는 사용자
                     startActivity(new Intent(ActivitySplash.this, LoginActivity.class));    //로그인 화면으로 이동
