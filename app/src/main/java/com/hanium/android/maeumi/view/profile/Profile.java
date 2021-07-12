@@ -9,43 +9,24 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.hanium.android.maeumi.LoginUser;
+
 import com.hanium.android.maeumi.R;
 
 public class Profile extends Activity {
 
-    FirebaseDatabase database;
-    DatabaseReference userRef;
 
-    String loginUserUid;
-    TextView loginUserNameText;
-    TextView loginUserEmailText;
+    TextView userName, userEmail, userAlias, userSchool, userGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_main);
 
-        loginUserNameText = findViewById(R.id.loginUserNameText);
-        loginUserEmailText = findViewById(R.id.loginUserEmailText);
-
-        LoginUser loginUser = LoginUser.getInstance();
-
-        loginUserNameText.setText("이름 : " + loginUser.getName());
-        loginUserEmailText.setText("이메일 : " + loginUser.getEmail());
     }
 
     public void goToProfileEdit(View view){
         Intent intent = new Intent(Profile.this,ProfileEdit.class);
         startActivity(intent);
-        System.out.println("Move To Profile Edit");
     }
 
     public void deleteConfirm(View view){

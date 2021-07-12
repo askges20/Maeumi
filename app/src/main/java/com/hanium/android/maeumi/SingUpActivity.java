@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,9 +24,10 @@ import java.util.HashMap;
 
 public class SingUpActivity extends AppCompatActivity {
 
-    EditText email, password, name;
+    EditText email, password, name,alias,school;
     FirebaseAuth firebaseAuth;
-    private String userEmail, userPassword, userName;
+    private String userEmail, userPassword, userName, userGender,userAlias,userSchool;
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,20 @@ public class SingUpActivity extends AppCompatActivity {
         email = findViewById(R.id.userEmail);
         password = findViewById(R.id.userPassword);
         name = findViewById(R.id.userName);
+        alias = findViewById(R.id.alias);
+        school = findViewById(R.id.school);
+        radioGroup = findViewById(R.id.radioGroup);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.girl){
+                    userGender = "여";
+                }else if(checkedId == R.id.man){
+                    userGender = "남";
+                }
+            }
+        });
 
     }
 
@@ -41,18 +59,27 @@ public class SingUpActivity extends AppCompatActivity {
         userEmail = email.getText().toString();
         userPassword = password.getText().toString();
         userName = name.getText().toString();
+        userAlias = alias.getText().toString();
+        userSchool = school.getText().toString();
 
         if (userEmail.equals("") || userPassword.equals("") || userName.equals("")) {
             Toast.makeText(SingUpActivity.this, "빈 칸을 채워주세요.", Toast.LENGTH_LONG).show();
         } else if (userPassword.length() < 6) {
             Toast.makeText(SingUpActivity.this, "비밀번호는 6자 이상으로 입력해주세요!", Toast.LENGTH_LONG).show();
             //이 외에도 문자, 숫자, 특수기호 포함했는지 유효성 검사 추가 필요
-        } else {
-            createUser(userEmail, userPassword, userName);
+        } else if(userGender == null) {
+            Toast.makeText(SingUpActivity.this, "성별을 선택해주세요.", Toast.LENGTH_LONG).show();
+        }else if(userAlias == null){
+            Toast.makeText(SingUpActivity.this, "닉네임을 입력해주세요.", Toast.LENGTH_LONG).show();
+        }else if(userSchool == null){
+            Toast.makeText(SingUpActivity.this, "학교를 입력해주세요.", Toast.LENGTH_LONG).show();
+        }else{
+            createUser(userEmail, userPassword, userName,userGender,userAlias,userSchool);
+
         }
     }
 
-    private void createUser(String email, String password, String userName) {
+    private void createUser(String email, String password, String userName,String UserGender,String userAlias,String userSchool) {
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -65,11 +92,17 @@ public class SingUpActivity extends AppCompatActivity {
                             String email = user.getEmail();
                             String uid = user.getUid();
                             String name = userName;
+                            String gender = UserGender;
+                            String alias = userAlias;
+                            String school = userSchool;
 
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("uid", uid);
                             hashMap.put("email", email);
                             hashMap.put("name", name);
+                            hashMap.put("gender",gender);
+                            hashMap.put("alias",alias);
+                            hashMap.put("school",school);
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference reference = database.getReference("Users");
