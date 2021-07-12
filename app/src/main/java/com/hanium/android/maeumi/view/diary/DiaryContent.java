@@ -32,7 +32,7 @@ public class DiaryContent extends AppCompatActivity {
 
         DiaryViewModel.setDiaryData();
         diaryCalDate = DiaryViewModel.getCalendarDate();
-        nullDate();
+        nullDiary = DiaryViewModel.getNullDiary();
 
         dateText = findViewById(R.id.contentDate);
         titleText = findViewById(R.id.diaryTitle);
@@ -40,42 +40,40 @@ public class DiaryContent extends AppCompatActivity {
         emoticon = findViewById(R.id.emoticon);
         mainContent = findViewById(R.id.mainContent);
 
-        nullDiary = DiaryViewModel.getNullDiary();
-        ifNullDiary();
-
         diaryTitle = DiaryViewModel.getTitle();
         diaryContent = DiaryViewModel.getContent();
         diaryEmoticonNum = DiaryViewModel.getEmoticonNum();
+        checkNull();
 
         dateText.setText(diaryCalDate);
         titleText.setText(diaryTitle);
         contentText.setText(diaryContent);
-        switch (diaryEmoticonNum){
-            case "1":
-                emoticon.setText("좋음");
-                mainContent.setBackgroundColor(Color.YELLOW);
-                break;
-            case "2":
-                emoticon.setText("평범");
-                mainContent.setBackgroundColor(Color.GREEN);
-                break;
-            case "3":
-                emoticon.setText("나쁨");
-                mainContent.setBackgroundColor(Color.GRAY);
-                break;
+        if(diaryEmoticonNum != null){
+            switch (diaryEmoticonNum){
+                case "1":
+                    emoticon.setText("좋음");
+                    mainContent.setBackgroundColor(Color.YELLOW);
+                    break;
+                case "2":
+                    emoticon.setText("평범");
+                    mainContent.setBackgroundColor(Color.GREEN);
+                    break;
+                case "3":
+                    emoticon.setText("나쁨");
+                    mainContent.setBackgroundColor(Color.GRAY);
+                    break;
+            }
         }
     }
-    // 일기 없을 때 이벤트
-    public void ifNullDiary(){
-        if (nullDiary == null){
-            Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
-    // 빈곳 클릭 시 이벤트
-    public void nullDate(){
+    public void checkNull(){
+        // 빈곳 클릭 시 이벤트
         if(diaryCalDate == null){
             Toast.makeText(DiaryContent.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        // 일기 없을 때 이벤트
+        if (nullDiary == null && diaryEmoticonNum == null){
+            Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
