@@ -1,12 +1,11 @@
 package com.hanium.android.maeumi.model;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.util.ArrayList;
@@ -17,9 +16,9 @@ public class DiaryModel {
     FirebaseDatabase database;
     DatabaseReference diaryRef;
     DiaryViewModel DiaryViewModel;
-    FirebaseAuth firebaseAuth;
+    LoginUser loginUser = LoginUser.getInstance();
 
-    public static String calendarDate, fireDate, compareMonth, monthlyDate, userId;
+    public static String calendarDate, fireDate, compareMonth, monthlyDate;
 
     public static String title, content, nullDiary,emoticonNum;
 
@@ -39,7 +38,6 @@ public class DiaryModel {
     public void setCompareDate(String date) {
         this.compareMonth = date;
 
-        getUserId();
         getMonthDiary();
     }
 
@@ -47,16 +45,9 @@ public class DiaryModel {
         dates.clear();
         this.compareMonth = date;
 
-        getUserId();
         getMonthDiary();
     }
 
-    //   유저 uid 조회, 저장
-    public void getUserId(){
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        userId = user.getUid();
-    }
 
     //일기 제목, 내용, 이모티콘 번호 조회
     public void setTitle(String title) {
@@ -103,9 +94,9 @@ public class DiaryModel {
 
     // Firebase에서 월별 일기 조회
     public void getMonthDiary() {
-        System.out.println("month - "+ userId);
+
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+userId + "/");
+        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/");
 
         diaryRef.addValueEventListener(new ValueEventListener() {
 
@@ -116,7 +107,6 @@ public class DiaryModel {
                     if (compareMonth.equals(dateSnap.getKey().substring(0, 6))) {
                         Diary testValue = dateSnap.getValue(Diary.class);
                         monthlyDate = testValue.date + testValue.emoticonNum;
-//                        dates.add(monthlyDate);
                         setMonthDiaryDates(monthlyDate);
                     }
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
@@ -135,7 +125,7 @@ public class DiaryModel {
     // 개별 일기 조회
     public void getDiaryFromFB(String date) {
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+userId + "/"+ date);
+        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/"+ date);
 
         diaryRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -162,7 +152,7 @@ public class DiaryModel {
     // 일기 작성 & 수정
     public void diaryWrite(Diary value) {
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+userId + "/");
+        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/");
 
 
         Map<String, Object> childUpdates = new HashMap<>();
@@ -177,7 +167,7 @@ public class DiaryModel {
     // 일기 삭제
     public void deleteDiary() {
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+userId + "/");
+        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/");
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(fireDate, null); //dnull이라 기존 데이터 삭제됨
