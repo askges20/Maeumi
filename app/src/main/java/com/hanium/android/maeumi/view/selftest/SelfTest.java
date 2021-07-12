@@ -22,6 +22,7 @@ public class SelfTest extends AppCompatActivity {
         startTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();   //현재 액티비티 종료
                 Intent intent = new Intent(SelfTest.this, TestClick.class);
                 startActivity(intent); //액티비티 이동
             }

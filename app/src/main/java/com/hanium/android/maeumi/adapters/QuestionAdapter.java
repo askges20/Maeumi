@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -16,19 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.model.Question;
+import com.hanium.android.maeumi.view.selftest.TestClick;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class QuestionAdapter extends BaseAdapter {
-
+    TestClick testClick;
     Context mContext;
     LayoutInflater mLayoutInflater;
 
     ArrayList<Question> items = new ArrayList<Question>();
     HashSet<Integer> checkedQuestions = new HashSet<Integer>(); //답변한 문항 번호
 
-    public QuestionAdapter(Context context) {
+    public QuestionAdapter(TestClick testClick, Context context) {
+        this.testClick = testClick;
         mContext = context;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
@@ -107,6 +110,7 @@ public class QuestionAdapter extends BaseAdapter {
                         break;
                 }
                 setSelectedNum(position, selectedNum);  //선택 반영
+                testClick.changeProgress(checkedQuestions.size(), getCount());
             }
         });
 
