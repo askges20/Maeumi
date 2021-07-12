@@ -51,6 +51,8 @@ public class QuestionAdapter extends BaseAdapter {
         return 0;
     }
 
+    public ArrayList<Question> getItems() { return items; }
+
     public void setItems(ArrayList<Question> items){
         this.items = items;
     }

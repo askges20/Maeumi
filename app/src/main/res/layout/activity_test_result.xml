@@ -1,121 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".view.selftest.TestResult" >
 
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:text="설문조사 결과"
-        android:textColor="#000000"
-        app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp" />
-
     <LinearLayout
+        android:id="@+id/testResultTop"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="158dp"
-            android:layout_height="71dp"
-            android:layout_weight="1"
-            android:background="#F40404"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="247dp"
-            android:layout_height="74dp"
-            android:text="가해 정도"
-            android:textColor="#070707"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="테스트 결과"
             android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/testResultContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@id/testResultMenu"
+        app:layout_constraintTop_toBottomOf="@id/testResultTop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:background="#FFC107"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="피해 정도"
+                    android:textColor="#070707"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/victimScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="0"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:background="#F40404"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="가해 정도"
+                    android:textColor="#070707"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/perpetrationScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="0"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
-
     <LinearLayout
+        android:id="@+id/testResultMenu"
         android:layout_width="match_parent"
-        android:layout_height="82dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="169dp"
-            android:layout_height="match_parent"
-            android:background="#FFC107"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:text="테스트 결과 설명 더보기"
+            android:textColor="#000000"
+            app:backgroundTint="#9E9E9E"
+            tools:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="247dp"
-            android:layout_height="74dp"
-            android:layout_weight="1"
-            android:text="피해 정도"
-            android:textColor="#070707"
-            android:textSize="24sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:text="메인화면으로 가기"
+            android:textColor="#000000"
+            app:backgroundTint="#D3D0CC"
+            tools:textSize="18sp" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:text="결과 전송하기"
+            android:textColor="#000000"
+            app:backgroundTint="#D3D0CC"
+            tools:textSize="18sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:onClick="goToBoard"
+            android:text="게시글 작성하러 가기"
+            android:textColor="#000000"
+            app:backgroundTint="#D3D0CC"
+            tools:textSize="18sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginVertical="5dp"
+            android:onClick="goToChatBotStart"
+            android:text="상담하러 가기"
+            android:textColor="#000000"
+            app:backgroundTint="#D3D0CC"
+            tools:textSize="18sp" />
     </LinearLayout>
 
-    <SeekBar
-        android:id="@+id/seekBar3"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
-
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="테스트 결과 설명 더보기"
-        android:textColor="#000000"
-        app:backgroundTint="#9E9E9E"
-        tools:textSize="18sp" />
-
-    <Button
-        android:id="@+id/button15"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="메인화면으로 가기"
-        android:textColor="#000000"
-        app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp"/>
-    <Button
-        android:id="@+id/button16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="결과 전송하기"
-        android:textColor="#000000"
-        app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp" />
-
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시글 작성하러 가기"
-        android:textColor="#000000"
-        app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp"
-        android:onClick="goToBoard"/> <!-- 게시판으로 넘어가고싶다..-->
-
-    <Button
-        android:id="@+id/button18"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:text="상담하러 가기"
-        android:textColor="#000000"
-        app:backgroundTint="#D3D0CC"
-        tools:textSize="18sp"
-        android:onClick="goToChatBotStart"/> <!-- 테스트결과로 넘어가고싶다..-->
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
