@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="테스트 안내 (진행시간, 항목수 등 안내사항)"
+            android:text="@string/test_guide"
             android:textColor="#000000"
             android:textSize="18sp" />
 
@@ -54,7 +54,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="지난 설문조사 결과보기"
+            android:text="지난 테스트 결과 확인"
             android:textColor="#000000"
             android:textSize="18sp"
             app:backgroundTint="@color/lightgray" />
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="10dp"
-            android:text="설문조사 시작"
+            android:text="테스트 시작하기"
             android:textColor="#000000"
             android:textSize="18sp"
             app:backgroundTint="@color/lightgreen" />

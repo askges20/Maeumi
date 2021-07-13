@@ -42,8 +42,8 @@ public class BoardWrite extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formatDate = dateFormat.format(date);
 
-        TextView boardWriteDate = (TextView) findViewById(R.id.boardWriteDate);
-        boardWriteDate.setText(formatDate);
+        //TextView boardWriteDate = (TextView) findViewById(R.id.boardWriteDate);
+        //boardWriteDate.setText(formatDate);
 
         Button saveWrite = (Button) findViewById(R.id.saveWrite); //작성 완료 버튼
         final EditText boardTitle = (EditText) findViewById(R.id.boardTitle); //게시글 제목
@@ -112,6 +112,10 @@ public class BoardWrite extends AppCompatActivity {
         Date time = new Date();
         SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         return format.format(time);
+    }
+
+    public void goToBack(View view) {
+        finish();
     }
 
 }

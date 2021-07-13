@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,11 +8,13 @@
     tools:context=".view.selftest.TestClick">
 
     <LinearLayout
+        android:id="@+id/testTopBar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50"
+        android:layout_height="120dp"
         android:orientation="horizontal"
-        android:weightSum="3">
+        app:layout_constraintBottom_toTopOf="@id/testProcess"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,11 +25,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/testProcess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:orientation="vertical"
-        android:paddingHorizontal="15dp">
+        android:paddingHorizontal="15dp"
+        app:layout_constraintBottom_toTopOf="@id/testQuestion"
+        app:layout_constraintTop_toBottomOf="@id/testTopBar">
 
         <ImageView
             android:id="@+id/maeumiImg"
@@ -49,26 +53,22 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/testQuestion"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="180"
         android:orientation="vertical"
-        android:padding="15dp"
-        android:weightSum="30">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/testProcess">
 
         <!--테스트 문항 영역-->
         <ListView
             android:id="@+id/questionListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
             android:orientation="vertical" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="30"
-        android:orientation="vertical">
 
         <Button
             android:id="@+id/finishBtn"
@@ -81,4 +81,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
