@@ -4,6 +4,9 @@ public class LoginUser {
     private String uid;
     private String email;
     private String name;
+    private String gender;
+    private String school;
+    private String alias;
 
     private static final LoginUser user = new LoginUser();
 
@@ -38,5 +41,29 @@ public class LoginUser {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

@@ -73,6 +73,9 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot snapshot) {
                             user.setName(snapshot.child("name").getValue(String.class)); //사용자 이름
                             user.setEmail(snapshot.child("email").getValue(String.class));  //사용자 이메일
+                            user.setAlias(snapshot.child("alias").getValue(String.class));
+                            user.setGender(snapshot.child("gender").getValue(String.class));
+                            user.setSchool(snapshot.child("school").getValue(String.class));
                         }
 
                         @Override
