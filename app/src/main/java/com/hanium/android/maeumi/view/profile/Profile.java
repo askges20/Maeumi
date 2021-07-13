@@ -42,13 +42,6 @@ public class Profile extends Activity {
         userAlias.setText(alias);
         userSchool.setText(school);
         userGender.setText(gender);
-
-        System.out.println(alias);
-        System.out.println(email);
-        System.out.println(name);
-        System.out.println(gender);
-        System.out.println(school);
-
     }
 
     public void goToProfileEdit(View view) {
