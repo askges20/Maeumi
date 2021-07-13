@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +23,11 @@ import com.google.cloud.dialogflow.v2.SessionsSettings;
 import com.google.cloud.dialogflow.v2.TextInput;
 import com.google.common.collect.Lists;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.adapters.ChatAdapter;
@@ -93,6 +97,8 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         //Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         refPath = "/채팅/" + LoginUser.getInstance().getUid() + "/";  //DB 경로
+
+        readFirebaseData(); //DB에서 이전 채팅 내역 불러오기
     }
 
     private void setUpBot() {
@@ -141,13 +147,13 @@ public class ChatBot extends AppCompatActivity implements BotReply {
     //전송한 채팅을 DB에 저장하기
     public void addChat2FirebaseDB(boolean isUserSent, String message) {
         Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat ( "yyyyMMdd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String dateStr = dateFormat.format(today);
         SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");
         String timeStr = timeFormat.format(today);
 
         String who;
-        if (isUserSent){
+        if (isUserSent) {
             who = "user";
         } else {
             who = "bot";
@@ -155,5 +161,34 @@ public class ChatBot extends AppCompatActivity implements BotReply {
 
         chatRef = firebaseDatabase.getReference(refPath + dateStr + "/" + timeStr + who);
         chatRef.setValue(message);
+    }
+
+    //DB에서 채팅 내역 불러오기
+    private void readFirebaseData() {
+        chatRef = firebaseDatabase.getReference(refPath);
+        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot datesnap : snapshot.getChildren()){
+                    for (DataSnapshot chatsnap : datesnap.getChildren()){
+                        String chatKey = chatsnap.getKey();
+                        String chatValue = (String)chatsnap.getValue();
+
+                        if (chatKey.contains("user")){  //사용자가 보낸 채팅이면
+                            messageList.add(new Message(chatValue, false));
+                        } else {    //dialogflow가 보낸 채팅이면
+                            messageList.add(new Message(chatValue, true));
+                        }
+                    }
+                }
+                chatAdapter.notifyDataSetChanged();
+                Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);   //채팅 맨 아래로 스크롤
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
