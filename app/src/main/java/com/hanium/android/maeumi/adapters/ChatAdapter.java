@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,11 +34,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         String message = messageList.get(position).getMessage();
         boolean isReceived = messageList.get(position).getIsReceived();
         if(isReceived){
+            holder.chatMaeumiImg.setVisibility(View.VISIBLE);
             holder.messageReceive.setVisibility(View.VISIBLE);
             holder.messageSend.setVisibility(View.GONE);
             holder.messageReceive.setText(message);
         }else {
             holder.messageSend.setVisibility(View.VISIBLE);
+            holder.chatMaeumiImg.setVisibility(View.GONE);
             holder.messageReceive.setVisibility(View.GONE);
             holder.messageSend.setText(message);
         }
@@ -51,11 +54,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
         TextView messageSend;
         TextView messageReceive;
+        ImageView chatMaeumiImg;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             messageSend = itemView.findViewById(R.id.message_send);
             messageReceive = itemView.findViewById(R.id.message_receive);
+            chatMaeumiImg = itemView.findViewById(R.id.chatMaeumiImg);
         }
     }
 }
