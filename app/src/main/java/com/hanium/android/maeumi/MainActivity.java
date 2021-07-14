@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +20,15 @@ import com.hanium.android.maeumi.view.selftest.SelfTest;
 public class MainActivity extends AppCompatActivity {
 
     private long pressedTime;
+    TextView randomText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        randomText = findViewById(R.id.mainRandomText);
+        setRandomText();
     }
 
     public void goToDiary(View view) {
@@ -69,5 +74,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    public void setRandomText() {
+        String randStr = "";
+        int randNum = (int)(Math.random()*3);
+        switch (randNum){
+            case 0:
+                randStr = "오늘 하루도 고생 많았어";
+                break;
+            case 1:
+                randStr = "랜덤 문구1";
+                break;
+            case 2:
+                randStr = "랜덤 문구2";
+                break;
+            case 3:
+                randStr = "랜덤 문구3";
+                break;
+        }
+        randomText.setText(randStr);
     }
 }
