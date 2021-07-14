@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,9 +26,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class DiaryWrite extends AppCompatActivity {
@@ -39,6 +46,10 @@ public class DiaryWrite extends AppCompatActivity {
     String diaryCalDate, diaryEmoticon;
     LinearLayout mainContent;
     ImageView testImgView;
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    StorageReference mountainsRef = storageRef.child("mountains.jpg");
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -155,6 +166,7 @@ public class DiaryWrite extends AppCompatActivity {
                     System.out.println("hello Test - "+ helloTest);
                     testImgView.setImageBitmap(imgName);    // 선택한 이미지 이미지뷰에 셋
                     inStream.close();   // 스트림 닫아주기
+                    testSaveImg();
 //                    saveBitmapToJpeg(imgBitmap);    // 내부 저장소에 저장
                     Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
@@ -180,5 +192,32 @@ public class DiaryWrite extends AppCompatActivity {
         }
 
     }
+
+    public void testSaveImg(){
+        // Get the data from an ImageView as bytes
+        testImgView.setDrawingCacheEnabled(true);
+        testImgView.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) testImgView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+                System.out.println("성공");
+            }
+        });
+    }
+
+
 
 }
