@@ -1,5 +1,7 @@
 package com.hanium.android.maeumi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onSignUpClick(View view) {
         Intent intent = new Intent(LoginActivity.this, SingUpActivity.class);
-        startActivity(intent);
+        startActivity(intent);  //회원가입 화면으로 이동
     }
 
     public void login(String email, String password) {
@@ -87,11 +89,32 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class); //메인 화면으로 이동
                     startActivity(intent);
+                    finish();   //현재 액티비티(로그인 화면) 종료
                 } else {
                     Toast.makeText(LoginActivity.this, "아이디 혹은 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {   //뒤로가기 버튼 클릭 시
+        //super.onBackPressed();
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+        dialog.setMessage("앱을 종료하시겠습니까?");
+        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                finish();   //현재 액티비티 없애기
+            }
+        });
+        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+            }
+        });
+        dialog.show();
     }
 
 }

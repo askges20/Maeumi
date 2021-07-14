@@ -78,18 +78,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setRandomText() {
         String randStr = "";
-        int randNum = (int)(Math.random()*3);
-        switch (randNum){
+        int randNum = (int) (Math.random() * 4);
+        switch (randNum) {
             case 0:
-                randStr = "오늘 하루도 고생 많았어";
+                randStr = "문구";
                 break;
             case 1:
-                randStr = "랜덤 문구1";
+                randStr = "오늘 하루도 고생 많았어";
                 break;
             case 2:
-                randStr = "랜덤 문구2";
+                randStr = "랜덤 문구1";
                 break;
             case 3:
+                randStr = "랜덤 문구2";
+                break;
+            case 4:
                 randStr = "랜덤 문구3";
                 break;
         }

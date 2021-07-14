@@ -8,14 +8,19 @@ public class LoginUser {
     private String school;
     private String alias;
 
-    private static final LoginUser user = new LoginUser();
+    //private static final LoginUser user = new LoginUser();
+    private static LoginUser user = new LoginUser();
 
     public static LoginUser getInstance() {
         return user;
     }
 
-    private LoginUser() {
+    public LoginUser() {
 
+    }
+
+    public static void signOutUser() {  //로그아웃 진행
+        user = new LoginUser();
     }
 
 

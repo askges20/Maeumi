@@ -6,15 +6,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.core.app.ActivityCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.hanium.android.maeumi.LoginActivity;
 import com.hanium.android.maeumi.LoginUser;
+import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
 public class Profile extends Activity {
 
+    Button logoutBtn;
     TextView userName, userEmail, userAlias, userSchool, userGender;
     private String name, email, alias, gender, school;
 
@@ -42,6 +49,9 @@ public class Profile extends Activity {
         userAlias.setText(alias);
         userSchool.setText(school);
         userGender.setText(gender);
+
+        //로그아웃 버튼
+        logoutBtn = findViewById(R.id.signOutBtn);
     }
 
     public void goToProfileEdit(View view) {
@@ -65,5 +75,33 @@ public class Profile extends Activity {
                     }
                 })
                 .show();
+    }
+
+    //로그아웃 버튼 클릭 이벤트
+    public void signOutBtnEvent(View view) {
+        new AlertDialog.Builder(this)
+                .setMessage("로그아웃 하시겠습니까?")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //네 클릭
+                        processSignOut();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //취소 클릭
+                    }
+                })
+                .show();
+    }
+
+    //로그아웃 진행
+    public void processSignOut() {
+        LoginUser.signOutUser();    //싱글톤 객체 null
+        FirebaseAuth.getInstance().signOut();   //FirebaseAuth에서 로그아웃
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);  //로그인 화면으로 이동
     }
 }
