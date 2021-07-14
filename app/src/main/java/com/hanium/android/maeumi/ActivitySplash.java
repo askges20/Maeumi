@@ -21,14 +21,14 @@ public class ActivitySplash extends AppCompatActivity {
     private static final String TAG = "splash";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);   //로딩 화면
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable(){
+        handler.postDelayed(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 FirebaseUser userFromFB = FirebaseAuth.getInstance().getCurrentUser();
 
                 if (userFromFB != null) { //로그인 기록이 있는 사용자
@@ -64,23 +64,10 @@ public class ActivitySplash extends AppCompatActivity {
                 finish();
             }
         }, 2500);
-
-        /*
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
-                System.out.println("Splash Splash");
-            }
-        }, 3000);   //3초 뒤 메인으로 이동
-         */
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         finish();
     }

@@ -97,7 +97,7 @@ public class Profile extends Activity {
 
     //로그아웃 진행
     public void processSignOut() {
-        LoginUser.signOutUser();    //싱글톤 객체 null
+        LoginUser.signOutUser();    //싱글톤 객체 new
         FirebaseAuth.getInstance().signOut();   //FirebaseAuth에서 로그아웃
 
         Intent intent = new Intent(this, LoginActivity.class);
