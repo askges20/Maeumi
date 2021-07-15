@@ -1,13 +1,23 @@
 package com.hanium.android.maeumi.model;
 
+import android.graphics.Bitmap;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +28,11 @@ public class DiaryModel {
     DiaryViewModel DiaryViewModel;
     LoginUser loginUser = LoginUser.getInstance();
 
-    public static String calendarDate, fireDate, compareMonth, monthlyDate;
+    public static String calendarDate, fireDate, compareMonth, monthlyDate,saveId;
 
     public static String title, content, nullDiary,emoticonNum;
+
+    public static Bitmap imgName;
 
     public static ArrayList<String> dates = new ArrayList<>();
 
@@ -172,6 +184,45 @@ public class DiaryModel {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(fireDate, null); //dnull이라 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
+    }
+
+    // 이미지 비트맵 저장, 전달
+    public void setImgName(){
+        imgName = DiaryViewModel.getImgName();
+
+        if(imgName != null){
+            saveImg(imgName);
+        }
+    }
+
+    //  이미지 저장
+    public void saveImg(Bitmap imgBitmap){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+
+        this.saveId = LoginUser.getInstance().getUid() +fireDate;
+
+        StorageReference mountainsRef = storageRef.child(saveId);
+
+        Bitmap bitmap = imgBitmap;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                System.out.println("error - "+ exception.getMessage());
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                System.out.println("성공");
+            }
+        });
     }
 }
 

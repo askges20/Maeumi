@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
@@ -120,12 +119,13 @@ public class DiaryContent extends AppCompatActivity {
         finish();   //현재 액티비티 없애기
     }
 
+    // 이미지 조회
     private void getImg(){
-        String testUrl = LoginUser.getInstance().getUid();
+        String imgString = DiaryViewModel.getFireImgName();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
-        storageRef.child(testUrl+123123).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child(imgString).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
 

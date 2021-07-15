@@ -1,5 +1,8 @@
 package com.hanium.android.maeumi.viewmodel;
 
+import android.graphics.Bitmap;
+
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.model.Diary;
 import com.hanium.android.maeumi.model.DiaryModel;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
@@ -14,7 +17,9 @@ public class DiaryViewModel {
 
     public static String calendarDate, fireDate;
 
-    public static String title, content, nullDiary,emoticonNum;
+    public static String title, content, nullDiary,emoticonNum,saveId;
+
+    public static Bitmap imgName;
 
     public static String day, year, month, oneTimeDate, oneTimeMonth, compareMonth;
 
@@ -122,4 +127,22 @@ public class DiaryViewModel {
         DiaryModel.deleteDiary();
     }
 
+
+    // 이미지 비트맵 저장, 전달
+    public void setImgName(Bitmap imgBitmap){
+        this.imgName = imgBitmap;
+
+        DiaryModel.setImgName();
+    }
+
+    // 이미지 비트맵 저장, 전달
+    public Bitmap getImgName(){
+        return imgName;
+    }
+
+    // 아이디 + 날짜로 이미지 조회 id 생성
+    public String getFireImgName(){
+        this.saveId = LoginUser.getInstance().getUid() +fireDate;
+        return saveId;
+    }
 }
