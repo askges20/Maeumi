@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
@@ -43,13 +44,12 @@ public class DiaryWrite extends AppCompatActivity {
 
     TextView dateText,emoticon;
     EditText titleText,contentText;
-    String diaryCalDate, diaryEmoticon;
+    String diaryCalDate, diaryEmoticon, saveImgName;
     LinearLayout mainContent;
     ImageView testImgView;
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
-    StorageReference mountainsRef = storageRef.child("mountains.jpg");
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -86,6 +86,7 @@ public class DiaryWrite extends AppCompatActivity {
             toastView.show();
         }else{
             DiaryViewModel.diaryWrite(diaryTitle,diaryContent,diaryEmoticon);
+            testSaveImg();
             Toast toastView = Toast.makeText(DiaryWrite.this, "작성 완료", Toast.LENGTH_SHORT);
             toastView.show();
             finish();   //현재 액티비티 없애기
@@ -162,11 +163,10 @@ public class DiaryWrite extends AppCompatActivity {
                 try {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     Bitmap imgName = BitmapFactory.decodeStream(inStream);
-                    String helloTest = imgName.toString();
-                    System.out.println("hello Test - "+ helloTest);
+                    saveImgName = imgName.toString();
+                    System.out.println("saveImgName - "+ saveImgName);
                     testImgView.setImageBitmap(imgName);    // 선택한 이미지 이미지뷰에 셋
                     inStream.close();   // 스트림 닫아주기
-                    testSaveImg();
 //                    saveBitmapToJpeg(imgBitmap);    // 내부 저장소에 저장
                     Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
@@ -194,6 +194,9 @@ public class DiaryWrite extends AppCompatActivity {
     }
 
     public void testSaveImg(){
+
+        StorageReference mountainsRef = storageRef.child(LoginUser.getInstance().getUid()+123123);
+
         // Get the data from an ImageView as bytes
         testImgView.setDrawingCacheEnabled(true);
         testImgView.buildDrawingCache();

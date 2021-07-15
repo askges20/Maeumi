@@ -4,16 +4,22 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Switch;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
@@ -23,6 +29,7 @@ public class DiaryContent extends AppCompatActivity {
 
     String diaryCalDate,diaryTitle, diaryContent, nullDiary,diaryEmoticonNum;
     TextView dateText ,titleText,contentText,emoticon;
+    ImageView testImgView;
     ConstraintLayout mainContent;
 
     @Override
@@ -39,6 +46,7 @@ public class DiaryContent extends AppCompatActivity {
         contentText = findViewById(R.id.diaryContent);
         emoticon = findViewById(R.id.emoticon);
         mainContent = findViewById(R.id.mainContent);
+        testImgView = findViewById(R.id.testImgView);
 
         diaryTitle = DiaryViewModel.getTitle();
         diaryContent = DiaryViewModel.getContent();
@@ -64,6 +72,7 @@ public class DiaryContent extends AppCompatActivity {
                     break;
             }
         }
+        getImg();
     }
     public void checkNull(){
         // 빈곳 클릭 시 이벤트
@@ -109,6 +118,27 @@ public class DiaryContent extends AppCompatActivity {
         Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
         toastView.show();
         finish();   //현재 액티비티 없애기
+    }
+
+    private void getImg(){
+        String testUrl = LoginUser.getInstance().getUid();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+
+        storageRef.child(testUrl+123123).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                String tet = uri.toString();
+                Glide.with(DiaryContent.this).load(tet).into(testImgView);
+                System.out.println("Success "+ uri);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Fail "+ e.getMessage());
+            }
+        });
     }
 
 }
