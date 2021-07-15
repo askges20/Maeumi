@@ -21,16 +21,19 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 public class DiaryModel {
 
     FirebaseDatabase database;
+    FirebaseStorage storage;
+    StorageReference storageRef;
     DatabaseReference diaryRef;
     DiaryViewModel DiaryViewModel;
     LoginUser loginUser = LoginUser.getInstance();
 
-    public static String calendarDate, fireDate, compareMonth, monthlyDate,saveId;
+    public static String calendarDate, fireDate, compareMonth, monthlyDate, saveId;
 
-    public static String title, content, nullDiary,emoticonNum;
+    public static String title, content, nullDiary, emoticonNum;
 
     public static Bitmap imgName;
 
@@ -44,6 +47,7 @@ public class DiaryModel {
     public void setDate() {
         fireDate = DiaryViewModel.getFBDate();
         calendarDate = DiaryViewModel.getCalendarDate();
+        saveId = LoginUser.getInstance().getUid() + fireDate;
         getDiaryFromFB(fireDate);
     }
 
@@ -99,7 +103,7 @@ public class DiaryModel {
         return dates;
     }
 
-    public void setMonthDiaryDates(String date){
+    public void setMonthDiaryDates(String date) {
 
         dates.add(date);
     }
@@ -108,7 +112,7 @@ public class DiaryModel {
     public void getMonthDiary() {
 
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/");
+        diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/");
 
         diaryRef.addValueEventListener(new ValueEventListener() {
 
@@ -137,7 +141,7 @@ public class DiaryModel {
     // 개별 일기 조회
     public void getDiaryFromFB(String date) {
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/"+ date);
+        diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/" + date);
 
         diaryRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -164,7 +168,7 @@ public class DiaryModel {
     // 일기 작성 & 수정
     public void diaryWrite(Diary value) {
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/");
+        diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/");
 
 
         Map<String, Object> childUpdates = new HashMap<>();
@@ -178,43 +182,62 @@ public class DiaryModel {
 
     // 일기 삭제
     public void deleteDiary() {
+
+        // 게시글 삭제
         database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/"+loginUser.getUid() + "/");
+        diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/");
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(fireDate, null); //dnull이라 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
+
+        // 이미지 삭제
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        StorageReference imgSaveRef = storageRef.child(saveId);
+
+        imgSaveRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // File deleted successfully
+                System.out.println("삭제성공");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Uh-oh, an error occurred!
+                System.out.println("error - "+ exception.getMessage());
+            }
+        });
     }
 
     // 이미지 비트맵 저장, 전달
-    public void setImgName(){
+    public void setImgName() {
         imgName = DiaryViewModel.getImgName();
 
-        if(imgName != null){
+        if (imgName != null) {
             saveImg(imgName);
         }
     }
 
     //  이미지 저장
-    public void saveImg(Bitmap imgBitmap){
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
+    public void saveImg(Bitmap imgBitmap) {
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
 
-        this.saveId = LoginUser.getInstance().getUid() +fireDate;
-
-        StorageReference mountainsRef = storageRef.child(saveId);
+        StorageReference imgSaveRef = storageRef.child(saveId);
 
         Bitmap bitmap = imgBitmap;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        UploadTask uploadTask = mountainsRef.putBytes(data);
+        UploadTask uploadTask = imgSaveRef.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
-                System.out.println("error - "+ exception.getMessage());
+                System.out.println("error - " + exception.getMessage());
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
