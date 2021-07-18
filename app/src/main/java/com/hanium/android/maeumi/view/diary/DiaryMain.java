@@ -84,10 +84,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         DiaryViewModel.setDate(CalendarUtils.selectDate, dayText);
         String message = "선택한 날짜 : " + dayText + " " + monthYearFromDate(CalendarUtils.selectDate);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
 
-    //일기 내용 페이지로 이동
-    public void diaryContent(View view) {
         Intent intent = new Intent(getApplicationContext(), DiaryContent.class);
         startActivity(intent);
     }
