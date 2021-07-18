@@ -36,13 +36,10 @@ public class DiaryWrite extends AppCompatActivity {
 
     TextView dateText,emoticon;
     EditText titleText,contentText;
-    String diaryCalDate, diaryEmoticon, saveImgName;
+    String diaryCalDate, diaryEmoticon;
     LinearLayout mainContent;
-    ImageView testImgView;
+    ImageView imgView;
     Bitmap imgName;
-
-//    FirebaseStorage storage = FirebaseStorage.getInstance();
-//    StorageReference storageRef = storage.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -57,7 +54,7 @@ public class DiaryWrite extends AppCompatActivity {
         mainContent = findViewById(R.id.mainContent);
         titleText = (EditText)findViewById(R.id.diaryTitleWriteText);
         contentText = (EditText)findViewById(R.id.diaryContentWriteText);
-        testImgView = findViewById(R.id.testImgView);
+        imgView = findViewById(R.id.testImgView);
         dateText.setText(diaryCalDate);
     }
     // 빈곳 클릭 시 이벤트
@@ -145,7 +142,7 @@ public class DiaryWrite extends AppCompatActivity {
         }
     }
 
-    // 앨범에서 이미지 클릭하면 testImgView에 이미지 담아주기
+    // 앨범에서 이미지 클릭하면 ImgView에 이미지 담아주기
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 갤러리
         super.onActivityResult(requestCode, resultCode, data);
@@ -156,7 +153,7 @@ public class DiaryWrite extends AppCompatActivity {
                 try {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
-                    testImgView.setImageBitmap(imgName);    // 선택한 이미지 이미지뷰에 셋
+                    imgView.setImageBitmap(imgName);    // 선택한 이미지 이미지뷰에 셋
                     inStream.close();   // 스트림 닫아주기
                     Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {

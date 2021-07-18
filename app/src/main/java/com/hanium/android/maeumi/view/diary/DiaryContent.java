@@ -28,7 +28,7 @@ public class DiaryContent extends AppCompatActivity {
 
     String diaryCalDate,diaryTitle, diaryContent, nullDiary,diaryEmoticonNum;
     TextView dateText ,titleText,contentText,emoticon;
-    ImageView testImgView;
+    ImageView imgView;
     ConstraintLayout mainContent;
 
     @Override
@@ -45,7 +45,7 @@ public class DiaryContent extends AppCompatActivity {
         contentText = findViewById(R.id.diaryContent);
         emoticon = findViewById(R.id.emoticon);
         mainContent = findViewById(R.id.mainContent);
-        testImgView = findViewById(R.id.testImgView);
+        imgView = findViewById(R.id.testImgView);
 
         diaryTitle = DiaryViewModel.getTitle();
         diaryContent = DiaryViewModel.getContent();
@@ -130,7 +130,7 @@ public class DiaryContent extends AppCompatActivity {
             public void onSuccess(Uri uri) {
 
                 String tet = uri.toString();
-                Glide.with(DiaryContent.this).load(tet).into(testImgView);
+                Glide.with(DiaryContent.this).load(tet).into(imgView);
                 System.out.println("Success "+ uri);
             }
         }).addOnFailureListener(new OnFailureListener() {
