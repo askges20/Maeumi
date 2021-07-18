@@ -90,12 +90,18 @@ public class DiaryViewModel {
 
     // 일기 제목, 내용, 이모티콘 번호 불러오기
     public void setDiaryData() {
+        resetDiary();
         this.nullDiary = DiaryModel.getNullDiary();
         if (this.nullDiary != null) {
             this.title = DiaryModel.getTitle();
             this.content = DiaryModel.getContent();
             this.emoticonNum = DiaryModel.getEmoticonNum();
         }
+    }
+    public void resetDiary(){
+        this.title = null;
+        this.content = null;
+        this.emoticonNum = null;
     }
 
     public String getTitle() {

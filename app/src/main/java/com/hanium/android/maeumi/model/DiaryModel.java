@@ -63,6 +63,11 @@ public class DiaryModel {
 
         getMonthDiary();
     }
+    public void resetDiary(){
+        this.title = null;
+        this.content = null;
+        this.emoticonNum = null;
+    }
 
 
     //일기 제목, 내용, 이모티콘 번호 조회
@@ -140,6 +145,8 @@ public class DiaryModel {
 
     // 개별 일기 조회
     public void getDiaryFromFB(String date) {
+        resetDiary();
+
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/" + date);
 
