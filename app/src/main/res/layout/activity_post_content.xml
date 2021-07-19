@@ -111,6 +111,33 @@
                         android:text="게시글 내용"
                         android:textSize="18sp" />
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="@drawable/like_button"
+                        android:gravity="center"
+                        android:onClick="onClickLikeBtn"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:id="@+id/likeHeartImg"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginRight="5dp"
+                            android:tint="@color/pinkred"
+                            app:srcCompat="@drawable/heart_icon_1" />
+
+                        <TextView
+                            android:id="@+id/likeCnt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/pinkred"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

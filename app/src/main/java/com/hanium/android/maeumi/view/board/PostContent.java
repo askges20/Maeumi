@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -27,10 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.adapters.PostAdapter;
 import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.adapters.CommentAdapter;
+import com.hanium.android.maeumi.model.Post;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +47,7 @@ public class PostContent extends AppCompatActivity {
     DatabaseReference commentRef;
     CommentAdapter commentAdapter;
 
+    Post post = PostAdapter.curPost;    //클릭한 게시글 객체
     String title, content, writeDate, writer, writerUid, boardType;
 
     ListView commentList; //댓글 목록
@@ -54,13 +59,13 @@ public class PostContent extends AppCompatActivity {
     TextView dateText;  //날짜 텍스트
     TextView writerText;    //작성자 텍스트
 
-    Button modifyPostBtn;   //게시글 수정 버튼
-    Button deletePostBtn;   //게시글 삭제 버튼
-
     EditText writtenCommentText;    //댓글 작성칸
     Button addCommentBtn;   //댓글 등록 버튼
 
     InputMethodManager imm; //키보드 제어
+
+    ImageView likeHeartImg; //공감 버튼 하트 이미지
+    TextView likeCntText;   //공감 수 텍스트
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,22 +85,34 @@ public class PostContent extends AppCompatActivity {
         writtenCommentText = findViewById(R.id.writtenCommentText);
         addCommentBtn = findViewById(R.id.addCommentBtn);
 
+        likeHeartImg = findViewById(R.id.likeHeartImg);
+        likeCntText = findViewById(R.id.likeCnt);
+
+
+        //intent를 통해 얻어온 데이터 저장
         Intent prevIntent = getIntent();
-        title = prevIntent.getStringExtra("title");
+        title = post.getTitle();
         titleText.setText(title);
-        content = prevIntent.getStringExtra("content");
+        content = post.getContent();
         contentText.setText(content);
-        writeDate = prevIntent.getStringExtra("writeDate");
+        writeDate = post.getWriteDate();
         dateText.setText(writeDate);
-        writer = prevIntent.getStringExtra("writer");
+        writer = post.getWriter();
         writerText.setText(writer);
-        writerUid = prevIntent.getStringExtra("writerUid");
+        writerUid = post.getWriterUid();
+        likeCntText.setText(post.getLikeUsersCnt()+"");
         boardType = prevIntent.getStringExtra("boardType");
+
+        String userUid = LoginUser.getInstance().getUid();
+        if (post.getLikeUsers().contains(userUid)){  //이미 공감을 눌렀던 사용자이면
+            likeHeartImg.setImageResource(R.drawable.heart_icon_2);
+        } else {    //공감을 누르지 않았던 사용자이면
+            likeHeartImg.setImageResource(R.drawable.heart_icon_1);
+        }
+
 
         if (!LoginUser.getInstance().getUid().equals(writerUid)){ //로그인한 사용자와 글 작성자의 Uid가 다르면
             dropDownBtn.setVisibility(View.GONE);
-            modifyPostBtn.setVisibility(View.GONE); //수정 버튼 없음
-            deletePostBtn.setVisibility(View.GONE); //삭제 버튼 없음
         }
 
         //댓글
@@ -177,9 +194,7 @@ public class PostContent extends AppCompatActivity {
         dialog.show();
     }
 
-    public void goToBack(View view) {   //목록으로 버튼 클릭 시
-        Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
-        toastView.show();
+    public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
         finish();   //현재 액티비티 없애기
     }
 
@@ -283,5 +298,19 @@ public class PostContent extends AppCompatActivity {
         childUpdates.put(commentNum, null); //DB에서 삭제
         commentRef.updateChildren(childUpdates);
         commentAdapter.notifyDataSetChanged();
+    }
+
+    //공감 버튼을 클릭했을 때
+    public void onClickLikeBtn(View view) {
+        String userUid = LoginUser.getInstance().getUid();
+        if (post.getLikeUsers().contains(userUid)){  //이미 공감을 눌렀던 사용자이면
+            likeHeartImg.setImageResource(R.drawable.heart_icon_1);
+            post.removeLikeUser(userUid);
+            //공감 취소
+        } else {    //공감을 누르지 않았던 사용자이면
+            likeHeartImg.setImageResource(R.drawable.heart_icon_2);
+            post.addLikeUser(userUid);
+        }
+        likeCntText.setText(post.getLikeUsersCnt()+"");
     }
 }

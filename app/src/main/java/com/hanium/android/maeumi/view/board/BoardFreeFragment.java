@@ -28,7 +28,7 @@ public class BoardFreeFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference freeBoardRef;
-    PostAdapter adapter;
+    PostAdapter postAdapter;
 
     Board board;    //Intent
 
@@ -53,11 +53,11 @@ public class BoardFreeFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new PostAdapter();
+        postAdapter = new PostAdapter();
 
 
         getPostFromDB(); //DB에서 게시글 데이터 조회
-        recyclerView.setAdapter(adapter);   //리사이클러뷰에 어댑터 등록
+        recyclerView.setAdapter(postAdapter);   //리사이클러뷰에 어댑터 등록
         addListener();  //리스너 추가
 
         return view;
@@ -76,13 +76,13 @@ public class BoardFreeFragment extends Fragment {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                adapter.clearList();    //데이터 중복 출력 문제 해결을 위해 리스트 초기화 후 다시 받아옴
+                postAdapter.clearList();    //데이터 중복 출력 문제 해결을 위해 리스트 초기화 후 다시 받아옴
                 for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
-                        adapter.addItem(snap.getValue(Post.class));
+                        postAdapter.addItem(snap.getValue(Post.class));
                     }
                 }
-                adapter.notifyDataSetChanged(); //리스트 새로고침 알림
+                postAdapter.notifyDataSetChanged(); //리스트 새로고침 알림
             }
 
             @Override
@@ -94,10 +94,10 @@ public class BoardFreeFragment extends Fragment {
 
     //카드별 클릭 이벤트 추가
     private void addListener(){
-        adapter.setOnItemClickListener(new OnPostItemClickListener() {
+        postAdapter.setOnItemClickListener(new OnPostItemClickListener() {
             @Override
             public void onItemClick(PostAdapter.ViewHolder holder, View view, int position) {
-                Post item = adapter.getItem(position);
+                Post item = postAdapter.getItem(position);
                 goToPostContent(item);
                 //Toast.makeText(getContext(), "아이템 선택됨: "+item.getContent(), Toast.LENGTH_SHORT).show();
             }
@@ -107,11 +107,7 @@ public class BoardFreeFragment extends Fragment {
     //게시글 내용 페이지로 이동
     private void goToPostContent(Post item){
         Intent intent = new Intent(board, PostContent.class);
-        intent.putExtra("title", item.getTitle());
-        intent.putExtra("content", item.getContent());
-        intent.putExtra("writeDate",item.getWriteDate());
-        intent.putExtra("writer",item.getWriter());
-        intent.putExtra("writerUid",item.getWriterUid());
+        postAdapter.curPost = item;
         intent.putExtra("boardType", "free");
         startActivity(intent);
     }

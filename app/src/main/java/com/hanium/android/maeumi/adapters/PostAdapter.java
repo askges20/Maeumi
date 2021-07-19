@@ -15,7 +15,8 @@ import com.hanium.android.maeumi.model.Post;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements OnPostItemClickListener {
-    ArrayList<Post> items = new ArrayList<Post>();
+    public static Post curPost; //가장 최근에 클릭한 게시글
+    ArrayList<Post> items = new ArrayList<Post>();  //게시글 목록
     OnPostItemClickListener listener;
 
     @NonNull
@@ -53,6 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         TextView titleView;
         TextView writerView;
         TextView dateView;
+        TextView likeCntText;
 
         public ViewHolder(View itemView, final OnPostItemClickListener listener) {
             super(itemView);
@@ -60,6 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             titleView = itemView.findViewById(R.id.postTitle);
             writerView = itemView.findViewById(R.id.postWriter);
             dateView = itemView.findViewById(R.id.postDateText);
+            likeCntText = itemView.findViewById(R.id.postItemLikeCnt);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,12 +79,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             titleView.setText(item.getTitle());
             writerView.setText(item.getWriter());
             dateView.setText(item.getWriteDate());
+            likeCntText.setText(item.getLikeUsersCnt()+"");
+            System.out.println("셋아이템");
         }
     }
 
     public void addItem(Post item) {
-        //items.add(item);
-        items.add(0, item); //최신글부터 정렬하도록
+        item.setAdapter(this);  //각 아이템에 postAdapter 저장
+        item.setLikeUsers();    //공감을 누른 사용자 DB로부터 읽어오기
+        items.add(0, item); //리스트에 추가, 최신글부터 정렬하도록
     }
 
     public void setItems(ArrayList<Post> items) {
