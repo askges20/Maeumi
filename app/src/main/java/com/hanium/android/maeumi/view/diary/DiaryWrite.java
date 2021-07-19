@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
@@ -153,7 +154,7 @@ public class DiaryWrite extends AppCompatActivity {
                 try {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
-                    imgView.setImageBitmap(imgName);    // 선택한 이미지 이미지뷰에 셋
+                    Glide.with(this).load(imgView).into(imgView);
                     inStream.close();   // 스트림 닫아주기
                     Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {

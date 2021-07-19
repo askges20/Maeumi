@@ -129,9 +129,7 @@ public class DiaryContent extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
 
-                String tet = uri.toString();
-                Glide.with(DiaryContent.this).load(tet).into(imgView);
-                System.out.println("Success "+ uri);
+                Glide.with(DiaryContent.this).load(uri).into(imgView);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
