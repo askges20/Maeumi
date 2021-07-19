@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,21 +16,19 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
+import com.hanium.android.maeumi.model.DiaryModel;
 
 import java.io.InputStream;
 
-public class DiaryModify extends AppCompatActivity {
+public class DiaryModify extends Activity {
 
-    DiaryViewModel DiaryViewModel = new DiaryViewModel();
+    DiaryModel DiaryModel = new DiaryModel();
 
     String diaryCalDate, diaryTitle, diaryContent, diaryEmoticonNum;
     TextView dateText, titleText, contentText, emoticon;
@@ -44,7 +41,7 @@ public class DiaryModify extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_modify);
 
-        diaryCalDate = DiaryViewModel.getCalendarDate();
+        diaryCalDate = DiaryModel.getCalendarDate();
 
         dateText = findViewById(R.id.modifyDate);
         emoticon = findViewById(R.id.emoticon);
@@ -53,9 +50,9 @@ public class DiaryModify extends AppCompatActivity {
         mainContent = findViewById(R.id.mainContent);
         imgView = findViewById(R.id.testImgView);
 
-        diaryTitle = DiaryViewModel.getTitle();
-        diaryContent = DiaryViewModel.getContent();
-        diaryEmoticonNum = DiaryViewModel.getEmoticonNum();
+        diaryTitle = DiaryModel.getTitle();
+        diaryContent = DiaryModel.getContent();
+        diaryEmoticonNum = DiaryModel.getEmoticonNum();
 
         dateText.setText(diaryCalDate);
         titleText.setText(diaryTitle);
@@ -79,7 +76,7 @@ public class DiaryModify extends AppCompatActivity {
 
     // 이미지 조회
     private void getImg() {
-        String imgString = DiaryViewModel.getFireImgName();
+        String imgString = DiaryModel.getFireImgName();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
@@ -118,7 +115,7 @@ public class DiaryModify extends AppCompatActivity {
                 try {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
-                    Glide.with(this).load(imgView).into(imgView);
+                    Glide.with(this).load(imgName).into(imgView);
                     inStream.close();   // 스트림 닫아주기
                     Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
@@ -138,8 +135,8 @@ public class DiaryModify extends AppCompatActivity {
             Toast toastView = Toast.makeText(DiaryModify.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
             toastView.show();
         } else {
-            DiaryViewModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
-            DiaryViewModel.setImgName(imgName);
+            DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
+            DiaryModel.setImgName(imgName);
             Toast toastView = Toast.makeText(DiaryModify.this, "작성 완료", Toast.LENGTH_SHORT);
             toastView.show();
             Intent intent = new Intent(DiaryModify.this, DiaryMain.class);
