@@ -78,9 +78,7 @@ public class PostModify extends AppCompatActivity {
         finish();
     }
 
-    public void goToBack(View view){   //목록으로 버튼 클릭 시
-        Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
-        toastView.show();
+    public void goToBack(View view){
         finish();   //현재 액티비티 없애기
     }
 }

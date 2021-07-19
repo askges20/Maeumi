@@ -105,4 +105,8 @@ public class Profile extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);  //로그인 화면으로 이동
     }
+
+    public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
+        finish();   //현재 액티비티 없애기
+    }
 }

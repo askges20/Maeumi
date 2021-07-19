@@ -63,4 +63,8 @@ public class ProfileEdit extends AppCompatActivity {
         });
 
     }
+
+    public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
+        finish();   //현재 액티비티 없애기
+    }
 }

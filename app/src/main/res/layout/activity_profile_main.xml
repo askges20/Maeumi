@@ -9,15 +9,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="70dp"
+        android:background="@drawable/shadow">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:background="@drawable/shadow"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:onClick="goToBack"
+            android:text="←"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="마이페이지"
             android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Button"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
