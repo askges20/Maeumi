@@ -78,7 +78,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
             public void onClick(View view) {
                 String message = editMessage.getText().toString();  //입력된 문장
                 if (!message.isEmpty()) {
-                    messageList.add(new Message(message, false));   //전송한 채팅을 채팅 내역에 추가
+                    messageList.add(new Message(message, false, false));   //전송한 채팅을 채팅 내역에 추가
                     editMessage.setText("");    //채팅 입력칸 비우기
                     sendMessageToBot(message);  //채팅 전송
                     Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
@@ -131,7 +131,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         if (returnResponse != null) {
             String botReply = returnResponse.getQueryResult().getFulfillmentText();
             if (!botReply.isEmpty()) {
-                messageList.add(new Message(botReply, true));   //챗봇 답변을 채팅 내역 ArrayList에 추가
+                messageList.add(new Message(botReply, true, false));   //챗봇 답변을 채팅 내역 ArrayList에 추가
                 chatAdapter.notifyDataSetChanged();
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
 
@@ -149,7 +149,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         Date today = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String dateStr = dateFormat.format(today);
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmssSSS");
         String timeStr = timeFormat.format(today);
 
         String who;
@@ -170,15 +170,24 @@ public class ChatBot extends AppCompatActivity implements BotReply {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot datesnap : snapshot.getChildren()){
+
+                    String chatDate = datesnap.getKey();
+                    int year = Integer.parseInt(chatDate.substring(0,4));
+                    int month = Integer.parseInt(chatDate.substring(4,6));
+                    int date = Integer.parseInt(chatDate.substring(6,8));
+
+                    boolean isFirstMsgOfDay = true; //해당 날짜의 첫번째 채팅
+
                     for (DataSnapshot chatsnap : datesnap.getChildren()){
                         String chatKey = chatsnap.getKey();
                         String chatValue = (String)chatsnap.getValue();
 
                         if (chatKey.contains("user")){  //사용자가 보낸 채팅이면
-                            messageList.add(new Message(chatValue, false));
+                            messageList.add(new Message(chatValue, false, isFirstMsgOfDay, year, month, date));
                         } else {    //dialogflow가 보낸 채팅이면
-                            messageList.add(new Message(chatValue, true));
+                            messageList.add(new Message(chatValue, true, isFirstMsgOfDay, year, month, date));
                         }
+                        isFirstMsgOfDay = false;
                     }
                 }
                 chatAdapter.notifyDataSetChanged();
