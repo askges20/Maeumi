@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +47,8 @@ public class PostContent extends AppCompatActivity {
 
     ListView commentList; //댓글 목록
 
+    ImageButton dropDownBtn;    //드롭다운 메뉴 버튼
+
     TextView titleText; //제목 텍스트
     TextView contentText;   //내용 텍스트
     TextView dateText;  //날짜 텍스트
@@ -64,13 +70,12 @@ public class PostContent extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
+        dropDownBtn = findViewById(R.id.postContentMenu);
+
         titleText = findViewById(R.id.postTitleText);
         contentText = findViewById(R.id.postContentText);
         dateText = findViewById(R.id.postDateText);
         writerText = findViewById(R.id.postWriterText);
-
-        modifyPostBtn = findViewById(R.id.modifyPostBtn);
-        deletePostBtn = findViewById(R.id.deletePostBtn);
 
         writtenCommentText = findViewById(R.id.writtenCommentText);
         addCommentBtn = findViewById(R.id.addCommentBtn);
@@ -88,6 +93,7 @@ public class PostContent extends AppCompatActivity {
         boardType = prevIntent.getStringExtra("boardType");
 
         if (!LoginUser.getInstance().getUid().equals(writerUid)){ //로그인한 사용자와 글 작성자의 Uid가 다르면
+            dropDownBtn.setVisibility(View.GONE);
             modifyPostBtn.setVisibility(View.GONE); //수정 버튼 없음
             deletePostBtn.setVisibility(View.GONE); //삭제 버튼 없음
         }
@@ -104,7 +110,26 @@ public class PostContent extends AppCompatActivity {
 
     }
 
-    public void goToPostModify(View view) { //수정 버튼 클릭 시
+    //드롭다운 메뉴 클릭 시
+    public void onClickDropDownMenu(View view) {
+        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
+        getMenuInflater().inflate(R.menu.post_content_popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.post_modify_menu) {    //수정 버튼 클릭
+                    goToPostModify();
+                } else {    //삭제 버튼 클릭
+                    showDeleteDialog();
+                }
+
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    public void goToPostModify() { //수정 버튼 클릭 시
         Intent intent = new Intent(PostContent.this, PostModify.class);
 
         intent.putExtra("title", title);
@@ -117,7 +142,7 @@ public class PostContent extends AppCompatActivity {
         System.out.println("Move To Modify Post");
     }
 
-    public void showDeleteDialog(View view) {    //삭제 버튼 클릭 시
+    public void showDeleteDialog() {    //삭제 버튼 클릭 시
         AlertDialog.Builder dialog = new AlertDialog.Builder(PostContent.this);
         dialog.setMessage("작성하신 글을 삭제하시겠습니까?");
         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {

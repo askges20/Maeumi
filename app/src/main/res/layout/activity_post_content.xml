@@ -7,6 +7,46 @@
     android:orientation="vertical"
     tools:context=".view.board.PostContent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/shadow"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/white"
+                android:onClick="goToBack"
+                android:text="←"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/postContentMenu"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/white"
+                android:onClick="onClickDropDownMenu"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/dropdown_btn" />
+        </LinearLayout>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +64,7 @@
                 android:layout_weight="0"
                 android:orientation="vertical"
                 android:paddingHorizontal="20dp"
-                android:paddingTop="30dp">
+                android:paddingTop="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -58,7 +98,7 @@
                         android:layout_weight="3"
                         android:gravity="center_vertical"
                         android:text="제목"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/postContentText"
@@ -70,38 +110,6 @@
                         android:paddingVertical="15dp"
                         android:text="게시글 내용"
                         android:textSize="18sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/modifyPostBtn"
-                            android:layout_width="70dp"
-                            android:layout_height="match_parent"
-                            android:onClick="goToPostModify"
-                            android:text="수정" />
-
-                        <Button
-                            android:id="@+id/deletePostBtn"
-                            android:layout_width="70dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginHorizontal="5dp"
-                            android:backgroundTint="@color/lightgray"
-                            android:onClick="showDeleteDialog"
-                            android:text="삭제" />
-
-                        <!--
-                        <Button
-                            android:layout_width="70dp"
-                            android:layout_height="match_parent"
-                            android:onClick="goToBack"
-                            android:text="목록" />
-                        -->
-                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
