@@ -100,8 +100,8 @@ public class DiaryModify extends Activity {
     // 사진 바꾸기 버튼 클릭
     public void changeImg(View view) {
         Intent intent = new Intent();
-        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
         startActivityForResult(intent, 101);
     }
 

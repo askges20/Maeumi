@@ -116,7 +116,6 @@ public class DiaryWrite extends AppCompatActivity {
 
     public void addImg(View view){   // 사진추가 버튼 클릭 시
         checkSelfPermission();
-        // MediaStore.Images.Media.CONTENT_TYPE
 
         Intent intent = new Intent();
         intent.setType("image/*");
