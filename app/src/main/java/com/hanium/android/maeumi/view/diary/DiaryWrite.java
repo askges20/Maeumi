@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,13 +26,13 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
+import com.hanium.android.maeumi.model.DiaryModel;
 
 import java.io.InputStream;
 
 public class DiaryWrite extends AppCompatActivity {
 
-    DiaryViewModel DiaryViewModel = new DiaryViewModel();
+    DiaryModel DiaryModel = new DiaryModel();
 
     TextView dateText,emoticon;
     EditText titleText,contentText;
@@ -47,7 +46,7 @@ public class DiaryWrite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
-        diaryCalDate = DiaryViewModel.getCalendarDate();
+        diaryCalDate = DiaryModel.getCalendarDate();
         nullDate();
 
         dateText = findViewById(R.id.writeDate);
@@ -76,8 +75,8 @@ public class DiaryWrite extends AppCompatActivity {
             Toast toastView = Toast.makeText(DiaryWrite.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
             toastView.show();
         }else{
-            DiaryViewModel.diaryWrite(diaryTitle,diaryContent,diaryEmoticon);
-            DiaryViewModel.setImgName(imgName);
+            DiaryModel.diaryWrite(diaryTitle,diaryContent,diaryEmoticon);
+            DiaryModel.setImgName(imgName);
             Toast toastView = Toast.makeText(DiaryWrite.this, "작성 완료", Toast.LENGTH_SHORT);
             toastView.show();
             finish();   //현재 액티비티 없애기
@@ -154,7 +153,7 @@ public class DiaryWrite extends AppCompatActivity {
                 try {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
-                    Glide.with(this).load(imgView).into(imgView);
+                    Glide.with(this).load(imgName).into(imgView);
                     inStream.close();   // 스트림 닫아주기
                     Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {

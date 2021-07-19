@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
+import com.hanium.android.maeumi.model.DiaryModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
 
-    DiaryViewModel DiaryViewModel = new DiaryViewModel(this);
+    DiaryModel DiaryModel = new DiaryModel(this);
     CalendarAdapter calendarAdapter;
 
     public static ArrayList<String> diaryDates = new ArrayList<>();
@@ -34,7 +34,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         setContentView(R.layout.activity_diary_main);
         iniwigets();
         CalendarUtils.selectDate = LocalDate.now();
-        DiaryViewModel.setCompareMonth(CalendarUtils.selectDate);
+        DiaryModel.setCompareMonth(CalendarUtils.selectDate);
 
         setMonthView();
     }
@@ -66,14 +66,14 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     //이전 달 캘린더로 이동
     public void previousMonthAction(View view) {
         CalendarUtils.selectDate = CalendarUtils.selectDate.minusMonths(1);
-        DiaryViewModel.setChangeCompareMonth(CalendarUtils.selectDate);
+        DiaryModel.setChangeCompareMonth(CalendarUtils.selectDate);
         setMonthView();
     }
 
     //다음 달 캘린더로 이동
     public void nextMonthAction(View view) {
         CalendarUtils.selectDate = CalendarUtils.selectDate.plusMonths(1);
-        DiaryViewModel.setChangeCompareMonth(CalendarUtils.selectDate);
+        DiaryModel.setChangeCompareMonth(CalendarUtils.selectDate);
         setMonthView();
     }
 
@@ -81,7 +81,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     @Override
     public void onItemClick(int position, String dayText) {
         // 클릭 날짜 표시 [x]
-        DiaryViewModel.setDate(CalendarUtils.selectDate, dayText);
+        DiaryModel.setDate(CalendarUtils.selectDate,dayText);
         String message = "선택한 날짜 : " + dayText + " " + monthYearFromDate(CalendarUtils.selectDate);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
