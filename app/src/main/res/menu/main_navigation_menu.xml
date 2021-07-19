@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="카테고리">
+        <menu>
+
+            <item
+                android:id="@+id/drawer_menu_test"
+                android:icon="@drawable/maeumi_logo"
+                android:title="진단테스트" />
+
+            <item
+                android:id="@+id/drawer_menu_chat"
+                android:icon="@drawable/comment_icon"
+                android:title="상담하기" />
+
+            <item
+                android:id="@+id/drawer_menu_diary"
+                android:icon="@drawable/heart_icon_1"
+                android:title="나만의 일기장" />
+
+            <item
+                android:id="@+id/drawer_menu_board"
+                android:icon="@drawable/heart_icon_2"
+                android:title="게시판" />
+
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/drawer_menu_mypage"
+        android:icon="@drawable/mypage_icon"
+        android:title="마이페이지"/>
+
+    <item
+        android:icon="@drawable/question_mark_icon"
+        android:title="이용안내" />
+
+    <item
+        android:icon="@drawable/settings_icon"
+        android:title="환경설정" />
+
+    <!--
+    <item android:title="remote">
+        <menu>
+            <item
+                android:id="@+id/nav_remote"
+                android:icon="@drawable/heart_icon_1"
+                android:title="remote_control"/>
+            <item
+                android:id="@+id/nav_addremote"
+                android:icon="@drawable/heart_icon_2"
+                android:title="remote_control"/>
+        </menu>
+    </item>
+    -->
+</menu>

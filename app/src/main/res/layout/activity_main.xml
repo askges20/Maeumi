@@ -25,12 +25,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <ImageView
+                android:id="@+id/mainDrawerBtn"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                android:gravity="center"
-                android:textSize="24sp" />
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,12 +41,12 @@
                 android:text="마음이"
                 android:textSize="24sp" />
 
-            <ImageView
+            <TextView
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/menu_icon" />
+                android:backgroundTint="@color/white"
+                android:gravity="center"
+                android:textSize="24sp" />
 
         </LinearLayout>
 

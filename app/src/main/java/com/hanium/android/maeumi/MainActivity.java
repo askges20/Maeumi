@@ -4,28 +4,87 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
-import com.hanium.android.maeumi.view.diary.DiaryContent;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
 import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
 
 public class MainActivity extends AppCompatActivity {
 
-    private long pressedTime;
+    private DrawerLayout mDrawerLayout;
+    ImageView mainDrawerBtn;
+    NavigationView navigationView;
+    Button logoutBtn;
     TextView randomText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_include_drawer);
+
+        mDrawerLayout = findViewById(R.id.main_drawer_layout);
+
+        navigationView = findViewById(R.id.main_navigation_view);
+        //사이드바(NavigationView) 메뉴 클릭 이벤트
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                mDrawerLayout.closeDrawers();
+
+                int id = item.getItemId();
+
+                if (id==R.id.drawer_menu_test){
+                    startActivity(new Intent(MainActivity.this, SelfTest.class));
+                } else if (id==R.id.drawer_menu_chat){
+                    startActivity(new Intent(MainActivity.this, ChatBot.class));
+                } else if (id==R.id.drawer_menu_diary){
+                    startActivity(new Intent(MainActivity.this, DiaryMain.class));
+                } else if (id==R.id.drawer_menu_board){
+                    startActivity(new Intent(MainActivity.this, Board.class));
+                } else if (id==R.id.drawer_menu_mypage){
+                    startActivity(new Intent(MainActivity.this, Profile.class));
+                }
+
+                return true;
+            }
+        });
+
+        View header = navigationView.getHeaderView(0);
+        TextView userAlias = header.findViewById(R.id.mainUserAliasText);
+        //userAlias.setText(LoginUser.getInstance().getAlias());
+        TextView userSchool = header.findViewById(R.id.mainUserSchoolText);
+        //userSchool.setText(LoginUser.getInstance().getSchool());
+
+        logoutBtn = header.findViewById(R.id.mainLogoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOutBtnEvent();  //로그아웃 버튼 이벤트
+            }
+        });
+
+        mainDrawerBtn = findViewById(R.id.mainDrawerBtn);
+        mainDrawerBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         randomText = findViewById(R.id.mainRandomText);
         setRandomText();
@@ -56,26 +115,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public void onBackPressed() {   //뒤로가기 버튼 클릭 시
-        //super.onBackPressed();
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-        dialog.setMessage("앱을 종료하시겠습니까?");
-        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                finish();   //현재 액티비티 없애기
-            }
-        });
-        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-            }
-        });
-        dialog.show();
-    }
-
     public void setRandomText() {
         String randStr = "";
         int randNum = (int) (Math.random() * 4);
@@ -97,5 +136,61 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         randomText.setText(randStr);
+    }
+
+    @Override
+    public void onBackPressed() {   //뒤로가기 버튼 클릭 시
+        //사이드바가 열려있으면 닫기
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {    //사이드바가 닫혀있으면 앱 종료 팝업
+            showEndDialog();
+        }
+    }
+
+    //앱을 종료할지 묻는 팝업 띄우기
+    public void showEndDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setMessage("앱을 종료하시겠습니까?");
+        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                finish();   //현재 액티비티 없애기
+            }
+        });
+        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+            }
+        });
+        dialog.show();
+    }
+
+    //로그아웃 버튼 클릭 이벤트
+    public void signOutBtnEvent() {
+        new AlertDialog.Builder(this)
+                .setMessage("로그아웃 하시겠습니까?")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //네 클릭
+                        processSignOut();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //취소 클릭
+                    }
+                })
+                .show();
+    }
+
+    //로그아웃 진행
+    public void processSignOut() {
+        LoginUser.signOutUser();    //싱글톤 객체 new
+        FirebaseAuth.getInstance().signOut();   //FirebaseAuth에서 로그아웃
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);  //로그인 화면으로 이동
     }
 }
