@@ -149,7 +149,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         Date today = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String dateStr = dateFormat.format(today);
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmssSSS");
         String timeStr = timeFormat.format(today);
 
         String who;
