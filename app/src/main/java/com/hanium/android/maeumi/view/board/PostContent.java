@@ -50,6 +50,7 @@ public class PostContent extends AppCompatActivity {
 
     Post post = PostAdapter.curPost;    //클릭한 게시글 객체
     String title, content, writeDate, writer, writerUid, boardType;
+    String postCode;    //게시글 번호
 
     ImageButton dropDownBtn;    //드롭다운 메뉴 버튼
 
@@ -97,6 +98,9 @@ public class PostContent extends AppCompatActivity {
         writerText.setText(writer);
         writerUid = post.getWriterUid();
         likeCntText.setText(post.getLikeUsersCnt()+"");
+
+        postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
+
         Intent prevIntent = getIntent();
         boardType = prevIntent.getStringExtra("boardType");
 
@@ -171,18 +175,25 @@ public class PostContent extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int i) {
 
-                String loginUserUid = LoginUser.getInstance().getUid();  //로그인한 사용자의 Uid
-
-                //DB에서 삭제
+                //DB에서 게시글 데이터 삭제
                 String date = writeDate.substring(0, 4) + writeDate.substring(5, 7) + writeDate.substring(8, 10);
                 if (boardType.equals("free"))
                     postRef = database.getReference("/자유게시판/" + date + "/");
                 else
                     postRef = database.getReference("/익명게시판/" + date + "/");
-                String time = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19);
                 Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put(time + loginUserUid, null);
+                childUpdates.put(postCode, null);
                 postRef.updateChildren(childUpdates);
+
+
+                //DB에서 해당 게시글 댓글 삭제
+                commentRef = database.getReference("/댓글/" + postCode);
+                commentRef.setValue(null);
+
+
+                //DB에서 해당 게시글 공감 삭제
+                DatabaseReference likeRef = database.getReference("/공감/" + postCode);
+                likeRef.setValue(null);
 
 
                 Toast toastView = Toast.makeText(PostContent.this, "삭제 완료", Toast.LENGTH_SHORT);
@@ -208,7 +219,6 @@ public class PostContent extends AppCompatActivity {
         if (commentContent.equals("")) //내용을 작성하지 않은 경우
             Toast.makeText(this, "댓글을 입력해주세요", Toast.LENGTH_SHORT).show();
         else {
-            String postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
             commentRef = database.getReference("/댓글/" + postCode + "/");
 
             //댓글 작성 일자
