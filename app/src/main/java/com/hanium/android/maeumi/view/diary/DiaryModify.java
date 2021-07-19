@@ -17,6 +17,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,7 +29,7 @@ import com.hanium.android.maeumi.viewmodel.DiaryViewModel;
 
 import java.io.InputStream;
 
-public class DiaryModify extends Activity {
+public class DiaryModify extends AppCompatActivity {
 
     DiaryViewModel DiaryViewModel = new DiaryViewModel();
 

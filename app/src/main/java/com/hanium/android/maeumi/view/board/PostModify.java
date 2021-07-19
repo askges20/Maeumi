@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.LoginUser;
@@ -17,7 +19,7 @@ import com.hanium.android.maeumi.model.Post;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostModify extends Activity {
+public class PostModify extends AppCompatActivity {
     PostContent prevActivity;    //수정하는 게시글 내용 페이지
 
     FirebaseDatabase database;

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +20,7 @@ import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
-public class Profile extends Activity {
+public class Profile extends AppCompatActivity {
 
     Button logoutBtn;
     TextView userName, userEmail, userAlias, userSchool, userGender;
