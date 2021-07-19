@@ -81,7 +81,7 @@ public class DiaryContent extends AppCompatActivity {
         }
         // 일기 없을 때 이벤트
         if (nullDiary == null && diaryEmoticonNum == null){
-            Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(DiaryContent.this, "해당 날짜의 일기가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
@@ -97,7 +97,7 @@ public class DiaryContent extends AppCompatActivity {
         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                DiaryViewModel.deleteDiary();
+                DiaryViewModel.deleteDiary(diaryEmoticonNum);
 
                 Toast toastView = Toast.makeText(DiaryContent.this, "삭제 완료", Toast.LENGTH_SHORT);
                 toastView.show();
