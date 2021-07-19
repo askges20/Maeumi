@@ -99,4 +99,8 @@ public class Board extends AppCompatActivity {
         });
         popupMenu.show();
     }
+
+    public void goToBack(View view) {
+        finish();
+    }
 }
