@@ -70,7 +70,6 @@ public class DiaryViewModel {
         this.dates = DiaryModel.getMonthDiaryDates();
         DiaryMain.setDates(this.dates);
     }
-
     public String dayPlusZero(String date) {
         if (date.length() < 2) {
             date = "0" + date;
@@ -129,8 +128,8 @@ public class DiaryViewModel {
     }
 
     // 일기 삭제
-    public void deleteDiary() {
-        DiaryModel.deleteDiary();
+    public void deleteDiary(String date) {
+        DiaryModel.deleteDiary(date);
     }
 
 

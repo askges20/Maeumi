@@ -108,11 +108,6 @@ public class DiaryModel {
         return dates;
     }
 
-    public void setMonthDiaryDates(String date) {
-
-        dates.add(date);
-    }
-
     // Firebase에서 월별 일기 조회
     public void getMonthDiary() {
 
@@ -123,12 +118,13 @@ public class DiaryModel {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                dates.clear();
 
                 for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
                     if (compareMonth.equals(dateSnap.getKey().substring(0, 6))) {
-                        Diary testValue = dateSnap.getValue(Diary.class);
-                        monthlyDate = testValue.date + testValue.emoticonNum;
-                        setMonthDiaryDates(monthlyDate);
+                        Diary value = dateSnap.getValue(Diary.class);
+                        monthlyDate = value.date + value.emoticonNum;
+                        dates.add(monthlyDate);
                     }
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                     }
@@ -188,7 +184,7 @@ public class DiaryModel {
     }
 
     // 일기 삭제
-    public void deleteDiary() {
+    public void deleteDiary(String date) {
 
         // 게시글 삭제
         database = FirebaseDatabase.getInstance();
@@ -197,6 +193,7 @@ public class DiaryModel {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(fireDate, null); //dnull이라 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
+        String deleteDate =fireDate.substring(7,9)+date;
 
         // 이미지 삭제
         storage = FirebaseStorage.getInstance();
@@ -216,6 +213,7 @@ public class DiaryModel {
                 System.out.println("error - "+ exception.getMessage());
             }
         });
+        dates.remove(deleteDate);
     }
 
     // 이미지 비트맵 저장, 전달
