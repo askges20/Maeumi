@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -50,15 +51,12 @@ public class PostContent extends AppCompatActivity {
     Post post = PostAdapter.curPost;    //클릭한 게시글 객체
     String title, content, writeDate, writer, writerUid, boardType;
 
-    ListView commentList; //댓글 목록
-
     ImageButton dropDownBtn;    //드롭다운 메뉴 버튼
 
-    TextView titleText; //제목 텍스트
-    TextView contentText;   //내용 텍스트
-    TextView dateText;  //날짜 텍스트
-    TextView writerText;    //작성자 텍스트
+    TextView titleText, contentText, dateText, writerText; //제목, 내용, 날짜, 작성자 텍스트
 
+    ListView commentList; //댓글 목록
+    LinearLayout writeCommentArea;  //댓글 작성 영역
     EditText writtenCommentText;    //댓글 작성칸
     Button addCommentBtn;   //댓글 등록 버튼
 
@@ -89,8 +87,6 @@ public class PostContent extends AppCompatActivity {
         likeCntText = findViewById(R.id.likeCnt);
 
 
-        //intent를 통해 얻어온 데이터 저장
-        Intent prevIntent = getIntent();
         title = post.getTitle();
         titleText.setText(title);
         content = post.getContent();
@@ -101,7 +97,17 @@ public class PostContent extends AppCompatActivity {
         writerText.setText(writer);
         writerUid = post.getWriterUid();
         likeCntText.setText(post.getLikeUsersCnt()+"");
+        Intent prevIntent = getIntent();
         boardType = prevIntent.getStringExtra("boardType");
+
+        commentList = findViewById(R.id.commentListView);
+        writeCommentArea = findViewById(R.id.writeCommentArea);
+
+        //익명게시판 글 -> 댓글 없음
+        if (boardType.equals("anonymous")) {
+            commentList.setVisibility(View.GONE);
+            writeCommentArea.setVisibility(View.GONE);
+        }
 
         String userUid = LoginUser.getInstance().getUid();
         if (post.getLikeUsers().contains(userUid)){  //이미 공감을 눌렀던 사용자이면
@@ -118,7 +124,6 @@ public class PostContent extends AppCompatActivity {
         //댓글
         commentAdapter = new CommentAdapter(this, this);
         getCommentFromDB();
-        commentList = findViewById(R.id.commentListView);
 
         commentList.setAdapter(commentAdapter);
         commentList.setVerticalScrollBarEnabled(false);
