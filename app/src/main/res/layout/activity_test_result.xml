@@ -134,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
             android:text="메인화면으로 가기"
+            android:onClick="goToMain"
             android:textColor="#000000"
             app:backgroundTint="#D3D0CC"
             tools:textSize="18sp" />

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
@@ -42,6 +43,12 @@ public class TestResult extends AppCompatActivity {
         Intent intent = new Intent(TestResult.this, Board.class);
         startActivity(intent);
         System.out.println("Move To Board");
+    }
+
+    public void goToMain(View view) {
+        Intent intent = new Intent(TestResult.this, MainActivity.class);
+        startActivity(intent);
+        System.out.println("Move To Main");
     }
 
 }
