@@ -41,51 +41,71 @@
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="7"
-            android:background="@drawable/border_outline"
+            android:background="@drawable/board_border"
             android:orientation="vertical"
             android:padding="10dp">
 
-            <TextView
-                android:id="@+id/contentDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="2021/01/01"
-                android:textSize="16sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="7dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/diaryTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:text="제목"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/emoticon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:ems="2"
                     android:gravity="center"
-                    android:padding="5dp"
-                    android:text="기분"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/contentDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="2021/01/01"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/diaryTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:padding="5dp"
+                        android:text="제목"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/emoticon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="2"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="기분"
+                        android:textSize="15sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <LinearLayout

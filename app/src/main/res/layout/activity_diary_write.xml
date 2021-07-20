@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainContent"
@@ -11,176 +11,193 @@
     <LinearLayout
         android:id="@+id/diaryMainTop"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:orientation="vertical">
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="일기 작성"
+            android:text="일기 내용"
             android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/diaryMainContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/diaryMainTop">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="7"
+            android:background="@drawable/board_border"
             android:orientation="vertical"
             android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginBottom="10dp"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/writeDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="7"
-                    android:background="#EDEDED"
-                    android:padding="5dp"
-                    android:text="2021/01/01"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/dailyEmoticon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="onFilterClick"
-                    android:text="이모티콘" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/writeDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="7"
+                        android:background="#EDEDED"
+                        android:padding="5dp"
+                        android:text="2021/01/01"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/dailyEmoticon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="onFilterClick"
+                        android:text="이모티콘" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/diaryTitleWriteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="3"
+                        android:background="#EDEDED"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:padding="5dp"
+                        android:text="제목"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/emoticon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="#EDEDED"
+                        android:ems="2"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="기분"
+                        android:textSize="15sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="7dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/diaryTitleWriteText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="3"
-                    android:background="#EDEDED"
-                    android:inputType="textPersonName"
-                    android:padding="5dp"
-                    android:text="제목"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/emoticon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="#EDEDED"
-                    android:ems="2"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="기분"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="2"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_marginTop="10dp"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
-                <ScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/diaryContentWriteText"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="#ECECEC"
-                            android:ems="10"
-                            android:gravity="start|top"
-                            android:inputType="textMultiLine"
-                            android:padding="15dp" />
+                            android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/testImgView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true" />
+                            <EditText
+                                android:id="@+id/diaryContentWriteText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:background="#ECECEC"
+                                android:ems="10"
+                                android:gravity="start|top"
+                                android:inputType="textMultiLine"
+                                android:padding="15dp" />
 
-                    </LinearLayout>
+                            <ImageView
+                                android:id="@+id/testImgView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true" />
+
+                        </LinearLayout>
 
 
-                </ScrollView>
+                    </ScrollView>
 
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:onClick="processAdd"
+                        android:text="작성 완료" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:onClick="addImg"
+                        android:text="사진 추가" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:onClick="goToBack"
+                        android:text="작성 취소" />
+                </LinearLayout>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:onClick="processAdd"
-                    android:text="작성 완료" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:onClick="addImg"
-                    android:text="사진 추가" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:onClick="goToBack"
-                    android:text="작성 취소" />
-            </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

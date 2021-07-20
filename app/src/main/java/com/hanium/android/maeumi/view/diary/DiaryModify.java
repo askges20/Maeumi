@@ -11,10 +11,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,7 +33,7 @@ public class DiaryModify extends Activity {
 
     String diaryCalDate, diaryTitle, diaryContent, diaryEmoticonNum;
     TextView dateText, titleText, contentText, emoticon;
-    LinearLayout mainContent;
+    ConstraintLayout mainContent;
     ImageView imgView;
     Bitmap imgName;
 

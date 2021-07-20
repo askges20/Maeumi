@@ -14,13 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -37,7 +37,7 @@ public class DiaryWrite extends AppCompatActivity {
     TextView dateText,emoticon;
     EditText titleText,contentText;
     String diaryCalDate, diaryEmoticon;
-    LinearLayout mainContent;
+    ConstraintLayout mainContent;
     ImageView imgView;
     Bitmap imgName;
 
