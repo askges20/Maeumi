@@ -46,6 +46,7 @@ public class TestResult extends AppCompatActivity {
     }
 
     public void goToMain(View view) {
+        finish();
         Intent intent = new Intent(TestResult.this, MainActivity.class);
         startActivity(intent);
         System.out.println("Move To Main");

@@ -14,6 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.model.Question;
@@ -29,6 +32,11 @@ public class QuestionAdapter extends BaseAdapter {
 
     ArrayList<Question> items = new ArrayList<Question>();
     HashSet<Integer> checkedQuestions = new HashSet<Integer>(); //답변한 문항 번호
+
+    String answers = ""; //체크한 답변을 문자열로 저장
+    int victimValue = 0;    //피해 정도
+    int perpetrationValue = 0;  //가해 정도
+
 
     public QuestionAdapter(TestClick testClick, Context context) {
         this.testClick = testClick;
@@ -138,4 +146,41 @@ public class QuestionAdapter extends BaseAdapter {
             return false;
         }
     }
+
+
+    //테스트 결과 계산
+    public void calSelectedOptions() {
+        int optionNum;
+        for (int i = 0; i <= 11; i++) {
+            optionNum = items.get(i).getSelectedOption();
+            victimValue += optionNum;    //피해 정도 합산
+            answers += optionNum;   //문자열 마지막에 추가
+        }
+        for (int j = 12; j < items.size(); j++) {
+            optionNum = items.get(j).getSelectedOption();
+            perpetrationValue += optionNum;  //가해 정도 합산
+            answers += optionNum;   //문자열 마지막에 추가
+        }
+    }
+
+    //테스트 결과 firebase DB 반영 부분
+    public void resultToFirebase() {
+        FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+        DatabaseReference testReference = firebase.getReference("/진단테스트/" + LoginUser.getInstance().getUid() + "/");
+
+        testReference.child("답변").setValue(answers);
+        testReference.child("피해정도").setValue(victimValue);
+        testReference.child("가해정도").setValue(perpetrationValue);
+    }
+
+    //피해 정도 리턴
+    public int getVictimValue(){
+        return victimValue;
+    }
+
+    //가해 정도 리턴
+    public int getPerpetrationValue(){
+        return perpetrationValue;
+    }
+
 }
