@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Question;
 import com.hanium.android.maeumi.adapters.QuestionAdapter;
-import com.hanium.android.maeumi.viewmodel.TestViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,8 +39,6 @@ public class TestClick extends AppCompatActivity {
     ImageView maeumiImg;
     ProgressBar progressBar;
     double progress = 0;
-
-    TestViewModel testViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +62,13 @@ public class TestClick extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (adapter.isAllChecked()) {    //모든 문항에 답변을 했으면
-                    testViewModel = new TestViewModel(adapter); //TestViewModel에서 결과 계산, DB 반영
+                    adapter.calSelectedOptions();   //테스트 결과 계산
+                    adapter.resultToFirebase(); //테스트 결과 DB에 반영
 
                     finish();   //현재 액티비티 종료
                     Intent intent = new Intent(TestClick.this, TestResult.class);
-                    intent.putExtra("victim", testViewModel.getVictimValue());
-                    intent.putExtra("perpetration", testViewModel.getPerpetrationValue());
+                    intent.putExtra("victim", adapter.getVictimValue());
+                    intent.putExtra("perpetration", adapter.getPerpetrationValue());
                     startActivity(intent); //액티비티 이동
                 } else {
                     Toast.makeText(TestClick.this, "체크하지 않은 문항이 있습니다!", Toast.LENGTH_SHORT).show();
