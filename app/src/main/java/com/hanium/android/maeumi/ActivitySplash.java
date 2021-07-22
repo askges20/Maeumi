@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.model.TestModel;
 
 public class ActivitySplash extends AppCompatActivity {
     FirebaseDatabase database;
@@ -59,6 +60,8 @@ public class ActivitySplash extends AppCompatActivity {
 
                         }
                     });
+                    TestModel TestModel = new TestModel();
+                    TestModel.getHistory();
 
                     startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
                 } else {    //로그인 기록이 없는 사용자

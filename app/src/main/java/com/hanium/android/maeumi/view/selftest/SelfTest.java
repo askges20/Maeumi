@@ -29,6 +29,10 @@ public class SelfTest extends AppCompatActivity {
         });
 
     }
+    public void goToHistory(View view){
+        Intent intent = new Intent(this,TestHistory.class);
+        startActivity(intent);
+    }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
         finish();   //현재 액티비티 없애기
