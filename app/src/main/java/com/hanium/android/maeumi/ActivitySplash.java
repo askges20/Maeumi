@@ -60,8 +60,6 @@ public class ActivitySplash extends AppCompatActivity {
 
                         }
                     });
-                    TestModel TestModel = new TestModel();
-                    TestModel.getHistory();
 
                     startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
                 } else {    //로그인 기록이 없는 사용자
