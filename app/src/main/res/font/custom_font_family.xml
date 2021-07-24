@@ -5,12 +5,14 @@
 
     <!--regular-->
     <font
-        android:font="@font/nanumsquare"
+        android:font="@font/uhbee_mimi_bold"
         android:fontStyle="normal"
-        android:fontWeight="400"
-        app:font="@font/nanumsquare"
+        android:fontWeight="500"
+        app:font="@font/uhbee_mimi_bold"
         app:fontStyle="normal"
         app:fontWeight="500"
         tools:ignore="ResourceCycle" />
+
+    <!-- android:font="@font/nanumsquare" -->
 
 </font-family>
