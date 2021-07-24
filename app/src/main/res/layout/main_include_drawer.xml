@@ -23,6 +23,7 @@
         android:layout_gravity="left"
         android:orientation="vertical"
         app:headerLayout="@layout/main_navigation_header"
-        app:menu="@menu/main_navigation_menu" />
+        app:menu="@menu/main_navigation_menu"
+        app:itemTextAppearance="@style/TextViewFontStyle"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
