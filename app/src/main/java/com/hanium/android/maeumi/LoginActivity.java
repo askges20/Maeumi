@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.userEmail);
         password = findViewById(R.id.userPassword);
 
+        /*
         //네트워크 연결 상태 확인
         if(!isConnect2Network()){   //연결되어 있지 않으면
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -52,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.setCancelable(false);    //뒤로가기 키, 배경 터치 불가
             dialog.show();
         }
+         */
     }
 
     public void onLoginClick(View view) {
