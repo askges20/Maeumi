@@ -3,6 +3,8 @@ package com.hanium.android.maeumi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -36,6 +38,20 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.userEmail);
         password = findViewById(R.id.userPassword);
+
+        //네트워크 연결 상태 확인
+        if(!isConnect2Network()){   //연결되어 있지 않으면
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage("네트워크 연결상태 확인 후 재접속해주세요");
+            dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    finish();
+                }
+            });
+            dialog.setCancelable(false);    //뒤로가기 키, 배경 터치 불가
+            dialog.show();
+        }
     }
 
     public void onLoginClick(View view) {
@@ -115,6 +131,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    //네트워크 연결 여부 리턴
+    public boolean isConnect2Network() {
+        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo.State networkState = manager.getActiveNetworkInfo().getState();
+        if (networkState == NetworkInfo.State.DISCONNECTED) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -3,6 +3,8 @@ package com.hanium.android.maeumi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +37,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_include_drawer);
+
+        //네트워크 연결 상태 확인
+        if(!isConnect2Network()){   //연결되어 있지 않으면
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage("네트워크 연결상태 확인 후 재접속해주세요");
+            dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    finish();
+                }
+            });
+            dialog.setCancelable(false);    //뒤로가기 키, 배경 터치 불가
+            dialog.show();
+        }
 
         mDrawerLayout = findViewById(R.id.main_drawer_layout);
 
@@ -191,5 +207,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);  //로그인 화면으로 이동
+    }
+
+    //네트워크 연결 여부 리턴
+    public boolean isConnect2Network() {
+        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo.State networkState = manager.getActiveNetworkInfo().getState();
+        if (networkState == NetworkInfo.State.DISCONNECTED) {
+            return false;
+        }
+        return true;
     }
 }

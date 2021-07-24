@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Message;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {

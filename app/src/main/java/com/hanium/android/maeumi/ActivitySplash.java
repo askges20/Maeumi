@@ -1,6 +1,10 @@
 package com.hanium.android.maeumi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -33,6 +37,7 @@ public class ActivitySplash extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 FirebaseUser userFromFB = FirebaseAuth.getInstance().getCurrentUser();
 
                 if (userFromFB != null) { //로그인 기록이 있는 사용자
@@ -75,4 +80,5 @@ public class ActivitySplash extends AppCompatActivity {
         super.onPause();
         finish();
     }
+
 }
