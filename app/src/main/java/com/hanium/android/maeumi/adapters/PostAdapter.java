@@ -110,7 +110,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             dateView.setText(item.getWriteDate());
             postItemCommentCntText.setText(item.getCommentCnt() + "");
             likeCntText.setText(item.getLikeUsersCnt() + "");
-            System.out.println("셋아이템");
         }
     }
 

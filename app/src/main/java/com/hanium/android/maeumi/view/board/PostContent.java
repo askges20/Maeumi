@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +34,6 @@ import com.hanium.android.maeumi.adapters.CommentAdapter;
 import com.hanium.android.maeumi.model.Post;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,6 +85,8 @@ public class PostContent extends AppCompatActivity {
         likeHeartImg = findViewById(R.id.likeHeartImg);
         likeCntText = findViewById(R.id.likeCnt);
 
+        Intent prevIntent = getIntent();
+        boardType = prevIntent.getStringExtra("boardType");
 
         title = post.getTitle();
         titleText.setText(title);
@@ -95,14 +95,15 @@ public class PostContent extends AppCompatActivity {
         writeDate = post.getWriteDate();
         dateText.setText(writeDate);
         writer = post.getWriter();
-        writerText.setText(writer);
+        if (boardType.equals("anonymous")){ //익명게시판 글은 닉네임 표시 X
+            writerText.setText("익명");
+        } else {
+            writerText.setText(writer);
+        }
         writerUid = post.getWriterUid();
         likeCntText.setText(post.getLikeUsersCnt()+"");
 
         postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
-
-        Intent prevIntent = getIntent();
-        boardType = prevIntent.getStringExtra("boardType");
 
         commentList = findViewById(R.id.commentListView);
         writeCommentArea = findViewById(R.id.writeCommentArea);
