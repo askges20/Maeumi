@@ -32,7 +32,7 @@ public class BoardFreeFragment extends Fragment {
 
     Board board;    //Intent
 
-    public BoardFreeFragment(Board board){
+    public BoardFreeFragment(Board board) {
         this.board = board;
     }
 
@@ -69,7 +69,7 @@ public class BoardFreeFragment extends Fragment {
     }
 
     //Firebase에서 데이터 가져오기
-    private void getPostFromDB(){
+    private void getPostFromDB() {
         database = FirebaseDatabase.getInstance();
         freeBoardRef = database.getReference("/자유게시판/");
         freeBoardRef.addValueEventListener(new ValueEventListener() {
@@ -93,7 +93,7 @@ public class BoardFreeFragment extends Fragment {
     }
 
     //카드별 클릭 이벤트 추가
-    private void addListener(){
+    private void addListener() {
         postAdapter.setOnItemClickListener(new OnPostItemClickListener() {
             @Override
             public void onItemClick(PostAdapter.ViewHolder holder, View view, int position) {
@@ -105,7 +105,7 @@ public class BoardFreeFragment extends Fragment {
     }
 
     //게시글 내용 페이지로 이동
-    private void goToPostContent(Post item){
+    private void goToPostContent(Post item) {
         Intent intent = new Intent(board, PostContent.class);
         postAdapter.curPost = item;
         intent.putExtra("boardType", "free");

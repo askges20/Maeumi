@@ -23,9 +23,11 @@ public class Post {
     private String writer;      //작성자
     private String writeDate;   //작성일자
     private String writerUid;    //작성자 uid
-    private ArrayList<String> likeUsers = new ArrayList<>(); //공감(좋아요)을 누른 사용자 uid
 
-    public Post(){
+    private ArrayList<String> likeUsers = new ArrayList<>(); //공감(좋아요)을 누른 사용자 uid
+    private int commentCnt; //댓글 개수
+
+    public Post() {
 
     }
 
@@ -37,7 +39,7 @@ public class Post {
         this.writerUid = writerUid;
     }
 
-    public Map<String, Object> toMap(){
+    public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("title", title);
         result.put("content", content);
@@ -95,6 +97,37 @@ public class Post {
         likeRef.setValue(null);
         postAdapter.notifyDataSetChanged(); //어댑터에 변경 알림
     }
+
+
+    /* 댓글 개수 관련 메소드 */
+
+    public void setCommentCnt() {
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference commentRef = database.getReference("/댓글/" + postNum + "/");
+        commentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int cnt = 0;
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    cnt++;
+                }
+                commentCnt = cnt;   //댓글 개수 저장
+                postAdapter.notifyDataSetChanged(); //어댑터에 변경 알림
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public int getCommentCnt() {
+        return commentCnt;
+    }
+
+
+    /* Getter/Setter */
 
     public int getLikeUsersCnt() {
         return likeUsers.size();

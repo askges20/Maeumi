@@ -54,6 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         TextView titleView;
         TextView writerView;
         TextView dateView;
+        TextView postItemCommentCntText;
         TextView likeCntText;
 
         public ViewHolder(View itemView, final OnPostItemClickListener listener) {
@@ -62,6 +63,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             titleView = itemView.findViewById(R.id.postTitle);
             writerView = itemView.findViewById(R.id.postWriter);
             dateView = itemView.findViewById(R.id.postDateText);
+            postItemCommentCntText = itemView.findViewById(R.id.postItemCommentCntText);
             likeCntText = itemView.findViewById(R.id.postItemLikeCnt);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +81,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             titleView.setText(item.getTitle());
             writerView.setText(item.getWriter());
             dateView.setText(item.getWriteDate());
-            likeCntText.setText(item.getLikeUsersCnt()+"");
+            postItemCommentCntText.setText(item.getCommentCnt() + "");
+            likeCntText.setText(item.getLikeUsersCnt() + "");
             System.out.println("셋아이템");
         }
     }
@@ -87,6 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
     public void addItem(Post item) {
         item.setAdapter(this);  //각 아이템에 postAdapter 저장
         item.setLikeUsers();    //공감을 누른 사용자 DB로부터 읽어오기
+        item.setCommentCnt();   //댓글 개수 DB로부터 읽어와서 저장
         items.add(0, item); //리스트에 추가, 최신글부터 정렬하도록
     }
 
@@ -102,7 +106,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         items.set(position, item);
     }
 
-    public void clearList(){
+    public void clearList() {
         items.clear();
     }
 }
