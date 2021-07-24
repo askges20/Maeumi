@@ -60,7 +60,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/postItemCommentImg"
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"

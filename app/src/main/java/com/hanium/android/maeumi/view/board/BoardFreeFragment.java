@@ -53,7 +53,7 @@ public class BoardFreeFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        postAdapter = new PostAdapter();
+        postAdapter = new PostAdapter("free");
 
 
         getPostFromDB(); //DB에서 게시글 데이터 조회

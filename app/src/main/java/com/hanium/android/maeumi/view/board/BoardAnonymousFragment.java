@@ -28,7 +28,7 @@ public class BoardAnonymousFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference freeBoardRef;
-    PostAdapter postAdapter = new PostAdapter();
+    PostAdapter postAdapter;
 
     Board board;    //Intent
 
@@ -53,7 +53,7 @@ public class BoardAnonymousFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        postAdapter = new PostAdapter();
+        postAdapter = new PostAdapter("anonymous");
 
         getPostFromDB(); //DB에서 게시글 데이터 조회
         recyclerView.setAdapter(postAdapter);   //리사이클러뷰에 어댑터 등록

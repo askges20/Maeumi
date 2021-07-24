@@ -3,6 +3,7 @@ package com.hanium.android.maeumi.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,9 +16,15 @@ import com.hanium.android.maeumi.model.Post;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements OnPostItemClickListener {
+    public String boardType;
+
     public static Post curPost; //가장 최근에 클릭한 게시글
     ArrayList<Post> items = new ArrayList<Post>();  //게시글 목록
     OnPostItemClickListener listener;
+
+    public PostAdapter(String boardType) {
+        this.boardType = boardType; //게시판 종류
+    }
 
     @NonNull
     @Override
@@ -25,7 +32,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.board_item, viewGroup, false);
 
-        return new ViewHolder(itemView, this);
+        return new ViewHolder(itemView, this, boardType);
     }
 
     @Override
@@ -51,19 +58,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        String boardType;
+
         TextView titleView;
         TextView writerView;
         TextView dateView;
+        ImageView postItemCommentImg;
         TextView postItemCommentCntText;
         TextView likeCntText;
 
-        public ViewHolder(View itemView, final OnPostItemClickListener listener) {
+        public ViewHolder(View itemView, final OnPostItemClickListener listener, String boardType) {
             super(itemView);
+
+            this.boardType = boardType;
 
             titleView = itemView.findViewById(R.id.postTitle);
             writerView = itemView.findViewById(R.id.postWriter);
             dateView = itemView.findViewById(R.id.postDateText);
+            postItemCommentImg = itemView.findViewById(R.id.postItemCommentImg);
             postItemCommentCntText = itemView.findViewById(R.id.postItemCommentCntText);
+
+            //익명게시판은 댓글 표시 없음
+            if (boardType.equals("anonymous")) {
+                postItemCommentImg.setVisibility(View.GONE);
+                postItemCommentCntText.setVisibility(View.GONE);
+            }
+
             likeCntText = itemView.findViewById(R.id.postItemLikeCnt);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +99,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
         public void setItem(Post item) {
             titleView.setText(item.getTitle());
-            writerView.setText(item.getWriter());
+
+            //익명게시판은 사용자 닉네임 표시 X
+            if (boardType.equals("anonymous")) {
+                writerView.setText("익명");
+            } else {
+                writerView.setText(item.getWriter());
+            }
+
             dateView.setText(item.getWriteDate());
             postItemCommentCntText.setText(item.getCommentCnt() + "");
             likeCntText.setText(item.getLikeUsersCnt() + "");
