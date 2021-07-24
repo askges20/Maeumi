@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ import com.google.cloud.dialogflow.v2.SessionsClient;
 import com.google.cloud.dialogflow.v2.SessionsSettings;
 import com.google.cloud.dialogflow.v2.TextInput;
 import com.google.common.collect.Lists;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +54,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
     ChatAdapter chatAdapter;
     List<Message> messageList = new ArrayList<>();  //채팅 내역
     EditText editMessage;
-    ImageButton btnSend;
+    Button btnSend;
     ImageView chatBotGuideBtn;
 
     //dialogFlow
@@ -92,7 +90,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
 
                     addChat2FirebaseDB(true, message);  //DB에 전송한 채팅 저장하기
                 } else {    //입력 문장이 없으면
-                    Toast.makeText(ChatBot.this, "Please enter text!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatBot.this, "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
         });

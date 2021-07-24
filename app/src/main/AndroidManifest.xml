@@ -29,9 +29,6 @@
         <activity android:name=".view.diary.DiaryModify" />
         <activity android:name=".view.diary.DiaryWrite" />
         <activity android:name=".view.chatbot.ChatBot" />
-        <activity android:name=".view.chatbot.ChatBotKeyWord" />
-        <activity android:name=".view.chatbot.ChatBotKeyWordNO" />
-        <activity android:name=".view.chatbot.ChatBotKeyWordYES" />
         <activity android:name=".view.board.Board" />
         <activity android:name=".view.board.BoardWrite" />
         <activity android:name=".view.board.PostContent" />
