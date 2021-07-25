@@ -1,5 +1,7 @@
 package com.hanium.android.maeumi;
 
+import com.hanium.android.maeumi.model.TestModel;
+
 public class LoginUser {
     private String uid;
     private String email;
@@ -8,8 +10,9 @@ public class LoginUser {
     private String school;
     private String alias;
 
-    //private static final LoginUser user = new LoginUser();
     private static LoginUser user = new LoginUser();
+
+    private TestModel testModel = new TestModel();  //테스트 결과 관련 모델
 
     public static LoginUser getInstance() {
         return user;
@@ -70,5 +73,19 @@ public class LoginUser {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+
+    /*테스트 결과*/
+    public void setHistory() {
+        testModel.getHistory();
+    }
+
+    public String getVictimScore(){
+        return testModel.getVictimScore();
+    }
+
+    public String getPerpetrationScore(){
+        return testModel.getPerpetrationScore();
     }
 }

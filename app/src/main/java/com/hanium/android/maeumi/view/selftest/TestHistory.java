@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.hanium.android.maeumi.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.TestModel;
 
@@ -19,14 +20,16 @@ public class TestHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_history);
 
-        TestModel TestModel = new TestModel();
+        //TestModel testModel = new TestModel();
 
         TextView victimScoreText = findViewById(R.id.victimScore);
         TextView perpetrationScoreText = findViewById(R.id.perpetrationScore);
 
 
-        victimScore = TestModel.getVictimScore();
-        perpetrationScore = TestModel.getPerpetrationScore();
+        //victimScore = testModel.getVictimScore();
+        //perpetrationScore = testModel.getPerpetrationScore();
+        victimScore = LoginUser.getInstance().getVictimScore();
+        perpetrationScore = LoginUser.getInstance().getPerpetrationScore();
 
         victimScoreText.setText(victimScore);
         perpetrationScoreText.setText(perpetrationScore);

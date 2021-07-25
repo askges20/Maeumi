@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/shadow"
-        android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
@@ -31,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="진단테스트"
+            android:text="지난 테스트 결과"
             android:textSize="24sp" />
 
         <TextView

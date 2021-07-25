@@ -1,10 +1,6 @@
 package com.hanium.android.maeumi;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,7 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hanium.android.maeumi.model.TestModel;
 
 public class ActivitySplash extends AppCompatActivity {
     FirebaseDatabase database;
@@ -65,6 +60,8 @@ public class ActivitySplash extends AppCompatActivity {
 
                         }
                     });
+
+                    user.setHistory();  //테스트 결과 DB에서 가져와서 저장하기
 
                     startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
                 } else {    //로그인 기록이 없는 사용자

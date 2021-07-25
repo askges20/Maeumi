@@ -9,18 +9,32 @@
     <LinearLayout
         android:id="@+id/testResultTop"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="70dp"
+        android:background="@drawable/shadow"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Button"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="테스트 결과"
             android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Button"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout

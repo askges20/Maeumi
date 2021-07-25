@@ -83,9 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         View header = navigationView.getHeaderView(0);
         TextView userAlias = header.findViewById(R.id.mainUserAliasText);
-        //userAlias.setText(LoginUser.getInstance().getAlias());
         TextView userSchool = header.findViewById(R.id.mainUserSchoolText);
-        //userSchool.setText(LoginUser.getInstance().getSchool());
 
         logoutBtn = header.findViewById(R.id.mainLogoutBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {

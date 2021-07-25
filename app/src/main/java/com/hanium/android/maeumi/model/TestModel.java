@@ -14,33 +14,36 @@ public class TestModel {
     FirebaseDatabase database;
     DatabaseReference victim;
     DatabaseReference perpetration;
-    LoginUser loginUser = LoginUser.getInstance();
+
+    //LoginUser loginUser = LoginUser.getInstance();
+    //ActivitySplash에서 사용자 정보를 가져오기 전에 생성되므로 null값을 가지는 오류 발생 -> 주석 처리
 
     public static String victimScore;
     public static String perpetrationScore;
 
-    public TestModel(){}
+    public TestModel() {
+    }
 
-    public TestModel(TestHistory history){
+    public TestModel(TestHistory history) {
         this.TestHistory = history;
     }
 
-    public String getVictimScore(){
+    public String getVictimScore() {
         return victimScore;
     }
-    public String getPerpetrationScore(){
+
+    public String getPerpetrationScore() {
         return perpetrationScore;
     }
 
-    public void setVictimScore(String score){
+    public void setVictimScore(String score) {
         this.victimScore = score;
         System.out.println(this.victimScore);
-//        TestHistory.setVictimScore(this.victimScore);
     }
 
 
-
     public void getHistory() {
+        LoginUser loginUser = LoginUser.getInstance();
 
         database = FirebaseDatabase.getInstance();
         victim = database.getReference("/진단테스트/" + loginUser.getUid() + "/피해정도");
@@ -49,8 +52,6 @@ public class TestModel {
         victim.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                victimScore = String.valueOf(dataSnapshot.getValue());
-
                 setVictimScore(String.valueOf(dataSnapshot.getValue()));
             }
 
@@ -74,7 +75,6 @@ public class TestModel {
             }
         });
     }
-
 
 
 }
