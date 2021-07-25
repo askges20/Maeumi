@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
         randomText = findViewById(R.id.mainRandomText);
         setRandomText();
+
+        //askForTest(); //테스트 진행 여부에 따른 팝업
     }
 
     public void goToDiary(View view) {
@@ -216,6 +218,34 @@ public class MainActivity extends AppCompatActivity {
         if (networkState == NetworkInfo.State.DISCONNECTED) {
             return false;
         }
+        return true;
+    }
+
+    //테스트 진행 팝업
+    public boolean askForTest() {
+        System.out.println("[메인화면] 테스트 결과 : "+LoginUser.getInstance().getVictimScore());
+
+        //테스트 결과가 존재하면
+        if (LoginUser.getInstance().getVictimScore() != null) {
+            return false;
+        }
+
+        //테스트 결과가 존재하지 않으면
+        new AlertDialog.Builder(this)
+                .setMessage("아직 진단테스트를 이용하지 않으셨습니다. 진단테스트를 진행하시겠습니까?") //진단테스트 권유.. 메세지? 내용 수정할수도
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //네 클릭
+                        startActivity(new Intent(MainActivity.this, SelfTest.class));
+                    }
+                })
+                .setNegativeButton("다음에 할게요", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //취소 클릭
+                    }
+                })
+                .show();
+
         return true;
     }
 }
