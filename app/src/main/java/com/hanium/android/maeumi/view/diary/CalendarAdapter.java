@@ -53,13 +53,13 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             if (compareDate.equals(diaryDates.get(i).substring(0, 2))) {
                 switch (diaryDates.get(i).substring(diaryDates.get(i).length() - 1)) {
                     case "1":
-                        holder.parentView.setBackgroundResource(R.drawable.diary_test_icon);
+                        holder.parentView.setBackgroundResource(R.drawable.diary_good);
                         break;
                     case "2":
-                        holder.parentView.setBackgroundResource(R.drawable.maeumi_logo);
+                        holder.parentView.setBackgroundResource(R.drawable.diary_normal);
                         break;
                     case "3":
-                        holder.parentView.setBackgroundResource(R.color.purple_500);
+                        holder.parentView.setBackgroundResource(R.drawable.diary_bad);
                         break;
                 }
             }

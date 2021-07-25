@@ -97,15 +97,15 @@ public class DiaryWrite extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.action_menu1) {
                     emoticon.setText("좋음");
                     diaryEmoticon = "1";
-                    mainContent.setBackgroundColor(Color.YELLOW);
+                    mainContent.setBackgroundResource(R.color.pinkred);
                 } else if (menuItem.getItemId() == R.id.action_menu2) {
                     emoticon.setText("평범");
                     diaryEmoticon = "2";
-                    mainContent.setBackgroundColor(Color.GREEN);
+                    mainContent.setBackgroundResource(R.color.lightgreen);
                 } else {
                     emoticon.setText("나쁨");
                     diaryEmoticon = "3";
-                    mainContent.setBackgroundColor(Color.GRAY);
+                    mainContent.setBackgroundResource(R.color.diaryGray);
                 }
 
                 return false;

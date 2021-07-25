@@ -61,15 +61,15 @@ public class DiaryModify extends Activity {
         switch (diaryEmoticonNum) {
             case "1":
                 emoticon.setText("좋음");
-                mainContent.setBackgroundColor(Color.YELLOW);
+                mainContent.setBackgroundResource(R.color.pinkred);
                 break;
             case "2":
                 emoticon.setText("평범");
-                mainContent.setBackgroundColor(Color.GREEN);
+                mainContent.setBackgroundResource(R.color.lightgreen);
                 break;
             case "3":
                 emoticon.setText("나쁨");
-                mainContent.setBackgroundColor(Color.GRAY);
+                mainContent.setBackgroundResource(R.color.diaryGray);
                 break;
         }
         getImg();
