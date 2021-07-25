@@ -113,17 +113,6 @@
                     android:gravity="center"
                     android:text="프로필" />
 
-
-                <Button
-                    android:id="@+id/profileEdit"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:onClick="goToProfileEdit"
-                    android:text="수정" />
-
-
             </LinearLayout>
 
             <View

@@ -1,6 +1,5 @@
 package com.hanium.android.maeumi.view.profile;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,12 +11,10 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.hanium.android.maeumi.LoginActivity;
 import com.hanium.android.maeumi.LoginUser;
-import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
 public class Profile extends AppCompatActivity {
@@ -53,11 +50,6 @@ public class Profile extends AppCompatActivity {
 
         //로그아웃 버튼
         logoutBtn = findViewById(R.id.signOutBtn);
-    }
-
-    public void goToProfileEdit(View view) {
-        Intent intent = new Intent(Profile.this, ProfileEdit.class);
-        startActivity(intent);
     }
 
     public void deleteConfirm(View view) {
