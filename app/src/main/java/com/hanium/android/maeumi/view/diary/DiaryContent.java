@@ -129,7 +129,7 @@ public class DiaryContent extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
 
-                Glide.with(DiaryContent.this).load(uri).into(imgView);
+                Glide.with(getApplicationContext()).load(uri).into(imgView);
             }
         });
     }

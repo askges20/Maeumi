@@ -153,7 +153,7 @@ public class DiaryWrite extends AppCompatActivity {
                 try {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
-                    Glide.with(this).load(imgName).into(imgView);
+                    Glide.with(getApplicationContext()).load(imgName).into(imgView);
                     inStream.close();   // 스트림 닫아주기
                     Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
