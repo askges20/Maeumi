@@ -107,16 +107,16 @@ public class QuestionAdapter extends BaseAdapter {
                 int selectedNum = 0;
                 switch (checkedId) {
                     case R.id.option1:
-                        selectedNum = 1;
+                        selectedNum = 0;
                         break;
                     case R.id.option2:
-                        selectedNum = 2;
+                        selectedNum = 1;
                         break;
                     case R.id.option3:
-                        selectedNum = 3;
+                        selectedNum = 2;
                         break;
                     case R.id.option4:
-                        selectedNum = 4;
+                        selectedNum = 3;
                         break;
                 }
                 setSelectedNum(position, selectedNum);  //선택 반영

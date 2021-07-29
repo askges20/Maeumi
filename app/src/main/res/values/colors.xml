@@ -15,4 +15,8 @@
     <color name="pinkred">#FFFF7777</color>
 
     <color name="diaryGray">#a6a6a6</color>
+
+    <color name="yellow">#FAED7D</color>
+    <color name="orange">#FFBB00</color>
+    <color name="red">#FF0000</color>
 </resources>
