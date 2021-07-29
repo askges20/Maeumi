@@ -2,9 +2,12 @@ package com.hanium.android.maeumi.view.board;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,13 +98,13 @@ public class PostContent extends AppCompatActivity {
         writeDate = post.getWriteDate();
         dateText.setText(writeDate);
         writer = post.getWriter();
-        if (boardType.equals("anonymous")){ //익명게시판 글은 닉네임 표시 X
+        if (boardType.equals("anonymous")) { //익명게시판 글은 닉네임 표시 X
             writerText.setText("익명");
         } else {
             writerText.setText(writer);
         }
         writerUid = post.getWriterUid();
-        likeCntText.setText(post.getLikeUsersCnt()+"");
+        likeCntText.setText(post.getLikeUsersCnt() + "");
 
         postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
 
@@ -115,14 +118,14 @@ public class PostContent extends AppCompatActivity {
         }
 
         String userUid = LoginUser.getInstance().getUid();
-        if (post.getLikeUsers().contains(userUid)){  //이미 공감을 눌렀던 사용자이면
+        if (post.getLikeUsers().contains(userUid)) {  //이미 공감을 눌렀던 사용자이면
             likeHeartImg.setImageResource(R.drawable.heart_icon_2);
         } else {    //공감을 누르지 않았던 사용자이면
             likeHeartImg.setImageResource(R.drawable.heart_icon_1);
         }
 
 
-        if (!LoginUser.getInstance().getUid().equals(writerUid)){ //로그인한 사용자와 글 작성자의 Uid가 다르면
+        if (!LoginUser.getInstance().getUid().equals(writerUid)) { //로그인한 사용자와 글 작성자의 Uid가 다르면
             dropDownBtn.setVisibility(View.GONE);
         }
 
@@ -139,7 +142,7 @@ public class PostContent extends AppCompatActivity {
 
     //드롭다운 메뉴 클릭 시
     public void onClickDropDownMenu(View view) {
-        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
+        PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
         getMenuInflater().inflate(R.menu.post_content_popup_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -283,7 +286,7 @@ public class PostContent extends AppCompatActivity {
     }
 
     //댓글 삭제 버튼 클릭 시
-    public void deleteComment(Comment comment){
+    public void deleteComment(Comment comment) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("댓글을 삭제하시겠습니까?");
         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
@@ -319,7 +322,7 @@ public class PostContent extends AppCompatActivity {
     //공감 버튼을 클릭했을 때
     public void onClickLikeBtn(View view) {
         String userUid = LoginUser.getInstance().getUid();
-        if (post.getLikeUsers().contains(userUid)){  //이미 공감을 눌렀던 사용자이면
+        if (post.getLikeUsers().contains(userUid)) {  //이미 공감을 눌렀던 사용자이면
             likeHeartImg.setImageResource(R.drawable.heart_icon_1);
             post.removeLikeUser(userUid);
             //공감 취소
@@ -327,6 +330,6 @@ public class PostContent extends AppCompatActivity {
             likeHeartImg.setImageResource(R.drawable.heart_icon_2);
             post.addLikeUser(userUid);
         }
-        likeCntText.setText(post.getLikeUsersCnt()+"");
+        likeCntText.setText(post.getLikeUsersCnt() + "");
     }
 }
