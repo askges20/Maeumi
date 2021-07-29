@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,24 +78,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         chatAdapter = new ChatAdapter(messageList, this);
         chatView.setAdapter(chatAdapter);
 
-        btnSend.setOnClickListener(new View.OnClickListener() { //전송 버튼 리스너
-            @Override
-            public void onClick(View view) {
-                String message = editMessage.getText().toString();  //입력된 문장
-                if (!message.isEmpty()) {
-                    messageList.add(new Message(message, false, false));   //전송한 채팅을 채팅 내역에 추가
-                    editMessage.setText("");    //채팅 입력칸 비우기
-                    sendMessageToBot(message);  //채팅 전송
-                    Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
-                    Objects.requireNonNull(chatView.getLayoutManager())
-                            .scrollToPosition(messageList.size() - 1);
-
-                    addChat2FirebaseDB(true, message);  //DB에 전송한 채팅 저장하기
-                } else {    //입력 문장이 없으면
-                    Toast.makeText(ChatBot.this, "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        setSendListener();
 
         setUpBot(); //Dialogflow Bot 세팅
 
@@ -103,6 +87,35 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         refPath = "/채팅/" + LoginUser.getInstance().getUid() + "/";  //DB 경로
 
         readFirebaseData(); //DB에서 이전 채팅 내역 불러오기
+    }
+
+    //전송 버튼에 전송 이벤트 리스너 추가
+    public void setSendListener() {
+        btnSend.setOnClickListener(new View.OnClickListener() { //전송 버튼 리스너
+            @Override
+            public void onClick(View view) {
+                if (!sendMsg()) {    //입력 문장이 없으면
+                    Toast.makeText(ChatBot.this, "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    //메세지 전송하기
+    public boolean sendMsg() {
+        String message = editMessage.getText().toString();  //입력된 문장
+        if (!message.isEmpty()) {
+            messageList.add(new Message(message, false, false));   //전송한 채팅을 채팅 내역에 추가
+            editMessage.setText("");    //채팅 입력칸 비우기
+            sendMessageToBot(message);  //채팅 전송
+            Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
+            Objects.requireNonNull(chatView.getLayoutManager())
+                    .scrollToPosition(messageList.size() - 1);
+
+            addChat2FirebaseDB(true, message);  //DB에 전송한 채팅 저장하기
+            return true;
+        }
+        return false;
     }
 
     private void setUpBot() {
