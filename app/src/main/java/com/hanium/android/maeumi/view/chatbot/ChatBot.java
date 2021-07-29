@@ -3,6 +3,7 @@ package com.hanium.android.maeumi.view.chatbot;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -195,6 +196,10 @@ public class ChatBot extends AppCompatActivity implements BotReply {
                 }
                 chatAdapter.notifyDataSetChanged();
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);   //채팅 맨 아래로 스크롤
+
+                if (messageList.size() == 0) {   //이전 채팅이 없다면 웰컴 메세지 출력
+                    addWelcomeMessage();
+                }
             }
 
             @Override
@@ -232,17 +237,17 @@ public class ChatBot extends AppCompatActivity implements BotReply {
                 processDeleteChat();    //채팅 전체 삭제 진행
             }
         });
-        dialog.setNegativeButton("취소", new DialogInterface.OnClickListener(){
-           @Override
-           public void onClick(DialogInterface dialog, int i) {
+        dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
 
-           }
+            }
         });
         dialog.show();
     }
 
     //채팅 전체 삭제 진행
-    public void processDeleteChat(){
+    public void processDeleteChat() {
         //DB에서 삭제
         chatRef = firebaseDatabase.getReference(refPath);
         chatRef.setValue(null);
@@ -250,6 +255,24 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         //화면에서도 삭제
         chatAdapter.clearMessageList();
 
+        //웰컴 메세지 띄우기
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable()  {
+            public void run() {
+                addWelcomeMessage();
+            }
+        }, 1000); // 1초후
+
         Toast.makeText(this, "채팅 내역이 전체 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    //채팅을 시작할 때 봇으로부터 웰컴 메세지 받음
+    public void addWelcomeMessage() {
+        String welcomeMessage = getString(R.string.chatWelcomeMessage);
+        messageList.add(new Message(welcomeMessage, true, false));   //웰컴 메세지를 채팅 내역 ArrayList에 추가
+        chatAdapter.notifyDataSetChanged();
+        Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
+
+        addChat2FirebaseDB(false, welcomeMessage);    //DB에 botreply 저장하기
     }
 }
