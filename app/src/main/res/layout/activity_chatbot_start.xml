@@ -64,12 +64,28 @@
             android:textSize="24sp" />
 
         <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="상담하기"
             android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/deleteChatBtn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:onClick="showDeleteChat"
+            android:padding="10dp"
+            android:tint="@color/gray"
+            app:srcCompat="@drawable/delete_icon" />
 
         <ImageView
             android:id="@+id/chatBotGuideBtn"

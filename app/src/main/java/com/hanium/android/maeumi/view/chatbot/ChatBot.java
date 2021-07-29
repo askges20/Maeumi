@@ -172,20 +172,20 @@ public class ChatBot extends AppCompatActivity implements BotReply {
         chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot datesnap : snapshot.getChildren()){
+                for (DataSnapshot datesnap : snapshot.getChildren()) {
 
                     String chatDate = datesnap.getKey();
-                    int year = Integer.parseInt(chatDate.substring(0,4));
-                    int month = Integer.parseInt(chatDate.substring(4,6));
-                    int date = Integer.parseInt(chatDate.substring(6,8));
+                    int year = Integer.parseInt(chatDate.substring(0, 4));
+                    int month = Integer.parseInt(chatDate.substring(4, 6));
+                    int date = Integer.parseInt(chatDate.substring(6, 8));
 
                     boolean isFirstMsgOfDay = true; //해당 날짜의 첫번째 채팅
 
-                    for (DataSnapshot chatsnap : datesnap.getChildren()){
+                    for (DataSnapshot chatsnap : datesnap.getChildren()) {
                         String chatKey = chatsnap.getKey();
-                        String chatValue = (String)chatsnap.getValue();
+                        String chatValue = (String) chatsnap.getValue();
 
-                        if (chatKey.contains("user")){  //사용자가 보낸 채팅이면
+                        if (chatKey.contains("user")) {  //사용자가 보낸 채팅이면
                             messageList.add(new Message(chatValue, false, isFirstMsgOfDay, year, month, date));
                         } else {    //dialogflow가 보낸 채팅이면
                             messageList.add(new Message(chatValue, true, isFirstMsgOfDay, year, month, date));
@@ -219,5 +219,37 @@ public class ChatBot extends AppCompatActivity implements BotReply {
             }
         });
         dialog.show();
+    }
+
+    //채팅 내역 전체 삭제 팝업
+    public void showDeleteChat(View view) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("채팅 내역 전체 삭제");
+        dialog.setMessage("지금까지 진행한 채팅 내역을 모두 삭제하시겠습니까?\n(삭제된 채팅은 복구할 수 없습니다.)");
+        dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                processDeleteChat();    //채팅 전체 삭제 진행
+            }
+        });
+        dialog.setNegativeButton("취소", new DialogInterface.OnClickListener(){
+           @Override
+           public void onClick(DialogInterface dialog, int i) {
+
+           }
+        });
+        dialog.show();
+    }
+
+    //채팅 전체 삭제 진행
+    public void processDeleteChat(){
+        //DB에서 삭제
+        chatRef = firebaseDatabase.getReference(refPath);
+        chatRef.setValue(null);
+
+        //화면에서도 삭제
+        chatAdapter.clearMessageList();
+
+        Toast.makeText(this, "채팅 내역이 전체 삭제되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }

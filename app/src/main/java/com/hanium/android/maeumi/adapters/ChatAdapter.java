@@ -33,6 +33,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        System.out.println("포지션은"+position);
         Message message = messageList.get(position);
 
         String content = message.getContent();
@@ -81,5 +82,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             messageReceive = itemView.findViewById(R.id.message_receive);
             chatMaeumiImg = itemView.findViewById(R.id.chatMaeumiImg);
         }
+    }
+
+    public void clearMessageList() {
+        messageList.clear();
+        notifyDataSetChanged();
     }
 }
