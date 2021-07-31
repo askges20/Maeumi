@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:text="@string/test_guide"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
