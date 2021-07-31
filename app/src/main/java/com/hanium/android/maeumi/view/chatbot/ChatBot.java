@@ -2,10 +2,10 @@ package com.hanium.android.maeumi.view.chatbot;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +37,7 @@ import com.hanium.android.maeumi.adapters.ChatAdapter;
 import com.hanium.android.maeumi.helpers.SendMessageInBg;
 import com.hanium.android.maeumi.interfaces.BotReply;
 import com.hanium.android.maeumi.model.Message;
+import com.hanium.android.maeumi.view.diary.DiaryMain;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -153,6 +154,11 @@ public class ChatBot extends AppCompatActivity implements BotReply {
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
 
                 addChat2FirebaseDB(false, botReply);    //DB에 botreply 저장하기
+
+                //"일기장으로 이동합니다." -> 일기장 intent 시작
+                if(botReply.equals("일기장으로 이동합니다.")){
+                    goToDiary();    //일기장으로 이동
+                }
             } else {
                 Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
             }
@@ -224,6 +230,17 @@ public class ChatBot extends AppCompatActivity implements BotReply {
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
         finish();   //현재 액티비티 없애기
+    }
+
+    //일기장으로 이동하기
+    public void goToDiary() {
+        Intent intent = new Intent(ChatBot.this, DiaryMain.class);
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable()  {
+            public void run() {
+                startActivity(intent);  //일기장으로 이동
+            }
+        }, 1500); // 1.5초후
     }
 
     //상담 안내 팝업
