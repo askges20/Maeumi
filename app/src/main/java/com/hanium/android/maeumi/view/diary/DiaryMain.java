@@ -39,6 +39,10 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         setMonthView();
     }
 
+    public void goToBack(View view){
+        finish();
+    }
+
     public void setDates(ArrayList<String> dates) {
         this.diaryDates = dates;
         calendarAdapter.SetDates(this.diaryDates);
