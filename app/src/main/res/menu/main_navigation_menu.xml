@@ -6,7 +6,7 @@
 
             <item
                 android:id="@+id/drawer_menu_test"
-                android:icon="@drawable/maeumi_logo"
+                android:icon="@drawable/selftest_icon"
                 android:title="진단테스트" />
 
             <item
@@ -16,13 +16,18 @@
 
             <item
                 android:id="@+id/drawer_menu_diary"
-                android:icon="@drawable/heart_icon_1"
+                android:icon="@drawable/diary_icon"
                 android:title="나만의 일기장" />
 
             <item
                 android:id="@+id/drawer_menu_board"
-                android:icon="@drawable/heart_icon_2"
+                android:icon="@drawable/pen_icon"
                 android:title="게시판" />
+
+            <item
+                android:id="@+id/drawer_menu_youtube"
+                android:icon="@drawable/youtube_icon"
+                android:title="마음 채우기" />
 
         </menu>
     </item>

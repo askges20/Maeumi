@@ -10,6 +10,39 @@
     tools:context=".view.diary.DiaryMain" >
 
     <LinearLayout
+        android:id="@+id/diaryTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/shadow"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:onClick="goToBack"
+            android:text="←"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="나만의 일기장"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Button"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/diaryTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +51,8 @@
         android:paddingVertical="30dp"
         app:layout_constraintBottom_toTopOf="@id/diaryDays"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/diaryTopBar"
+        >
 
         <Button
             android:layout_width="0dp"
@@ -158,7 +192,7 @@
             android:layout_marginLeft="5dp"
             android:onClick="diaryWrite"
             android:padding="10dp"
-            android:text="작성하기"
+            android:text="날짜를 선택하세요"
             android:textSize="15sp" />
 
     </LinearLayout>
