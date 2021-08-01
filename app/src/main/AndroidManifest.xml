@@ -14,8 +14,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-        <activity android:name=".view.heartprogram.HeartProgram"></activity>
-        <activity android:name=".view.selftest.TestHistory" />
+
         <activity android:name=".ActivitySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".SingUpActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".view.diary.DiaryContent" />
         <activity android:name=".view.diary.DiaryModify" />
         <activity android:name=".view.diary.DiaryWrite" />
@@ -39,6 +38,8 @@
         <activity android:name=".view.selftest.TestResult" />
         <activity android:name=".view.selftest.TestClick" />
         <activity android:name=".view.diary.DiaryMain" />
+        <activity android:name=".view.heartprogram.HeartProgram"></activity>
+        <activity android:name=".view.selftest.TestHistory" />
     </application>
 
 </manifest>

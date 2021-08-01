@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         randomText = findViewById(R.id.mainRandomText);
         setRandomText();
 
-        //askForTest(); //테스트 진행 여부에 따른 팝업
+        askForTest(); //테스트 진행 여부에 따른 팝업
     }
 
     public void goToDiary(View view) {
@@ -210,8 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
     //테스트 진행 팝업
     public boolean askForTest() {
-        System.out.println("[메인화면] 테스트 결과 : "+LoginUser.getInstance().getVictimScore());
-
         //테스트 결과가 존재하면
         if (LoginUser.getInstance().getVictimScore() != null) {
             return false;

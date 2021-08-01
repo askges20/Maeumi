@@ -76,7 +76,7 @@ public class LoginUser {
     }
 
 
-    /*테스트 결과*/
+    /* 테스트 결과 불러와서 저장하기 */
     public void setHistory() {
         testModel.getHistory();
     }

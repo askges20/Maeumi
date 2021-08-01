@@ -12,8 +12,7 @@ public class TestModel {
     TestHistory TestHistory;
 
     FirebaseDatabase database;
-    DatabaseReference victim;
-    DatabaseReference perpetration;
+    DatabaseReference testRef;
 
     //LoginUser loginUser = LoginUser.getInstance();
     //ActivitySplash에서 사용자 정보를 가져오기 전에 생성되므로 null값을 가지는 오류 발생 -> 주석 처리
@@ -38,43 +37,33 @@ public class TestModel {
 
     public void setVictimScore(String score) {
         this.victimScore = score;
-        System.out.println(this.victimScore);
     }
 
+    public void setPerpetrationScore(String score) {
+        this.perpetrationScore = score;
+    }
 
     public void getHistory() {
         LoginUser loginUser = LoginUser.getInstance();
 
         database = FirebaseDatabase.getInstance();
-        victim = database.getReference("/진단테스트/" + loginUser.getUid() + "/피해정도");
-        perpetration = database.getReference("/진단테스트/" + loginUser.getUid() + "/가해정도");
-
-        victim.addValueEventListener(new ValueEventListener() {
+        testRef = database.getReference("/진단테스트/" + loginUser.getUid() + "/");
+        testRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                setVictimScore(String.valueOf(dataSnapshot.getValue()));
+                for (DataSnapshot snap: dataSnapshot.getChildren()){
+                    if(snap.getKey().equals("피해정도")){
+                        setVictimScore(snap.getValue().toString());
+                    } else if(snap.getKey().equals("가해정도")){
+                        setPerpetrationScore(snap.getValue().toString());
+                    }
+                    System.out.println("사용자 테스트 결과 불러오기 완료");
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                System.out.println("Failed to read value." + error.toException());
-            }
-        });
-
-        perpetration.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                perpetrationScore = String.valueOf(dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                System.out.println("Failed to read value." + error.toException());
             }
         });
     }
-
-
 }
