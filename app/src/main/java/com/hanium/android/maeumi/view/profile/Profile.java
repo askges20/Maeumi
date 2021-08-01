@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class Profile extends AppCompatActivity {
 
     Button logoutBtn;
     TextView userName, userEmail, userAlias, userSchool, userGender;
+    ImageView heartProgress;
     private String name, email, alias, gender, school;
 
     @Override
@@ -35,6 +37,7 @@ public class Profile extends AppCompatActivity {
         userAlias = findViewById(R.id.userAlias);
         userSchool = findViewById(R.id.userSchool);
         userGender = findViewById(R.id.userGender);
+        heartProgress = findViewById(R.id.heartProgress);
 
         name = loginUser.getName();
         email = loginUser.getEmail();
@@ -47,6 +50,8 @@ public class Profile extends AppCompatActivity {
         userAlias.setText(alias);
         userSchool.setText(school);
         userGender.setText(gender);
+
+        heartProgress.setImageResource(R.drawable.heart_icon_1);
 
         //로그아웃 버튼
         logoutBtn = findViewById(R.id.signOutBtn);
