@@ -3,6 +3,7 @@ package com.hanium.android.maeumi.view.diary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import static com.hanium.android.maeumi.view.diary.CalendarUtils.monthYearFromDa
 public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnItemListener {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
+    Button diaryButton;
 
     DiaryModel DiaryModel = new DiaryModel(this);
     CalendarAdapter calendarAdapter;
@@ -35,6 +37,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         iniwigets();
         CalendarUtils.selectDate = LocalDate.now();
         DiaryModel.setCompareMonth(CalendarUtils.selectDate);
+        diaryButton = findViewById(R.id.diaryWriteBtn);
 
         setMonthView();
     }
@@ -84,11 +87,12 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     //캘린더에서 날짜 선택했을 때 이벤트 리스너
     @Override
     public void onItemClick(int position, String dayText) {
-        // 클릭 날짜 표시 [x]
         DiaryModel.setDate(CalendarUtils.selectDate,dayText);
-        String message = "선택한 날짜 : " + dayText + " " + monthYearFromDate(CalendarUtils.selectDate);
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-
+        if(dayText != ""){
+            diaryButton.setText(dayText + "일 일기 작성하기");
+        }else{
+            diaryButton.setText("날짜를 선택하세요");
+        }
         Intent intent = new Intent(getApplicationContext(), DiaryContent.class);
         startActivity(intent);
     }
