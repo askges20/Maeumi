@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
+import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
 import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
 
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, Board.class));
                 } else if (id==R.id.drawer_menu_mypage){
                     startActivity(new Intent(MainActivity.this, Profile.class));
+                }else if (id==R.id.drawer_menu_youtube){
+                    startActivity(new Intent(MainActivity.this, HeartProgram.class));
                 }
 
                 return true;

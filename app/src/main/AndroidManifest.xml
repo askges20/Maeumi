@@ -14,7 +14,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-        <activity android:name=".view.selftest.TestHistory"></activity>
+        <activity android:name=".view.heartprogram.HeartProgram"></activity>
+        <activity android:name=".view.selftest.TestHistory" />
         <activity android:name=".ActivitySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
