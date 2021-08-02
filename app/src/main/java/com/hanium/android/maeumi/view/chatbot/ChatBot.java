@@ -234,10 +234,10 @@ public class ChatBot extends AppCompatActivity implements BotReply {
 
     //일기장으로 이동하기
     public void goToDiary() {
-        Intent intent = new Intent(ChatBot.this, DiaryMain.class);
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable()  {
             public void run() {
+                Intent intent = new Intent(ChatBot.this, DiaryMain.class);
                 startActivity(intent);  //일기장으로 이동
             }
         }, 1500); // 1.5초후
