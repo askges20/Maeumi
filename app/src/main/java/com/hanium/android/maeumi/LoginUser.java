@@ -9,6 +9,7 @@ public class LoginUser {
     private String gender;
     private String school;
     private String alias;
+    private int heart = -1;  //마음 채우기 정도, 디폴트는 -1
 
     private static LoginUser user = new LoginUser();
 
@@ -75,6 +76,13 @@ public class LoginUser {
         this.gender = gender;
     }
 
+    public int getHeart() {
+        return heart;
+    }
+
+    public void setHeart(int heart) {
+        this.heart = heart;
+    }
 
     /* 테스트 결과 불러와서 저장하기 */
     public void setHistory() {

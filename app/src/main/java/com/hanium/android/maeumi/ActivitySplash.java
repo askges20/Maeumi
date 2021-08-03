@@ -47,6 +47,7 @@ public class ActivitySplash extends AppCompatActivity {
                     user.setAlias(snapshot.child("alias").getValue(String.class));
                     user.setGender(snapshot.child("gender").getValue(String.class));
                     user.setSchool(snapshot.child("school").getValue(String.class));
+                    user.setHeart(snapshot.child("heart").getValue(int.class)); //마음 채우기 정도
 
                     System.out.println("사용자 정보 저장");
                 }
