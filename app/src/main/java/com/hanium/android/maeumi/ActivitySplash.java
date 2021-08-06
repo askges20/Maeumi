@@ -80,7 +80,7 @@ public class ActivitySplash extends AppCompatActivity {
                 }
                 finish();
             }
-        }, 4000);   //4초 뒤 이동
+        }, 4500);   //4초 뒤 이동
     }
 
     @Override
