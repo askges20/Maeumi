@@ -29,7 +29,7 @@ public class TestHistory extends AppCompatActivity {
         //victimScoreText.setText(victimScore);
         //perpetrationScoreText.setText(perpetrationScore);
 
-        if (victimScore.equals("null")){    //결과가 존재하지 않음
+        if (victimScore == null){    //결과가 존재하지 않음
             alertNoResult();
         } else {    //결과가 존재함
             moveToTestResult();
