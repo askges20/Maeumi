@@ -5,7 +5,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hanium.android.maeumi.LoginUser;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.selftest.TestHistory;
 
 public class TestModel {

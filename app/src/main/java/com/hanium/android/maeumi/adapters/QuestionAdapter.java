@@ -1,24 +1,18 @@
 package com.hanium.android.maeumi.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.hanium.android.maeumi.LoginUser;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.model.Question;
 import com.hanium.android.maeumi.view.selftest.TestClick;
 

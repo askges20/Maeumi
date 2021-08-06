@@ -1,6 +1,5 @@
-package com.hanium.android.maeumi.view.diary;
+package com.hanium.android.maeumi.adapters;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.view.diary.CalendarViewHolder;
 
 import java.util.ArrayList;
 
-class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
+public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final ArrayList<String> days0fMonth;
     private final OnItemListener onItemListener;
