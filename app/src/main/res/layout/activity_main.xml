@@ -92,7 +92,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:onClick="goToProfile"
-                android:text="마음 온도 5도" />
+                android:text="마음 채우기" />
         </LinearLayout>
 
     </LinearLayout>

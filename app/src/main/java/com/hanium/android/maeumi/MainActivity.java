@@ -23,6 +23,8 @@ import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
 import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
+import com.hanium.android.maeumi.view.loading.LoginActivity;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
 

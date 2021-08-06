@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.loading;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.hanium.android.maeumi.R;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -97,6 +98,7 @@ public class SingUpActivity extends AppCompatActivity {
                             String gender = UserGender;
                             String alias = userAlias;
                             String school = userSchool;
+                            String heart = "-1";
 
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("uid", uid);
@@ -105,6 +107,7 @@ public class SingUpActivity extends AppCompatActivity {
                             hashMap.put("gender", gender);
                             hashMap.put("alias", alias);
                             hashMap.put("school", school);
+                            hashMap.put("heart", heart);
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference reference = database.getReference("Users");

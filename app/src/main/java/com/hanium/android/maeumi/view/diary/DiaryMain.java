@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.adapters.CalendarAdapter;
 import com.hanium.android.maeumi.model.DiaryModel;
 
 import java.time.LocalDate;

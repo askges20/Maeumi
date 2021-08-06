@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.loading;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.MainActivity;
+import com.hanium.android.maeumi.R;
 
 public class LoginActivity extends AppCompatActivity {
     FirebaseDatabase database;
@@ -96,6 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                             user.setAlias(snapshot.child("alias").getValue(String.class));
                             user.setGender(snapshot.child("gender").getValue(String.class));
                             user.setSchool(snapshot.child("school").getValue(String.class));
+                            if(snapshot.child("heart").getValue(String.class) == null){
+                                user.setHeart("-1");
+                            }else{
+                                user.setHeart(snapshot.child("heart").getValue(String.class));
+                            }
                         }
 
                         @Override

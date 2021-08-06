@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.hanium.android.maeumi.LoginUser;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
 
 import java.io.ByteArrayOutputStream;

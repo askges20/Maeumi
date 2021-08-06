@@ -14,8 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.hanium.android.maeumi.LoginActivity;
-import com.hanium.android.maeumi.LoginUser;
+import com.hanium.android.maeumi.view.loading.LoginActivity;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 
 public class Profile extends AppCompatActivity {

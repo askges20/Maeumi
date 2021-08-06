@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.loading;
 
 import com.hanium.android.maeumi.model.TestModel;
 
@@ -9,7 +9,7 @@ public class LoginUser {
     private String gender;
     private String school;
     private String alias;
-    private int heart = -1;  //마음 채우기 정도, 디폴트는 -1
+    private String heart;  //마음 채우기 정도, 디폴트는 -1
 
     private static LoginUser user = new LoginUser();
 
@@ -76,11 +76,11 @@ public class LoginUser {
         this.gender = gender;
     }
 
-    public int getHeart() {
+    public String getHeart() {
         return heart;
     }
 
-    public void setHeart(int heart) {
+    public void setHeart(String heart) {
         this.heart = heart;
     }
 

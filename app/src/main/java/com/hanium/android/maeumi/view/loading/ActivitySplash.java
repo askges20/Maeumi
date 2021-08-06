@@ -1,4 +1,4 @@
-package com.hanium.android.maeumi;
+package com.hanium.android.maeumi.view.loading;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.MainActivity;
+import com.hanium.android.maeumi.R;
 
 public class ActivitySplash extends AppCompatActivity {
     FirebaseDatabase database;
@@ -47,8 +49,11 @@ public class ActivitySplash extends AppCompatActivity {
                     user.setAlias(snapshot.child("alias").getValue(String.class));
                     user.setGender(snapshot.child("gender").getValue(String.class));
                     user.setSchool(snapshot.child("school").getValue(String.class));
-                    if (snapshot.child("heart").exists()){
-                        user.setHeart(snapshot.child("heart").getValue(int.class)); //마음 채우기 정도
+//                    user.setHeart(snapshot.child("heart").getValue(int.class)); //마음 채우기 정도
+                    if(snapshot.child("heart").getValue(String.class) == null){
+                        user.setHeart("-1");
+                    }else{
+                        user.setHeart(snapshot.child("heart").getValue(String.class));
                     }
 
                     System.out.println("사용자 정보 저장");
@@ -77,7 +82,7 @@ public class ActivitySplash extends AppCompatActivity {
                 }
                 finish();
             }
-        }, 4000);   //4초 뒤 이동
+        }, 4500);   //4초 뒤 이동
     }
 
     @Override
