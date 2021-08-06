@@ -33,6 +33,15 @@
         <item name="android:fontFamily">@font/custom_font_family</item>
     </style>
 
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textSize">18sp</item>   <!-- 버튼 텍스트 사이즈 지정, 메세지 텍스트 크기는 java 파일에서 지정해줘야함 -->
+        <item name="android:fontFamily">@font/custom_font_family</item>
+        <item name="android:textAppearanceSmall">@font/custom_font_family</item>
+        <item name="android:textAppearanceMedium">@font/custom_font_family</item>
+        <item name="android:textAppearanceLarge">@font/custom_font_family</item>
+        <item name="android:windowBackground">@drawable/alert_white_border</item>   <!-- 모서리 둥글게 -->
+    </style>
+
     <!--
     <style name="PopUpMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
         <item name="fontFamily">@font/custom_font_family</item>

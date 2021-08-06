@@ -3,6 +3,7 @@ package com.hanium.android.maeumi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -160,25 +161,28 @@ public class MainActivity extends AppCompatActivity {
 
     //앱을 종료할지 묻는 팝업 띄우기
     public void showEndDialog(){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-        dialog.setMessage("앱을 종료하시겠습니까?");
-        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                finish();   //현재 액티비티 없애기
-            }
-        });
-        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-            }
-        });
-        dialog.show();
+        AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+            .setMessage("앱을 종료하시겠습니까?")
+            .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    finish();   //현재 액티비티 없애기
+                }
+            })
+            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                }
+            }).show();
+
+        //폰트 크기 조정
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(18);
     }
 
     //로그아웃 버튼 클릭 이벤트
     public void signOutBtnEvent() {
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage("로그아웃 하시겠습니까?")
                 .setPositiveButton("네", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -192,6 +196,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+
+        //폰트 크기 조정
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(18);
     }
 
     //로그아웃 진행
@@ -222,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //테스트 결과가 존재하지 않으면
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage("아직 진단테스트를 이용하지 않으셨습니다. 진단테스트를 진행하시겠습니까?") //진단테스트 권유.. 메세지? 내용 수정할수도
                 .setPositiveButton("네", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -236,6 +244,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+
+        //폰트 크기 조정
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(18);
 
         return true;
     }

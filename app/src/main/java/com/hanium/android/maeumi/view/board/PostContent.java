@@ -170,9 +170,9 @@ public class PostContent extends AppCompatActivity {
     }
 
     public void showDeleteDialog() {    //삭제 버튼 클릭 시
-        AlertDialog.Builder dialog = new AlertDialog.Builder(PostContent.this);
-        dialog.setMessage("작성하신 글을 삭제하시겠습니까?");
-        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+        AlertDialog dialog = new AlertDialog.Builder(PostContent.this)
+        .setMessage("작성하신 글을 삭제하시겠습니까?")
+        .setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
 
@@ -197,18 +197,22 @@ public class PostContent extends AppCompatActivity {
                 likeRef.setValue(null);
 
 
-                Toast toastView = Toast.makeText(PostContent.this, "삭제 완료", Toast.LENGTH_SHORT);
-                toastView.show();
+//                Toast toastView = Toast.makeText(PostContent.this, "삭제 완료", Toast.LENGTH_SHORT);
+//                toastView.show();
                 finish();   //현재 액티비티 없애기
             }
-        });
-        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+        })
+        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                Toast.makeText(PostContent.this, "삭제 취소", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(PostContent.this, "삭제 취소", Toast.LENGTH_SHORT).show();
             }
-        });
-        dialog.show();
+        })
+        .show();
+
+        //폰트 크기 조정
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(18);
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
@@ -284,21 +288,25 @@ public class PostContent extends AppCompatActivity {
 
     //댓글 삭제 버튼 클릭 시
     public void deleteComment(Comment comment) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("댓글을 삭제하시겠습니까?");
-        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+        .setMessage("댓글을 삭제하시겠습니까?")
+        .setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 processDeleteComment(comment);  //댓글 삭제 진행
             }
-        });
-        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+        })
+        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 //댓글 삭제 취소
             }
-        });
-        dialog.show();
+        })
+        .show();
+
+        //폰트 크기 조정
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(18);
     }
 
     public void processDeleteComment(Comment comment) { //삭제할 댓글을 파라미터로 받음
