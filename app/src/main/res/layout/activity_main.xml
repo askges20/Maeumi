@@ -85,14 +85,23 @@
             android:layout_height="wrap_content"
             android:background="#E6E6E6"
             android:orientation="vertical"
+            android:onClick="goToProfile"
             android:padding="10dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:onClick="goToProfile"
                 android:text="마음 채우기" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/pinkred"/>
         </LinearLayout>
 
     </LinearLayout>

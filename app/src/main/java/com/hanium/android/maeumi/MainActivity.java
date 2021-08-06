@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     Button logoutBtn;
     TextView randomText;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         }
          */
+        progressBar = findViewById(R.id.progressBar);
 
         mDrawerLayout = findViewById(R.id.main_drawer_layout);
 
@@ -110,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         setRandomText();
 
         askForTest(); //테스트 진행 여부에 따른 팝업
+        getHeart(); // 마음채우기
     }
 
     public void goToDiary(View view) {
@@ -234,5 +238,14 @@ public class MainActivity extends AppCompatActivity {
                 .show();
 
         return true;
+    }
+
+    //마음 채우기
+    public void getHeart(){
+        if(LoginUser.getInstance().getHeart() != null){
+            progressBar.setProgress(Integer.parseInt(LoginUser.getInstance().getHeart()));
+        }else{
+            progressBar.setProgress(5);
+        }
     }
 }
