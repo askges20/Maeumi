@@ -168,15 +168,15 @@ public class QuestionAdapter extends BaseAdapter {
         testReference.child("피해정도").setValue(victimValue);
         testReference.child("가해정도").setValue(perpetrationValue);
 
-        int heart = 0;
+        String heart = "0";
         if (perpetrationValue <= 6){
-            heart = 80;
+            heart = "80";
         } else if (perpetrationValue <= 13){
-            heart = 60;
+            heart = "60";
         } else if (perpetrationValue <= 22){
-            heart = 40;
+            heart = "40";
         } else if (perpetrationValue <= 29){
-            heart = 20;
+            heart = "20";
         }
 
         DatabaseReference userReference = firebase.getReference("/Users/" + loginUserUid + "/");
