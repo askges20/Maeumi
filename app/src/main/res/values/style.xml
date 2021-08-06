@@ -42,9 +42,15 @@
         <item name="android:windowBackground">@drawable/alert_white_border</item>   <!-- 모서리 둥글게 -->
     </style>
 
-    <!--
-    <style name="PopUpMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
-        <item name="fontFamily">@font/custom_font_family</item>
+    <!-- 팝업 (적용 안됨) -->
+    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@color/pinkred</item>
+        <item name="android:textColor">@color/pinkred</item>
     </style>
-    -->
+    <style name="PopupMenuTextAppearanceSmall" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
+        <item name="android:textColor">@color/pinkred</item>
+    </style>
+    <style name="PopupMenuTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+        <item name="android:textColor">@color/pinkred</item>
+    </style>
 </resources>

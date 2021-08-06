@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <!-- <style name="Theme.Maeumi" parent="Theme.MaterialComponents.DayNight.NoActionBar"> -->
-    <style name="Theme.Maeumi" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.Maeumi" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -26,5 +26,10 @@
         <item name="android:radioButtonStyle">@style/RadioButtonStyle</item>
         <item name="android:checkboxStyle">@style/CheckboxStyle</item>
         <item name="android:alertDialogTheme">@style/AlertDialogStyle</item>
+
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/PopupMenuTextAppearanceSmall</item>
+
     </style>
 </resources>
