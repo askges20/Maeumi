@@ -41,9 +41,6 @@ public class BoardWrite extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formatDate = dateFormat.format(date);
 
-        //TextView boardWriteDate = (TextView) findViewById(R.id.boardWriteDate);
-        //boardWriteDate.setText(formatDate);
-
         Button saveWrite = (Button) findViewById(R.id.saveWrite); //작성 완료 버튼
         final EditText boardTitle = (EditText) findViewById(R.id.boardTitle); //게시글 제목
         final EditText boardBody = (EditText) findViewById(R.id.boardBody); //게시글 내용
@@ -56,11 +53,7 @@ public class BoardWrite extends AppCompatActivity {
                 String content = boardBody.getText().toString();    //작성한 내용
                 /*제목, 내용 유효성 검사 추가할 예정*/
                 addPost(title, content);    //게시글 등록
-
                 Toast.makeText(BoardWrite.this, "작성 완료", Toast.LENGTH_SHORT).show();
-                System.out.println("제목: " + boardTitle.getText());
-                System.out.println("내용: " + boardBody.getText());
-
                 finish();
             }
         });
@@ -90,7 +83,6 @@ public class BoardWrite extends AppCompatActivity {
 
         Post post = new Post(title, content, loginUserName, curDate, loginUserUid);   //model Post 객체
         postValues = post.toMap();
-        System.out.println("postValue- " + postValues);
         childUpdates.put(postNum, postValues);
         boardRef.updateChildren(childUpdates);
     }

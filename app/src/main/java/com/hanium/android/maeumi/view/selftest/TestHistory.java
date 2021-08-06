@@ -20,16 +20,10 @@ public class TestHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_history);
 
-        //TextView victimScoreText = findViewById(R.id.victimScore);
-        //TextView perpetrationScoreText = findViewById(R.id.perpetrationScore);
-
         victimScore = LoginUser.getInstance().getVictimScore();
         perpetrationScore = LoginUser.getInstance().getPerpetrationScore();
 
-        //victimScoreText.setText(victimScore);
-        //perpetrationScoreText.setText(perpetrationScore);
-
-        if (victimScore == null){    //결과가 존재하지 않음
+        if (victimScore == null) {    //결과가 존재하지 않음
             alertNoResult();
         } else {    //결과가 존재함
             moveToTestResult();
