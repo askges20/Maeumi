@@ -120,25 +120,57 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <Button
+            <LinearLayout
                 android:id="@+id/btnTest"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginVertical="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/alert_white_border"
+                android:backgroundTint="@color/yellow"
+                android:gravity="center"
                 android:onClick="goToSelfTest"
-                android:text="테스트 하기"
-                android:textSize="24sp" />
+                android:orientation="horizontal">
 
-            <Button
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/selftest_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="테스트 하기"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/btnChat"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginVertical="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/alert_white_border"
+                android:backgroundTint="@color/lightgreen"
+                android:gravity="center"
                 android:onClick="goToChatBot"
-                android:text="상담하기"
-                android:textSize="24sp" />
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/comment_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="상담하기"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -149,27 +181,60 @@
             android:paddingTop="10dp"
             android:paddingBottom="5dp">
 
-            <Button
+            <LinearLayout
                 android:id="@+id/btnDiary"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/alert_white_border"
+                android:backgroundTint="#A7E4FF"
+                android:gravity="center"
                 android:onClick="goToDiary"
-                android:text="나만의\n일기장"
-                android:textSize="24sp" />
+                android:orientation="vertical">
 
-            <Button
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나만의\n일기장"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/diary_icon" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/btnBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/alert_white_border"
+                android:backgroundTint="#FFD963"
+                android:gravity="center"
                 android:onClick="goToBoard"
-                android:text="게시판"
-                android:textSize="24sp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="게시판"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/pen_icon" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
