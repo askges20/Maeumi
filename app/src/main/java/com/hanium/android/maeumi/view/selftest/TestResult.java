@@ -7,13 +7,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 
 import com.hanium.android.maeumi.view.heartprogram.HeartGuide;
 import com.hanium.android.maeumi.view.loading.LoginUser;
@@ -134,12 +132,14 @@ public class TestResult extends AppCompatActivity {
         //finish();
     }
 
+    //마음 채우기 가이드 이동 팝업 띄우기
     public void showHeartDialog(int layout) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         View layoutView = getLayoutInflater().inflate(layout, null);
-        dialogBuilder.setCancelable(false);
+        dialogBuilder.setCancelable(false); //뒤로가기 버튼 비활성화
         dialogBuilder.setView(layoutView);
 
+        //이동하기 버튼
         TextView moveBtn = layoutView.findViewById(R.id.moveToHeartGuideBtn);
         moveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -151,9 +151,10 @@ public class TestResult extends AppCompatActivity {
         });
 
         AlertDialog dialog = dialogBuilder.create();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //모서리 둥글게
         dialog.show();
 
+        //팝업 사이즈
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
