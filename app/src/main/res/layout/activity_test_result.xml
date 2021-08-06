@@ -192,6 +192,7 @@
 
             </LinearLayout>
 
+            <!--
             <LinearLayout
                 android:id="@+id/testResultMenu"
                 android:layout_width="match_parent"
@@ -247,6 +248,7 @@
                     app:backgroundTint="#D3D0CC"
                     tools:textSize="18sp" />
             </LinearLayout>
+            -->
         </LinearLayout>
     </ScrollView>
 

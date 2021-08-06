@@ -165,12 +165,28 @@ public class QuestionAdapter extends BaseAdapter {
 
     //테스트 결과 firebase DB 반영 부분
     public void resultToFirebase() {
+        String loginUserUid = LoginUser.getInstance().getUid();
+
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
-        DatabaseReference testReference = firebase.getReference("/진단테스트/" + LoginUser.getInstance().getUid() + "/");
+        DatabaseReference testReference = firebase.getReference("/진단테스트/" + loginUserUid + "/");
 
         testReference.child("답변").setValue(answers);
         testReference.child("피해정도").setValue(victimValue);
         testReference.child("가해정도").setValue(perpetrationValue);
+
+        int heart = 0;
+        if (perpetrationValue <= 6){
+            heart = 80;
+        } else if (perpetrationValue <= 13){
+            heart = 60;
+        } else if (perpetrationValue <= 22){
+            heart = 40;
+        } else if (perpetrationValue <= 29){
+            heart = 20;
+        }
+
+        DatabaseReference userReference = firebase.getReference("/Users/" + loginUserUid + "/");
+        userReference.child("heart").setValue(heart);   //마음 온도 저장
     }
 
     //피해 정도 리턴
