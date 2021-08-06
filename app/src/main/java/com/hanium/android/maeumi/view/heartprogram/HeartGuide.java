@@ -1,5 +1,6 @@
 package com.hanium.android.maeumi.view.heartprogram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.hanium.android.maeumi.R;
@@ -13,6 +14,12 @@ public class HeartGuide extends AppCompatActivity {
     }
 
     public void goToBack(View view){
+        finish();
+    }
+
+    public void goToHeartProgram(View view) {
+        Intent intent = new Intent(HeartGuide.this, HeartProgram.class);
+        startActivity(intent);
         finish();
     }
 }
