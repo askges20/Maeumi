@@ -90,10 +90,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //사이드바 헤더
         View header = navigationView.getHeaderView(0);
         TextView userAlias = header.findViewById(R.id.mainUserAliasText);
+        userAlias.setText(LoginUser.getInstance().getAlias()+" 님");  //유저 닉네임
         TextView userSchool = header.findViewById(R.id.mainUserSchoolText);
+        userSchool.setText(LoginUser.getInstance().getSchool());    //유저 학교
 
+        //로그아웃 버튼
         logoutBtn = header.findViewById(R.id.mainLogoutBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //사이드바 여는 버튼
         mainDrawerBtn = findViewById(R.id.mainDrawerBtn);
         mainDrawerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //랜덤 문구
         randomText = findViewById(R.id.mainRandomText);
         setRandomText();
 
