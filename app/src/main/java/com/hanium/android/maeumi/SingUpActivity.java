@@ -97,6 +97,7 @@ public class SingUpActivity extends AppCompatActivity {
                             String gender = UserGender;
                             String alias = userAlias;
                             String school = userSchool;
+                            String heart = "-1";
 
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("uid", uid);
@@ -105,6 +106,7 @@ public class SingUpActivity extends AppCompatActivity {
                             hashMap.put("gender", gender);
                             hashMap.put("alias", alias);
                             hashMap.put("school", school);
+                            hashMap.put("heart", heart);
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference reference = database.getReference("Users");

@@ -96,6 +96,11 @@ public class LoginActivity extends AppCompatActivity {
                             user.setAlias(snapshot.child("alias").getValue(String.class));
                             user.setGender(snapshot.child("gender").getValue(String.class));
                             user.setSchool(snapshot.child("school").getValue(String.class));
+                            if(snapshot.child("heart").getValue(String.class) == null){
+                                user.setHeart("-1");
+                            }else{
+                                user.setHeart(snapshot.child("heart").getValue(String.class));
+                            }
                         }
 
                         @Override
