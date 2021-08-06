@@ -40,6 +40,7 @@
         <activity android:name=".view.diary.DiaryMain" />
         <activity android:name=".view.heartprogram.HeartProgram"></activity>
         <activity android:name=".view.selftest.TestHistory" />
+        <activity android:name=".view.heartprogram.HeartGuide"></activity>
     </application>
 
 </manifest>

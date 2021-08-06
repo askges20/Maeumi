@@ -1,13 +1,21 @@
 package com.hanium.android.maeumi.view.selftest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
+import com.hanium.android.maeumi.view.heartprogram.HeartGuide;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.view.board.Board;
@@ -113,9 +121,47 @@ public class TestResult extends AppCompatActivity {
         System.out.println("Move To Board");
     }
 
+
+    //상단바 뒤로가기 버튼 터치했을 때
     public void goToMain(View view) {
-        finish();
-        System.out.println("Move To Main");
+        showHeartDialog(R.layout.heart_popup);
+        //finish();
+    }
+
+    @Override
+    public void onBackPressed() {   //뒤로가기 버튼 클릭 시
+        showHeartDialog(R.layout.heart_popup);
+        //finish();
+    }
+
+    public void showHeartDialog(int layout) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View layoutView = getLayoutInflater().inflate(layout, null);
+        dialogBuilder.setCancelable(false);
+        dialogBuilder.setView(layoutView);
+
+        TextView moveBtn = layoutView.findViewById(R.id.moveToHeartGuideBtn);
+        moveBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TestResult.this, HeartGuide.class);
+                startActivity(intent);
+                finish();   //현재 액티비티(테스트 결과 화면) 종료
+            }
+        });
+
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int x = (int)(size.x * 0.7f);
+        int y = (int)(size.y * 0.5f);
+
+        dialog.getWindow().setLayout(x, y);
     }
 
 }
