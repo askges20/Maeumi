@@ -25,8 +25,7 @@ public class PostModify extends AppCompatActivity {
 
     String postTitle, postContent, postDate, postWriter, boardType;
 
-    EditText titleText;
-    EditText contentText;
+    EditText titleText,contentText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

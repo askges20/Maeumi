@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,7 +166,6 @@ public class PostContent extends AppCompatActivity {
         intent.putExtra("boardType", boardType);
 
         startActivity(intent);
-        System.out.println("Move To Modify Post");
     }
 
     public void showDeleteDialog() {    //삭제 버튼 클릭 시
@@ -197,9 +195,6 @@ public class PostContent extends AppCompatActivity {
                 DatabaseReference likeRef = database.getReference("/공감/" + postCode);
                 likeRef.setValue(null);
 
-
-//                Toast toastView = Toast.makeText(PostContent.this, "삭제 완료", Toast.LENGTH_SHORT);
-//                toastView.show();
                 finish();   //현재 액티비티 없애기
             }
         })

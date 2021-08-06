@@ -33,7 +33,7 @@ public class ActivitySplash extends AppCompatActivity {
 
         FirebaseUser userFromFB = FirebaseAuth.getInstance().getCurrentUser();  //사용자가 이전에 로그인한 계정
 
-        if(userFromFB != null) {    //이전에 로그인을 했었다면 DB에서 정보 조회, 저장
+        if (userFromFB != null) {    //이전에 로그인을 했었다면 DB에서 정보 조회, 저장
             String loginUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); //로그인한 계정의 uid
             LoginUser user = LoginUser.getInstance();    //싱글톤 패턴
             user.setUid(loginUserUid);  //사용자 uid
@@ -49,10 +49,9 @@ public class ActivitySplash extends AppCompatActivity {
                     user.setAlias(snapshot.child("alias").getValue(String.class));
                     user.setGender(snapshot.child("gender").getValue(String.class));
                     user.setSchool(snapshot.child("school").getValue(String.class));
-//                    user.setHeart(snapshot.child("heart").getValue(int.class)); //마음 채우기 정도
-                    if(snapshot.child("heart").getValue(String.class) == null){
+                    if (snapshot.child("heart").getValue(String.class) == null) {
                         user.setHeart("-1");
-                    }else{
+                    } else {
                         user.setHeart(snapshot.child("heart").getValue(String.class));
                     }
 

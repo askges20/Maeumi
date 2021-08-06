@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -155,7 +154,6 @@ public class DiaryWrite extends AppCompatActivity {
                     imgName = BitmapFactory.decodeStream(inStream);
                     Glide.with(getApplicationContext()).load(imgName).into(imgView);
                     inStream.close();   // 스트림 닫아주기
-                    Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
                 }
