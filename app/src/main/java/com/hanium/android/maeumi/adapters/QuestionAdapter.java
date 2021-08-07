@@ -1,6 +1,7 @@
 package com.hanium.android.maeumi.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class QuestionAdapter extends BaseAdapter {
     String answers = ""; //체크한 답변을 문자열로 저장
     int victimValue = 0;    //피해 정도
     int perpetrationValue = 0;  //가해 정도
+
+    String heart = "";  //마음 온도
 
 
     public QuestionAdapter(TestClick testClick, Context context) {
@@ -168,7 +171,7 @@ public class QuestionAdapter extends BaseAdapter {
         testReference.child("피해정도").setValue(victimValue);
         testReference.child("가해정도").setValue(perpetrationValue);
 
-        String heart = "0";
+        heart = "0";
         if (perpetrationValue <= 6){
             heart = "80";
         } else if (perpetrationValue <= 13){
@@ -181,6 +184,14 @@ public class QuestionAdapter extends BaseAdapter {
 
         DatabaseReference userReference = firebase.getReference("/Users/" + loginUserUid + "/");
         userReference.child("heart").setValue(heart);   //마음 온도 저장
+    }
+
+    //LoginUser 객체에 테스트 결과 저장
+    public void resultToLoginUser() {
+        LoginUser user = LoginUser.getInstance();
+        user.setVictimScore("" + victimValue);  //피해 정도 저장
+        user.setPerpetrationScore("" + perpetrationValue);  //가해 정도 저장
+        user.getInstance().setHeart(heart); //마음 온도 저장
     }
 
     //피해 정도 리턴

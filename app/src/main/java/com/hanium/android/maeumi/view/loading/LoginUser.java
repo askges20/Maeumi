@@ -88,6 +88,14 @@ public class LoginUser {
     public void setHistory() {
         testModel.getHistory();
     }
+    
+    public void setVictimScore(String score) {
+        testModel.setVictimScore(score);
+    }
+
+    public void setPerpetrationScore(String score) {
+        testModel.setPerpetrationScore(score);
+    }
 
     public String getVictimScore(){
         return testModel.getVictimScore();
