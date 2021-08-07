@@ -61,6 +61,7 @@ public class TestClick extends AppCompatActivity {
                 if (adapter.isAllChecked()) {    //모든 문항에 답변을 했으면
                     adapter.calSelectedOptions();   //테스트 결과 계산
                     adapter.resultToFirebase(); //테스트 결과 DB에 반영
+                    adapter.resultToLoginUser();    //LoginUser 객체에 결과 저장
 
                     finish();   //현재 액티비티 종료
                     Intent intent = new Intent(TestClick.this, TestResult.class);

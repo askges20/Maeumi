@@ -95,7 +95,7 @@ public class TestResult extends AppCompatActivity {
             perpetrationScoreText.setText("약함");
         } else if (perpetrationScore <= 22){
             perpetrationResultDetailText.setText(R.string.test_result_perpetration_3);
-
+            perpetrationScoreText.setText("보통");
         } else if (perpetrationScore <= 29){
             perpetrationResultDetailText.setText(R.string.test_result_perpetration_4);
             perpetrationScoreText.setText("심함");

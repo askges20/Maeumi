@@ -46,4 +46,11 @@
         <activity android:name=".view.heartprogram.HeartGuide"></activity>
     </application>
 
+    <!-- Android 11 (API 30+) Youtube API 초기화 -->
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
+
 </manifest>
