@@ -67,11 +67,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginRight="15dp"
-                        android:background="#FFC107"
-                        app:srcCompat="@drawable/ic_launcher_foreground" />
+                        app:srcCompat="@drawable/victim_maeumi" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -112,11 +111,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginRight="15dp"
-                        android:background="#F40404"
-                        app:srcCompat="@drawable/ic_launcher_foreground" />
+                        app:srcCompat="@drawable/perpetration_maeumi" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
