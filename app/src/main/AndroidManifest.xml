@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hanium.android.maeumi">
     <!-- Dialogflow 연결 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 앨범 접근 권한 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 앨범 접근 권한 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/> <!-- YouTube 인터넷 연결 -->
 
 
     <application
