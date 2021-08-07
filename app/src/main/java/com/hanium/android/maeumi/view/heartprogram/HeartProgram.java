@@ -6,12 +6,13 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.hanium.android.maeumi.R;
 
-public class HeartProgram extends AppCompatActivity {
+public class HeartProgram extends YouTubeBaseActivity {
     YouTubePlayerView youTubePlayerView;
     Button btn;
     YouTubePlayer.OnInitializedListener listener;
@@ -21,7 +22,7 @@ public class HeartProgram extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heart_program);
 
-        btn = findViewById(R.id.youtubeViewPlayer);
+        btn = findViewById(R.id.button3);
         youTubePlayerView = findViewById(R.id.youtubeView);
         listener = new YouTubePlayer.OnInitializedListener() {
             @Override
