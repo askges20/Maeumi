@@ -3,6 +3,7 @@ package com.hanium.android.maeumi.view.heartprogram;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -30,6 +31,7 @@ public class HeartProgram extends YouTubeBaseActivity {
             @Override
             public void onClick(View v) {
                 playOrPause();  //영상 재생 (또는 일시정지)
+                Toast.makeText(HeartProgram.this, "마음채우기 +1", Toast.LENGTH_LONG).show();
             }
         });
     }
