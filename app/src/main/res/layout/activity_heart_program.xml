@@ -9,11 +9,9 @@
     <LinearLayout
         android:id="@+id/heartProgramTopBar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="74dp"
+        android:layout_height="70dp"
         android:background="@drawable/shadow"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/youtubeView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -43,27 +41,33 @@
 
     </LinearLayout>
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/youtubeView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="119dp"
-        app:layout_constraintBottom_toTopOf="@+id/youtubeViewPlayer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heartProgramTopBar" />
-
-    <Button
-        android:id="@+id/youtubeViewPlayer"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="209dp"
-        android:text="재 생"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/youtubeView" />
+        app:layout_constraintTop_toBottomOf="@+id/heartProgramTopBar">
+
+
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youtubeView"
+            android:layout_width="382dp"
+            android:layout_height="211dp"
+            tools:layout_editor_absoluteX="18dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="재 생"
+            android:onClick="onYTBcliclick"
+            tools:layout_editor_absoluteX="155dp"
+            tools:layout_editor_absoluteY="474dp" />
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
