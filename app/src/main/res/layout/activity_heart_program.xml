@@ -61,7 +61,7 @@
             android:id="@+id/videoPlayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="재 생"
+            android:text="Button"
             tools:layout_editor_absoluteX="155dp"
             tools:layout_editor_absoluteY="474dp" />
 
