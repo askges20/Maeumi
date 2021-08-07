@@ -3,7 +3,8 @@ package com.hanium.android.maeumi.view.heartprogram;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -11,13 +12,10 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.hanium.android.maeumi.R;
 
-
 public class HeartProgram extends YouTubeBaseActivity {
     YouTubePlayerView youTubePlayerView;
     Button btn;
     YouTubePlayer.OnInitializedListener listener;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +23,6 @@ public class HeartProgram extends YouTubeBaseActivity {
         setContentView(R.layout.activity_heart_program);
 
         btn = findViewById(R.id.button3);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HeartProgram.this, "마음채우기 +1", Toast.LENGTH_LONG).show();
-            }
-        });
-
         youTubePlayerView = findViewById(R.id.youtubeView);
         listener = new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -45,16 +36,13 @@ public class HeartProgram extends YouTubeBaseActivity {
             }
         };
 
-
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
-
             public void onClick(View v) {
                 youTubePlayerView.initialize("AIzaSyAd7jxBYoyffM5fWPST32ZYddSlbAtix48",listener); //api 키
             }
         });
-
-
+        
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
