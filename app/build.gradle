@@ -71,5 +71,6 @@ dependencies {
     //dialogFlow
     implementation 'com.google.cloud:google-cloud-dialogflow:2.1.0'
     implementation 'io.grpc:grpc-okhttp:1.30.0'
-//    compilefies('wrapper/YouTubeAndroidPlayerApi.jar') //libs 폴더 없어서 wrapper에 넣고 이 코드 수동으로 작성,,, wrapper밑에 jar있길래...
+   // compile 'com.google.android.gms:play-services:8.4.0'
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }
