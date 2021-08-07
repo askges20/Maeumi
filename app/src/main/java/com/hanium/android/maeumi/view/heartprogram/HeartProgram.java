@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -22,7 +20,7 @@ public class HeartProgram extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heart_program);
 
-        btn = findViewById(R.id.button3);
+        btn = findViewById(R.id.videoPlayBtn);
         youTubePlayerView = findViewById(R.id.youtubeView);
         listener = new YouTubePlayer.OnInitializedListener() {
             @Override
