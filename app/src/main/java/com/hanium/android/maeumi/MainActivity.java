@@ -3,9 +3,13 @@ package com.hanium.android.maeumi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +26,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
+import com.hanium.android.maeumi.view.heartprogram.HeartGuide;
 import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
 import com.hanium.android.maeumi.view.loading.LoginActivity;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
+import com.hanium.android.maeumi.view.selftest.TestResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -137,8 +143,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToBoard(View view) {
-        Intent intent = new Intent(MainActivity.this, Board.class);
-        startActivity(intent);
+        int heart = Integer.parseInt(LoginUser.getInstance().getHeart());
+        if (heart == -1) {  //진단테스트를 이용하지 않은 경우
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setMessage(R.string.board_before_test)
+                    .setPositiveButton("이동", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            goToSelfTest(null);
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
+
+            TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
+            dialogMessage.setTextSize(18);
+        } else if (heart < 60) {   //마음 온도가 60 미만인 경우 게시판 이용 불가
+            showBoardBeforeHeartPopup(R.layout.board_before_heart_popup);    //마음 채우기 안내 팝업
+        } else {
+            Intent intent = new Intent(MainActivity.this, Board.class);
+            startActivity(intent);
+        }
+    }
+
+    public void showBoardBeforeHeartPopup(int layout) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View layoutView = getLayoutInflater().inflate(layout, null);
+        dialogBuilder.setView(layoutView);
+
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //모서리 둥글게
+        dialog.show();
+
+        //이동하기 버튼
+        TextView moveBtn = layoutView.findViewById(R.id.moveToHeartBtn);
+        moveBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HeartProgram.class);
+                startActivity(intent);  //마음 채우기로 이동
+                dialog.hide();  //팝업 없애기
+            }
+        });
+
+        //팝업 사이즈
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int x = (int)(size.x * 0.8f);
+        int y = (int)(size.y * 0.6f);
+
+        dialog.getWindow().setLayout(x, y);
+
     }
 
     public void goToProfile(View view) {
