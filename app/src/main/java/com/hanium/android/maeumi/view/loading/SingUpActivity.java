@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 
 import java.util.HashMap;
@@ -27,6 +30,8 @@ public class SingUpActivity extends AppCompatActivity {
 
     EditText email, password, name, alias, school;
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase database;
+    DatabaseReference aliasRef;
     private String userEmail, userPassword, userName, userGender, userAlias, userSchool;
     private RadioGroup radioGroup;
 
@@ -78,7 +83,7 @@ public class SingUpActivity extends AppCompatActivity {
         } else if (userSchool == null) {
             Toast.makeText(SingUpActivity.this, "학교를 입력해주세요.", Toast.LENGTH_LONG).show();
         } else {
-            createUser(userEmail, userPassword, userName, userGender, userAlias, userSchool);
+            checkAlias(userAlias);
         }
     }
         private void createUser(String email, String password, String userName, String UserGender, String userAlias, String userSchool) {
@@ -136,6 +141,28 @@ public class SingUpActivity extends AppCompatActivity {
                     }
                 });
     }
+    public void checkAlias(String name){
+
+        database = FirebaseDatabase.getInstance();
+        aliasRef = database.getReference("/Users/");
+
+        aliasRef.orderByChild("alias").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Toast.makeText(SingUpActivity.this, "동일한 닉네임이 존재합니다.", Toast.LENGTH_LONG).show();
+                }else{
+                    createUser(userEmail, userPassword, userName, userGender, userAlias, userSchool);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+    }
+
     public void onLoginClick(View view){
         finish();
     }
