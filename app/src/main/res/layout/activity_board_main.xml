@@ -33,11 +33,14 @@
             android:text="게시판"
             android:textSize="24sp" />
 
-        <TextView
+        <ImageView
+            android:id="@+id/boardGuideBtn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:text="Button"
-            android:visibility="invisible" />
+            android:onClick="showBoardGuide"
+            android:padding="10dp"
+            android:tint="@color/gray"
+            app:srcCompat="@drawable/question_mark_icon" />
     </LinearLayout>
 
     <LinearLayout

@@ -1,5 +1,7 @@
 package com.hanium.android.maeumi.view.board;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -111,6 +113,28 @@ public class Board extends AppCompatActivity {
         intent.putExtra("타입",cur_fragment); //어떤 게시판에 작성할건지 전달
         startActivity(intent);
         System.out.println("게시글 작성");
+    }
+
+    public void showBoardGuide(View view) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+        .setTitle("게시판 이용 안내")
+        .setMessage(R.string.board_guide)
+        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+            }
+        }).show();
+
+        //폰트 크기 조정
+        /*
+        TextView dialogTitle = new TextView(getApplicationContext());
+        dialogTitle.setText("게시판 이용 안내");
+        dialogTitle.setTextSize(20);
+        dialog.setCustomTitle(dialogTitle);
+         */
+
+        TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
+        dialogMessage.setTextSize(18);
     }
 
     public void goToBack(View view) {
