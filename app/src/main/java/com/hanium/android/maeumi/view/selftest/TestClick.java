@@ -67,6 +67,7 @@ public class TestClick extends AppCompatActivity {
                     Intent intent = new Intent(TestClick.this, TestResult.class);
                     intent.putExtra("victim", adapter.getVictimValue());
                     intent.putExtra("perpetration", adapter.getPerpetrationValue());
+                    intent.putExtra("afterTest", true);
                     startActivity(intent); //액티비티 이동
                 } else {
                     Toast.makeText(TestClick.this, "체크하지 않은 문항이 있습니다!", Toast.LENGTH_SHORT).show();
