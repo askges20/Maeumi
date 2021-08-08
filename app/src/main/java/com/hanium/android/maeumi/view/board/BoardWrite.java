@@ -75,16 +75,16 @@ public class BoardWrite extends AppCompatActivity {
         //게시판 종류
         switch (boardType){
             case "free":
-                boardRef = database.getReference("/자유게시판/"+today);
+                boardRef = database.getReference("/게시판/자유게시판/"+today);
                 break;
             case "question":
-                boardRef = database.getReference("/질문게시판/"+today);
+                boardRef = database.getReference("/게시판/질문게시판/"+today);
                 break;
             case "tip":
-                boardRef = database.getReference("/꿀팁게시판/"+today);
+                boardRef = database.getReference("/게시판/꿀팁게시판/"+today);
                 break;
             case "anonymous":
-                boardRef = database.getReference("/익명게시판/"+today);
+                boardRef = database.getReference("/게시판/익명게시판/"+today);
                 break;
             default:
                 break;

@@ -178,13 +178,13 @@ public class PostContent extends AppCompatActivity {
                 //DB에서 게시글 데이터 삭제
                 String date = writeDate.substring(0, 4) + writeDate.substring(5, 7) + writeDate.substring(8, 10);
                 if (boardType.equals("free"))
-                    postRef = database.getReference("/자유게시판/" + date + "/");
+                    postRef = database.getReference("/게시판/자유게시판/" + date + "/");
                 else if (boardType.equals("question"))
-                    postRef = database.getReference("/질문게시판/" + date + "/");
+                    postRef = database.getReference("/게시판/질문게시판/" + date + "/");
                 else if (boardType.equals("tip"))
-                    postRef = database.getReference("/꿀팁게시판/" + date + "/");
+                    postRef = database.getReference("/게시판/꿀팁게시판/" + date + "/");
                 else
-                    postRef = database.getReference("/익명게시판/" + date + "/");
+                    postRef = database.getReference("/게시판/익명게시판/" + date + "/");
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put(postCode, null);
                 postRef.updateChildren(childUpdates);

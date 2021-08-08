@@ -70,7 +70,7 @@ public class BoardTipFragment extends Fragment {
     //Firebase에서 데이터 가져오기
     private void getPostFromDB() {
         database = FirebaseDatabase.getInstance();
-        tipBoardRef = database.getReference("/꿀팁게시판/");
+        tipBoardRef = database.getReference("/게시판/꿀팁게시판/");
         tipBoardRef.addValueEventListener(new ValueEventListener() {
 
             @Override

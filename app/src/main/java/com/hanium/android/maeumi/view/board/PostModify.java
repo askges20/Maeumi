@@ -58,16 +58,16 @@ public class PostModify extends AppCompatActivity {
 
         switch (boardType){
             case "free":
-                postRef = database.getReference("/자유게시판/"+date+"/");
+                postRef = database.getReference("/게시판/자유게시판/"+date+"/");
                 break;
             case "question":
-                postRef = database.getReference("/질문게시판/"+date+"/");
+                postRef = database.getReference("/게시판/질문게시판/"+date+"/");
                 break;
             case "tip":
-                postRef = database.getReference("/꿀팁게시판/"+date+"/");
+                postRef = database.getReference("/게시판/꿀팁게시판/"+date+"/");
                 break;
             case "anonymous":
-                postRef = database.getReference("/익명게시판/"+date+"/");
+                postRef = database.getReference("/게시판/익명게시판/"+date+"/");
                 break;
             default:
                 break;

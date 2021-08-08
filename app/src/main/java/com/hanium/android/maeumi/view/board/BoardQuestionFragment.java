@@ -70,7 +70,7 @@ public class BoardQuestionFragment extends Fragment {
     //Firebase에서 데이터 가져오기
     private void getPostFromDB() {
         database = FirebaseDatabase.getInstance();
-        questionBoardRef = database.getReference("/질문게시판/");
+        questionBoardRef = database.getReference("/게시판/질문게시판/");
         questionBoardRef.addValueEventListener(new ValueEventListener() {
 
             @Override

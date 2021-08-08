@@ -71,7 +71,7 @@ public class BoardFreeFragment extends Fragment {
     //Firebase에서 데이터 가져오기
     private void getPostFromDB() {
         database = FirebaseDatabase.getInstance();
-        freeBoardRef = database.getReference("/자유게시판/");
+        freeBoardRef = database.getReference("/게시판/자유게시판/");
         freeBoardRef.addValueEventListener(new ValueEventListener() {
 
             @Override
