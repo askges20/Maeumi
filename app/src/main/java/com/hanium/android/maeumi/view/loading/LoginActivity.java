@@ -119,12 +119,11 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
                                 if(mUser.isEmailVerified()){
-                                    Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class); //메인 화면으로 이동
                                     startActivity(intent);
                                     finish();   //현재 액티비티(로그인 화면) 종료
                                 }else{
-                                    Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "이메일 인증 후 로그인 해주세요.", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -138,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {   //뒤로가기 버튼 클릭 시
-        //super.onBackPressed();
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
         dialog.setMessage("앱을 종료하시겠습니까?");

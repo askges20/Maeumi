@@ -129,6 +129,7 @@ public class SingUpActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             // 계정이 중복된 경우
                             Toast.makeText(SingUpActivity.this, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show();
