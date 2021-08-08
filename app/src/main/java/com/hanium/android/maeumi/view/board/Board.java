@@ -14,9 +14,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.hanium.android.maeumi.R;
 
 public class Board extends AppCompatActivity {
-    private final int fragment_1 = 1; //자유게시판
-    private final int fragment_2 = 2; //익명게시판
-    private int cur_fragment;   //현재 fragment 번호
+    private final String fragment_free = "free"; //자유게시판
+    private final String fragment_question = "question";   //질문&고민 게시판
+    private final String fragment_tip = "tip";    //꿀팁 게시판
+    private final String fragment_anonymous = "anonymous"; //익명게시판
+    private String cur_fragment;   //현재 fragment
 
     TextView boardNameText;
 
@@ -30,43 +32,75 @@ public class Board extends AppCompatActivity {
         findViewById(R.id.freeBoardBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentView(fragment_1);
+                setFragmentView(fragment_free);
+            }
+        });
+
+        findViewById(R.id.questionBoardBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragmentView(fragment_question);
+            }
+        });
+
+        findViewById(R.id.tipBoardBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragmentView(fragment_tip);
             }
         });
 
         findViewById(R.id.anonymousBoardBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentView(fragment_2);
+                setFragmentView(fragment_anonymous);
             }
         });
 
-        cur_fragment = fragment_1;
-        FragmentView(cur_fragment);   //처음 화면은 자유게시판
+        cur_fragment = fragment_free;
+        setFragmentView(cur_fragment);   //처음 화면은 자유게시판
         boardNameText.setText("자유게시판");
     }
 
     //fragment 부착
-    private void FragmentView(int fragment) {
+    private void setFragmentView(String fragment) {
         //FragmentTransactiom를 이용해 fragment 사용
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         switch (fragment) {
-            case 1:
-                // 첫번째 fragment(자유게시판) 호출
+            case "free":
+                // 자유게시판 fragment
                 BoardFreeFragment freeFragment = new BoardFreeFragment(this);
                 transaction.replace(R.id.board_fragment_container, freeFragment);
                 transaction.commit();
-                cur_fragment = fragment_1;  //현재 fragment 번호 업데이트
+                cur_fragment = fragment_free;  //현재 fragment 번호 업데이트
                 boardNameText.setText("자유게시판");
                 break;
 
-            case 2:
-                // 두번째 fragment(익명게시판) 호출
+            case "question":
+                //  질문게시판 fragment
+                BoardQuestionFragment questionFragment = new BoardQuestionFragment(this);
+                transaction.replace(R.id.board_fragment_container, questionFragment);
+                transaction.commit();
+                cur_fragment = fragment_question;  //현재 fragment 번호 업데이트
+                boardNameText.setText("질문게시판");
+                break;
+
+            case "tip":
+                //  꿀팁게시판 fragment
+                BoardTipFragment tipFragment = new BoardTipFragment(this);
+                transaction.replace(R.id.board_fragment_container, tipFragment);
+                transaction.commit();
+                cur_fragment = fragment_tip;  //현재 fragment 번호 업데이트
+                boardNameText.setText("꿀팁게시판");
+                break;
+
+            case "anonymous":
+                //  익명게시판 fragment
                 BoardAnonymousFragment anonymousFragment = new BoardAnonymousFragment(this);
                 transaction.replace(R.id.board_fragment_container, anonymousFragment);
                 transaction.commit();
-                cur_fragment = fragment_2; //현재 fragment 번호 업데이트
+                cur_fragment = fragment_anonymous; //현재 fragment 번호 업데이트
                 boardNameText.setText("익명게시판");
                 break;
         }
@@ -77,27 +111,6 @@ public class Board extends AppCompatActivity {
         intent.putExtra("타입",cur_fragment); //어떤 게시판에 작성할건지 전달
         startActivity(intent);
         System.out.println("게시글 작성");
-    }
-
-    //정렬 클릭
-    public void onFilterClick(final View view) {
-        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
-        getMenuInflater().inflate(R.menu.board_popup_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.action_menu1) {
-                    Toast.makeText(Board.this, "메뉴 1 클릭", Toast.LENGTH_SHORT).show();
-                } else if (menuItem.getItemId() == R.id.action_menu2) {
-                    Toast.makeText(Board.this, "메뉴 2 클릭", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Board.this, "메뉴 3 클릭", Toast.LENGTH_SHORT).show();
-                }
-
-                return false;
-            }
-        });
-        popupMenu.show();
     }
 
     public void goToBack(View view) {

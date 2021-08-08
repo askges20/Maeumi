@@ -55,10 +55,23 @@ public class PostModify extends AppCompatActivity {
         //DB 반영
         database = FirebaseDatabase.getInstance();
         String date = postDate.substring(0,4)+postDate.substring(5,7)+postDate.substring(8,10);
-        if (boardType.equals("free"))
-            postRef = database.getReference("/자유게시판/"+date+"/");
-        else
-            postRef = database.getReference("/익명게시판/"+date+"/");
+
+        switch (boardType){
+            case "free":
+                postRef = database.getReference("/자유게시판/"+date+"/");
+                break;
+            case "question":
+                postRef = database.getReference("/질문게시판/"+date+"/");
+                break;
+            case "tip":
+                postRef = database.getReference("/꿀팁게시판/"+date+"/");
+                break;
+            case "anonymous":
+                postRef = database.getReference("/익명게시판/"+date+"/");
+                break;
+            default:
+                break;
+        }
 
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;

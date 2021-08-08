@@ -57,6 +57,22 @@
             android:text="자유게시판" />
 
         <Button
+            android:id="@+id/questionBoardBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="질문게시판" />
+
+        <Button
+            android:id="@+id/tipBoardBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="꿀팁게시판" />
+
+        <Button
             android:id="@+id/anonymousBoardBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

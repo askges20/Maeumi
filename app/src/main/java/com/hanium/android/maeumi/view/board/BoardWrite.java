@@ -25,7 +25,7 @@ public class BoardWrite extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference boardRef;
 
-    private int boardType;
+    private String boardType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class BoardWrite extends AppCompatActivity {
         setContentView(R.layout.activity_board_write);
 
         Intent intent = getIntent();
-        boardType = intent.getIntExtra("타입", 1);    //작성할 게시판 타입
+        boardType = intent.getStringExtra("타입");    //작성할 게시판 타입
 
         //작성 일자 = 현재 날짜
         long now = System.currentTimeMillis();
@@ -73,10 +73,22 @@ public class BoardWrite extends AppCompatActivity {
         String curDate = getCurrentDate();
 
         //게시판 종류
-        if (boardType==1)
-            boardRef = database.getReference("/자유게시판/"+today);
-        else
-            boardRef = database.getReference("/익명게시판/"+today);
+        switch (boardType){
+            case "free":
+                boardRef = database.getReference("/자유게시판/"+today);
+                break;
+            case "question":
+                boardRef = database.getReference("/질문게시판/"+today);
+                break;
+            case "tip":
+                boardRef = database.getReference("/꿀팁게시판/"+today);
+                break;
+            case "anonymous":
+                boardRef = database.getReference("/익명게시판/"+today);
+                break;
+            default:
+                break;
+        }
 
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
