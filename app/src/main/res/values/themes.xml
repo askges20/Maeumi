@@ -2,6 +2,10 @@
     <!-- Base application theme. -->
     <!-- <style name="Theme.Maeumi" parent="Theme.MaterialComponents.DayNight.NoActionBar"> -->
     <style name="Theme.Maeumi" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Color Accent -->
+        <item name="colorAccent">@android:color/holo_green_dark</item>
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
