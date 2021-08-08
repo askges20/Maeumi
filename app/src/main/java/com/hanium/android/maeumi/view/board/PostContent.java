@@ -235,7 +235,7 @@ public class PostContent extends AppCompatActivity {
             Map<String, Object> commentValues = null;
 
             LoginUser loginUser = LoginUser.getInstance();
-            Comment comment = new Comment(loginUser.getName(), commentContent, addTime, loginUser.getUid());
+            Comment comment = new Comment(loginUser.getAlias(), commentContent, addTime, loginUser.getUid());
             commentValues = comment.toMap();
             System.out.println("commentValue- " + commentValues);
 

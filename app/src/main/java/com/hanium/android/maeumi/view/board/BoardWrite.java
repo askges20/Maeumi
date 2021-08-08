@@ -65,7 +65,7 @@ public class BoardWrite extends AppCompatActivity {
         //로그인한 사용자
         LoginUser loginUser = LoginUser.getInstance();
         String loginUserUid = loginUser.getUid();
-        String loginUserName = loginUser.getName();
+        String loginUserAlias = loginUser.getAlias();
 
         String today = getToday();  //yyyyMMdd
         String code = getCode();    //HHmmss
@@ -93,7 +93,7 @@ public class BoardWrite extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
 
-        Post post = new Post(title, content, loginUserName, curDate, loginUserUid);   //model Post 객체
+        Post post = new Post(title, content, loginUserAlias, curDate, loginUserUid);   //model Post 객체
         postValues = post.toMap();
         childUpdates.put(postNum, postValues);
         boardRef.updateChildren(childUpdates);
