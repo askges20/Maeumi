@@ -132,7 +132,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_join"
@@ -141,7 +142,18 @@
             android:layout_gravity="center"
             android:background="@android:color/white"
             android:onClick="onSignUpClick"
-            android:text="Join"
+            android:text="회원가입"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/white"
+            android:onClick="onLoginClick"
+            android:text="로그인"
+            android:layout_marginLeft="10dp"
             android:textColor="@android:color/black" />
 
 

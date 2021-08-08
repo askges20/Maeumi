@@ -69,7 +69,7 @@ public class SingUpActivity extends AppCompatActivity {
             Toast.makeText(SingUpActivity.this, "이메일 형식을 맞춰주세요", Toast.LENGTH_LONG).show();
         } else if (!Pattern.matches("^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$", userPassword)) {
             Toast.makeText(SingUpActivity.this, "8자 이상, 숫자, 특수문자가 각각 1개이상 입력해주세요.", Toast.LENGTH_LONG).show();
-        }else if (userName.equals("")) {
+        } else if (userName.equals("")) {
             Toast.makeText(SingUpActivity.this, "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
         } else if (userGender == null) {
             Toast.makeText(SingUpActivity.this, "성별을 선택해주세요.", Toast.LENGTH_LONG).show();
@@ -82,7 +82,7 @@ public class SingUpActivity extends AppCompatActivity {
 
         }
     }
-    private void createUser(String email, String password, String userName, String UserGender, String userAlias, String userSchool) {
+        private void createUser(String email, String password, String userName, String UserGender, String userAlias, String userSchool) {
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -90,8 +90,22 @@ public class SingUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
                             // 회원가입 성공시
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                            // 인증 메일 보내기
+                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(Task<Void> task) {
+
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(SingUpActivity.this, "회원가입 성공, 인증 메일을 확인해주세요.", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(SingUpActivity.this, "메일 보내기 실패", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                             String email = user.getEmail();
                             String uid = user.getUid();
                             String name = userName;
@@ -113,8 +127,6 @@ public class SingUpActivity extends AppCompatActivity {
                             DatabaseReference reference = database.getReference("Users");
                             reference.child(uid).setValue(hashMap);
 
-                            Toast.makeText(SingUpActivity.this, "회원가입 성공", Toast.LENGTH_LONG).show();
-
                             Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
@@ -124,6 +136,10 @@ public class SingUpActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    public void onLoginClick(View view){
+        Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
 }

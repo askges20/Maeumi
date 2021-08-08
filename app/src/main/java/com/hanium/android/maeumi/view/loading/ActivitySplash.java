@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +23,7 @@ import com.hanium.android.maeumi.R;
 public class ActivitySplash extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
+    FirebaseAuth firebaseAuth;
     private static final String TAG = "splash";
 
     @Override
@@ -74,14 +77,30 @@ public class ActivitySplash extends AppCompatActivity {
             @Override
             public void run() {
                 if (userFromFB != null) { //로그인 기록이 있는 사용자
-                    Log.d(TAG, "로그인 계정 uid : " + userFromFB.getUid());
-                    startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
+
+                    firebaseAuth.getInstance().getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            if(userFromFB.isEmailVerified()){
+                                Toast.makeText(ActivitySplash.this, "로그인 성공", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
+                                Log.d(TAG, "로그인 계정 uid : " + userFromFB.getUid());
+                                finish();   //현재 액티비티(로그인 화면) 종료
+                            }else{
+                                Toast.makeText(ActivitySplash.this, "이메일 인증을 완료해주세요.", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(ActivitySplash.this, LoginActivity.class));    //로그인 화면으로 이동
+                                finish();
+                            }
+                        }
+                    });
+
+
                 } else {    //로그인 기록이 없는 사용자
                     startActivity(new Intent(ActivitySplash.this, LoginActivity.class));    //로그인 화면으로 이동
                 }
                 finish();
             }
-        }, 4500);   //4초 뒤 이동
+        }, 5000);   // 5초 뒤 이동
     }
 
     @Override

@@ -14,9 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     FirebaseAuth firebaseAuth;
+    FirebaseUser mUser;
     private String userEmail, userPassword;
 
     @Override
@@ -86,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                     String loginUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); //로그인한 계정의 uid
                     LoginUser user = LoginUser.getInstance();    //싱글톤 패턴
                     user.setUid(loginUserUid);  //사용자 uid
+                    mUser = firebaseAuth.getInstance().getCurrentUser();
 
                     //DB에서 사용자 정보 가져와서 싱글톤 객체에 저장
                     database = FirebaseDatabase.getInstance();
@@ -110,11 +114,21 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
-
-                    Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class); //메인 화면으로 이동
-                    startActivity(intent);
-                    finish();   //현재 액티비티(로그인 화면) 종료
+                    if(mUser != null){
+                        firebaseAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                if(mUser.isEmailVerified()){
+                                    Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class); //메인 화면으로 이동
+                                    startActivity(intent);
+                                    finish();   //현재 액티비티(로그인 화면) 종료
+                                }else{
+                                    Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
                 } else {
                     Toast.makeText(LoginActivity.this, "아이디 혹은 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                 }
