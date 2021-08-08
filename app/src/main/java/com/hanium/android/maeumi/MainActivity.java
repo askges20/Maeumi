@@ -97,9 +97,19 @@ public class MainActivity extends AppCompatActivity {
         //사이드바 헤더
         View header = navigationView.getHeaderView(0);
         TextView userAlias = header.findViewById(R.id.mainUserAliasText);
-        userAlias.setText(LoginUser.getInstance().getAlias()+" 님");  //유저 닉네임
         TextView userSchool = header.findViewById(R.id.mainUserSchoolText);
-        userSchool.setText(LoginUser.getInstance().getSchool());    //유저 학교
+
+        String alias = LoginUser.getInstance().getAlias();
+
+        //로그인 화면에서 넘어오면 DB 읽어오는 시간으로 인해 null값이 뜨는 경우가 있음
+        //이 때는 사용자 정보를 출력하지 않음
+        if (alias.equals("null")){
+            userAlias.setText("마음이에 오신 것을 환영합니다!");
+            userSchool.setVisibility(View.GONE);
+        } else {    //사용자 정보를 읽어왔으면
+            userAlias.setText(alias + " 님");  //유저 닉네임 출력
+            userSchool.setText(LoginUser.getInstance().getSchool());    //유저 학교 출력
+        }
 
         //로그아웃 버튼
         logoutBtn = header.findViewById(R.id.mainLogoutBtn);
