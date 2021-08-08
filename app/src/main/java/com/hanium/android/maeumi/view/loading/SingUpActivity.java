@@ -79,7 +79,6 @@ public class SingUpActivity extends AppCompatActivity {
             Toast.makeText(SingUpActivity.this, "학교를 입력해주세요.", Toast.LENGTH_LONG).show();
         } else {
             createUser(userEmail, userPassword, userName, userGender, userAlias, userSchool);
-
         }
     }
         private void createUser(String email, String password, String userName, String UserGender, String userAlias, String userSchool) {
@@ -129,18 +128,16 @@ public class SingUpActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
                             startActivity(intent);
-                            finish();
+
                         } else {
                             // 계정이 중복된 경우
                             Toast.makeText(SingUpActivity.this, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
     }
     public void onLoginClick(View view){
-        Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
-        startActivity(intent);
+        finish();
     }
 
 }

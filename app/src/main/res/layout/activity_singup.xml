@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="E-mail"
+            android:hint="이메일"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/black" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="Password"
+            android:hint="비밀번호"
             android:inputType="textPassword"
             android:textColor="@android:color/black" />
 
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="Name"
+            android:hint="이름"
             android:inputType="textPersonName"
             android:textColor="@android:color/black" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="Alias"
+            android:hint="별명"
             android:inputType="textPersonName"
             android:textColor="@android:color/black" />
         <EditText
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="School"
+            android:hint="학교"
             android:inputType="textPersonName"
             android:textColor="@android:color/black" />
 
