@@ -1,6 +1,7 @@
 package com.hanium.android.maeumi.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Video;
 import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
+import com.hanium.android.maeumi.view.heartprogram.HeartVideo;
 
 import java.util.ArrayList;
 
@@ -61,6 +63,8 @@ public class VideoAdapter extends BaseAdapter {
 
         Video video = getItem(position);
         String videoId = video.getId();
+        String title = video.getTitle();
+        String description = video.getDescription();
 
         YouTubeThumbnailView thumbnail = view.findViewById(R.id.videoThumbnailView);    //유튜브 썸네일 뷰
         thumbnail.initialize(API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
@@ -87,15 +91,31 @@ public class VideoAdapter extends BaseAdapter {
         });
 
         TextView videoTitleText = view.findViewById(R.id.videoTitleText);
-        videoTitleText.setText(video.getTitle());   //제목
+        videoTitleText.setText(title);   //제목
         TextView videoDescriptionText = view.findViewById(R.id.videoDescriptionText);
-        videoDescriptionText.setText(video.getDescription());   //설명
+        videoDescriptionText.setText(description);   //설명
 
         //시청 완료한 영상만 완료 표시 나타내기
         if(!video.getIsWatched()){
             LinearLayout isWatchedView = view.findViewById(R.id.isWatchedView);
             isWatchedView.setVisibility(View.GONE);
         }
+
+
+        //각 아이템 클릭 시 영상 시청 화면으로 이동
+        LinearLayout videoItemView = view.findViewById(R.id.videoItemView);
+        videoItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, HeartVideo.class);
+                //영상 정보 넘기기
+                intent.putExtra("API_KEY", API_KEY);
+                intent.putExtra("videoId", videoId);
+                intent.putExtra("title", title);
+                intent.putExtra("description", description);
+                mContext.startActivity(intent); //영상 시청 화면으로 이동
+            }
+        });
 
         return view;
     }

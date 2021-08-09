@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="마음 채우기"
+            android:text="영상 시청하기"
             android:textSize="24sp" />
 
         <TextView
@@ -42,17 +42,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heartVideoTopBar">
 
 
         <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/youtubeView"
-            android:layout_width="382dp"
-            android:layout_height="211dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             tools:layout_editor_absoluteX="18dp"
             tools:layout_editor_absoluteY="144dp" />
 
@@ -61,8 +63,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Button"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="155dp"
             tools:layout_editor_absoluteY="474dp" />
+
+        <TextView
+            android:id="@+id/youtubeViewTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="영상 제목"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/youtubeViewDescText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="영상 설명" />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/maeumi_main_img" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="영상을 끝까지 시청해야 시청 완료 체크가 돼요!"
+            android:textAlignment="center" />
 
     </LinearLayout>
 

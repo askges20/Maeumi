@@ -1,8 +1,10 @@
 package com.hanium.android.maeumi.view.heartprogram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -16,15 +18,28 @@ public class HeartVideo extends YouTubeBaseActivity {
     YouTubePlayer youtubePlayer;
     Button btn; //영상 재생(일시정지) 버튼
 
-    private static String API_KEY = "AIzaSyAd7jxBYoyffM5fWPST32ZYddSlbAtix48";
-    private static String videoId = "CbGpbuOhtVE";
+    private static String API_KEY;
+    private static String videoId;
+    private static String title;
+    private static String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_heart_program);
+        setContentView(R.layout.activity_heart_video);
+
+        Intent intent = getIntent();
+        API_KEY = intent.getStringExtra("API_KEY");
+        videoId = intent.getStringExtra("videoId");
+        title = intent.getStringExtra("title");
+        description = intent.getStringExtra("description");
 
         initPlayer();   //플레이어 초기화
+
+        TextView titleText = findViewById(R.id.youtubeViewTitleText);
+        titleText.setText(title);
+        TextView descriptionText = findViewById(R.id.youtubeViewDescText);
+        descriptionText.setText(description);
 
         btn = findViewById(R.id.videoPlayBtn);
         btn.setOnClickListener(new View.OnClickListener() { //버튼 클릭 이벤트
