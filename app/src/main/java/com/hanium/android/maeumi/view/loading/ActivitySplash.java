@@ -96,9 +96,9 @@ public class ActivitySplash extends AppCompatActivity {
 
 
                 } else {    //로그인 기록이 없는 사용자
-                    startActivity(new Intent(ActivitySplash.this, LoginActivity.class));    //로그인 화면으로 이동
+                    startActivity(new Intent(ActivitySplash.this, LoginActivity.class));//로그인 화면으로 이동
+                    finish();
                 }
-                finish();
             }
         }, 5000);   // 5초 뒤 이동
     }
