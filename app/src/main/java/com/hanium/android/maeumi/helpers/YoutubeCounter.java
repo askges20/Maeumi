@@ -30,7 +30,7 @@ public class YoutubeCounter extends Thread{
             if(!isPaused){  //일시정지 상태가 아니면
                 watchedTime++;  //시청 시간 1초 증가
                 System.out.println("누적 시청 시간 : " + watchedTime);
-                heartVideo.updateSeekbar(watchedTime);
+                heartVideo.updateSeekbar(watchedTime);  //seekbar 업데이트
             }
         }
         System.out.println("스레드 정지");

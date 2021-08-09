@@ -3,6 +3,7 @@ package com.hanium.android.maeumi.view.heartprogram;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     private static String description;
 
     YoutubeCounter timer = new YoutubeCounter(this);
+    boolean isCompleted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +64,8 @@ public class HeartVideo extends YouTubeBaseActivity {
 
     //영상 재생 또는 일시정지
     private void playOrPause() {
-        if(youtubePlayer != null){
-            if(youtubePlayer.isPlaying()) { //재생 중이면
+        if (youtubePlayer != null) {
+            if (youtubePlayer.isPlaying()) { //재생 중이면
                 youtubePlayer.pause();  //일시정지
             } else {    //일시정지 상태면
                 youtubePlayer.play();   //재생
@@ -134,6 +136,10 @@ public class HeartVideo extends YouTubeBaseActivity {
                     @Override
                     public void onVideoStarted() {
                         System.out.println("영상 시작");
+                        if(timer.getState() == Thread.State.TERMINATED) { //이미 스레드가 종료된 상태(시청을 완료한 상태)
+                            System.out.println("이미 시청을 완료한 영상, 스레드 시작하지 않음");
+                            return;
+                        }
                         timer.start();    //스레드 생성, 시작
                     }
 
@@ -158,17 +164,18 @@ public class HeartVideo extends YouTubeBaseActivity {
     }
 
     //영상 시청 시간 seekbar 세팅
-    public void setSeekbar(long videoTime){
+    public void setSeekbar(long videoTime) {
         seekBar = findViewById(R.id.videoSeekBar);
-        seekBar.setMax((int)videoTime); //최댓값 : 영상 길이
+        seekBar.setMax((int) videoTime); //최댓값 : 영상 길이
         seekBar.setEnabled(false);
     }
 
     //seekbar 누적 시청 시간 표시 업데이트
     public void updateSeekbar(int time) {
-        if (time >= seekBar.getMax() - 1){  //영상 시청 완료시
+        if (time >= seekBar.getMax() - 1) {  //영상 시청 완료시
             seekBar.setProgress(seekBar.getMax());  //최대로 표시
             timer.finish(); //타이머 정지
+            isCompleted = true;
             return;
         }
 
@@ -176,27 +183,44 @@ public class HeartVideo extends YouTubeBaseActivity {
         seekBar.setProgress(time);  //누적 시청 시간 증가
     }
 
-    /*
-    public void showPopup(){
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setMessage("영상 시청 완료!!")
-                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                    }
-                })
-                .show();
+    public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
+        AlertDialog dialog;
 
+        if (isCompleted) {   //영상 시청을 완료했을 때
+            dialog = new AlertDialog.Builder(this)
+                    .setMessage("영상 시청 완료!!")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            youtubePlayer.release();    //YoutubePlayer에서 사용한 리소스 해제
+                            timer.finish();
+                            finish();   //현재 액티비티 없애기
+                        }
+                    })
+                    .show();
+        } else {
+            dialog = new AlertDialog.Builder(this)
+                    .setMessage("아직 영상 시청을 완료하지 않았어요. 영상 시청을 종료할까요? (완료하지 않으면 영상 시청 기록이 남지 않아요.)")
+                    .setPositiveButton("종료하기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            youtubePlayer.release();    //YoutubePlayer에서 사용한 리소스 해제
+                            timer.finish();
+                            finish();   //현재 액티비티 없애기
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
+        }
         TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
         dialogMessage.setTextSize(18);
-    }
 
-     */
-
-    public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
-        youtubePlayer.release();    //YoutubePlayer에서 사용한 리소스 해제
-        timer.finish();
-        finish();   //현재 액티비티 없애기
+        //왜 여기만 커스텀 폰트 적용이 안되는지 모르겠음
     }
 
     @Override
