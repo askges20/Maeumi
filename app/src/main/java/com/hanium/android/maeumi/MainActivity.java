@@ -85,13 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id==R.id.drawer_menu_test){
-                    startActivity(new Intent(MainActivity.this, SelfTest.class));
+                    goToSelfTest(null);
                 } else if (id==R.id.drawer_menu_chat){
-                    startActivity(new Intent(MainActivity.this, ChatBot.class));
+                    goToChatBot(null);
                 } else if (id==R.id.drawer_menu_diary){
-                    startActivity(new Intent(MainActivity.this, DiaryMain.class));
+                    goToDiary(null);
                 } else if (id==R.id.drawer_menu_board){
-                    startActivity(new Intent(MainActivity.this, Board.class));
+                    goToBoard(null);
                 } else if (id==R.id.drawer_menu_mypage){
                     startActivity(new Intent(MainActivity.this, Profile.class));
                 }else if (id==R.id.drawer_menu_youtube){
