@@ -3,97 +3,89 @@ package com.hanium.android.maeumi.view.heartprogram;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.adapters.PostAdapter;
+import com.hanium.android.maeumi.adapters.QuestionAdapter;
+import com.hanium.android.maeumi.adapters.VideoAdapter;
+import com.hanium.android.maeumi.model.Question;
+import com.hanium.android.maeumi.model.Video;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class HeartProgram extends YouTubeBaseActivity {
-    YouTubePlayerView youTubePlayerView;
-    YouTubePlayer youtubePlayer;
-    Button btn; //영상 재생(일시정지) 버튼
 
-    private static String API_KEY = "AIzaSyAd7jxBYoyffM5fWPST32ZYddSlbAtix48";
-    private static String videoId = "CbGpbuOhtVE";
+    ListView videoListView;
+    private ArrayList<Video> videoList = new ArrayList<Video>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heart_program);
 
-        initPlayer();   //플레이어 초기화
+        videoListView = findViewById(R.id.heartVideoListView);
 
-        btn = findViewById(R.id.videoPlayBtn);
-        btn.setOnClickListener(new View.OnClickListener() { //버튼 클릭 이벤트
-            @Override
-            public void onClick(View v) {
-                playOrPause();  //영상 재생 (또는 일시정지)
-                Toast.makeText(HeartProgram.this, "마음채우기 +1", Toast.LENGTH_LONG).show();
-            }
-        });
+        String jsonString = getJsonString();    //json 파일 읽기
+        jsonParsing(jsonString);    //json 파싱 -> ArrayList에 담기
+
+        //어댑터를 이용해서 리스트뷰에 데이터 넘김
+        VideoAdapter adapter = new VideoAdapter(this, this);
+        adapter.setItems(videoList);
+        videoListView.setAdapter(adapter);   //어댑터 등록
     }
 
-    //영상 재생 또는 일시정지
-    private void playOrPause() {
-        if(youtubePlayer != null){
-            if(youtubePlayer.isPlaying()) { //재생 중이면
-                youtubePlayer.pause();  //일시정지
-            } else {    //일시정지 상태면
-                youtubePlayer.play();   //재생
-            }
+    //테스트 문항 json 파일 읽어오기
+    private String getJsonString() {
+        String json = "";
+
+        try {
+            InputStream is = getAssets().open("videos.json");
+            int fileSize = is.available();
+
+            byte[] buffer = new byte[fileSize];
+            is.read(buffer);
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+
+        return json;
     }
 
-    //플레이어 초기화
-    private void initPlayer() {
-        youTubePlayerView = findViewById(R.id.youtubeView);
-        youTubePlayerView.initialize(API_KEY, new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean b) {
-                youtubePlayer = player;
-                youtubePlayer.cueVideo(videoId);    //썸네일 이미지 로드하는 메소드
+    private void jsonParsing(String json) {
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray videoArray = jsonObject.getJSONArray("Videos");
 
-                player.setPlayerStateChangeListener(new YouTubePlayer.PlayerStateChangeListener() {
-                    @Override
-                    public void onLoading() {
-                        System.out.println("영상 로딩 중");
-                    }
+            for (int i = 0; i < videoArray.length(); i++) {
+                JSONObject videoObject = videoArray.getJSONObject(i);
+                String id = videoObject.getString("id");
+                String title = videoObject.getString("title");
+                String description = videoObject.getString("description");
+                Video video = new Video(id, title, description);
 
-                    @Override
-                    public void onLoaded(String s) {
-                        System.out.println("영상 로딩 완료");
-                    }
-
-                    @Override
-                    public void onAdStarted() {
-                        System.out.println("광고 시작");
-                    }
-
-                    @Override
-                    public void onVideoStarted() {
-                        System.out.println("영상 시작");
-                    }
-
-                    @Override
-                    public void onVideoEnded() {
-                        System.out.println("영상 끝");
-                    }
-
-                    @Override
-                    public void onError(YouTubePlayer.ErrorReason errorReason) {
-                        System.out.println("onError: " + errorReason);
-                    }
-                });
+                videoList.add(video);
             }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-            }
-        });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시

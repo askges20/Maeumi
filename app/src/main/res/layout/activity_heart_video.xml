@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.heartprogram.HeartProgram">
+    tools:context=".view.heartprogram.HeartVideo">
 
     <LinearLayout
-        android:id="@+id/heartProgramTopBar"
+        android:id="@+id/heartVideoTopBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/shadow"
@@ -40,17 +40,32 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/heartVideoListView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/heartProgramTopBar"
-        tools:layout_constraintTop_toBottomOf="@id/heartProgramTopBar" />
+        app:layout_constraintTop_toBottomOf="@+id/heartVideoTopBar">
+
+
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youtubeView"
+            android:layout_width="382dp"
+            android:layout_height="211dp"
+            tools:layout_editor_absoluteX="18dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <Button
+            android:id="@+id/videoPlayBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            tools:layout_editor_absoluteX="155dp"
+            tools:layout_editor_absoluteY="474dp" />
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
