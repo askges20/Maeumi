@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,22 +18,26 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
-import com.hanium.android.maeumi.view.heartprogram.HeartGuide;
 import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
 import com.hanium.android.maeumi.view.loading.LoginActivity;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
-import com.hanium.android.maeumi.view.selftest.TestResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     Button logoutBtn;
     TextView randomText;
     ProgressBar progressBar;
+
+    DatabaseReference heartRef;
+    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         //로그인 화면에서 넘어오면 DB 읽어오는 시간으로 인해 null값이 뜨는 경우가 있음
         //이 때는 사용자 정보를 출력하지 않음
-        if (alias.equals("null")){
+        if (alias == null){
             userAlias.setText("마음이에 오신 것을 환영합니다!");
             userSchool.setVisibility(View.GONE);
         } else {    //사용자 정보를 읽어왔으면
@@ -330,11 +338,20 @@ public class MainActivity extends AppCompatActivity {
 
     //마음 채우기
     public void getHeart(){
-        if(LoginUser.getInstance().getHeart() != null){
-            progressBar.setProgress(Integer.parseInt(LoginUser.getInstance().getHeart()));
-        }else{
-            progressBar.setProgress(5);
-        }
+        database = FirebaseDatabase.getInstance();
+        heartRef = database.getReference("/Users/" + LoginUser.getInstance().getUid() +"/heart/");
+
+        heartRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                progressBar.setProgress(Integer.parseInt(snapshot.getValue(String.class)));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
 
 
     }
