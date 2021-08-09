@@ -49,6 +49,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heartVideoTopBar">
 
+        <TextView
+            android:id="@+id/youtubeViewTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="영상 제목"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
 
         <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/youtubeView"
@@ -58,6 +66,33 @@
             tools:layout_editor_absoluteX="18dp"
             tools:layout_editor_absoluteY="144dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- 시크바 -->
+            <SeekBar
+                android:id="@+id/videoSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="10"
+                android:progress="0"
+                android:progressDrawable="@drawable/video_seekbar_bar"
+                android:thumb="@drawable/video_seekbar_thumb"
+                android:splitTrack="false"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시청 완료" />
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/videoPlayBtn"
             android:layout_width="wrap_content"
@@ -66,15 +101,6 @@
             android:visibility="gone"
             tools:layout_editor_absoluteX="155dp"
             tools:layout_editor_absoluteY="474dp" />
-
-        <TextView
-            android:id="@+id/youtubeViewTitleText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="영상 제목"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/youtubeViewDescText"
