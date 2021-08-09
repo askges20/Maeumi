@@ -10,13 +10,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Video;
 import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
 import com.hanium.android.maeumi.view.heartprogram.HeartVideo;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 
 import java.util.ArrayList;
 
@@ -24,16 +33,40 @@ public class VideoAdapter extends BaseAdapter {
 
     private static String API_KEY = "AIzaSyAd7jxBYoyffM5fWPST32ZYddSlbAtix48";
 
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    String pathStr = "/마음채우기/"+ LoginUser.getInstance().getUid()+"/";
+
     HeartProgram heartProgram;
     Context mContext;
     LayoutInflater mLayoutInflater;
 
-    ArrayList<Video> items = new ArrayList<Video>();
+    ArrayList<Video> items = new ArrayList<Video>();    //영상 리스트
+    ArrayList<String> watchedIds = new ArrayList<>();   //시청한 영상들
 
     public VideoAdapter(HeartProgram heartProgram, Context context) {
         this.heartProgram = heartProgram;
         mContext = context;
         mLayoutInflater = LayoutInflater.from(mContext);
+        readWatchedFromFB();    //DB 조회해서 시청한 영상 목록 저장
+    }
+
+    //DB에서 시청기록 읽어오기
+    public void readWatchedFromFB(){
+        DatabaseReference videoRef = firebaseDatabase.getReference(pathStr);
+        videoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    watchedIds.add(snap.getKey());  //시청한 영상 id 리스트에 저장
+                }
+                notifyDataSetChanged(); //화면에 시청 완료 표시 업데이트
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -66,6 +99,7 @@ public class VideoAdapter extends BaseAdapter {
         String title = video.getTitle();
         String description = video.getDescription();
 
+        //유튜브 썸네일 불러오기
         YouTubeThumbnailView thumbnail = view.findViewById(R.id.videoThumbnailView);    //유튜브 썸네일 뷰
         thumbnail.initialize(API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
             @Override
@@ -90,15 +124,17 @@ public class VideoAdapter extends BaseAdapter {
             }
         });
 
+        //영상 정보 출력하기
         TextView videoTitleText = view.findViewById(R.id.videoTitleText);
         videoTitleText.setText(title);   //제목
         TextView videoDescriptionText = view.findViewById(R.id.videoDescriptionText);
         videoDescriptionText.setText(description);   //설명
 
+
         //시청 완료한 영상만 완료 표시 나타내기
-        if(!video.getIsWatched()){
+        if(watchedIds.contains(videoId)){
             LinearLayout isWatchedView = view.findViewById(R.id.isWatchedView);
-            isWatchedView.setVisibility(View.GONE);
+            isWatchedView.setVisibility(View.VISIBLE);
         }
 
 
@@ -116,6 +152,7 @@ public class VideoAdapter extends BaseAdapter {
                 mContext.startActivity(intent); //영상 시청 화면으로 이동
             }
         });
+
 
         return view;
     }
