@@ -15,8 +15,11 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.helpers.YoutubeCounter;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 
 import java.util.concurrent.TimeUnit;
 
@@ -176,11 +179,20 @@ public class HeartVideo extends YouTubeBaseActivity {
             seekBar.setProgress(seekBar.getMax());  //최대로 표시
             timer.finish(); //타이머 정지
             isCompleted = true;
+
+            updateFBVideo();
             return;
         }
 
         //영상 시청 완료되지 않았을 때
         seekBar.setProgress(time);  //누적 시청 시간 증가
+    }
+
+    //파이어베이스에 영상 시청 기록 저장하기
+    public void updateFBVideo() {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference videoRef = firebaseDatabase.getReference("/마음채우기/"+ LoginUser.getInstance().getUid()+"/"+videoId);
+        videoRef.setValue("watched");
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
