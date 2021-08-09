@@ -1,5 +1,6 @@
 package com.hanium.android.maeumi.view.heartprogram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -86,6 +87,11 @@ public class HeartProgram extends YouTubeBaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showHeartGuide(View view) {
+        Intent intent = new Intent(HeartProgram.this, HeartGuide.class);
+        startActivity(intent);
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시

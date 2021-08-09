@@ -32,11 +32,14 @@
             android:text="마음 채우기"
             android:textSize="24sp" />
 
-        <TextView
+        <ImageView
+            android:id="@+id/heartProgramGuideBtn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:visibility="invisible" />
-
+            android:onClick="showHeartGuide"
+            android:padding="10dp"
+            android:tint="@color/gray"
+            android:src="@drawable/question_mark_icon" />
 
     </LinearLayout>
 

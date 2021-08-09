@@ -123,6 +123,7 @@ public class TestResult extends AppCompatActivity {
     //이전 화면으로 이동
     public void goBack(View view) {
         boolean isAfterTest = getIntent().getBooleanExtra("afterTest", false);
+
         if (isAfterTest) { //테스트 완료 후
             showHeartDialog(R.layout.heart_popup);  //마음 채우기 이동 팝업
         } else {    //지난 테스트 결과 조회한 경우
@@ -148,6 +149,7 @@ public class TestResult extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TestResult.this, HeartGuide.class);
+                intent.putExtra("fromTest", "true");
                 startActivity(intent);
                 finish();   //현재 액티비티(테스트 결과 화면) 종료
             }
@@ -163,7 +165,7 @@ public class TestResult extends AppCompatActivity {
         display.getSize(size);
 
         int x = (int) (size.x * 0.7f);
-        int y = (int) (size.y * 0.5f);
+        int y = (int) (size.y * 0.6f);
 
         dialog.getWindow().setLayout(x, y);
     }
