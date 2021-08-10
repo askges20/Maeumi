@@ -39,7 +39,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     private static String title;
     private static String description;
 
-    int heartNum;
+    static int heartNum;
 
     YoutubeCounter timer = new YoutubeCounter(this);
     boolean isCompleted = false;
@@ -208,13 +208,13 @@ public class HeartVideo extends YouTubeBaseActivity {
                 heartNum = Integer.parseInt(snapshot.getValue(String.class));
 
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
 
             }
         });
-        String heartPlus = Integer.toString(heartNum + 5);
+        heartNum +=5;
+        String heartPlus = Integer.toString(heartNum);
         heartRef.setValue(heartPlus);
     }
 
