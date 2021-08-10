@@ -3,8 +3,12 @@ package com.hanium.android.maeumi.view.heartprogram;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -25,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.helpers.YoutubeCounter;
 import com.hanium.android.maeumi.view.loading.LoginUser;
+import com.hanium.android.maeumi.view.selftest.TestResult;
 
 import java.util.concurrent.TimeUnit;
 
@@ -219,43 +224,86 @@ public class HeartVideo extends YouTubeBaseActivity {
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
-        AlertDialog dialog;
 
         if (isCompleted) {   //영상 시청을 완료했을 때
-            dialog = new AlertDialog.Builder(this)
-                    .setMessage("영상 시청 완료!!")
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int i) {
-                            youtubePlayer.release();    //YoutubePlayer에서 사용한 리소스 해제
-                            timer.finish();
-                            finish();   //현재 액티비티 없애기
-                        }
-                    })
-                    .show();
+            showWatchedPopup();
         } else {
-            dialog = new AlertDialog.Builder(this)
-                    .setMessage("아직 영상 시청을 완료하지 않았어요. 영상 시청을 종료할까요? (완료하지 않으면 영상 시청 기록이 남지 않아요.)")
-                    .setPositiveButton("종료하기", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int i) {
-                            youtubePlayer.release();    //YoutubePlayer에서 사용한 리소스 해제
-                            timer.finish();
-                            finish();   //현재 액티비티 없애기
-                        }
-                    })
-                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-                    .show();
+            showUnwatchedPopup();
         }
-        TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
-        dialogMessage.setTextSize(18);
+    }
 
-        //왜 여기만 커스텀 폰트 적용이 안되는지 모르겠음
+    //영상 시청 완료 팝업
+    public void showWatchedPopup(){
+        int layout = R.layout.video_watched_popup;
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View layoutView = getLayoutInflater().inflate(layout, null);
+        dialogBuilder.setCancelable(false); //뒤로가기 버튼 비활성화
+        dialogBuilder.setView(layoutView);
+
+        //확인 버튼
+        TextView watchedBtn = layoutView.findViewById(R.id.videoWatchedBtn);
+        watchedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();   //현재 액티비티 종료 (뒤로가기)
+            }
+        });
+
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //모서리 둥글게
+        dialog.show();
+
+        //팝업 사이즈
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int x = (int) (size.x * 0.7f);
+        int y = (int) (size.y * 0.4f);
+
+        dialog.getWindow().setLayout(x, y);
+    }
+
+    //영상 시청 완료X 팝업
+    public void showUnwatchedPopup(){
+        int layout = R.layout.video_unwatched_popup;
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View layoutView = getLayoutInflater().inflate(layout, null);
+        dialogBuilder.setView(layoutView);
+
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //모서리 둥글게
+        dialog.show();
+
+        //취소 버튼
+        TextView cancelBtn = layoutView.findViewById(R.id.videoKeepWatchBtn);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();   //팝업창 닫기
+            }
+        });
+
+        //종료하기 버튼
+        TextView unwatchedBtn = layoutView.findViewById(R.id.videoUnwatchedBtn);
+        unwatchedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();   //현재 액티비티 종료 (뒤로가기)
+            }
+        });
+
+        //팝업 사이즈
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int x = (int) (size.x * 0.7f);
+        int y = (int) (size.y * 0.5f);
+
+        dialog.getWindow().setLayout(x, y);
     }
 
     @Override

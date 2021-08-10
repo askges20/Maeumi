@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/alert_white_border"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="30dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="영상 시청 완료!"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/maeumi_watched" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="마음 채우기 +5"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/videoWatchedBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="확인"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+</LinearLayout>
