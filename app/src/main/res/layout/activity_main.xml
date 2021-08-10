@@ -133,15 +133,18 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    app:srcCompat="@drawable/selftest_icon" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="30dp"
+                    app:srcCompat="@drawable/menu_test_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
+                    android:paddingHorizontal="30dp"
                     android:text="테스트 하기"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -159,15 +162,18 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    app:srcCompat="@drawable/comment_icon" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="30dp"
+                    app:srcCompat="@drawable/menu_chat_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
+                    android:paddingHorizontal="40dp"
                     android:text="상담하기"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -197,16 +203,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="나만의\n일기장"
+                    android:text="나만의 일기장"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
-                    app:srcCompat="@drawable/diary_icon" />
+                    app:srcCompat="@drawable/menu_diary_icon" />
             </LinearLayout>
 
             <LinearLayout
@@ -230,10 +236,10 @@
                     android:textSize="24sp" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
-                    app:srcCompat="@drawable/pen_icon" />
+                    app:srcCompat="@drawable/menu_board_icon" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
