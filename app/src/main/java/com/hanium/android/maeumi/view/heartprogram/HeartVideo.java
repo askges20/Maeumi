@@ -11,12 +11,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.helpers.YoutubeCounter;
 import com.hanium.android.maeumi.view.loading.LoginUser;
@@ -33,6 +38,8 @@ public class HeartVideo extends YouTubeBaseActivity {
     private static String videoId;
     private static String title;
     private static String description;
+
+    static int heartNum;
 
     YoutubeCounter timer = new YoutubeCounter(this);
     boolean isCompleted = false;
@@ -193,6 +200,22 @@ public class HeartVideo extends YouTubeBaseActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference videoRef = firebaseDatabase.getReference("/마음채우기/"+ LoginUser.getInstance().getUid()+"/"+videoId);
         videoRef.setValue("watched");
+
+        DatabaseReference heartRef = firebaseDatabase.getReference("/Users/"+ LoginUser.getInstance().getUid()+"/heart");
+        heartRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                heartNum = Integer.parseInt(snapshot.getValue(String.class));
+
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+        heartNum +=5;
+        String heartPlus = Integer.toString(heartNum);
+        heartRef.setValue(heartPlus);
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
