@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id==R.id.drawer_menu_mypage){
                     startActivity(new Intent(MainActivity.this, Profile.class));
                 }else if (id==R.id.drawer_menu_youtube){
-                    startActivity(new Intent(MainActivity.this, HeartProgram.class));
+                    prohibitBeforeTestMessage();
                 }
 
                 return true;
@@ -186,6 +186,31 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Intent intent = new Intent(MainActivity.this, Board.class);
             startActivity(intent);
+        }
+    }
+    public void prohibitBeforeTestMessage(){
+        int heart = Integer.parseInt(LoginUser.getInstance().getHeart());
+        if (heart == -1) {  //진단테스트를 이용하지 않은 경우
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setMessage(R.string.heartProgram_before_test)
+                    .setPositiveButton("이동", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            goToSelfTest(null);
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
+
+            TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
+            dialogMessage.setTextSize(18);
+        }else{
+            startActivity(new Intent(MainActivity.this, HeartProgram.class));
         }
     }
 
