@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -207,20 +209,19 @@ public class HeartVideo extends YouTubeBaseActivity {
         videoRef.setValue("watched");
 
         DatabaseReference heartRef = firebaseDatabase.getReference("/Users/"+ LoginUser.getInstance().getUid()+"/heart");
-        heartRef.addValueEventListener(new ValueEventListener() {
+        heartRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>(){
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                heartNum = Integer.parseInt(snapshot.getValue(String.class));
-
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-
+            public void onComplete(Task<DataSnapshot> task){
+                if(task.isSuccessful()){
+                    String value = task.getResult().getValue(String.class);
+                    heartNum = Integer.parseInt(value);
+                    heartNum = heartNum + 5;
+                    heartRef.setValue(Integer.toString(heartNum));
+                }
             }
         });
-        heartNum +=5;
-        String heartPlus = Integer.toString(heartNum);
-        heartRef.setValue(heartPlus);
+
+
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
