@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -112,10 +113,9 @@ public class DiaryContent extends AppCompatActivity {
         dialog.show();
     }
 
-    public void goToBack(View view) {   //목록으로 버튼 클릭 시
-        Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
-        toastView.show();
-        finish();   //현재 액티비티 없애기
+    //목록으로 버튼 클릭 시
+    public void goToBack(View view) {
+        finish();
     }
 
     // 이미지 조회

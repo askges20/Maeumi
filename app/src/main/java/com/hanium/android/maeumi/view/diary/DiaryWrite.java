@@ -83,7 +83,7 @@ public class DiaryWrite extends AppCompatActivity {
     }
 
     public void goToBack(View view){   //목록으로 버튼 클릭 시
-        Toast toastView = Toast.makeText(this, "이전 페이지", Toast.LENGTH_SHORT);
+        Toast toastView = Toast.makeText(this, "작성 취소", Toast.LENGTH_SHORT);
         toastView.show();
         finish();   //현재 액티비티 없애기
     }
@@ -106,7 +106,6 @@ public class DiaryWrite extends AppCompatActivity {
                     diaryEmoticon = "3";
                     mainContent.setBackgroundResource(R.color.diaryGray);
                 }
-
                 return false;
             }
         });

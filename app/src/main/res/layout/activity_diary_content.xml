@@ -17,12 +17,29 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:onClick="goToBack"
+            android:text="←"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/contentDate"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:onClick="goToBack"
             android:text="일기 내용"
             android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Button"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,11 +54,11 @@
         app:layout_constraintTop_toBottomOf="@id/diaryMainTop">
 
         <LinearLayout
+            android:background="@drawable/diary_border"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="7"
-            android:background="@drawable/board_border"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -49,59 +66,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="7"
-                android:orientation="vertical"
+                android:layout_weight="13"
+                android:orientation="horizontal"
                 android:padding="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/contentDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="2021/01/01"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="7dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/diaryTitle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginRight="3dp"
                         android:layout_weight="3"
                         android:gravity="center_vertical"
                         android:padding="5dp"
                         android:text="제목"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/emoticon"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="2"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="기분"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                        android:textSize="25sp" />
+
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black" />
+
             <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
@@ -112,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
+                    android:padding="10dp"
                     android:orientation="vertical">
 
                     <ScrollView
@@ -123,13 +123,13 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/diaryContent"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:background="#ECECEC"
                                 android:ems="10"
+                                android:textSize="20dp"
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
                                 android:padding="15dp" />
@@ -152,13 +152,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="bottom"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/modifyDiaryBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
@@ -168,7 +168,7 @@
                     <Button
                         android:id="@+id/deleteDiaryBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginEnd="5dp"
@@ -177,14 +177,6 @@
                         android:onClick="showDeleteDialog"
                         android:text="삭제하기" />
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:onClick="goToBack"
-                        android:text="목록으로" />
                 </LinearLayout>
 
             </LinearLayout>

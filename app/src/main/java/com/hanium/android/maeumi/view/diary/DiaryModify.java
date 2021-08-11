@@ -84,15 +84,8 @@ public class DiaryModify extends Activity {
         storageRef.child(imgString).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-
                 String tet = uri.toString();
                 Glide.with(DiaryModify.this).load(tet).into(imgView);
-                System.out.println("Success " + uri);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(Exception e) {
-                System.out.println("Fail " + e.getMessage());
             }
         });
     }
@@ -138,7 +131,7 @@ public class DiaryModify extends Activity {
         } else {
             DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
             DiaryModel.setImgName(imgName);
-            Toast toastView = Toast.makeText(DiaryModify.this, "작성 완료", Toast.LENGTH_SHORT);
+            Toast toastView = Toast.makeText(DiaryModify.this, "수정 완료", Toast.LENGTH_SHORT);
             toastView.show();
             Intent intent = new Intent(DiaryModify.this, DiaryMain.class);
             startActivity(intent);

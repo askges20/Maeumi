@@ -37,11 +37,11 @@
         app:layout_constraintTop_toBottomOf="@id/diaryMainTop">
 
         <LinearLayout
+            android:background="@drawable/diary_border"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="7"
-            android:background="@drawable/board_border"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -68,8 +68,8 @@
                         android:layout_weight="7"
                         android:background="#EDEDED"
                         android:padding="5dp"
-                        android:text="2021/01/01"
-                        android:textSize="16sp" />
+                        android:text="0000/00/00"
+                        android:textSize="20sp" />
 
                     <Button
                         android:id="@+id/dailyEmoticon"
@@ -77,7 +77,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="onFilterClick"
-                        android:text="이모티콘" />
+                        android:text="오늘의 기분" />
 
                 </LinearLayout>
 
@@ -94,31 +94,35 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="3dp"
                         android:layout_weight="3"
-                        android:background="#EDEDED"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:padding="5dp"
                         android:text="제목"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/emoticon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:background="#EDEDED"
                         android:ems="2"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="기분"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
+                android:padding="3dp"
                 android:layout_weight="2"
                 android:orientation="vertical">
 
@@ -126,6 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
+                    android:padding="10dp"
                     android:orientation="vertical">
 
                     <ScrollView
@@ -142,8 +147,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:background="#ECECEC"
                                 android:ems="10"
+                                android:textSize="20dp"
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
                                 android:padding="15dp" />
@@ -166,12 +171,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="bottom"
                     android:orientation="horizontal">
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
@@ -180,7 +185,7 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
@@ -189,7 +194,7 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
