@@ -55,9 +55,11 @@ public class VideoAdapter extends BaseAdapter {
         videoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                watchedIds.clear();
                 for(DataSnapshot snap : snapshot.getChildren()){
                     watchedIds.add(snap.getKey());  //시청한 영상 id 리스트에 저장
                 }
+                heartProgram.showWatchedCnt(items.size(), watchedIds.size()); //영상 시청 개수 나타내기
                 notifyDataSetChanged(); //화면에 시청 완료 표시 업데이트
             }
 

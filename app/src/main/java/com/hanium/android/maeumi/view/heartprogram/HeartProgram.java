@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 
 public class HeartProgram extends YouTubeBaseActivity {
 
+    TextView watchedCntText;
     ListView videoListView;
     private ArrayList<Video> videoList = new ArrayList<Video>();
 
@@ -39,6 +41,7 @@ public class HeartProgram extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heart_program);
 
+        watchedCntText = findViewById(R.id.watchedCntText);
         videoListView = findViewById(R.id.heartVideoListView);
 
         String jsonString = getJsonString();    //json 파일 읽기
@@ -87,6 +90,11 @@ public class HeartProgram extends YouTubeBaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    //시청한 영상 개수 나타내기
+    public void showWatchedCnt(int total, int watchedCnt) {
+        watchedCntText.setText("전체 " + total + "개의 영상 중\n" + watchedCnt+ "개를 시청 완료했어요!");
     }
 
     public void showHeartGuide(View view) {
