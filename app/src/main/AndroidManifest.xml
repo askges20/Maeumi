@@ -18,38 +18,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
 
-        <activity android:name=".view.loading.ActivitySplash">
+        <activity android:name=".view.loading.ActivitySplash" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".view.profile.Profile" />
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".view.profile.Profile" android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.loading.SingUpActivity" />
-        <activity android:name=".view.loading.LoginActivity" />
+        <activity android:name=".view.loading.SingUpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".view.loading.LoginActivity" android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.diary.DiaryMain" />
-        <activity android:name=".view.diary.DiaryContent" />
-        <activity android:name=".view.diary.DiaryModify" />
-        <activity android:name=".view.diary.DiaryWrite" />
+        <activity android:name=".view.diary.DiaryMain" android:screenOrientation="portrait"/>
+        <activity android:name=".view.diary.DiaryContent" android:screenOrientation="portrait"/>
+        <activity android:name=".view.diary.DiaryModify" android:screenOrientation="portrait"/>
+        <activity android:name=".view.diary.DiaryWrite" android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.chatbot.ChatBot" />
+        <activity android:name=".view.chatbot.ChatBot" android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.board.Board" />
-        <activity android:name=".view.board.BoardWrite" />
-        <activity android:name=".view.board.PostContent" />
-        <activity android:name=".view.board.PostModify" />
+        <activity android:name=".view.board.Board" android:screenOrientation="portrait"/>
+        <activity android:name=".view.board.BoardWrite" android:screenOrientation="portrait"/>
+        <activity android:name=".view.board.PostContent" android:screenOrientation="portrait"/>
+        <activity android:name=".view.board.PostModify" android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.selftest.SelfTest" />
-        <activity android:name=".view.selftest.TestResult" />
-        <activity android:name=".view.selftest.TestClick" />
+        <activity android:name=".view.selftest.SelfTest" android:screenOrientation="portrait"/>
+        <activity android:name=".view.selftest.TestResult" android:screenOrientation="portrait"/>
+        <activity android:name=".view.selftest.TestClick" android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.heartprogram.HeartProgram"></activity>
-        <activity android:name=".view.heartprogram.HeartGuide"></activity>
-        <activity android:name=".view.heartprogram.HeartVideo"></activity>
+        <activity android:name=".view.heartprogram.HeartProgram" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.heartprogram.HeartGuide" android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.heartprogram.HeartVideo" android:screenOrientation="portrait"></activity>
     </application>
 
     <!-- Android 11 (API 30+) Youtube API 초기화 -->
