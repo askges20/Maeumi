@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.helpers.YoutubeCounter;
+import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.selftest.TestResult;
 
@@ -181,7 +182,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     }
 
     //영상 시청 시간 seekbar 세팅
-    public void setSeekbar(long videoTime) {
+    void setSeekbar(long videoTime) {
         seekBar = findViewById(R.id.videoSeekBar);
         seekBar.setMax((int) videoTime); //최댓값 : 영상 길이
         seekBar.setEnabled(false);
@@ -203,7 +204,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     }
 
     //파이어베이스에 영상 시청 기록 저장하기
-    public void updateFBVideo() {
+    private void updateFBVideo() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference videoRef = firebaseDatabase.getReference("/마음채우기/"+ LoginUser.getInstance().getUid()+"/"+videoId);
         videoRef.setValue("watched");
@@ -216,7 +217,8 @@ public class HeartVideo extends YouTubeBaseActivity {
                     String value = task.getResult().getValue(String.class);
                     heartNum = Integer.parseInt(value);
                     heartNum = heartNum + 5;
-                    heartRef.setValue(Integer.toString(heartNum));
+                    LoginUser.getInstance().setHeart("" + heartNum);    //LoginUser 객체의 마음 온도 수정
+                    heartRef.setValue(Integer.toString(heartNum));  //DB 값 수정
                 }
             }
         });
@@ -234,7 +236,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     }
 
     //영상 시청 완료 팝업
-    public void showWatchedPopup(){
+    private void showWatchedPopup(){
         int layout = R.layout.video_watched_popup;
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -247,7 +249,12 @@ public class HeartVideo extends YouTubeBaseActivity {
         watchedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();   //현재 액티비티 종료 (뒤로가기)
+                //마음 온도 60점 달성 시 게시판 기능 해제 알림
+                if (heartNum == 60) {
+                    showBoardOpenPopup();
+                } else {
+                    finish();   //현재 액티비티 종료 (뒤로가기)
+                }
             }
         });
 
@@ -267,7 +274,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     }
 
     //영상 시청 완료X 팝업
-    public void showUnwatchedPopup(){
+    private void showUnwatchedPopup(){
         int layout = R.layout.video_unwatched_popup;
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -303,6 +310,41 @@ public class HeartVideo extends YouTubeBaseActivity {
 
         int x = (int) (size.x * 0.7f);
         int y = (int) (size.y * 0.5f);
+
+        dialog.getWindow().setLayout(x, y);
+    }
+
+    //마음 온도 60점 달성 시 게시판 기능 해제 팝업
+    private void showBoardOpenPopup() {
+        int layout = R.layout.video_board_open_popup;
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View layoutView = getLayoutInflater().inflate(layout, null);
+        dialogBuilder.setCancelable(false); //뒤로가기 버튼 비활성화
+        dialogBuilder.setView(layoutView);
+
+        //게시판으로 이동 버튼
+        TextView moveToBoardBtn = layoutView.findViewById(R.id.videoToBoardBtn);
+        moveToBoardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HeartVideo.this, Board.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //모서리 둥글게
+        dialog.show();
+
+        //팝업 사이즈
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int x = (int) (size.x * 0.7f);
+        int y = (int) (size.y * 0.6f);
 
         dialog.getWindow().setLayout(x, y);
     }
