@@ -200,11 +200,13 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="30"
+                    android:weightSum="7"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:layout_gravity="center">
 
                         <TextView
@@ -220,16 +222,33 @@
                     <!--마음 채우기 이미지-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
                         android:gravity="center">
 
                         <ImageView
                             android:layout_gravity="center"
-
                             android:id="@+id/heartProgress"
                             android:adjustViewBounds="true"
                             android:layout_width="200dp"
                             android:layout_height="match_parent" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/goToHeartProgramBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:onClick="goToHeartProgram"
+                            android:text="마음 채우러가기" />
 
 
                     </LinearLayout>

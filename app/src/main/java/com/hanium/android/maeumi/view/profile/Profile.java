@@ -14,13 +14,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
 import com.hanium.android.maeumi.view.loading.LoginActivity;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 
 public class Profile extends AppCompatActivity {
 
-    Button logoutBtn;
+    Button logoutBtn,goToHeartProgramBtn;
     TextView userName, userEmail, userAlias, userSchool, userGender;
     ImageView heartProgress;
     private String name, email, alias, gender, school;
@@ -91,6 +92,11 @@ public class Profile extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+    public void goToHeartProgram(View view){
+        Intent intent = new Intent(this, HeartProgram.class);
+        startActivity(intent);
+        finish();
     }
 
     //로그아웃 진행
