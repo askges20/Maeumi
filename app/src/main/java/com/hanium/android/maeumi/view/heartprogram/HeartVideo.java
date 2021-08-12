@@ -42,6 +42,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     SeekBar seekBar;
     Button btn; //영상 재생(일시정지) 버튼
 
+    private boolean isWatched;
     private static String API_KEY;
     private static String videoId;
     private static String title;
@@ -58,6 +59,7 @@ public class HeartVideo extends YouTubeBaseActivity {
         setContentView(R.layout.activity_heart_video);
 
         Intent intent = getIntent();
+        isWatched = intent.getBooleanExtra("isWatched", false);
         API_KEY = intent.getStringExtra("API_KEY");
         videoId = intent.getStringExtra("videoId");
         title = intent.getStringExtra("title");
@@ -227,11 +229,14 @@ public class HeartVideo extends YouTubeBaseActivity {
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
-
-        if (isCompleted) {   //영상 시청을 완료했을 때
-            showWatchedPopup();
-        } else {
-            showUnwatchedPopup();
+        if (isWatched) {    //이전에 시청했던 영상인 경우
+            finish();   //뒤로가기
+        } else {    //처음 시청하는 영상인 경우
+            if (isCompleted) {   //영상 시청을 완료했을 때
+                showWatchedPopup();
+            } else {
+                showUnwatchedPopup();
+            }
         }
     }
 

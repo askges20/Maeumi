@@ -1,7 +1,10 @@
 package com.hanium.android.maeumi.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -144,8 +147,37 @@ public class VideoAdapter extends BaseAdapter {
         videoItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (watchedIds.contains(videoId)) { //이미 시청했던 영상
+                    AlertDialog dialog = new AlertDialog.Builder(mContext)
+                            .setMessage(R.string.video_already_watched)
+                            .setPositiveButton("시청하기", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int i) {
+                                    Intent intent = new Intent(mContext, HeartVideo.class);
+                                    //영상 정보 넘기기
+                                    intent.putExtra("isWatched", true);
+                                    intent.putExtra("API_KEY", API_KEY);
+                                    intent.putExtra("videoId", videoId);
+                                    intent.putExtra("title", title);
+                                    intent.putExtra("description", description);
+                                    mContext.startActivity(intent); //영상 시청 화면으로 이동
+                                }
+                            })
+                            .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
+
+                    return;
+                }
+
+                //시청 기록이 없는 영상
                 Intent intent = new Intent(mContext, HeartVideo.class);
                 //영상 정보 넘기기
+                intent.putExtra("isWatched", false);
                 intent.putExtra("API_KEY", API_KEY);
                 intent.putExtra("videoId", videoId);
                 intent.putExtra("title", title);
