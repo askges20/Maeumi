@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 
 public class SelfTest extends AppCompatActivity {
 
@@ -30,8 +32,14 @@ public class SelfTest extends AppCompatActivity {
 
     }
     public void goToHistory(View view){
-        Intent intent = new Intent(this,TestHistory.class);
-        startActivity(intent);
+        String victimScore = LoginUser.getInstance().getVictimScore();
+
+        if (victimScore == null) {    //결과가 존재하지 않음
+            Toast.makeText(this, "테스트 결과가 존재하지 않습니다!", Toast.LENGTH_SHORT).show();
+        } else {    //결과가 존재함
+            Intent intent = new Intent(SelfTest.this, TestResult.class);
+            startActivity(intent);
+        }
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
