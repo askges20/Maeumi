@@ -48,7 +48,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     private static String title;
     private static String description;
 
-    static int heartNum;
+    int heartNum;
 
     YoutubeCounter timer = new YoutubeCounter(this);
     boolean isCompleted = false;
@@ -211,21 +211,22 @@ public class HeartVideo extends YouTubeBaseActivity {
         DatabaseReference videoRef = firebaseDatabase.getReference("/마음채우기/"+ LoginUser.getInstance().getUid()+"/"+videoId);
         videoRef.setValue("watched");
 
-        DatabaseReference heartRef = firebaseDatabase.getReference("/Users/"+ LoginUser.getInstance().getUid()+"/heart");
-        heartRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>(){
-            @Override
-            public void onComplete(Task<DataSnapshot> task){
-                if(task.isSuccessful()){
-                    String value = task.getResult().getValue(String.class);
-                    heartNum = Integer.parseInt(value);
-                    heartNum = heartNum + 5;
-                    LoginUser.getInstance().setHeart("" + heartNum);    //LoginUser 객체의 마음 온도 수정
-                    heartRef.setValue(Integer.toString(heartNum));  //DB 값 수정
+
+        if(!isWatched){
+            DatabaseReference heartRef = firebaseDatabase.getReference("/Users/"+ LoginUser.getInstance().getUid()+"/heart");
+            heartRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>(){
+                @Override
+                public void onComplete(Task<DataSnapshot> task){
+                    if(task.isSuccessful()){
+                        String value = task.getResult().getValue(String.class);
+                        heartNum = Integer.parseInt(value);
+                        heartNum = heartNum + 5;
+                        LoginUser.getInstance().setHeart("" + heartNum);    //LoginUser 객체의 마음 온도 수정
+                        heartRef.setValue(Integer.toString(heartNum));  //DB 값 수정
+                    }
                 }
-            }
-        });
-
-
+            });
+        }
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
