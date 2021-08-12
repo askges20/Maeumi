@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="로그인"
+            android:text="마음이 로그인"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -39,9 +39,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="70dp"
+            app:srcCompat="@drawable/maeumi_main_img" />
 
         <EditText
             android:id="@+id/userEmail"
@@ -68,6 +74,18 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="15dp" />
 
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:background="#ffffff"
+            android:onClick="onLoginClick"
+            android:text="로그인"
+            android:textSize="24sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -77,24 +95,21 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:onClick="onLoginClick"
-            android:id="@+id/btn_login"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#ffffff"
-            android:layout_marginRight="10dp"
-            android:text="로그인" />
-        <Button
-            android:onClick="onSignUpClick"
+            android:text="마음이가 처음이라면?"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/btn_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#ffffff"
-            android:text="회원가입" />
-
+            android:onClick="onSignUpClick"
+            android:padding="10dp"
+            android:text="회원가입 하기"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
