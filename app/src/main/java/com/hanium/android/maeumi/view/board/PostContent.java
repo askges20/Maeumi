@@ -52,7 +52,7 @@ public class PostContent extends AppCompatActivity {
 
     ImageButton dropDownBtn;    //드롭다운 메뉴 버튼
 
-    TextView titleText, contentText, dateText, writerText; //제목, 내용, 날짜, 작성자 텍스트
+    TextView titleText, contentText, dateText, writerText, boardName; //제목, 내용, 날짜, 작성자 텍스트, 게시판이름
 
     ListView commentList; //댓글 목록
     LinearLayout writeCommentArea;  //댓글 작성 영역
@@ -78,6 +78,7 @@ public class PostContent extends AppCompatActivity {
         contentText = findViewById(R.id.postContentText);
         dateText = findViewById(R.id.postDateText);
         writerText = findViewById(R.id.postWriterText);
+        boardName = findViewById(R.id.boardName);
 
         writtenCommentText = findViewById(R.id.writtenCommentText);
         addCommentBtn = findViewById(R.id.addCommentBtn);
@@ -87,6 +88,21 @@ public class PostContent extends AppCompatActivity {
 
         Intent prevIntent = getIntent();
         boardType = prevIntent.getStringExtra("boardType");
+
+        switch (boardType) {
+            case "free":
+                boardName.setText("자유게시판");
+                break;
+            case "question":
+                boardName.setText("질문게시판");
+                break;
+            case "anonymous":
+                boardName.setText("익명게시판");
+                break;
+            case "tip":
+                boardName.setText("꿀팁게시판");
+                break;
+        }
 
         title = post.getTitle();
         titleText.setText(title);
@@ -170,45 +186,45 @@ public class PostContent extends AppCompatActivity {
 
     public void showDeleteDialog() {    //삭제 버튼 클릭 시
         AlertDialog dialog = new AlertDialog.Builder(PostContent.this)
-        .setMessage("작성하신 글을 삭제하시겠습니까?")
-        .setPositiveButton("네", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
+                .setMessage("작성하신 글을 삭제하시겠습니까?")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
 
-                //DB에서 게시글 데이터 삭제
-                String date = writeDate.substring(0, 4) + writeDate.substring(5, 7) + writeDate.substring(8, 10);
-                if (boardType.equals("free"))
-                    postRef = database.getReference("/게시판/자유게시판/" + date + "/");
-                else if (boardType.equals("question"))
-                    postRef = database.getReference("/게시판/질문게시판/" + date + "/");
-                else if (boardType.equals("tip"))
-                    postRef = database.getReference("/게시판/꿀팁게시판/" + date + "/");
-                else
-                    postRef = database.getReference("/게시판/익명게시판/" + date + "/");
-                Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put(postCode, null);
-                postRef.updateChildren(childUpdates);
-
-
-                //DB에서 해당 게시글 댓글 삭제
-                commentRef = database.getReference("/댓글/" + postCode);
-                commentRef.setValue(null);
+                        //DB에서 게시글 데이터 삭제
+                        String date = writeDate.substring(0, 4) + writeDate.substring(5, 7) + writeDate.substring(8, 10);
+                        if (boardType.equals("free"))
+                            postRef = database.getReference("/게시판/자유게시판/" + date + "/");
+                        else if (boardType.equals("question"))
+                            postRef = database.getReference("/게시판/질문게시판/" + date + "/");
+                        else if (boardType.equals("tip"))
+                            postRef = database.getReference("/게시판/꿀팁게시판/" + date + "/");
+                        else
+                            postRef = database.getReference("/게시판/익명게시판/" + date + "/");
+                        Map<String, Object> childUpdates = new HashMap<>();
+                        childUpdates.put(postCode, null);
+                        postRef.updateChildren(childUpdates);
 
 
-                //DB에서 해당 게시글 공감 삭제
-                DatabaseReference likeRef = database.getReference("/공감/" + postCode);
-                likeRef.setValue(null);
+                        //DB에서 해당 게시글 댓글 삭제
+                        commentRef = database.getReference("/댓글/" + postCode);
+                        commentRef.setValue(null);
 
-                finish();   //현재 액티비티 없애기
-            }
-        })
-        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
+
+                        //DB에서 해당 게시글 공감 삭제
+                        DatabaseReference likeRef = database.getReference("/공감/" + postCode);
+                        likeRef.setValue(null);
+
+                        finish();   //현재 액티비티 없애기
+                    }
+                })
+                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
 //                Toast.makeText(PostContent.this, "삭제 취소", Toast.LENGTH_SHORT).show();
-            }
-        })
-        .show();
+                    }
+                })
+                .show();
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
@@ -239,8 +255,8 @@ public class PostContent extends AppCompatActivity {
             commentValues = comment.toMap();
             System.out.println("commentValue- " + commentValues);
 
-            SimpleDateFormat format2 = new SimpleDateFormat ( "yyMMdd");    //날짜
-            SimpleDateFormat format3= new SimpleDateFormat("HHmmss");   //시간
+            SimpleDateFormat format2 = new SimpleDateFormat("yyMMdd");    //날짜
+            SimpleDateFormat format3 = new SimpleDateFormat("HHmmss");   //시간
             String commentNum = format2.format(time) + format3.format(time) + LoginUser.getInstance().getUid();
             childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
@@ -290,20 +306,20 @@ public class PostContent extends AppCompatActivity {
     //댓글 삭제 버튼 클릭 시
     public void deleteComment(Comment comment) {
         AlertDialog dialog = new AlertDialog.Builder(this)
-        .setMessage("댓글을 삭제하시겠습니까?")
-        .setPositiveButton("네", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                processDeleteComment(comment);  //댓글 삭제 진행
-            }
-        })
-        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                //댓글 삭제 취소
-            }
-        })
-        .show();
+                .setMessage("댓글을 삭제하시겠습니까?")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        processDeleteComment(comment);  //댓글 삭제 진행
+                    }
+                })
+                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        //댓글 삭제 취소
+                    }
+                })
+                .show();
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
