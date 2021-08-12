@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
     FirebaseDatabase database;
     DatabaseReference userRef;
 

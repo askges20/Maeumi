@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.view.loading.ActivitySplash;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 
 public class TestModel {
@@ -36,7 +37,7 @@ public class TestModel {
         this.perpetrationScore = score;
     }
 
-    public void getHistory() {
+    public void getHistory(ActivitySplash splash) {
         LoginUser loginUser = LoginUser.getInstance();
 
         database = FirebaseDatabase.getInstance();
@@ -52,6 +53,8 @@ public class TestModel {
                     }
                     System.out.println("사용자 테스트 결과 불러오기 완료");
                 }
+
+                splash.moveToMain();    //테스트 결과 읽어왔으므로 스플래시 -> 메인 화면으로 이동
             }
 
             @Override

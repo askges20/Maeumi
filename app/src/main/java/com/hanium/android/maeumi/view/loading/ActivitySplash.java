@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,10 +22,13 @@ import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
 public class ActivitySplash extends AppCompatActivity {
+
     FirebaseDatabase database;
     DatabaseReference userRef;
     FirebaseAuth firebaseAuth;
     private static final String TAG = "splash";
+
+    FirebaseUser userFromFB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,7 @@ public class ActivitySplash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);   //로딩 화면
 
 
-        FirebaseUser userFromFB = FirebaseAuth.getInstance().getCurrentUser();  //사용자가 이전에 로그인한 계정
+        userFromFB = FirebaseAuth.getInstance().getCurrentUser();  //사용자가 이전에 로그인한 계정
 
         if (userFromFB != null) {    //이전에 로그인을 했었다면 DB에서 정보 조회, 저장
             String loginUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); //로그인한 계정의 uid
@@ -67,40 +71,31 @@ public class ActivitySplash extends AppCompatActivity {
                 }
             });
 
-            user.setHistory();  //사용자 테스트 결과 DB에서 읽고 저장하기
+            user.setHistory(this);  //사용자 테스트 결과 DB에서 읽고 저장하기 (완료되면 moveToMain 실행)
+
+        } else {    //이전에 로그인을 한 기록이 없으면
+            startActivity(new Intent(ActivitySplash.this, LoginActivity.class));
+            finish();   //로그인 화면으로 이동
         }
+    }
 
-
-        //스레드 실행
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+    //메인 화면으로 이동하기
+    public void moveToMain() {
+        firebaseAuth.getInstance().getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void run() {
-                if (userFromFB != null) { //로그인 기록이 있는 사용자
-
-                    firebaseAuth.getInstance().getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            if(userFromFB.isEmailVerified()){
-                                Toast.makeText(ActivitySplash.this, "로그인 성공", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
-                                Log.d(TAG, "로그인 계정 uid : " + userFromFB.getUid());
-                                finish();   //현재 액티비티(로그인 화면) 종료
-                            }else{
-                                Toast.makeText(ActivitySplash.this, "이메일 인증을 완료해주세요.", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(ActivitySplash.this, LoginActivity.class));    //로그인 화면으로 이동
-                                finish();
-                            }
-                        }
-                    });
-
-
-                } else {    //로그인 기록이 없는 사용자
-                    startActivity(new Intent(ActivitySplash.this, LoginActivity.class));//로그인 화면으로 이동
+            public void onSuccess(Void unused) {
+                if (userFromFB.isEmailVerified()) {
+                    // Toast.makeText(ActivitySplash.this, "로그인 성공", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
+                    Log.d(TAG, "로그인 계정 uid : " + userFromFB.getUid());
+                    finish();   //현재 액티비티(로그인 화면) 종료
+                } else {
+                    Toast.makeText(ActivitySplash.this, "이메일 인증을 완료해주세요.", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(ActivitySplash.this, LoginActivity.class));    //로그인 화면으로 이동
                     finish();
                 }
             }
-        }, 5000);   // 5초 뒤 이동
+        });
     }
 
     @Override

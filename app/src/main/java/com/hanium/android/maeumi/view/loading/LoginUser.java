@@ -85,8 +85,8 @@ public class LoginUser {
     }
 
     /* 테스트 결과 불러와서 저장하기 */
-    public void setHistory() {
-        testModel.getHistory();
+    public void setHistory(ActivitySplash splash) {
+        testModel.getHistory(splash);
     }
     
     public void setVictimScore(String score) {
