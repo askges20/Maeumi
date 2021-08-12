@@ -239,8 +239,9 @@ public class PostContent extends AppCompatActivity {
             commentValues = comment.toMap();
             System.out.println("commentValue- " + commentValues);
 
-            SimpleDateFormat format2 = new SimpleDateFormat("HHmmss");
-            String commentNum = format2.format(time) + LoginUser.getInstance().getUid();
+            SimpleDateFormat format2 = new SimpleDateFormat ( "yyMMdd");    //날짜
+            SimpleDateFormat format3= new SimpleDateFormat("HHmmss");   //시간
+            String commentNum = format2.format(time) + format3.format(time) + LoginUser.getInstance().getUid();
             childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
 
