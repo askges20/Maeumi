@@ -73,6 +73,7 @@ public class DiaryModel {
     }
 
     public void setCompareMonth(LocalDate selectedDate) {
+        System.out.println("모델 : setCompareMonth");
 
         this.oneTimeMonth = selectedDate.toString();
         this.compareMonth = this.oneTimeMonth.replace("-", "");
@@ -82,6 +83,8 @@ public class DiaryModel {
     }
 
     public void setChangeCompareMonth(LocalDate selectedDate) {
+        System.out.println("모델 : setChangeCompareMonth");
+
         this.oneTimeMonth = selectedDate.toString();
         this.compareMonth = this.oneTimeMonth.replace("-", "");
         this.compareMonth = this.compareMonth.substring(0, 6);
@@ -95,12 +98,14 @@ public class DiaryModel {
 
 
     public void setMonthDiaryDates() {
+        System.out.println("모델 : setMonthDiaryDates 실행");
         this.dates = this.getMonthDiaryDates();
         DiaryMain.setDates(this.dates);
     }
 
 
     public void getMonthDiary() {
+        System.out.println("모델 : getMonthDiary 실행");
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/");
 
@@ -119,6 +124,8 @@ public class DiaryModel {
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                     }
                 }
+                System.out.println("모델 : getMonthDiary에서 일기 파이어베이스 DB 읽기 완료 후 setMonthDiaryDates 시작");
+
                 setMonthDiaryDates();
             }
 

@@ -41,6 +41,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         holder.day0fMonth.setText(days0fMonth.get(position));
+        System.out.println("어댑터 : 뷰홀더 setText : " + days0fMonth.get(position));
 
         // 1 ~ 9일 까지 앞에 0 붙이기
         if (days0fMonth.get(position).length() == 1) {
@@ -48,6 +49,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         } else {
             compareDate = days0fMonth.get(position);
         }
+
         // 조건 비교 후 배경 색칠
         for (int i = 0; i < diaryDates.size(); i++) {
             if (compareDate.equals(diaryDates.get(i).substring(0, 2))) {
