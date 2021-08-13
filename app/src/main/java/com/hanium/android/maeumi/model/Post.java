@@ -1,20 +1,30 @@
 package com.hanium.android.maeumi.model;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hanium.android.maeumi.adapters.PostAdapter;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Post {
     FirebaseDatabase database;
+    FirebaseStorage storage;
+    StorageReference storageRef;
     PostAdapter postAdapter;
     String postNum;
 
@@ -118,6 +128,34 @@ public class Post {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    // 사진 DB저장
+    public void saveImg(Bitmap imgBitmap){
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference("/board");
+
+        StorageReference imgSaveRef = storageRef.child("hello");
+
+        Bitmap bitmap = imgBitmap;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = imgSaveRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                System.out.println("error - " + exception.getMessage());
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                System.out.println("성공");
             }
         });
     }

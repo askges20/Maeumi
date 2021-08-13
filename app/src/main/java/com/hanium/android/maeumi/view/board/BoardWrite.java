@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +22,9 @@ import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Post;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,7 @@ public class BoardWrite extends AppCompatActivity {
     DatabaseReference boardRef;
     Bitmap imgName;
     private String boardType;
+    ImageView imgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class BoardWrite extends AppCompatActivity {
 
         Button saveWrite = (Button) findViewById(R.id.saveWrite); //작성 완료 버튼
         Button addPhoto = (Button) findViewById(R.id.addPhoto); //사진 추가 버튼
+        imgView = findViewById(R.id.imgView); //사진 추가 버튼
         final EditText boardTitle = (EditText) findViewById(R.id.boardTitle); //게시글 제목
         final EditText boardBody = (EditText) findViewById(R.id.boardBody); //게시글 내용
 
@@ -75,8 +78,6 @@ public class BoardWrite extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkSelfPermission();
-
-
             }
         });
     }
@@ -119,13 +120,18 @@ public class BoardWrite extends AppCompatActivity {
                 try {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
-//                    Glide.with(getApplicationContext()).load(imgName).into(imgView);
+                    Glide.with(getApplicationContext()).load(imgName).into(imgView);
                     inStream.close();   // 스트림 닫아주기
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
                 }
             }
         }
+    }
+
+    // 사진 DB저장
+    protected void saveImg(){
+
     }
 
     protected void addPost(String title, String content){
@@ -166,6 +172,7 @@ public class BoardWrite extends AppCompatActivity {
         postValues = post.toMap();
         childUpdates.put(postNum, postValues);
         boardRef.updateChildren(childUpdates);
+        post.saveImg(imgName);
     }
 
     protected String getToday(){    //오늘 날짜 yyyyMMdd
