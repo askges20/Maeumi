@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/writePostTop"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="70dp"
         android:background="@drawable/shadow"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
