@@ -129,11 +129,6 @@ public class BoardWrite extends AppCompatActivity {
         }
     }
 
-    // 사진 DB저장
-    protected void saveImg(){
-
-    }
-
     protected void addPost(String title, String content){
         database = FirebaseDatabase.getInstance();
 
@@ -173,7 +168,7 @@ public class BoardWrite extends AppCompatActivity {
         childUpdates.put(postNum, postValues);
         boardRef.updateChildren(childUpdates);
         if(imgName != null){
-            post.saveImg(imgName,boardType,today+code);
+            post.saveImg(imgName,boardType,today+postNum);
         }
     }
 

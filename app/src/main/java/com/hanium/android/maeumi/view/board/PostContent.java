@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,11 +22,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.hanium.android.maeumi.model.DiaryModel;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.adapters.PostAdapter;
@@ -44,6 +50,8 @@ public class PostContent extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference postRef;
     DatabaseReference commentRef;
+    FirebaseStorage storage;
+    StorageReference storageRef;
     CommentAdapter commentAdapter;
 
     Post post = PostAdapter.curPost;    //클릭한 게시글 객체
@@ -62,6 +70,7 @@ public class PostContent extends AppCompatActivity {
     InputMethodManager imm; //키보드 제어
 
     ImageView likeHeartImg; //공감 버튼 하트 이미지
+    ImageView boardImgView; //게시글 이미지
     TextView likeCntText;   //공감 수 텍스트
 
     @Override
@@ -84,6 +93,7 @@ public class PostContent extends AppCompatActivity {
         addCommentBtn = findViewById(R.id.addCommentBtn);
 
         likeHeartImg = findViewById(R.id.likeHeartImg);
+        boardImgView = findViewById(R.id.imgView);
         likeCntText = findViewById(R.id.likeCnt);
 
         Intent prevIntent = getIntent();
@@ -151,6 +161,7 @@ public class PostContent extends AppCompatActivity {
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
+        getImg(); //이미지 가져오기
     }
 
     //드롭다운 메뉴 클릭 시
@@ -353,5 +364,22 @@ public class PostContent extends AppCompatActivity {
             post.addLikeUser(userUid);
         }
         likeCntText.setText(post.getLikeUsersCnt() + "");
+    }
+
+    // 이미지 조회
+    private void getImg() {
+
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference("/board");
+        String date = writeDate.substring(0, 4) + writeDate.substring(5, 7) + writeDate.substring(8, 10);
+        String path = date + postCode;
+
+        storageRef.child(boardType).child(path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                Glide.with(getApplicationContext()).load(uri).into(boardImgView);
+            }
+        });
     }
 }
