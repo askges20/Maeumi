@@ -2,6 +2,8 @@ package com.hanium.android.maeumi.view.diary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,12 +24,13 @@ import static com.hanium.android.maeumi.view.diary.CalendarUtils.monthYearFromDa
 
 public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnItemListener {
     private TextView monthYearText;
-    private RecyclerView calendarRecyclerView;
+    public RecyclerView calendarRecyclerView;
     Button diaryButton;
 
-    DiaryModel DiaryModel = new DiaryModel(this);
     CalendarAdapter calendarAdapter;
+    DiaryModel DiaryModel;
 
+    ArrayList<String> daysInMonth = new ArrayList<String>();
     public static ArrayList<String> diaryDates = new ArrayList<>();
 
     @Override
@@ -35,23 +38,10 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_main);
 
-        iniwigets();
+        iniwigets();    //activity_diary_main.xml.xml 레이아웃 요소 연결
         CalendarUtils.selectDate = LocalDate.now(); //CalendarUtils에 오늘 날짜 전달
-        DiaryModel.setCompareMonth(CalendarUtils.selectDate);
 
         setMonthView(); //캘린더 표시
-    }
-
-    public void goToBack(View view){
-        finish();
-    }
-
-    public void setDates(ArrayList<String> dates) {
-        System.out.println("메인에서 실행 : setDates " + dates);
-        this.diaryDates = dates;
-        calendarAdapter.SetDates(this.diaryDates);
-        System.out.println("setDates에서 setMonthView 실행");
-        setMonthView();
     }
 
     //activity_diary_main.xml.xml 레이아웃 요소 연결
@@ -65,22 +55,40 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     //캘린더 새로고침
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectDate)); //년, 월 표시
-        ArrayList<String> daysInMonth = daysInMonthArray(CalendarUtils.selectDate); //캘린더 날짜 배열 세팅
-        System.out.println("메인에서 실행 : 캘린더 날짜 배열 : " + daysInMonth);
+        daysInMonth = daysInMonthArray(CalendarUtils.selectDate); //캘린더 날짜 배열 세팅
 
-        calendarAdapter = new CalendarAdapter(daysInMonth,this);
+        calendarAdapter = new CalendarAdapter(daysInMonth,this);    //어댑터 생성
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);   //레이아웃 매니저 설정
         calendarRecyclerView.setAdapter(calendarAdapter);   //캘린더 어댑터 등록
         System.out.println("메인에서 실행 : 캘린더 어댑터 등록");
 
+        DiaryModel = new DiaryModel(this, calendarAdapter);
+        DiaryModel.setCompareMonth(CalendarUtils.selectDate);   //DiaryModel에 전달 후 DB 읽기
+        System.out.println("메인에서 실행 : 캘린더 날짜 배열 : " + daysInMonth);
     }
+
+    //DiaryModel에서 DB로부터 읽어온 날짜를 설정하고 adapter에 넘김, notify
+    public void setDates(ArrayList<String> dates) {
+        System.out.println("메인에서 실행 : setDates " + dates);
+        diaryDates = dates;
+        calendarAdapter.SetDates(this.diaryDates);
+
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            public void run() {
+                calendarAdapter.notifyDataSetChanged();
+                System.out.println("메인 : setDates 어댑터에 notify");
+            }
+        });
+    }
+
+
 
     //이전 달 캘린더로 이동
     public void previousMonthAction(View view) {
         System.out.println("메인에서 실행 : 이전 달로 이동");
         CalendarUtils.selectDate = CalendarUtils.selectDate.minusMonths(1);
-        DiaryModel.setChangeCompareMonth(CalendarUtils.selectDate);
+        DiaryModel.setCompareMonth(CalendarUtils.selectDate);
         setMonthView(); //화면에 표시
     }
 
@@ -88,7 +96,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     public void nextMonthAction(View view) {
         System.out.println("메인에서 실행 : 다음 달로 이동");
         CalendarUtils.selectDate = CalendarUtils.selectDate.plusMonths(1);
-        DiaryModel.setChangeCompareMonth(CalendarUtils.selectDate);
+        DiaryModel.setCompareMonth(CalendarUtils.selectDate);
         setMonthView(); //화면에 표시
     }
 
@@ -105,10 +113,16 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         startActivity(intent);
     }
 
+
+
     //일기 작성 페이지로 이동
     public void diaryWrite(View view) {
         Intent intent = new Intent(getApplicationContext(), DiaryWrite.class);
         startActivity(intent);
+    }
+
+    public void goToBack(View view){
+        finish();
     }
 }
 

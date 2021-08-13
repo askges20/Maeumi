@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hanium.android.maeumi.adapters.CalendarAdapter;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
 
@@ -26,6 +27,7 @@ import java.util.Map;
 public class DiaryModel {
 
     DiaryMain DiaryMain;
+    CalendarAdapter adapter;
 
     FirebaseDatabase database;
     FirebaseStorage storage;
@@ -33,7 +35,7 @@ public class DiaryModel {
     DatabaseReference diaryRef;
     LoginUser loginUser = LoginUser.getInstance();
 
-    public static String calendarDate, fireDate, compareMonth, monthlyDate, saveId;
+    public static String calendarDate, fireDate, compareMonth, saveId;
     public static String title, content, nullDiary, emoticonNum, varTitle, varContent, varENum;
     public static String day, year, month, oneTimeDate, oneTimeMonth;
     public static Bitmap imgName;
@@ -43,8 +45,56 @@ public class DiaryModel {
     public DiaryModel() {
     }
 
-    public DiaryModel(DiaryMain custom) {
+    public DiaryModel(DiaryMain custom, CalendarAdapter adapter) {
         this.DiaryMain = custom;
+        this.adapter = adapter;
+    }
+
+    public void setCompareMonth(LocalDate selectedDate) {
+        System.out.println("모델 : setCompareMonth");
+
+        this.oneTimeMonth = selectedDate.toString();
+        this.compareMonth = this.oneTimeMonth.replace("-", "");
+        this.compareMonth = this.compareMonth.substring(0, 6);
+
+        getMonthDiaryFB();
+    }
+
+    public void getMonthDiaryFB() {
+        System.out.println("모델 : getMonthDiary 실행");
+        database = FirebaseDatabase.getInstance();
+        diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/");
+
+        diaryRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dates.clear();
+
+                for (DataSnapshot dateSnap : dataSnapshot.getChildren()) {
+                    if (compareMonth.equals(dateSnap.getKey().substring(0, 6))) {
+                        Diary value = dateSnap.getValue(Diary.class);
+                        String monthlyDate = value.date + value.emoticonNum;   //일기 있는 날짜와 이모티콘 번호
+                        dates.add(monthlyDate);
+                    }
+                }
+                System.out.println("모델 : getMonthDiary에서 일기 파이어베이스 DB 읽기 완료 후 setMonthDiaryDates 시작");
+
+                giveDiaryDatesToMain();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.out.println("Failed to read value." + error.toException());
+            }
+        });
+    }
+
+    public void giveDiaryDatesToMain() {
+        System.out.println("모델 : 메인으로 일기 있는 날짜 전달");
+        DiaryMain.setDates(this.dates);
+
+        //adapter.notifyDataSetChanged();
     }
 
     // Intent에서 생성된 날짜를 FireBase, 캘린더 날짜로 바꾸고 저장
@@ -72,70 +122,6 @@ public class DiaryModel {
         return date;
     }
 
-    public void setCompareMonth(LocalDate selectedDate) {
-        System.out.println("모델 : setCompareMonth");
-
-        this.oneTimeMonth = selectedDate.toString();
-        this.compareMonth = this.oneTimeMonth.replace("-", "");
-        this.compareMonth = this.compareMonth.substring(0, 6);
-
-        getMonthDiary();
-    }
-
-    public void setChangeCompareMonth(LocalDate selectedDate) {
-        System.out.println("모델 : setChangeCompareMonth");
-
-        this.oneTimeMonth = selectedDate.toString();
-        this.compareMonth = this.oneTimeMonth.replace("-", "");
-        this.compareMonth = this.compareMonth.substring(0, 6);
-
-        getMonthDiary();
-    }
-
-    public ArrayList getMonthDiaryDates() {
-        return dates;
-    }
-
-
-    public void setMonthDiaryDates() {
-        System.out.println("모델 : setMonthDiaryDates 실행");
-        this.dates = this.getMonthDiaryDates();
-        DiaryMain.setDates(this.dates);
-    }
-
-
-    public void getMonthDiary() {
-        System.out.println("모델 : getMonthDiary 실행");
-        database = FirebaseDatabase.getInstance();
-        diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/");
-
-        diaryRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                dates.clear();
-
-                for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
-                    if (compareMonth.equals(dateSnap.getKey().substring(0, 6))) {
-                        Diary value = dateSnap.getValue(Diary.class);
-                        monthlyDate = value.date + value.emoticonNum;
-                        dates.add(monthlyDate);
-                    }
-                    for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
-                    }
-                }
-                System.out.println("모델 : getMonthDiary에서 일기 파이어베이스 DB 읽기 완료 후 setMonthDiaryDates 시작");
-
-                setMonthDiaryDates();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                System.out.println("Failed to read value." + error.toException());
-            }
-        });
-    }
-
     // 일기 제목, 내용, 이모티콘 번호 불러오기
     public void setDiaryData() {
         resetDiary();
@@ -148,6 +134,7 @@ public class DiaryModel {
     }
 
     public void resetDiary() {
+        System.out.println("모델 : resetDiary");
         this.title = null;
         this.content = null;
         this.emoticonNum = null;
@@ -194,6 +181,7 @@ public class DiaryModel {
 
     // 개별 일기 조회
     public void getDiaryFromFB(String date) {
+        System.out.println("모델 : getDiaryFromFB 후 resetDiary() 넘어감");
         resetDiary();
 
         database = FirebaseDatabase.getInstance();

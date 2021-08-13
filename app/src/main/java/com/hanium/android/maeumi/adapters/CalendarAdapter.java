@@ -3,6 +3,7 @@ package com.hanium.android.maeumi.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +32,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        System.out.println("어댑터 : 뷰홀더 생성");
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
@@ -50,22 +52,19 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             compareDate = days0fMonth.get(position);
         }
 
-        // 조건 비교 후 배경 색칠
-        for (int i = 0; i < diaryDates.size(); i++) {
-            if (compareDate.equals(diaryDates.get(i).substring(0, 2))) {
-                switch (diaryDates.get(i).substring(diaryDates.get(i).length() - 1)) {
-                    case "1":
-                        holder.parentView.setBackgroundResource(R.drawable.diary_good);
-                        break;
-                    case "2":
-                        holder.parentView.setBackgroundResource(R.drawable.diary_normal);
-                        break;
-                    case "3":
-                        holder.parentView.setBackgroundResource(R.drawable.diary_bad);
-                        break;
-                }
-            }
+        //diaryDates 안에 있는 날짜면 배경 변경
+        if (diaryDates.contains(compareDate+"1")){
+            holder.parentView.setBackgroundResource(R.drawable.diary_good);
+        } else if (diaryDates.contains(compareDate+"2")){
+            holder.parentView.setBackgroundResource(R.drawable.diary_normal);
+        } else if (diaryDates.contains(compareDate+"3")){
+            holder.parentView.setBackgroundResource(R.drawable.diary_bad);
         }
+    }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull CalendarViewHolder holder){
+        super.onViewAttachedToWindow(holder);
     }
 
     @Override
