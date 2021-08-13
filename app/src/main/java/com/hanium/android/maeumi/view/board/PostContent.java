@@ -194,6 +194,7 @@ public class PostContent extends AppCompatActivity {
         intent.putExtra("writeDate", writeDate);
         intent.putExtra("writer", writer);
         intent.putExtra("boardType", boardType);
+        intent.putExtra("postCode", postCode);
 
         startActivity(intent);
     }
