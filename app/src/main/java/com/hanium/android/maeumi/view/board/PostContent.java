@@ -345,13 +345,20 @@ public class PostContent extends AppCompatActivity {
 
     public void processDeleteComment(Comment comment) { //삭제할 댓글을 파라미터로 받음
 
-        database = FirebaseDatabase.getInstance();
+        System.out.println("댓글 삭제하기");
+
         String postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
+        System.out.println("글번호 : " + postCode);
+
+        database = FirebaseDatabase.getInstance();
         commentRef = database.getReference("/댓글/" + postCode + "/");
         Map<String, Object> childUpdates = new HashMap<>();
 
         String commentDate = comment.writeDate;
-        String commentNum = commentDate.substring(11, 13) + commentDate.substring(14, 16) + commentDate.substring(17, 19) + LoginUser.getInstance().getUid();
+        String commentNum = commentDate.substring(2,4) + commentDate.substring(5,7) + commentDate.substring(8,10);
+        commentNum += commentDate.substring(11, 13) + commentDate.substring(14, 16) + commentDate.substring(17, 19) + LoginUser.getInstance().getUid();
+
+        System.out.println("댓글번호 : " + commentNum);
 
         childUpdates.put(commentNum, null); //DB에서 삭제
         commentRef.updateChildren(childUpdates);
