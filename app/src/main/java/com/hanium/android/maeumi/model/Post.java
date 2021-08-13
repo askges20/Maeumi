@@ -133,11 +133,11 @@ public class Post {
     }
 
     // 사진 DB저장
-    public void saveImg(Bitmap imgBitmap){
+    public void saveImg(Bitmap imgBitmap,String ref,String path){
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference("/board");
 
-        StorageReference imgSaveRef = storageRef.child("hello");
+        StorageReference imgSaveRef = storageRef.child(ref).child(path);
 
         Bitmap bitmap = imgBitmap;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -148,13 +148,11 @@ public class Post {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
                 System.out.println("error - " + exception.getMessage());
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 System.out.println("성공");
             }
         });

@@ -172,7 +172,9 @@ public class BoardWrite extends AppCompatActivity {
         postValues = post.toMap();
         childUpdates.put(postNum, postValues);
         boardRef.updateChildren(childUpdates);
-        post.saveImg(imgName);
+        if(imgName != null){
+            post.saveImg(imgName,boardType,today+code);
+        }
     }
 
     protected String getToday(){    //오늘 날짜 yyyyMMdd
