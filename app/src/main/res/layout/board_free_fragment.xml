@@ -27,18 +27,21 @@
         android:id="@+id/boardWriteFreeBtnArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="right|center_horizontal"
         android:orientation="horizontal"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circle_button"
             android:onClick="goToBoardWrite"
-            android:padding="10dp"
-            android:text="글 쓰기" />
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pen_icon"
+            app:tint="@color/white" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
