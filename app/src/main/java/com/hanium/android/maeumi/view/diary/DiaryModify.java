@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -35,7 +36,8 @@ public class DiaryModify extends Activity {
     TextView dateText, titleText, contentText, emoticon;
     ConstraintLayout mainContent;
     ImageView imgView;
-    Bitmap imgName;
+    static Bitmap imgName;
+    Button addImgBtn,deleteImgBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class DiaryModify extends Activity {
         contentText = findViewById(R.id.diaryContentModifyText);
         mainContent = findViewById(R.id.mainContent);
         imgView = findViewById(R.id.testImgView);
+
+        addImgBtn = findViewById(R.id.addImgBtn);
+        deleteImgBtn = findViewById(R.id.deleteImgBtn);
 
         diaryTitle = DiaryModel.getTitle();
         diaryContent = DiaryModel.getContent();
@@ -86,6 +91,8 @@ public class DiaryModify extends Activity {
             public void onSuccess(Uri uri) {
                 String tet = uri.toString();
                 Glide.with(DiaryModify.this).load(tet).into(imgView);
+                addImgBtn.setText("사진 바꾸기");
+                deleteImgBtn.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -110,6 +117,8 @@ public class DiaryModify extends Activity {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
                     Glide.with(getApplicationContext()).load(imgName).into(imgView);
+                    addImgBtn.setText("사진 바꾸기");
+                    deleteImgBtn.setVisibility(View.VISIBLE);
                     inStream.close();   // 스트림 닫아주기
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
@@ -128,13 +137,32 @@ public class DiaryModify extends Activity {
             Toast toastView = Toast.makeText(DiaryModify.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
             toastView.show();
         } else {
+            if(imgName != null){
+                DiaryModel.setImgName(imgName);
+            }else{
+                deleteImg();
+            }
             DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
-            DiaryModel.setImgName(imgName);
             Toast toastView = Toast.makeText(DiaryModify.this, "수정 완료", Toast.LENGTH_SHORT);
             toastView.show();
             Intent intent = new Intent(DiaryModify.this, DiaryMain.class);
             startActivity(intent);
         }
+    }
+
+    public void setEmptyImg(View view){
+        Glide.with(getApplicationContext()).clear(imgView);
+        imgName = null;
+        addImgBtn.setText("사진 추가");
+        deleteImgBtn.setVisibility(View.GONE);
+    }
+
+    private void deleteImg(){
+        String imgString = DiaryModel.getFireImgName();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference("/diary");
+
+        storageRef.child(imgString).delete();
     }
 
     //목록으로 버튼 클릭 시

@@ -15,14 +15,28 @@
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:onClick="goToBack"
+            android:text="←"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_weight="1"
             android:text="일기 수정하기"
             android:textSize="24sp" />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Button"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
@@ -184,23 +198,25 @@
                         android:text="수정 완료" />
 
                     <Button
+                        android:id="@+id/addImgBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
                         android:onClick="changeImg"
-                        android:text="사진 바꾸기" />
+                        android:text="사진 추가" />
 
                     <Button
-                        android:id="@+id/button2"
+                        android:id="@+id/deleteImgBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
+                        android:visibility="gone"
                         android:layout_weight="1"
-                        android:onClick="goToBack"
-                        android:text="수정 취소" />
+                        android:onClick="setEmptyImg"
+                        android:text="사진 없애기" />
                 </LinearLayout>
 
             </LinearLayout>

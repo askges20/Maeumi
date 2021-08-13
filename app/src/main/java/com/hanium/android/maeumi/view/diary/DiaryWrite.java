@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -39,6 +40,7 @@ public class DiaryWrite extends AppCompatActivity {
     ConstraintLayout mainContent;
     ImageView imgView;
     Bitmap imgName;
+    Button addImgBtn,deleteImgBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -51,6 +53,8 @@ public class DiaryWrite extends AppCompatActivity {
         dateText = findViewById(R.id.writeDate);
         emoticon = findViewById(R.id.emoticon);
         mainContent = findViewById(R.id.mainContent);
+        addImgBtn = findViewById(R.id.addImgBtn);
+        deleteImgBtn = findViewById(R.id.deleteImgBtn);
         titleText = (EditText)findViewById(R.id.diaryTitleWriteText);
         contentText = (EditText)findViewById(R.id.diaryContentWriteText);
         imgView = findViewById(R.id.testImgView);
@@ -74,8 +78,10 @@ public class DiaryWrite extends AppCompatActivity {
             Toast toastView = Toast.makeText(DiaryWrite.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
             toastView.show();
         }else{
+            if(imgName != null){
+                DiaryModel.setImgName(imgName);
+            }
             DiaryModel.diaryWrite(diaryTitle,diaryContent,diaryEmoticon);
-            DiaryModel.setImgName(imgName);
             Toast toastView = Toast.makeText(DiaryWrite.this, "작성 완료", Toast.LENGTH_SHORT);
             toastView.show();
             finish();   //현재 액티비티 없애기
@@ -83,9 +89,7 @@ public class DiaryWrite extends AppCompatActivity {
     }
 
     public void goToBack(View view){   //목록으로 버튼 클릭 시
-        Toast toastView = Toast.makeText(this, "작성 취소", Toast.LENGTH_SHORT);
-        toastView.show();
-        finish();   //현재 액티비티 없애기
+        finish();
     }
     public void onFilterClick(final View view) {
         final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
@@ -113,15 +117,6 @@ public class DiaryWrite extends AppCompatActivity {
     }
 
     public void addImg(View view){   // 사진추가 버튼 클릭 시
-        checkSelfPermission();
-
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_PICK);
-        startActivityForResult(intent,101);
-    }
-
-    public void checkSelfPermission() {
         String temp = "";
         //파일 읽기 권한 확인
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -136,9 +131,19 @@ public class DiaryWrite extends AppCompatActivity {
         if (TextUtils.isEmpty(temp) == false) {
             ActivityCompat.requestPermissions(this, temp.trim().split(" "), 1);
         } else { // 모두 허용 상태
-            Toast.makeText(this, "권한을 모두 허용", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_PICK);
+            startActivityForResult(intent,101);
         }
     }
+    public void setEmptyImg(View view){
+        Glide.with(getApplicationContext()).clear(imgView);
+        imgName =null;
+        addImgBtn.setText("사진 추가");
+        deleteImgBtn.setVisibility(View.GONE);
+    }
+
 
     // 앨범에서 이미지 클릭하면 ImgView에 이미지 담아주기
     @Override
@@ -152,6 +157,8 @@ public class DiaryWrite extends AppCompatActivity {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
                     Glide.with(getApplicationContext()).load(imgName).into(imgView);
+                    addImgBtn.setText("사진 바꾸기");
+                    deleteImgBtn.setVisibility(View.VISIBLE);
                     inStream.close();   // 스트림 닫아주기
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();

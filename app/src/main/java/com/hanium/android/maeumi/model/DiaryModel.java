@@ -4,8 +4,10 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -243,10 +245,7 @@ public class DiaryModel {
         diaryRef.updateChildren(childUpdates);
         String deleteDate = fireDate.substring(7, 9) + date;
 
-        // 이미지 삭제
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-        StorageReference imgSaveRef = storageRef.child(saveId);
+        deleteImg();
 
         dates.remove(deleteDate);
     }
@@ -264,6 +263,15 @@ public class DiaryModel {
         if (imgName != null) {
             saveImg(imgName);
         }
+    }
+
+    // 이미지 삭제
+    public void deleteImg(){
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        StorageReference imgSaveRef = storageRef.child(saveId);
+
+        imgSaveRef.delete();
     }
 
     public void saveImg(Bitmap imgBitmap) {
