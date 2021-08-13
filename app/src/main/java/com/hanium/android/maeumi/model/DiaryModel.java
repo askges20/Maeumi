@@ -268,7 +268,7 @@ public class DiaryModel {
 
     public void saveImg(Bitmap imgBitmap) {
         storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
+        storageRef = storage.getReference("/diary");
 
         StorageReference imgSaveRef = storageRef.child(saveId);
 
@@ -281,13 +281,11 @@ public class DiaryModel {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
                 System.out.println("error - " + exception.getMessage());
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 System.out.println("성공");
             }
         });

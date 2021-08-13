@@ -24,6 +24,8 @@ import com.hanium.android.maeumi.model.DiaryModel;
 public class DiaryContent extends AppCompatActivity {
 
     DiaryModel DiaryModel = new DiaryModel();
+    FirebaseStorage storage;
+    StorageReference storageRef;
 
     String diaryCalDate, diaryTitle, diaryContent, nullDiary, diaryEmoticonNum;
     TextView dateText, titleText, contentText, emoticon;
@@ -98,6 +100,7 @@ public class DiaryContent extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 DiaryModel.deleteDiary(diaryEmoticonNum);
+                deleteImg();
 
                 Toast toastView = Toast.makeText(DiaryContent.this, "삭제 완료", Toast.LENGTH_SHORT);
                 toastView.show();
@@ -121,8 +124,8 @@ public class DiaryContent extends AppCompatActivity {
     // 이미지 조회
     private void getImg() {
         String imgString = DiaryModel.getFireImgName();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference("/diary");
 
         storageRef.child(imgString).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -131,6 +134,13 @@ public class DiaryContent extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(uri).into(imgView);
             }
         });
+    }
+    private void deleteImg(){
+        String imgString = DiaryModel.getFireImgName();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference("/diary");
+
+        storageRef.child(imgString).delete();
     }
 
 }

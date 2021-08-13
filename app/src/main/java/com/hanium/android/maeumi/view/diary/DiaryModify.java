@@ -79,7 +79,7 @@ public class DiaryModify extends Activity {
     private void getImg() {
         String imgString = DiaryModel.getFireImgName();
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
+        StorageReference storageRef = storage.getReference("/diary");
 
         storageRef.child(imgString).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -111,7 +111,6 @@ public class DiaryModify extends Activity {
                     imgName = BitmapFactory.decodeStream(inStream);
                     Glide.with(getApplicationContext()).load(imgName).into(imgView);
                     inStream.close();   // 스트림 닫아주기
-                    Toast.makeText(getApplicationContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
                 }
