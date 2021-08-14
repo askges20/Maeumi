@@ -73,4 +73,7 @@ dependencies {
     implementation 'io.grpc:grpc-okhttp:1.30.0'
    // compile 'com.google.android.gms:play-services:8.4.0'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+
+    //이미지 줌
+    implementation 'com.github.hsmnzaydn:imagezoom:1.3.0'
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -42,10 +43,15 @@ import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.adapters.CommentAdapter;
 import com.hanium.android.maeumi.model.Post;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoomConfig;
+import ozaydin.serkan.com.image_zoom_view.SaveFileListener;
 
 public class PostContent extends AppCompatActivity {
     public static Activity PostContent_Activity;
@@ -73,7 +79,7 @@ public class PostContent extends AppCompatActivity {
     InputMethodManager imm; //키보드 제어
 
     ImageView likeHeartImg; //공감 버튼 하트 이미지
-    ImageView boardImgView; //게시글 이미지
+    ImageViewZoom boardImgView; //게시글 이미지
     TextView likeCntText;   //공감 수 텍스트
 
     @Override
@@ -96,7 +102,7 @@ public class PostContent extends AppCompatActivity {
         addCommentBtn = findViewById(R.id.addCommentBtn);
 
         likeHeartImg = findViewById(R.id.likeHeartImg);
-        boardImgView = findViewById(R.id.imgView);
+        boardImgView = findViewById(R.id.imgView);  //image zoom view
         likeCntText = findViewById(R.id.likeCnt);
 
         Intent prevIntent = getIntent();
@@ -124,11 +130,13 @@ public class PostContent extends AppCompatActivity {
         writeDate = post.getWriteDate();
         dateText.setText(writeDate);
         writer = post.getWriter();
+
         if (boardType.equals("anonymous")) { //익명게시판 글은 닉네임 표시 X
             writerText.setText("익명");
         } else {
             writerText.setText(writer);
         }
+
         writerUid = post.getWriterUid();
         likeCntText.setText(post.getLikeUsersCnt() + "");
 
