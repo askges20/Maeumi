@@ -3,6 +3,7 @@ package com.hanium.android.maeumi.view.board;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +44,9 @@ public class BoardWrite extends AppCompatActivity {
     DatabaseReference boardRef;
     Bitmap imgName;
     private String boardType;
+
+    EditText boardTitle;
+    EditText boardBody;
     ImageView imgView;
 
     @Override
@@ -61,8 +66,8 @@ public class BoardWrite extends AppCompatActivity {
         TextView saveWrite = findViewById(R.id.saveWrite); //작성 완료 버튼
         LinearLayout addPhoto = findViewById(R.id.addPhoto); //사진 추가 버튼
         imgView = findViewById(R.id.imgView); //사진 추가 버튼
-        final EditText boardTitle = (EditText) findViewById(R.id.boardTitle); //게시글 제목
-        final EditText boardBody = (EditText) findViewById(R.id.boardBody); //게시글 내용
+        EditText boardTitle = (EditText) findViewById(R.id.boardTitle); //게시글 제목
+        EditText boardBody = (EditText) findViewById(R.id.boardBody); //게시글 내용
 
         //작성완료 버튼 이벤트 리스너
         saveWrite.setOnClickListener(new View.OnClickListener() {
