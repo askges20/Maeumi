@@ -1,7 +1,9 @@
 package com.hanium.android.maeumi.view.board;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -193,7 +195,30 @@ public class BoardWrite extends AppCompatActivity {
     }
 
     public void goToBack(View view) {
-        finish();
+        AlertDialog dialog = new AlertDialog.Builder(BoardWrite.this)
+                .setMessage("글 작성을 취소하시겠습니까?")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("계속 작성하기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+
+        //폰트 크기 조정
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(18);
+    }
+
+    @Override
+    public void onBackPressed() {
+        goToBack(null);
     }
 
 }
