@@ -134,7 +134,7 @@
                                 android:inputType="textMultiLine"
                                 android:padding="15dp" />
 
-                            <ImageView
+                            <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
                                 android:id="@+id/testImgView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

@@ -21,6 +21,8 @@ import com.google.firebase.storage.StorageReference;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
 
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
+
 public class DiaryContent extends AppCompatActivity {
 
     DiaryModel DiaryModel = new DiaryModel();
@@ -29,7 +31,7 @@ public class DiaryContent extends AppCompatActivity {
 
     String diaryCalDate, diaryTitle, diaryContent, nullDiary, diaryEmoticonNum;
     TextView dateText, titleText, contentText, emoticon;
-    ImageView imgView;
+    ImageViewZoom imgView;
     ConstraintLayout mainContent;
 
     @Override
