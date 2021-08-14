@@ -10,9 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.common.io.LineReader;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hanium.android.maeumi.R;
@@ -54,8 +56,8 @@ public class BoardWrite extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formatDate = dateFormat.format(date);
 
-        Button saveWrite = (Button) findViewById(R.id.saveWrite); //작성 완료 버튼
-        Button addPhoto = (Button) findViewById(R.id.addPhoto); //사진 추가 버튼
+        TextView saveWrite = findViewById(R.id.saveWrite); //작성 완료 버튼
+        LinearLayout addPhoto = findViewById(R.id.addPhoto); //사진 추가 버튼
         imgView = findViewById(R.id.imgView); //사진 추가 버튼
         final EditText boardTitle = (EditText) findViewById(R.id.boardTitle); //게시글 제목
         final EditText boardBody = (EditText) findViewById(R.id.boardBody); //게시글 내용
