@@ -72,8 +72,6 @@ public class BoardWrite extends AppCompatActivity {
                 String content = boardBody.getText().toString();    //작성한 내용
                 /*제목, 내용 유효성 검사 추가할 예정*/
                 addPost(title, content);    //게시글 등록
-                Toast.makeText(BoardWrite.this, "작성 완료", Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
 
@@ -134,6 +132,23 @@ public class BoardWrite extends AppCompatActivity {
     }
 
     protected void addPost(String title, String content){
+        String message = "";
+        if(title.length() == 0){
+            message = "제목을 작성해주세요";
+        } else if (content.length() == 0) {
+            message = "내용을 작성해주세요";
+        }
+
+        if (message.length() > 0){
+            Toast.makeText(BoardWrite.this, message, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        processAddPost(title, content); //게시글 등록 진행
+        finish();
+    }
+
+    protected void processAddPost(String title, String content) {
         database = FirebaseDatabase.getInstance();
 
         //로그인한 사용자
