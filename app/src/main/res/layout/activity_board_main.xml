@@ -43,48 +43,41 @@
             app:srcCompat="@drawable/question_mark_icon" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/boardMenu"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/boardTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/boardTopBar">
+        app:layout_constraintTop_toBottomOf="@id/boardTopBar"
+        app:tabTextAppearance="@style/tab_text">
 
-        <Button
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/freeBoardBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:text="자유게시판" />
 
-        <Button
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/questionBoardBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:text="질문게시판" />
 
-        <Button
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tipBoardBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:text="꿀팁게시판" />
 
-        <Button
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/anonymousBoardBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:text="익명게시판" />
 
 
-    </LinearLayout>
+    </com.google.android.material.tabs.TabLayout>
 
     <LinearLayout
         android:id="@+id/board_fragment_container"
@@ -93,7 +86,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/boardMenu"/>
+        app:layout_constraintTop_toBottomOf="@id/boardTabLayout"/>
 
     <!-- fragment -->
 

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 import com.hanium.android.maeumi.R;
 
 public class Board extends AppCompatActivity {
@@ -27,32 +29,36 @@ public class Board extends AppCompatActivity {
         setContentView(R.layout.activity_board_main);
         boardNameText = findViewById(R.id.boardNameText);
 
-        //게시판 버튼 이벤트 리스너 추가
-        findViewById(R.id.freeBoardBtn).setOnClickListener(new View.OnClickListener() {
+        //게시판 카테고리 탭 메뉴
+        TabLayout tabLayout = findViewById(R.id.boardTabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View view) {
-                setFragmentView(fragment_free);
+            public void onTabSelected(TabLayout.Tab tab) {
+                int pos = tab.getPosition();
+                switch(pos){
+                    case 0:
+                        setFragmentView(fragment_free);
+                        break;
+                    case 1:
+                        setFragmentView(fragment_question);
+                        break;
+                    case 2:
+                        setFragmentView(fragment_tip);
+                        break;
+                    case 3:
+                        setFragmentView(fragment_anonymous);
+                        break;
+                }
             }
-        });
 
-        findViewById(R.id.questionBoardBtn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                setFragmentView(fragment_question);
+            public void onTabUnselected(TabLayout.Tab tab) {
+
             }
-        });
 
-        findViewById(R.id.tipBoardBtn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                setFragmentView(fragment_tip);
-            }
-        });
+            public void onTabReselected(TabLayout.Tab tab) {
 
-        findViewById(R.id.anonymousBoardBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setFragmentView(fragment_anonymous);
             }
         });
 
@@ -63,7 +69,7 @@ public class Board extends AppCompatActivity {
 
     //fragment 부착
     private void setFragmentView(String fragment) {
-        //FragmentTransactiom를 이용해 fragment 사용
+        //FragmentTransaction를 이용해 fragment 사용
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         switch (fragment) {
@@ -120,14 +126,6 @@ public class Board extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int i) {
             }
         }).show();
-
-        //폰트 크기 조정
-        /*
-        TextView dialogTitle = new TextView(getApplicationContext());
-        dialogTitle.setText("게시판 이용 안내");
-        dialogTitle.setTextSize(20);
-        dialog.setCustomTitle(dialogTitle);
-         */
 
         TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
         dialogMessage.setTextSize(18);

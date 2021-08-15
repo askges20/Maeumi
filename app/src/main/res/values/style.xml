@@ -53,4 +53,9 @@
     <style name="PopupMenuTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
         <item name="android:textColor">@color/pinkred</item>
     </style>
+
+    <!-- 탭 레이아웃 -->
+    <style name="tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
