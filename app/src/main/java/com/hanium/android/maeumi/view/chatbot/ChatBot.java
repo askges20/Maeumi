@@ -31,13 +31,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.adapters.ChatAdapter;
 import com.hanium.android.maeumi.helpers.SendMessageInBg;
 import com.hanium.android.maeumi.interfaces.BotReply;
 import com.hanium.android.maeumi.model.Message;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
+import com.hanium.android.maeumi.view.loading.LoginUser;
+import com.hanium.android.maeumi.view.selftest.SelfTest;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -159,6 +160,9 @@ public class ChatBot extends AppCompatActivity implements BotReply {
                 if(botReply.equals("일기장으로 이동합니다.")){
                     goToDiary();    //일기장으로 이동
                 }
+                else if(botReply.equals("테스트 진행을 시작합니다.")) {
+                    goToSelfTest();
+                }
             } else {
                 Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
             }
@@ -242,6 +246,19 @@ public class ChatBot extends AppCompatActivity implements BotReply {
             }
         }, 1500); // 1.5초후
     }
+
+    //테스트로 이동하기
+    public void goToSelfTest() {
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable()  {
+            public void run() {
+                Intent intent = new Intent(ChatBot.this, SelfTest.class);
+                startActivity(intent);  //일기장으로 이동
+            }
+        }, 1500); // 1.5초후
+    }
+
+
 
     //상담 안내 팝업
     public void showChatBotGuide(View view) {
