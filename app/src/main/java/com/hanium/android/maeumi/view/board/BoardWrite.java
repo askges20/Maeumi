@@ -130,7 +130,7 @@ public class BoardWrite extends AppCompatActivity {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
                     Glide.with(getApplicationContext()).load(imgName).into(imgView);
-                    addPhotoBtn.setText("사진 바꾸기");
+                    addPhotoBtn.setText("사진 변경");
                     deleteImgBtn.setVisibility(View.VISIBLE);
                     inStream.close();   // 스트림 닫아주기
                 } catch (Exception e) {
