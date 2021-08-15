@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class PostModify extends AppCompatActivity {
     EditText titleText,contentText;
     ImageView boardImgView;
     Bitmap imgName;
+    Button addImgBtn,deleteImgBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -51,6 +53,9 @@ public class PostModify extends AppCompatActivity {
         titleText = findViewById(R.id.postTitleText);
         contentText = findViewById(R.id.postContentText);
         boardImgView = findViewById(R.id.imgView);
+
+        addImgBtn = findViewById(R.id.addImgBtn);
+        deleteImgBtn = findViewById(R.id.deleteImgBtn);
 
         Intent prevIntent = getIntent();
         postTitle = prevIntent.getStringExtra("title");
@@ -110,6 +115,8 @@ public class PostModify extends AppCompatActivity {
 
         if(imgName != null){
             post.saveImg(imgName,boardType,imgPath);
+        }else{
+            deleteImg();
         }
         finish();
     }
@@ -126,9 +133,25 @@ public class PostModify extends AppCompatActivity {
                 public void onSuccess(Uri uri) {
                     String tet = uri.toString();
                     Glide.with(PostModify.this).load(tet).into(boardImgView);
+                    addImgBtn.setText("사진 바꾸기");
+                    deleteImgBtn.setVisibility(View.VISIBLE);
                 }
             });
         }
+    }
+
+    public void setEmptyImg(View view){
+        Glide.with(getApplicationContext()).clear(boardImgView);
+        imgName = null;
+        addImgBtn.setText("사진 추가");
+        deleteImgBtn.setVisibility(View.GONE);
+    }
+
+    private void deleteImg(){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference("/board");
+
+        storageRef.child(boardType).child(imgPath).delete();
     }
 
     public void changeImg(View view){
@@ -150,6 +173,8 @@ public class PostModify extends AppCompatActivity {
                     InputStream inStream = resolver.openInputStream(fileUri);
                     imgName = BitmapFactory.decodeStream(inStream);
                     Glide.with(getApplicationContext()).load(imgName).into(boardImgView);
+                    addImgBtn.setText("사진 바꾸기");
+                    deleteImgBtn.setVisibility(View.VISIBLE);
                     inStream.close();   // 스트림 닫아주기
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
