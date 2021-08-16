@@ -2,12 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hanium.android.maeumi">
     <!-- Dialogflow 연결 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- 앨범 접근 권한 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 앨범 접근 권한 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Android 11 (API 30+) Youtube API 초기화 -->
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -17,47 +19,76 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-
-        <activity android:name=".view.loading.ActivitySplash" android:screenOrientation="portrait">
+        <activity android:name=".view.guide.Guide"></activity>
+        <activity
+            android:name=".view.loading.ActivitySplash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".view.profile.Profile" android:screenOrientation="portrait"/>
-        <activity android:name=".view.profile.MyNotifications" android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.loading.SingUpActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".view.loading.LoginActivity" android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.diary.DiaryMain" android:screenOrientation="portrait"/>
-        <activity android:name=".view.diary.DiaryContent" android:screenOrientation="portrait"/>
-        <activity android:name=".view.diary.DiaryModify" android:screenOrientation="portrait"/>
-        <activity android:name=".view.diary.DiaryWrite" android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.chatbot.ChatBot" android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.board.Board" android:screenOrientation="portrait"/>
-        <activity android:name=".view.board.BoardWrite" android:screenOrientation="portrait"/>
-        <activity android:name=".view.board.PostContent" android:screenOrientation="portrait"/>
-        <activity android:name=".view.board.PostModify" android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.selftest.SelfTest" android:screenOrientation="portrait"/>
-        <activity android:name=".view.selftest.TestResult" android:screenOrientation="portrait"/>
-        <activity android:name=".view.selftest.TestClick" android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.heartprogram.HeartProgram" android:screenOrientation="portrait"></activity>
-        <activity android:name=".view.heartprogram.HeartGuide" android:screenOrientation="portrait"></activity>
-        <activity android:name=".view.heartprogram.HeartVideo" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.profile.Profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.profile.MyNotifications"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.loading.SingUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.loading.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.diary.DiaryMain"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.diary.DiaryContent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.diary.DiaryModify"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.diary.DiaryWrite"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.chatbot.ChatBot"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.board.Board"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.board.BoardWrite"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.board.PostContent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.board.PostModify"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.selftest.SelfTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.selftest.TestResult"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.selftest.TestClick"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.heartprogram.HeartProgram"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.heartprogram.HeartGuide"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.heartprogram.HeartVideo"
+            android:screenOrientation="portrait" />
     </application>
-
-    <!-- Android 11 (API 30+) Youtube API 초기화 -->
-    <queries>
-        <intent>
-            <action android:name="com.google.android.youtube.api.service.START" />
-        </intent>
-    </queries>
 
 </manifest>
