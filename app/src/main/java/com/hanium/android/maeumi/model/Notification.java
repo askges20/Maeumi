@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Notification {
+    private String type;    //타입
+
     private String title;   //알림 제목
     private String content; //알림 내용
 
@@ -22,7 +24,8 @@ public class Notification {
 
     }
 
-    public Notification(String title, String content, String boardType, String postNum, String dateTime) {
+    public Notification(String type, String title, String content, String boardType, String postNum, String dateTime) {
+        this.type = type;
         this.title = title;
         this.content = content;
         this.boardType = boardType;
@@ -33,6 +36,7 @@ public class Notification {
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("type", type);
         result.put("title", title);
         result.put("content", content);
         result.put("boardType", boardType);
@@ -40,6 +44,10 @@ public class Notification {
         result.put("dateTime", dateTime);
         result.put("isRead", false);
         return result;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getTitle() {

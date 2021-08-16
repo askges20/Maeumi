@@ -377,7 +377,8 @@ public class HeartVideo extends YouTubeBaseActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> notifyValues = null;
 
-        Notification notify = new Notification("마음 온도 60점을 달성하셨습니다!", "게시판 기능이 해제되었습니다. 게시판으로 이동하시겠습니까?",
+        Notification notify = new Notification("board", "마음 온도 60점을 달성하셨습니다!",
+                "게시판 기능이 해제되었습니다. 게시판으로 이동하시겠습니까?",
                 null, null, format2.format(today));
         notifyValues = notify.toMap();
         childUpdates.put(notifyNum, notifyValues);

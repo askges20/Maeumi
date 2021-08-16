@@ -298,7 +298,7 @@ public class PostContent extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> notifyValues = null;
 
-        Notification notify = new Notification("새로운 댓글이 달렸습니다.", comment, boardType, postCode, addTime);
+        Notification notify = new Notification("comment","새로운 댓글이 달렸습니다.", comment, boardType, postCode, addTime);
         notifyValues = notify.toMap();
         childUpdates.put(notifyNum, notifyValues);
         notifyRef.updateChildren(childUpdates);

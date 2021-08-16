@@ -185,7 +185,7 @@ public class SingUpActivity extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> notifyValues = null;
 
-        Notification notify = new Notification("마음이에 오신 것을 환영합니다!", "마음이 이용 안내를 확인하시겠습니까?", null, null, addTime);
+        Notification notify = new Notification("new", "마음이에 오신 것을 환영합니다!", "마음이 이용 안내를 확인하시겠습니까?", null, null, addTime);
         notifyValues = notify.toMap();
         childUpdates.put(notifyNum, notifyValues);
         notifyRef.updateChildren(childUpdates);

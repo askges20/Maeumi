@@ -1,6 +1,8 @@
 package com.hanium.android.maeumi.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +33,10 @@ import java.util.ArrayList;
 
 public class NotificationAdapter extends BaseAdapter {
 
+    String uid = LoginUser.getInstance().getUid();
+
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    String pathStr = "/알림/"+ LoginUser.getInstance().getUid()+"/";
+    String pathStr = "/알림/" + uid + "/";
 
     MyNotifications myNotifications;
     Context mContext;
@@ -48,13 +52,13 @@ public class NotificationAdapter extends BaseAdapter {
     }
 
     //DB에서 알림 읽어오기
-    public void readNotifyFromFB(){
+    public void readNotifyFromFB() {
         DatabaseReference notifyRef = firebaseDatabase.getReference(pathStr);
         notifyRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();  //기존 ArrayList 비우기
-                for(DataSnapshot snap : snapshot.getChildren()){
+                for (DataSnapshot snap : snapshot.getChildren()) {
                     items.add(0, snap.getValue(Notification.class));
                 }
                 notifyDataSetChanged();
@@ -82,9 +86,11 @@ public class NotificationAdapter extends BaseAdapter {
         return 0;
     }
 
-    public ArrayList<Notification> getNotifications() { return items; }
+    public ArrayList<Notification> getNotifications() {
+        return items;
+    }
 
-    public void setItems(ArrayList<Notification> items){
+    public void setItems(ArrayList<Notification> items) {
         this.items = items;
     }
 
@@ -99,9 +105,9 @@ public class NotificationAdapter extends BaseAdapter {
 
         //알림 이미지
         ImageView notifyImg = view.findViewById(R.id.notificationImg);
-        if (title.contains("회원가입")){
+        if (title.contains("회원가입")) {
             notifyImg.setImageResource(R.drawable.maeumi_happy);
-        } else if (title.contains("댓글")){
+        } else if (title.contains("댓글")) {
             notifyImg.setImageResource(R.drawable.comment_icon);
         } else {
             notifyImg.setImageResource(R.drawable.heart_icon_2);
@@ -121,25 +127,50 @@ public class NotificationAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //회원가입 축하 알림 -> 이용안내
-                if (title.contains("회원가입")){
+                if (title.contains("회원가입")) {
                     //이용 안내 페이지 만들어지면 추가할 부분
                     return;
                 }
 
                 //댓글 알림 -> 게시글로 이동
-                if (title.contains("댓글")){
+                if (title.contains("댓글")) {
                     notify.setRead(true, "comment");   //읽음 여부 수정
                     findPostFromDB(mContext, notify.getBoardType(), notify.getPostNum());
                     return;
                 }
 
                 //마음온도 60점 달성 -> 게시판 이동
-                if (title.contains("60점")){
+                if (title.contains("60점")) {
                     notify.setRead(true, "board");   //읽음 여부 수정
                     Intent intent = new Intent(mContext, Board.class);
                     mContext.startActivity(intent);
                     return;
                 }
+            }
+        });
+
+        notificationItemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog dialog = new AlertDialog.Builder(mContext)
+                        .setMessage("해당 알림을 삭제하시겠습니까?")
+                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                deleteNotifyFromDB(notify);
+                                Toast.makeText(mContext, "알림이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        })
+                        .show();
+
+                //폰트 크기 조정
+                TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+                textView.setTextSize(18);
+
+                return false;
             }
         });
 
@@ -150,7 +181,7 @@ public class NotificationAdapter extends BaseAdapter {
     // 댓글 알림과 관련된 게시글 DB에서 찾기
     public void findPostFromDB(Context mContext, String boardType, String postNum) {
         String boardName = "";
-        switch(boardType){
+        switch (boardType) {
             case "free":
                 boardName = "자유게시판";
                 break;
@@ -166,7 +197,7 @@ public class NotificationAdapter extends BaseAdapter {
         }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference postRef = database.getReference("/게시판/"+boardName+"/");
+        DatabaseReference postRef = database.getReference("/게시판/" + boardName + "/");
         System.out.println(postRef.orderByChild(postNum));
 
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -175,7 +206,7 @@ public class NotificationAdapter extends BaseAdapter {
                 boolean find = false;
                 for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
-                        if (snap.getKey().equals(postNum)){ //게시글 번호와 일치하는 글
+                        if (snap.getKey().equals(postNum)) { //게시글 번호와 일치하는 글
                             PostAdapter.curPost = snap.getValue(Post.class);
                             Intent intent = new Intent(mContext, PostContent.class);
                             intent.putExtra("boardType", boardType);
@@ -185,7 +216,7 @@ public class NotificationAdapter extends BaseAdapter {
                     }
                 }
                 //DB에 게시글이 존재하지 않으면 (삭제된 게시글이면)
-                if (!find){
+                if (!find) {
                     Toast.makeText(mContext, "삭제된 게시글입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -195,5 +226,22 @@ public class NotificationAdapter extends BaseAdapter {
                 System.out.println("Failed to read value." + error.toException());
             }
         });
+    }
+
+    public void deleteNotifyFromDB(Notification notify) {
+        String dateTime = notify.getDateTime();
+        String type = notify.getType();
+
+        String year = dateTime.substring(0, 4);
+        String month = dateTime.substring(5, 7);
+        String date = dateTime.substring(8, 10);
+        String hour = dateTime.substring(11, 13);
+        String min = dateTime.substring(14, 16);
+        String sec = dateTime.substring(17, 19);
+        String pathDateTime = year + month + date + hour + min + sec;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference notifyRef = database.getReference("/알림/" + uid + "/" + pathDateTime + type);
+        notifyRef.setValue(null);   //삭제
     }
 }
