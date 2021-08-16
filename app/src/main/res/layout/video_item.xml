@@ -53,7 +53,7 @@
             android:layout_height="25dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/check_icon"
-            android:tint="@android:color/holo_green_dark" />
+            app:tint="@android:color/holo_green_dark" />
     </LinearLayout>
 
 </LinearLayout>

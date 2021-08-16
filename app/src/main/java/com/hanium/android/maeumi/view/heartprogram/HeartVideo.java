@@ -30,10 +30,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.helpers.YoutubeCounter;
+import com.hanium.android.maeumi.model.Notification;
+import com.hanium.android.maeumi.model.Post;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.selftest.TestResult;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class HeartVideo extends YouTubeBaseActivity {
@@ -258,6 +266,7 @@ public class HeartVideo extends YouTubeBaseActivity {
                 //마음 온도 60점 달성 시 게시판 기능 해제 알림
                 if (heartNum == 60) {
                     showBoardOpenPopup();
+                    addNotifyToDB();    //DB에 알림 저장
                 } else {
                     finish();   //현재 액티비티 종료 (뒤로가기)
                 }
@@ -353,6 +362,26 @@ public class HeartVideo extends YouTubeBaseActivity {
         int y = (int) (size.y * 0.6f);
 
         dialog.getWindow().setLayout(x, y);
+    }
+
+    //60점 달성 시 알림 추가
+    public void addNotifyToDB() {
+        DateFormat format1 = new SimpleDateFormat("yyyyMMddhhmmss");
+        Date today = Calendar.getInstance().getTime();
+        String notifyNum = format1.format(today) + "board";
+        DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference notifyRef = firebaseDatabase.getReference("/알림/"+ LoginUser.getInstance().getUid()+"/");
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> notifyValues = null;
+
+        Notification notify = new Notification("마음 온도 60점을 달성하셨습니다!", "게시판 기능이 해제되었습니다. 게시판으로 이동하시겠습니까?",
+                null, null, format2.format(today));
+        notifyValues = notify.toMap();
+        childUpdates.put(notifyNum, notifyValues);
+        notifyRef.updateChildren(childUpdates);
     }
 
     @Override
