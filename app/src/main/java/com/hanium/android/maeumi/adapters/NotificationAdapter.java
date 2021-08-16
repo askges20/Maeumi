@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,6 +96,16 @@ public class NotificationAdapter extends BaseAdapter {
         String title = notify.getTitle();
         String content = notify.getContent();
         String dateTime = notify.getDateTime();
+
+        //알림 이미지
+        ImageView notifyImg = view.findViewById(R.id.notificationImg);
+        if (title.contains("회원가입")){
+            notifyImg.setImageResource(R.drawable.maeumi_happy);
+        } else if (title.contains("댓글")){
+            notifyImg.setImageResource(R.drawable.comment_icon);
+        } else {
+            notifyImg.setImageResource(R.drawable.heart_icon_2);
+        }
 
         //알림 정보 화면에 표시
         TextView notifyTitleText = view.findViewById(R.id.notifyTitleText);
