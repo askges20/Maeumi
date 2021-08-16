@@ -22,8 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
+import com.hanium.android.maeumi.model.Notification;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class SingUpActivity extends AppCompatActivity {
@@ -134,6 +140,8 @@ public class SingUpActivity extends AppCompatActivity {
                             Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
                             startActivity(intent);
 
+                            addNotifyToDB();
+
                         } else {
                             // 계정이 중복된 경우
                             Toast.makeText(SingUpActivity.this, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show();
@@ -161,6 +169,26 @@ public class SingUpActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    //DB에 회원가입 알림 추가
+    public void addNotifyToDB() {
+        Date time = Calendar.getInstance().getTime();;
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String addTime = format1.format(time);
+
+        DateFormat format2 = new SimpleDateFormat("yyyyMMddHHmmss");
+        String notifyNum = format2.format(time) + "comment";
+
+        DatabaseReference notifyRef = database.getReference("/알림/"+ LoginUser.getInstance().getUid()+"/");
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> notifyValues = null;
+
+        Notification notify = new Notification("마음이에 오신 것을 환영합니다!", "마음이 이용 안내를 확인하시겠습니까?", null, null, addTime);
+        notifyValues = notify.toMap();
+        childUpdates.put(notifyNum, notifyValues);
+        notifyRef.updateChildren(childUpdates);
     }
 
     public void onLoginClick(View view){

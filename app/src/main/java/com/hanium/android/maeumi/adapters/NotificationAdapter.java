@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -110,7 +111,7 @@ public class NotificationAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //회원가입 축하 알림 -> 이용안내
                 if (title.contains("회원가입")){
-                    Intent intent = new Intent(mContext, MainActivity.class);
+                    //이용 안내 페이지 만들어지면 추가할 부분
                     return;
                 }
 
@@ -160,6 +161,7 @@ public class NotificationAdapter extends BaseAdapter {
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean find = false;
                 for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                         if (snap.getKey().equals(postNum)){ //게시글 번호와 일치하는 글
@@ -167,8 +169,13 @@ public class NotificationAdapter extends BaseAdapter {
                             Intent intent = new Intent(mContext, PostContent.class);
                             intent.putExtra("boardType", boardType);
                             mContext.startActivity(intent); //게시글 내용 페이지로 이동
+                            find = true;
                         }
                     }
+                }
+                //DB에 게시글이 존재하지 않으면 (삭제된 게시글이면)
+                if (!find){
+                    Toast.makeText(mContext, "삭제된 게시글입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
 
