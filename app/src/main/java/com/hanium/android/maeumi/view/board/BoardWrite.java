@@ -153,6 +153,8 @@ public class BoardWrite extends AppCompatActivity {
             message = "제목을 작성해주세요";
         } else if (content.length() == 0) {
             message = "내용을 작성해주세요";
+        } else if (title.length() > 50) {
+            message = "제목은 50글자 이하로 작성해주세요";
         }
 
         if (message.length() > 0){
