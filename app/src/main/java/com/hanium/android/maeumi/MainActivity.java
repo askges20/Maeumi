@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
+import com.hanium.android.maeumi.view.guide.Guide;
 import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
 import com.hanium.android.maeumi.view.loading.LoginActivity;
 import com.hanium.android.maeumi.view.loading.LoginUser;
@@ -86,17 +87,17 @@ public class MainActivity extends AppCompatActivity {
 
                 int id = item.getItemId();
 
-                if (id==R.id.drawer_menu_test){
+                if (id == R.id.drawer_menu_test) {
                     goToSelfTest(null);
-                } else if (id==R.id.drawer_menu_chat){
+                } else if (id == R.id.drawer_menu_chat) {
                     goToChatBot(null);
-                } else if (id==R.id.drawer_menu_diary){
+                } else if (id == R.id.drawer_menu_diary) {
                     goToDiary(null);
-                } else if (id==R.id.drawer_menu_board){
+                } else if (id == R.id.drawer_menu_board) {
                     goToBoard(null);
-                } else if (id==R.id.drawer_menu_mypage){
+                } else if (id == R.id.drawer_menu_mypage) {
                     startActivity(new Intent(MainActivity.this, Profile.class));
-                }else if (id==R.id.drawer_menu_youtube){
+                } else if (id == R.id.drawer_menu_youtube) {
                     prohibitBeforeTestMessage();
                 }
 
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
         //로그인 화면에서 넘어오면 DB 읽어오는 시간으로 인해 null값이 뜨는 경우가 있음
         //이 때는 사용자 정보를 출력하지 않음
-        if (alias == null){
+        if (alias == null) {
             userAlias.setText("마음이에 오신 것을 환영합니다!");
             userSchool.setVisibility(View.GONE);
         } else {    //사용자 정보를 읽어왔으면
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         //사이드바 여는 버튼
         mainDrawerBtn = findViewById(R.id.mainDrawerBtn);
-        mainDrawerBtn.setOnClickListener(new View.OnClickListener(){
+        mainDrawerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(GravityCompat.START);
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         goToNotificationBtn = findViewById(R.id.goToNotification);
-        goToNotificationBtn.setOnClickListener(new View.OnClickListener(){
+        goToNotificationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyNotifications.class);
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         randomText = findViewById(R.id.mainRandomText);
         setRandomText();
 
-        askForTest(); //테스트 진행 여부에 따른 팝업
+        showHelpPopUp(); //이용안내 팝업
         getHeart(); // 마음채우기
     }
 
@@ -199,7 +200,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    public void prohibitBeforeTestMessage(){
+
+    public void prohibitBeforeTestMessage() {
         int heart = Integer.parseInt(LoginUser.getInstance().getHeart());
         if (heart == -1) {  //진단테스트를 이용하지 않은 경우
             AlertDialog dialog = new AlertDialog.Builder(this)
@@ -220,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
             TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
             dialogMessage.setTextSize(18);
-        }else{
+        } else {
             startActivity(new Intent(MainActivity.this, HeartProgram.class));
         }
     }
@@ -236,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
 
         //이동하기 버튼
         TextView moveBtn = layoutView.findViewById(R.id.moveToHeartBtn);
-        moveBtn.setOnClickListener(new View.OnClickListener(){
+        moveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HeartProgram.class);
@@ -250,8 +252,8 @@ public class MainActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
 
-        int x = (int)(size.x * 0.8f);
-        int y = (int)(size.y * 0.6f);
+        int x = (int) (size.x * 0.8f);
+        int y = (int) (size.y * 0.6f);
 
         dialog.getWindow().setLayout(x, y);
 
@@ -264,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
     //랜덤 문구 출력
     public void setRandomText() {
-        String []arr = getResources().getStringArray(R.array.random_text);
+        String[] arr = getResources().getStringArray(R.array.random_text);
         int randNum = (int) (Math.random() * 20);
         randomText.setText(arr[randNum]);
     }
@@ -272,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {   //뒤로가기 버튼 클릭 시
         //사이드바가 열려있으면 닫기
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {    //사이드바가 닫혀있으면 앱 종료 팝업
             showEndDialog();
@@ -280,20 +282,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //앱을 종료할지 묻는 팝업 띄우기
-    public void showEndDialog(){
+    public void showEndDialog() {
         AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-            .setMessage("앱을 종료하시겠습니까?")
-            .setPositiveButton("네", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
-                    finish();   //현재 액티비티 없애기
-                }
-            })
-            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
-                }
-            }).show();
+                .setMessage("앱을 종료하시겠습니까?")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        finish();   //현재 액티비티 없애기
+                    }
+                })
+                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                    }
+                }).show();
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
@@ -343,12 +345,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //테스트 진행 팝업
-    public boolean askForTest() {
+    public void showHelpPopUp() {
+        AlertDialog.Builder helpPopup = new AlertDialog.Builder(MainActivity.this);
+        helpPopup.setTitle("이용안내");
+        helpPopup.setIcon(R.drawable.maeumi_main_img);
+        helpPopup.setMessage("처음이라면 사이드바에서 이용안내를 받아보세요");
+        helpPopup.setCancelable(false);
+
+        helpPopup.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               dialog.dismiss();
+                showTestPopUp();
+            }
+        });
+        helpPopup.setNegativeButton("이동", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(MainActivity.this, Guide.class);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        helpPopup.setNeutralButton("오늘 그만 보기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // DB 조작 필요
+                dialog.dismiss();
+                showTestPopUp();
+            }
+        });
+        helpPopup.show();
+
+    }
+
+    public boolean showTestPopUp() {
         //테스트 결과가 존재하면
         if (LoginUser.getInstance().getVictimScore() != null) {
             return false;
         }
-
         //테스트 결과가 존재하지 않으면
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage("아직 진단테스트를 이용하지 않으셨습니다. 진단테스트를 진행하시겠습니까?") //진단테스트 권유.. 메세지? 내용 수정할수도
@@ -373,9 +409,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //마음 채우기
-    public void getHeart(){
+    public void getHeart() {
         database = FirebaseDatabase.getInstance();
-        heartRef = database.getReference("/Users/" + LoginUser.getInstance().getUid() +"/heart/");
+        heartRef = database.getReference("/Users/" + LoginUser.getInstance().getUid() + "/heart/");
 
         heartRef.addValueEventListener(new ValueEventListener() {
             @Override
