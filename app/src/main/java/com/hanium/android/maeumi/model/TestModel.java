@@ -42,7 +42,7 @@ public class TestModel {
 
         database = FirebaseDatabase.getInstance();
         testRef = database.getReference("/진단테스트/" + loginUser.getUid() + "/");
-        testRef.addValueEventListener(new ValueEventListener() {
+        testRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snap: dataSnapshot.getChildren()){

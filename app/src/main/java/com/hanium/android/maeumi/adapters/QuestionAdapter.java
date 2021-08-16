@@ -147,6 +147,7 @@ public class QuestionAdapter extends BaseAdapter {
 
     //테스트 결과 계산
     public void calSelectedOptions() {
+        System.out.println("테스트 결과 계산하기");
         int optionNum;
         for (int i = 0; i <= 11; i++) {
             optionNum = items.get(i).getSelectedOption();
@@ -184,6 +185,8 @@ public class QuestionAdapter extends BaseAdapter {
 
         DatabaseReference userReference = firebase.getReference("/Users/" + loginUserUid + "/");
         userReference.child("heart").setValue(heart);   //마음 온도 저장
+
+        System.out.println("테스트 결과 파이어베이스 DB에 저장하기");
     }
 
     //LoginUser 객체에 테스트 결과 저장

@@ -63,12 +63,12 @@ public class TestClick extends AppCompatActivity {
                     adapter.resultToFirebase(); //테스트 결과 DB에 반영
                     adapter.resultToLoginUser();    //LoginUser 객체에 결과 저장
 
-                    finish();   //현재 액티비티 종료
                     Intent intent = new Intent(TestClick.this, TestResult.class);
                     intent.putExtra("victim", adapter.getVictimValue());
                     intent.putExtra("perpetration", adapter.getPerpetrationValue());
                     intent.putExtra("afterTest", true);
-                    startActivity(intent); //액티비티 이동
+                    startActivity(intent); //테스트 결과 화면으로 이동
+                    finish();   //현재 액티비티 종료
                 } else {
                     Toast.makeText(TestClick.this, "체크하지 않은 문항이 있습니다!", Toast.LENGTH_SHORT).show();
                 }

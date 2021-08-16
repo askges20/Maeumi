@@ -34,20 +34,23 @@ public class TestResult extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_result);
+        System.out.println("테스트 결과 화면");
 
         victimScoreText = findViewById(R.id.victimScore);
         perpetrationScoreText = findViewById(R.id.perpetrationScore);
 
-        victimScore = getIntent().getIntExtra("victim", -1);
-        if (victimScore == -1) {
+        victimScore = getIntent().getIntExtra("victim", -1);    //테스트 진행 화면에서 넘어왔으면 intent로 받기
+        if (victimScore == -1) {    //이전 테스트 결과 조회면
             victimScore = Integer.parseInt(LoginUser.getInstance().getVictimScore());
         }
 
-        perpetrationScore = getIntent().getIntExtra("perpetration", -1);
-        if (perpetrationScore == -1) {
+        perpetrationScore = getIntent().getIntExtra("perpetration", -1);    //테스트 진행 화면에서 넘어왔으면 intent로 받기
+        if (perpetrationScore == -1) {    //이전 테스트 결과 조회면
             perpetrationScore = Integer.parseInt(LoginUser.getInstance().getPerpetrationScore());
         }
 
+        System.out.println("피해정도:"+victimScore);
+        System.out.println("가해정도:"+perpetrationScore);
 
         //프로그레스바 나타내기
         victimProgress = findViewById(R.id.victimProgressBar);
@@ -71,19 +74,19 @@ public class TestResult extends AppCompatActivity {
         //피해 정도 결과
         if (victimScore <= 6) {  //0~6점 아주 약함
             victimResultDetailText.setText(R.string.test_result_victim_1);
-            victimScoreText.setText(" 아주 약함");
+            victimScoreText.setText("아주 약함");
         } else if (victimScore <= 13) {  //7~13점 약함
             victimResultDetailText.setText(R.string.test_result_victim_2);
-            victimScoreText.setText(" 약함");
+            victimScoreText.setText("약함");
         } else if (victimScore <= 22) {  //14~22점 보통
             victimResultDetailText.setText(R.string.test_result_victim_3);
-            victimScoreText.setText(" 보통");
+            victimScoreText.setText("보통");
         } else if (victimScore <= 29) {  //23~29점 심함
             victimResultDetailText.setText(R.string.test_result_victim_4);
-            victimScoreText.setText(" 심함");
+            victimScoreText.setText("심함");
         } else {    //30~36점 아주 심함
             victimResultDetailText.setText(R.string.test_result_victim_5);
-            victimScoreText.setText(" 아주 심함");
+            victimScoreText.setText("아주 심함");
         }
 
         //가해 정도 결과
@@ -105,20 +108,11 @@ public class TestResult extends AppCompatActivity {
         }
     }
 
-
-    public void goToChatBotStart(View view) {
-        Intent intent = new Intent(TestResult.this, ChatBot.class);
-        startActivity(intent);
-        System.out.println("Move To ChatBotStart");
-    }
-
-
     public void goToBoard(View view) {
         Intent intent = new Intent(TestResult.this, Board.class);
         startActivity(intent);
         System.out.println("Move To Board");
     }
-
 
     //이전 화면으로 이동
     public void goBack(View view) {
