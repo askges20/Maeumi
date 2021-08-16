@@ -75,8 +75,7 @@
             android:onClick="goToHistory"
             android:text="지난 테스트 결과 확인"
             android:textColor="#000000"
-            android:textSize="18sp"
-            app:backgroundTint="@color/lightgray" />
+            android:textSize="22sp" />
 
         <Button
             android:id="@+id/startTestBtn"
@@ -85,7 +84,7 @@
             android:layout_marginTop="10dp"
             android:text="테스트 시작하기"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="22sp"
             app:backgroundTint="@color/lightgreen" />
 
     </LinearLayout>
