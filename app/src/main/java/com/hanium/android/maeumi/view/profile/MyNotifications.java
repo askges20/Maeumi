@@ -29,9 +29,6 @@ public class MyNotifications extends AppCompatActivity {
         notifyListView.setAdapter(adapter);   //어댑터 등록
     }
 
-
-
-
     public void goToBack(View view) {
         finish();
     }

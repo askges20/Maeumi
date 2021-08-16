@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.hanium.android.maeumi.model.Notification;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.adapters.PostAdapter;
@@ -38,7 +39,9 @@ import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.adapters.CommentAdapter;
 import com.hanium.android.maeumi.model.Post;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -278,9 +281,27 @@ public class PostContent extends AppCompatActivity {
             childUpdates.put(commentNum, commentValues);
             commentRef.updateChildren(childUpdates);
 
+            addNotifyToDB(commentContent, addTime);
+
             writtenCommentText.setText(""); //댓글 작성 칸 비우기
             imm.hideSoftInputFromWindow(writtenCommentText.getWindowToken(), 0);    //키보드 닫기
         }
+    }
+
+    public void addNotifyToDB(String comment, String addTime) {
+        DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date today = Calendar.getInstance().getTime();
+        String notifyNum = format.format(today) + "comment";
+
+        DatabaseReference notifyRef = database.getReference("/알림/"+ LoginUser.getInstance().getUid()+"/");
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> notifyValues = null;
+
+        Notification notify = new Notification("새로운 댓글이 달렸습니다.", comment, boardType, postCode, addTime);
+        notifyValues = notify.toMap();
+        childUpdates.put(notifyNum, notifyValues);
+        notifyRef.updateChildren(childUpdates);
     }
 
     private void getCommentFromDB() {    //DB에서 댓글 데이터 가져오기

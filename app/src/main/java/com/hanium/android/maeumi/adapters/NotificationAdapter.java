@@ -1,8 +1,6 @@
 package com.hanium.android.maeumi.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubeThumbnailLoader;
-import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,14 +19,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Notification;
-import com.hanium.android.maeumi.model.Video;
+import com.hanium.android.maeumi.model.Post;
 import com.hanium.android.maeumi.view.board.Board;
-import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
-import com.hanium.android.maeumi.view.heartprogram.HeartVideo;
+import com.hanium.android.maeumi.view.board.PostContent;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.profile.MyNotifications;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -56,10 +47,11 @@ public class NotificationAdapter extends BaseAdapter {
 
     //DB에서 알림 읽어오기
     public void readNotifyFromFB(){
-        DatabaseReference videoRef = firebaseDatabase.getReference(pathStr);
-        videoRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference notifyRef = firebaseDatabase.getReference(pathStr);
+        notifyRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                items.clear();  //기존 ArrayList 비우기
                 for(DataSnapshot snap : snapshot.getChildren()){
                     items.add(0, snap.getValue(Notification.class));
                 }
@@ -124,11 +116,14 @@ public class NotificationAdapter extends BaseAdapter {
 
                 //댓글 알림 -> 게시글로 이동
                 if (title.contains("댓글")){
+                    notify.setRead(true, "comment");   //읽음 여부 수정
+                    findPostFromDB(mContext, notify.getBoardType(), notify.getPostNum());
                     return;
                 }
 
                 //마음온도 60점 달성 -> 게시판 이동
                 if (title.contains("60점")){
+                    notify.setRead(true, "board");   //읽음 여부 수정
                     Intent intent = new Intent(mContext, Board.class);
                     mContext.startActivity(intent);
                     return;
@@ -138,5 +133,49 @@ public class NotificationAdapter extends BaseAdapter {
 
 
         return view;
+    }
+
+    // 댓글 알림과 관련된 게시글 DB에서 찾기
+    public void findPostFromDB(Context mContext, String boardType, String postNum) {
+        String boardName = "";
+        switch(boardType){
+            case "free":
+                boardName = "자유게시판";
+                break;
+            case "question":
+                boardName = "질문게시판";
+                break;
+            case "tip":
+                boardName = "꿀팁게시판";
+                break;
+            case "anonymous":
+                boardName = "익명게시판";
+                break;
+        }
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference postRef = database.getReference("/게시판/"+boardName+"/");
+        System.out.println(postRef.orderByChild(postNum));
+
+        postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dateSnap : dataSnapshot.getChildren()) { //하위 구조 (작성일자)
+                    for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
+                        if (snap.getKey().equals(postNum)){ //게시글 번호와 일치하는 글
+                            PostAdapter.curPost = snap.getValue(Post.class);
+                            Intent intent = new Intent(mContext, PostContent.class);
+                            intent.putExtra("boardType", boardType);
+                            mContext.startActivity(intent); //게시글 내용 페이지로 이동
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.out.println("Failed to read value." + error.toException());
+            }
+        });
     }
 }
