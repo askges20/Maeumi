@@ -13,6 +13,7 @@ import com.hanium.android.maeumi.view.loading.LoginUser;
 
 public class SelfTest extends AppCompatActivity {
 
+    private Button showTestResultBtn;
     private Button startTestBtn;
 
     @Override
@@ -20,26 +21,30 @@ public class SelfTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selftest);
 
+        showTestResultBtn = findViewById(R.id.showTestResultBtn);
         startTestBtn = findViewById(R.id.startTestBtn);
-        startTestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();   //현재 액티비티 종료
-                Intent intent = new Intent(SelfTest.this, TestClick.class);
-                startActivity(intent); //액티비티 이동
-            }
-        });
 
-    }
-    public void goToHistory(View view){
-        String victimScore = LoginUser.getInstance().getVictimScore();
+        String victimScore = LoginUser.getInstance().getVictimScore();  //테스트 결과 피해 정도 조회
 
         if (victimScore == null) {    //결과가 존재하지 않음
-            Toast.makeText(this, "테스트 결과가 존재하지 않습니다!", Toast.LENGTH_SHORT).show();
-        } else {    //결과가 존재함
-            Intent intent = new Intent(SelfTest.this, TestResult.class);
-            startActivity(intent);
+            showTestResultBtn.setVisibility(View.GONE); //지난 테스트 결과 확인 버튼 없애기
+            startTestBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();   //현재 액티비티 종료
+                    Intent intent = new Intent(SelfTest.this, TestClick.class);
+                    startActivity(intent); //액티비티 이동
+                }
+            });
+        } else {    //이미 테스트를 완료함
+            startTestBtn.setVisibility(View.GONE);  //테스트 시작 버튼 없애기
         }
+
+    }
+
+    public void goToHistory(View view) {
+        Intent intent = new Intent(SelfTest.this, TestResult.class);
+        startActivity(intent);
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
