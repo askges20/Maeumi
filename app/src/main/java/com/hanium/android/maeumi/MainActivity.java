@@ -36,6 +36,7 @@ import com.hanium.android.maeumi.view.diary.DiaryMain;
 import com.hanium.android.maeumi.view.heartprogram.HeartProgram;
 import com.hanium.android.maeumi.view.loading.LoginActivity;
 import com.hanium.android.maeumi.view.loading.LoginUser;
+import com.hanium.android.maeumi.view.profile.MyNotifications;
 import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     ImageView mainDrawerBtn;
+    ImageView goToNotificationBtn;
     NavigationView navigationView;
     Button logoutBtn;
     TextView randomText;
@@ -134,6 +136,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        goToNotificationBtn = findViewById(R.id.goToNotification);
+        goToNotificationBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyNotifications.class);
+                startActivity(intent);
             }
         });
 

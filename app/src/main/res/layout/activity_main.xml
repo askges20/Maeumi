@@ -41,12 +41,13 @@
                 android:text="마음이"
                 android:textSize="24sp" />
 
-            <TextView
+            <ImageView
+                android:id="@+id/goToNotification"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                android:gravity="center"
-                android:textSize="24sp" />
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/notification_icon" />
 
         </LinearLayout>
 

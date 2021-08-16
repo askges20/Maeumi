@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".view.profile.Profile" android:screenOrientation="portrait"/>
+        <activity android:name=".view.profile.MyNotifications" android:screenOrientation="portrait"/>
 
         <activity android:name=".view.loading.SingUpActivity" android:screenOrientation="portrait"/>
         <activity android:name=".view.loading.LoginActivity" android:screenOrientation="portrait"/>
