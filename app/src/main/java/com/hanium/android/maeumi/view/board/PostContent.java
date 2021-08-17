@@ -293,7 +293,7 @@ public class PostContent extends AppCompatActivity {
         Date today = Calendar.getInstance().getTime();
         String notifyNum = format.format(today) + "comment";
 
-        DatabaseReference notifyRef = database.getReference("/알림/"+ LoginUser.getInstance().getUid()+"/");
+        DatabaseReference notifyRef = database.getReference("/알림/"+ writerUid +"/");
 
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> notifyValues = null;

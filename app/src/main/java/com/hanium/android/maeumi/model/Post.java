@@ -76,7 +76,6 @@ public class Post {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     likeUsers.add(snap.getKey());   //리스트에 uid 추가
-                    System.out.println("언제 추가되는데 대체");
                 }
                 postAdapter.notifyDataSetChanged(); //어댑터에 알림
             }
