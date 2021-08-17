@@ -38,6 +38,7 @@
         android:title="마이페이지"/>
 
     <item
+        android:id="@+id/guide"
         android:icon="@drawable/question_mark_icon"
         android:title="이용안내" />
 
