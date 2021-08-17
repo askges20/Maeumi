@@ -42,6 +42,24 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/diaryDatePickerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/diaryMainTop"
+        app:layout_constraintBottom_toTopOf="@+id/diaryMainContent"
+        android:orientation="horizontal">
+
+        <DatePicker
+            android:visibility="gone"
+            android:id="@+id/diaryDatePicker"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/diaryMainContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -50,7 +68,7 @@
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/diaryMainTop">
+        app:layout_constraintTop_toBottomOf="@id/diaryDatePickerContainer">
 
         <LinearLayout
             android:background="@drawable/diary_border"
@@ -85,6 +103,7 @@
                         android:background="#EDEDED"
                         android:padding="5dp"
                         android:text="0000/00/00"
+                        android:onClick="openDatePicker"
                         android:textSize="20sp" />
 
                     <Button

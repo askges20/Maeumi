@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -29,6 +30,8 @@ import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DiaryWrite extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class DiaryWrite extends AppCompatActivity {
     ImageView imgView;
     Bitmap imgName;
     Button addImgBtn,deleteImgBtn;
+    DatePicker diaryDatePicker;
     boolean dateCheckResult;
 
     @Override
@@ -57,6 +61,7 @@ public class DiaryWrite extends AppCompatActivity {
         mainContent = findViewById(R.id.mainContent);
         addImgBtn = findViewById(R.id.addImgBtn);
         deleteImgBtn = findViewById(R.id.deleteImgBtn);
+        diaryDatePicker = findViewById(R.id.diaryDatePicker);
         titleText = (EditText)findViewById(R.id.diaryTitleWriteText);
         contentText = (EditText)findViewById(R.id.diaryContentWriteText);
         imgView = findViewById(R.id.testImgView);
@@ -189,6 +194,40 @@ public class DiaryWrite extends AppCompatActivity {
                     System.out.println("TestImg 권한 허용 : " + permissions[i]);
                 }
             }
+        }
+
+    }
+
+    // DatePicker
+    public void openDatePicker(View view){
+        int year = Integer.parseInt(diaryCalDate.substring(0,4));
+        int month = Integer.parseInt(diaryCalDate.substring(6,8))-1;
+        int day = Integer.parseInt(diaryCalDate.substring(10,12));
+//        getPickerDate(year,month,day);
+
+
+        diaryDatePicker.setVisibility(View.VISIBLE);
+        diaryDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+            }
+        });
+    }
+
+    public void getPickerDate(int year,int month,int day){
+        String sYear = Integer.toString(year);
+        String sMonth = Integer.toString(month);
+        String sDay = Integer.toString(day);
+        String bDate = sYear +"-" +sMonth+"-" + sDay;
+
+        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdFormat.parse(bDate);
+            long time = date.getTime();
+            diaryDatePicker.setMaxDate(time);
+        }catch (Exception e){
+
         }
 
     }
