@@ -21,8 +21,10 @@ import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +43,7 @@ public class DiaryModel {
     public static String title, content, nullDiary, emoticonNum, varTitle, varContent, varENum;
     public static String day, year, month, oneTimeDate, oneTimeMonth;
     public static Bitmap imgName;
+    public static boolean dateCheckResult;
 
     public static ArrayList<String> dates = new ArrayList<>();
 
@@ -105,6 +108,7 @@ public class DiaryModel {
         this.year = this.oneTimeDate.substring(0, 4);
         this.month = this.oneTimeDate.substring(5, 7);
         this.day = dayPlusZero(date);
+        compareDay(date);
         this.fireDate = "/" + this.year + this.month + this.day + "/";
         if (date == "") {
             this.calendarDate = null;
@@ -114,6 +118,31 @@ public class DiaryModel {
 
         saveId = LoginUser.getInstance().getUid() + fireDate;
         getDiaryFromFB(fireDate);
+    }
+
+    public void compareDay(String date){
+        //일기에서 선택한 날짜
+        String strPickDate = oneTimeDate.substring(0,8)+date;
+
+        // 오늘
+        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long now = System.currentTimeMillis();
+        Date nowDate = new Date(now);
+        String strToday = sdFormat.format(nowDate);
+
+        try{
+            Date pickDate = sdFormat.parse(strPickDate);
+            Date today = sdFormat.parse(strToday);
+            if(today.after(pickDate)){
+               this.dateCheckResult = true;
+            }else if(today.equals(pickDate)){
+                this.dateCheckResult = true;
+            }else{
+                this.dateCheckResult = false;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -146,6 +175,9 @@ public class DiaryModel {
     // Null Diary
     public void setNullDiary(String data) {
         this.nullDiary = data;
+    }
+    public boolean getDateCheckResult(){
+        return dateCheckResult;
     }
 
     public String getTitle() {

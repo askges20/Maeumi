@@ -41,6 +41,7 @@ public class DiaryWrite extends AppCompatActivity {
     ImageView imgView;
     Bitmap imgName;
     Button addImgBtn,deleteImgBtn;
+    boolean dateCheckResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -49,6 +50,7 @@ public class DiaryWrite extends AppCompatActivity {
 
         diaryCalDate = DiaryModel.getCalendarDate();
         nullDate();
+        dateCheck();
 
         dateText = findViewById(R.id.writeDate);
         emoticon = findViewById(R.id.emoticon);
@@ -64,6 +66,13 @@ public class DiaryWrite extends AppCompatActivity {
     public void nullDate(){
         if(diaryCalDate == null){
             Toast.makeText(DiaryWrite.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+    public void dateCheck(){
+        dateCheckResult = DiaryModel.getDateCheckResult();
+        if(dateCheckResult ==  false){
+            Toast.makeText(DiaryWrite.this, "오늘 이전 날짜에 일기를 작성해주세요.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
