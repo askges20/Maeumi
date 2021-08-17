@@ -124,6 +124,11 @@ public class SingUpActivity extends AppCompatActivity {
                             String school = userSchool;
                             String heart = "-1";
 
+                            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            long now = System.currentTimeMillis();
+                            Date nowDate = new Date(now);
+                            String notifyDate = sdFormat.format(nowDate);
+
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("uid", uid);
                             hashMap.put("email", email);
@@ -132,6 +137,7 @@ public class SingUpActivity extends AppCompatActivity {
                             hashMap.put("alias", alias);
                             hashMap.put("school", school);
                             hashMap.put("heart", heart);
+                            hashMap.put("notifyDate", notifyDate);
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference reference = database.getReference("Users");

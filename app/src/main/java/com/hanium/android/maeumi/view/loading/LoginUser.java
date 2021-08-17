@@ -10,6 +10,7 @@ public class LoginUser {
     private String school;
     private String alias;
     private String heart;  //마음 채우기 정도, 디폴트는 -1
+    private String notifyDate;
 
     private static LoginUser user = new LoginUser();
 
@@ -82,6 +83,14 @@ public class LoginUser {
 
     public void setHeart(String heart) {
         this.heart = heart;
+    }
+
+    public String getNotifyDate() {
+        return notifyDate;
+    }
+
+    public void setNotifyDate(String notifyDate) {
+        this.notifyDate = notifyDate;
     }
 
     /* 테스트 결과 불러와서 저장하기 */

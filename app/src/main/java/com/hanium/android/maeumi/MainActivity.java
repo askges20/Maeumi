@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -41,6 +39,9 @@ import com.hanium.android.maeumi.view.profile.MyNotifications;
 import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     DatabaseReference heartRef;
+    DatabaseReference notifyDateRef;
     FirebaseDatabase database;
 
     @Override
@@ -346,6 +348,12 @@ public class MainActivity extends AppCompatActivity {
 
     //테스트 진행 팝업
     public void showHelpPopUp() {
+        String dbDate = LoginUser.getInstance().getNotifyDate();
+        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long now = System.currentTimeMillis();
+        Date nowDate = new Date(now);
+        String strCurDate = sdFormat.format(nowDate);
+
         AlertDialog.Builder helpPopup = new AlertDialog.Builder(MainActivity.this);
         helpPopup.setTitle("이용안내");
         helpPopup.setIcon(R.drawable.maeumi_main_img);
@@ -371,12 +379,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                // DB 조작 필요
+                database = FirebaseDatabase.getInstance();
+                notifyDateRef = database.getReference("/Users/" + LoginUser.getInstance().getUid() + "/notifyDate/");
+                notifyDateRef.setValue(strCurDate);
                 dialog.dismiss();
                 showTestPopUp();
             }
         });
-        helpPopup.show();
+
+        if(dbDate != null){
+            try{
+                Date date = sdFormat.parse(dbDate);
+                Date today = sdFormat.parse(strCurDate);
+
+                if(today.after(date)){
+                    helpPopup.show();
+                }else{
+                    showTestPopUp();
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
 
     }
 
