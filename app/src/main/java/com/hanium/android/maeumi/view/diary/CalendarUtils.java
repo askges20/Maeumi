@@ -11,7 +11,6 @@ public class CalendarUtils {
 
     //캘린더 상단 년,월 (m월 yyyy)
     public static String monthYearFromDate(LocalDate date) {
-        System.out.println("유틸 : monthYearFromDate 캘린더 상단의 년, 월 값 리턴");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         return date.format(formatter);
     }
@@ -32,8 +31,6 @@ public class CalendarUtils {
                 dayInMonthArray.add(String.valueOf(i - day0fweek));
             }
         }
-
-        System.out.println("유틸 : daysInMonthArray 캘린더 안의 날짜 배열 리턴");
 
         return dayInMonthArray;
     }

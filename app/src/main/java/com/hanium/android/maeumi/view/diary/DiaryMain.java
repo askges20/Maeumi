@@ -46,7 +46,6 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
 
     //activity_diary_main.xml.xml 레이아웃 요소 연결
     private void iniwigets() {
-        System.out.println("메인에서 실행 : 다이어리 xml 레이아웃 연결");
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
         diaryButton = findViewById(R.id.diaryWriteBtn);
@@ -61,23 +60,19 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);   //레이아웃 매니저 설정
         calendarRecyclerView.setAdapter(calendarAdapter);   //캘린더 어댑터 등록
-        System.out.println("메인에서 실행 : 캘린더 어댑터 등록");
 
         DiaryModel = new DiaryModel(this, calendarAdapter);
         DiaryModel.setCompareMonth(CalendarUtils.selectDate);   //DiaryModel에 전달 후 DB 읽기
-        System.out.println("메인에서 실행 : 캘린더 날짜 배열 : " + daysInMonth);
     }
 
     //DiaryModel에서 DB로부터 읽어온 날짜를 설정하고 adapter에 넘김, notify
     public void setDates(ArrayList<String> dates) {
-        System.out.println("메인에서 실행 : setDates " + dates);
         diaryDates = dates;
         calendarAdapter.SetDates(this.diaryDates);
 
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             public void run() {
                 calendarAdapter.notifyDataSetChanged();
-                System.out.println("메인 : setDates 어댑터에 notify");
             }
         });
     }
@@ -86,7 +81,6 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
 
     //이전 달 캘린더로 이동
     public void previousMonthAction(View view) {
-        System.out.println("메인에서 실행 : 이전 달로 이동");
         CalendarUtils.selectDate = CalendarUtils.selectDate.minusMonths(1);
         DiaryModel.setCompareMonth(CalendarUtils.selectDate);
         setMonthView(); //화면에 표시
@@ -94,7 +88,6 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
 
     //다음 달 캘린더로 이동
     public void nextMonthAction(View view) {
-        System.out.println("메인에서 실행 : 다음 달로 이동");
         CalendarUtils.selectDate = CalendarUtils.selectDate.plusMonths(1);
         DiaryModel.setCompareMonth(CalendarUtils.selectDate);
         setMonthView(); //화면에 표시

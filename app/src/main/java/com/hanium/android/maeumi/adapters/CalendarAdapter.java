@@ -32,7 +32,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        System.out.println("어댑터 : 뷰홀더 생성");
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
@@ -43,7 +42,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         holder.day0fMonth.setText(days0fMonth.get(position));
-        System.out.println("어댑터 : 뷰홀더 setText : " + days0fMonth.get(position));
 
         // 1 ~ 9일 까지 앞에 0 붙이기
         if (days0fMonth.get(position).length() == 1) {

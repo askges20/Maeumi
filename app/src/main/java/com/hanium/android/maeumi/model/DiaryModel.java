@@ -56,8 +56,6 @@ public class DiaryModel {
     }
 
     public void setCompareMonth(LocalDate selectedDate) {
-        System.out.println("모델 : setCompareMonth");
-
         this.oneTimeMonth = selectedDate.toString();
         this.compareMonth = this.oneTimeMonth.replace("-", "");
         this.compareMonth = this.compareMonth.substring(0, 6);
@@ -66,7 +64,6 @@ public class DiaryModel {
     }
 
     public void getMonthDiaryFB() {
-        System.out.println("모델 : getMonthDiary 실행");
         database = FirebaseDatabase.getInstance();
         diaryRef = database.getReference("/일기장/" + loginUser.getUid() + "/");
 
@@ -83,8 +80,6 @@ public class DiaryModel {
                         dates.add(monthlyDate);
                     }
                 }
-                System.out.println("모델 : getMonthDiary에서 일기 파이어베이스 DB 읽기 완료 후 setMonthDiaryDates 시작");
-
                 giveDiaryDatesToMain();
             }
 
@@ -96,10 +91,7 @@ public class DiaryModel {
     }
 
     public void giveDiaryDatesToMain() {
-        System.out.println("모델 : 메인으로 일기 있는 날짜 전달");
         DiaryMain.setDates(this.dates);
-
-        //adapter.notifyDataSetChanged();
     }
 
     // Intent에서 생성된 날짜를 FireBase, 캘린더 날짜로 바꾸고 저장
@@ -165,7 +157,6 @@ public class DiaryModel {
     }
 
     public void resetDiary() {
-        System.out.println("모델 : resetDiary");
         this.title = null;
         this.content = null;
         this.emoticonNum = null;
@@ -215,7 +206,6 @@ public class DiaryModel {
 
     // 개별 일기 조회
     public void getDiaryFromFB(String date) {
-        System.out.println("모델 : getDiaryFromFB 후 resetDiary() 넘어감");
         resetDiary();
 
         database = FirebaseDatabase.getInstance();
