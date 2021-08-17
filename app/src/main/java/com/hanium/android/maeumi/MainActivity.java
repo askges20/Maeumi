@@ -101,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, Profile.class));
                 } else if (id == R.id.drawer_menu_youtube) {
                     prohibitBeforeTestMessage();
+                } else if (id == R.id.guide) {
+                    startActivity(new Intent(MainActivity.this, Guide.class));
                 }
 
                 return true;
