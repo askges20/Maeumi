@@ -24,14 +24,14 @@ public class Notification {
 
     }
 
-    public Notification(String type, String title, String content, String boardType, String postNum, String dateTime) {
+    public Notification(String type, String title, String content, String boardType, String postNum, String dateTime, boolean isRead) {
         this.type = type;
         this.title = title;
         this.content = content;
         this.boardType = boardType;
         this.postNum = postNum;
         this.dateTime = dateTime;
-        this.isRead = false;
+        this.isRead = isRead;
     }
 
     public Map<String, Object> toMap() {
@@ -42,7 +42,7 @@ public class Notification {
         result.put("boardType", boardType);
         result.put("postNum", postNum);
         result.put("dateTime", dateTime);
-        result.put("isRead", false);
+        result.put("isRead", isRead);
         return result;
     }
 
@@ -70,11 +70,11 @@ public class Notification {
         return dateTime;
     }
 
-    public boolean getRead() {
+    public boolean getIsRead() {
         return isRead;
     }
 
-    public void setRead(boolean read, String type) {
+    public void setIsRead(boolean read, String type) {
         isRead = read;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();

@@ -379,7 +379,7 @@ public class HeartVideo extends YouTubeBaseActivity {
 
         Notification notify = new Notification("board", "마음 온도 60점을 달성하셨습니다!",
                 "게시판 기능이 해제되었습니다. 게시판으로 이동하시겠습니까?",
-                null, null, format2.format(today));
+                null, null, format2.format(today), false);
         notifyValues = notify.toMap();
         childUpdates.put(notifyNum, notifyValues);
         notifyRef.updateChildren(childUpdates);

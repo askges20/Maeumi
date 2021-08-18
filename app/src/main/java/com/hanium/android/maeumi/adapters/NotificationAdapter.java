@@ -30,6 +30,7 @@ import com.hanium.android.maeumi.model.Notification;
 import com.hanium.android.maeumi.model.Post;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.board.PostContent;
+import com.hanium.android.maeumi.view.guide.Guide;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.view.profile.MyNotifications;
 
@@ -140,7 +141,7 @@ public class NotificationAdapter extends BaseAdapter {
         String title = notify.getTitle();
         String content = notify.getContent();
         String dateTime = notify.getDateTime();
-//        boolean isRead = notify.getRead();
+        boolean isRead = notify.getIsRead();
 
         //알림 이미지
         ImageView notifyImg = view.findViewById(R.id.notificationImg);
@@ -161,12 +162,12 @@ public class NotificationAdapter extends BaseAdapter {
         notifyDateTimeText.setText(dateTime);
 
         //읽음 여부 표시
-//        TextView notifyReadText = view.findViewById(R.id.notifyReadText);
-//        if(isRead){
-//            notifyReadText.setText("읽음");
-//        }else{
-//            notifyReadText.setText("읽지 않음");
-//        }
+        TextView notifyReadText = view.findViewById(R.id.notifyReadText);
+        if(isRead){
+            notifyReadText.setText("읽음");
+        }else{
+            notifyReadText.setText("읽지 않음");
+        }
 
         //각 아이템 클릭 시 영상 시청 화면으로 이동
         LinearLayout notificationItemView = view.findViewById(R.id.notificationItemView);
@@ -175,20 +176,21 @@ public class NotificationAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //회원가입 축하 알림 -> 이용안내
                 if (title.contains("회원가입")) {
-                    //이용 안내 페이지 만들어지면 추가할 부분
+                    notify.setIsRead(true, "sign");
+                    mContext.startActivity(new Intent(mContext, Guide.class));  //이용안내 페이지로 이동
                     return;
                 }
 
                 //댓글 알림 -> 게시글로 이동
                 if (title.contains("댓글")) {
-                    notify.setRead(true, "comment");   //읽음 여부 수정
+                    notify.setIsRead(true, "comment");   //읽음 여부 수정
                     findPostFromDB(mContext, notify.getBoardType(), notify.getPostNum());
                     return;
                 }
 
                 //마음온도 60점 달성 -> 게시판 이동
                 if (title.contains("60점")) {
-                    notify.setRead(true, "board");   //읽음 여부 수정
+                    notify.setIsRead(true, "board");   //읽음 여부 수정
                     Intent intent = new Intent(mContext, Board.class);
                     mContext.startActivity(intent);
                     return;
