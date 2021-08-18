@@ -33,7 +33,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        System.out.println("포지션은"+position);
         Message message = messageList.get(position);
 
         String content = message.getContent();

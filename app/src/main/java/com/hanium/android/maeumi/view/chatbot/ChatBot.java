@@ -86,7 +86,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
 
         //Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
-        refPath = "/채팅/" + LoginUser.getInstance().getUid() + "/";  //DB 경로
+        refPath = "/챗봇/" + LoginUser.getInstance().getUid() + "/";  //DB 경로
 
         readFirebaseData(); //DB에서 이전 채팅 내역 불러오기
     }
