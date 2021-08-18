@@ -52,11 +52,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         //diaryDates 안에 있는 날짜면 배경 변경
         if (diaryDates.contains(compareDate+"1")){
-            holder.parentView.setBackgroundResource(R.drawable.diary_good);
+            holder.parentView.setBackgroundResource(R.drawable.diary_happy);
         } else if (diaryDates.contains(compareDate+"2")){
-            holder.parentView.setBackgroundResource(R.drawable.diary_normal);
+            holder.parentView.setBackgroundResource(R.drawable.diary_proud);
         } else if (diaryDates.contains(compareDate+"3")){
-            holder.parentView.setBackgroundResource(R.drawable.diary_bad);
+            holder.parentView.setBackgroundResource(R.drawable.diary_sad);
         }
     }
 
