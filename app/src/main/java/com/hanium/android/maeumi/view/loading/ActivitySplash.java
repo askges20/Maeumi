@@ -38,7 +38,7 @@ public class ActivitySplash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);   //로딩 화면
         splashImgView =findViewById(R.id.splashImgView);
-        Glide.with(getApplicationContext()).load(R.drawable.loading).into(splashImgView);
+        Glide.with(getApplicationContext()).load(R.drawable.maeumi_splash).into(splashImgView);
 
 
 
