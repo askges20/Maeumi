@@ -41,223 +41,168 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
 
-
-        <!--프로필-->
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="60"
-            android:orientation="vertical">
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="프로필"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:id="@+id/userProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:layout_weight="3"
-                    android:gravity="center"
-                    android:text="프로필" />
-
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="5dp"
+                    android:text="이름 :" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:text="이름 :" />
-
-                        <TextView
-                            android:id="@+id/userName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="홍길동" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:text="이메일 :" />
-
-                        <TextView
-                            android:id="@+id/userEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="email@naver.com" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:text="닉네임 :" />
-
-                        <TextView
-                            android:id="@+id/userAlias"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="길동이" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:text="학교 :" />
-
-                        <TextView
-                            android:id="@+id/userSchool"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="고등학교" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:text="성별 :" />
-
-                        <TextView
-                            android:id="@+id/userGender"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="남" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/gray" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="이메일 :" />
 
-                <!--마음 채우기-->
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="30"
-                    android:weightSum="7"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="닉네임 :" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_gravity="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="학교 :" />
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_margin="5dp"
-                            android:layout_weight="3"
-                            android:gravity="center"
-                            android:text="마음 온도" />
-
-                    </LinearLayout>
-
-                    <!--마음 채우기 이미지-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="5"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_gravity="center"
-                            android:id="@+id/heartProgress"
-                            android:adjustViewBounds="true"
-                            android:layout_width="200dp"
-                            android:layout_height="match_parent" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center">
-
-                        <Button
-                            android:id="@+id/goToHeartProgramBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:onClick="goToHeartProgram"
-                            android:text="마음 채우러가기" />
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="성별 :" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="홍길동" />
+
+                <TextView
+                    android:id="@+id/userEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="email@naver.com" />
+
+                <TextView
+                    android:id="@+id/userAlias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="길동이" />
+
+                <TextView
+                    android:id="@+id/userSchool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="고등학교" />
+
+                <TextView
+                    android:id="@+id/userGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="남" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:id="@+id/userHeart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="마음 온도"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/heartProgress"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/z_heart_00" />
+
+            <!--마음 채우기 이미지-->
+
+            <TextView
+                android:id="@+id/userHeartText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0 / 100"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/goToHeartProgramBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:onClick="goToHeartProgram"
+                android:padding="10dp"
+                android:text="마음 채우러가기" />
 
 
         </LinearLayout>

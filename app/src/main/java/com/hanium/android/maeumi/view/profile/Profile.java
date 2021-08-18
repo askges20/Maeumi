@@ -22,7 +22,7 @@ import com.hanium.android.maeumi.R;
 public class Profile extends AppCompatActivity {
 
     Button logoutBtn,goToHeartProgramBtn;
-    TextView userName, userEmail, userAlias, userSchool, userGender;
+    TextView userName, userEmail, userAlias, userSchool, userGender, userHeartText;
     ImageView heartProgress;
     private String name, email, alias, gender, school;
 
@@ -38,6 +38,7 @@ public class Profile extends AppCompatActivity {
         userAlias = findViewById(R.id.userAlias);
         userSchool = findViewById(R.id.userSchool);
         userGender = findViewById(R.id.userGender);
+        userHeartText = findViewById(R.id.userHeartText);
         heartProgress = findViewById(R.id.heartProgress);
 
         name = loginUser.getName();
@@ -52,28 +53,40 @@ public class Profile extends AppCompatActivity {
         userSchool.setText(school);
         userGender.setText(gender);
 
-        heartProgress.setImageResource(R.drawable.heart_icon_1);
+        setHeartProgress(); //마음 온도에 따라 하트 이미지 출력
 
         //로그아웃 버튼
         logoutBtn = findViewById(R.id.signOutBtn);
     }
 
-    public void deleteConfirm(View view) {
-        new AlertDialog.Builder(this)
-                .setTitle("게시글 삭제")
-                .setMessage("게시글을 삭제하시겠습니까?")
-                .setIcon(android.R.drawable.ic_menu_save)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        Toast.makeText(Profile.this, "삭제완료", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        Toast.makeText(Profile.this, "취소완료", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .show();
+    //마음 온도에 따라 하트 이미지 설정
+    public void setHeartProgress() {
+        int heart = Integer.parseInt(LoginUser.getInstance().getHeart());
+        if (heart < 10){
+            heartProgress.setImageResource(R.drawable.z_heart_00);
+        } else if (heart < 20){
+            heartProgress.setImageResource(R.drawable.z_heart_01);
+        } else if (heart < 30){
+            heartProgress.setImageResource(R.drawable.z_heart_02);
+        }else if (heart < 40){
+            heartProgress.setImageResource(R.drawable.z_heart_03);
+        }else if (heart < 50){
+            heartProgress.setImageResource(R.drawable.z_heart_04);
+        }else if (heart < 60){
+            heartProgress.setImageResource(R.drawable.z_heart_05);
+        }else if (heart < 70){
+            heartProgress.setImageResource(R.drawable.z_heart_06);
+        }else if (heart < 80){
+            heartProgress.setImageResource(R.drawable.z_heart_07);
+        }else if (heart < 90){
+            heartProgress.setImageResource(R.drawable.z_heart_08);
+        }else if (heart < 100){
+            heartProgress.setImageResource(R.drawable.z_heart_09);
+        }else {
+            heartProgress.setImageResource(R.drawable.z_heart_10);
+        }
+
+        userHeartText.setText(heart + " / 100");
     }
 
     //로그아웃 버튼 클릭 이벤트
@@ -93,6 +106,7 @@ public class Profile extends AppCompatActivity {
                 })
                 .show();
     }
+
     public void goToHeartProgram(View view){
         Intent intent = new Intent(this, HeartProgram.class);
         startActivity(intent);
