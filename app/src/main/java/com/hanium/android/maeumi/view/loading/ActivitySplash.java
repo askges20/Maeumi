@@ -3,11 +3,13 @@ package com.hanium.android.maeumi.view.loading;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +29,7 @@ public class ActivitySplash extends AppCompatActivity {
     private static final String TAG = "splash";
 
     FirebaseUser userFromFB;
+    ImageView splashImgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,9 @@ public class ActivitySplash extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);   //로딩 화면
+        splashImgView =findViewById(R.id.splashImgView);
+        Glide.with(getApplicationContext()).load(R.drawable.loading).into(splashImgView);
+
 
 
         userFromFB = FirebaseAuth.getInstance().getCurrentUser();  //사용자가 이전에 로그인한 계정
