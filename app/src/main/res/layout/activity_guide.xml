@@ -60,7 +60,7 @@
 
         <ImageView
             android:id="@+id/guide1ImageView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/guide1" />
 
@@ -70,6 +70,14 @@
             android:layout_height="match_parent"
             android:visibility="invisible"
             app:srcCompat="@drawable/guide2" />
+
+
+        <ImageView
+            android:id="@+id/guide3ImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/guide3" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
