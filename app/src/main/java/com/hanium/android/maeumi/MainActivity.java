@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hanium.android.maeumi.adapters.NotificationAdapter;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
 import com.hanium.android.maeumi.view.diary.DiaryMain;
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference heartRef;
     DatabaseReference notifyDateRef;
     FirebaseDatabase database;
+
+    NotificationAdapter notifyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
 
         showHelpPopUp(); //이용안내 팝업
         getHeart(); // 마음채우기
+
+        notifyAdapter = new NotificationAdapter(this, goToNotificationBtn);
     }
 
     public void goToDiary(View view) {

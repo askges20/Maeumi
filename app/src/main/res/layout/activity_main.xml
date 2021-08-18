@@ -47,6 +47,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
+                android:tint="@color/gray"
                 app:srcCompat="@drawable/notification_icon" />
 
         </LinearLayout>

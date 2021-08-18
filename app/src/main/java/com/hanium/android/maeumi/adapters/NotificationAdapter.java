@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,7 +47,41 @@ public class NotificationAdapter extends BaseAdapter {
     LayoutInflater mLayoutInflater;
 
     ArrayList<Notification> items = new ArrayList<Notification>();    //알림들
+    int notReadCnt = 0;
 
+    //메인 화면 어댑터
+    public NotificationAdapter(MainActivity mainActivity, ImageView imageView){
+        DatabaseReference notifyRef = firebaseDatabase.getReference(pathStr);
+        notifyRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                items.clear();  //기존 ArrayList 비우기
+                notReadCnt = 0; //안읽은 알림 초기화
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    for(DataSnapshot s: snap.getChildren()){
+                        if(s.getKey().equals("isRead") && !((boolean)s.getValue())){    //안읽은 알림
+                            notReadCnt++;   //카운트
+                        }
+                    }
+                }
+                notifyDataSetChanged();
+                if (notReadCnt > 0){    //안읽은 알림이 있으면
+                    imageView.setImageResource(R.drawable.notification_arrive_icon);    //아이콘 모양 변경
+                    imageView.setColorFilter(Color.argb(255, 255, 115, 115));  //빨간색
+                } else {    //모든 알림을 읽었으면
+                    imageView.setImageResource(R.drawable.notification_icon);
+                    imageView.setColorFilter(Color.argb(255, 136, 136, 136));   //회색
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("Failed to read value." + error.toException());
+            }
+        });
+    }
+
+    //알림 목록 어댑터
     public NotificationAdapter(MyNotifications myNotifications, Context context) {
         this.myNotifications = myNotifications;
         mContext = context;
@@ -102,6 +140,7 @@ public class NotificationAdapter extends BaseAdapter {
         String title = notify.getTitle();
         String content = notify.getContent();
         String dateTime = notify.getDateTime();
+//        boolean isRead = notify.getRead();
 
         //알림 이미지
         ImageView notifyImg = view.findViewById(R.id.notificationImg);
@@ -120,6 +159,14 @@ public class NotificationAdapter extends BaseAdapter {
         notifyContentText.setText(content);
         TextView notifyDateTimeText = view.findViewById(R.id.notifyDateTimeText);
         notifyDateTimeText.setText(dateTime);
+
+        //읽음 여부 표시
+//        TextView notifyReadText = view.findViewById(R.id.notifyReadText);
+//        if(isRead){
+//            notifyReadText.setText("읽음");
+//        }else{
+//            notifyReadText.setText("읽지 않음");
+//        }
 
         //각 아이템 클릭 시 영상 시청 화면으로 이동
         LinearLayout notificationItemView = view.findViewById(R.id.notificationItemView);
