@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class SingUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     EditText email, password, name, alias, school;
     FirebaseAuth firebaseAuth;
@@ -44,7 +44,7 @@ public class SingUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singup);
+        setContentView(R.layout.activity_signup);
 
         email = findViewById(R.id.userEmail);
         password = findViewById(R.id.userPassword);
@@ -77,17 +77,17 @@ public class SingUpActivity extends AppCompatActivity {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
 
         if (!pattern.matcher(userEmail).matches()) {
-            Toast.makeText(SingUpActivity.this, "이메일 형식을 맞춰주세요", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "이메일 형식을 맞춰주세요", Toast.LENGTH_LONG).show();
         } else if (!Pattern.matches("^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$", userPassword)) {
-            Toast.makeText(SingUpActivity.this, "8자 이상, 숫자, 특수문자가 각각 1개이상 입력해주세요.", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "8자 이상, 숫자, 특수문자가 각각 1개이상 입력해주세요.", Toast.LENGTH_LONG).show();
         } else if (userName.equals("")) {
-            Toast.makeText(SingUpActivity.this, "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
         } else if (userGender == null) {
-            Toast.makeText(SingUpActivity.this, "성별을 선택해주세요.", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "성별을 선택해주세요.", Toast.LENGTH_LONG).show();
         } else if (userAlias == null) {
-            Toast.makeText(SingUpActivity.this, "닉네임을 입력해주세요.", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "닉네임을 입력해주세요.", Toast.LENGTH_LONG).show();
         } else if (userSchool == null) {
-            Toast.makeText(SingUpActivity.this, "학교를 입력해주세요.", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, "학교를 입력해주세요.", Toast.LENGTH_LONG).show();
         } else {
             checkAlias(userAlias);
         }
@@ -96,7 +96,7 @@ public class SingUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SingUpActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -110,9 +110,9 @@ public class SingUpActivity extends AppCompatActivity {
                                 public void onComplete(Task<Void> task) {
 
                                     if(task.isSuccessful()){
-                                        Toast.makeText(SingUpActivity.this, "회원가입 성공, 인증 메일을 확인해주세요.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, "회원가입 성공, 인증 메일을 확인해주세요.", Toast.LENGTH_LONG).show();
                                     }else{
-                                        Toast.makeText(SingUpActivity.this, "메일 보내기 실패", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, "메일 보내기 실패", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -143,14 +143,14 @@ public class SingUpActivity extends AppCompatActivity {
                             DatabaseReference reference = database.getReference("Users");
                             reference.child(uid).setValue(hashMap);
 
-                            Intent intent = new Intent(SingUpActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intent);
 
                             addNotifyToDB();
 
                         } else {
                             // 계정이 중복된 경우
-                            Toast.makeText(SingUpActivity.this, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -164,7 +164,7 @@ public class SingUpActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    Toast.makeText(SingUpActivity.this, "동일한 닉네임이 존재합니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "동일한 닉네임이 존재합니다.", Toast.LENGTH_LONG).show();
                 }else{
                     createUser(userEmail, userPassword, userName, userGender, userAlias, userSchool);
                 }

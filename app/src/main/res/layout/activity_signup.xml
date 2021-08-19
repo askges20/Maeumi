@@ -7,7 +7,7 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".view.loading.SingUpActivity">
+    tools:context=".view.loading.SignUpActivity">
 
 
     <LinearLayout

@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     public void onSignUpClick(View view) {
-        Intent intent = new Intent(LoginActivity.this,SingUpActivity.class);
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intent);  //회원가입 화면으로 이동
     }
 

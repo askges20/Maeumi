@@ -39,7 +39,7 @@
             android:name=".view.profile.MyNotifications"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.loading.SingUpActivity"
+            android:name=".view.loading.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.loading.LoginActivity"
