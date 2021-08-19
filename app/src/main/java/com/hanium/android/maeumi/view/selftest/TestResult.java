@@ -17,7 +17,6 @@ import com.hanium.android.maeumi.view.heartprogram.HeartGuide;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.view.board.Board;
-import com.hanium.android.maeumi.view.chatbot.ChatBot;
 
 public class TestResult extends AppCompatActivity {
 

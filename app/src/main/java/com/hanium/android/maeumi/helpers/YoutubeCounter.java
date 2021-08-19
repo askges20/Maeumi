@@ -1,7 +1,5 @@
 package com.hanium.android.maeumi.helpers;
 
-import android.content.Context;
-
 import com.hanium.android.maeumi.view.heartprogram.HeartVideo;
 
 public class YoutubeCounter extends Thread{

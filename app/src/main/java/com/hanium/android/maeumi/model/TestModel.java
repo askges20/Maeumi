@@ -12,9 +12,6 @@ public class TestModel {
     FirebaseDatabase database;
     DatabaseReference testRef;
 
-    //LoginUser loginUser = LoginUser.getInstance();
-    //ActivitySplash에서 사용자 정보를 가져오기 전에 생성되므로 null값을 가지는 오류 발생 -> 주석 처리
-
     public static String victimScore;
     public static String perpetrationScore;
 

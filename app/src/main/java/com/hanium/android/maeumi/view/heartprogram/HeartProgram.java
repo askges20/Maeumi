@@ -3,23 +3,12 @@ package com.hanium.android.maeumi.view.heartprogram;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 import com.hanium.android.maeumi.R;
-import com.hanium.android.maeumi.adapters.PostAdapter;
-import com.hanium.android.maeumi.adapters.QuestionAdapter;
 import com.hanium.android.maeumi.adapters.VideoAdapter;
-import com.hanium.android.maeumi.model.Question;
 import com.hanium.android.maeumi.model.Video;
 
 import org.json.JSONArray;
