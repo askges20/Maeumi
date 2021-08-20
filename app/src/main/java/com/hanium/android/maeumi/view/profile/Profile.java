@@ -85,7 +85,11 @@ public class Profile extends AppCompatActivity {
             heartProgress.setImageResource(R.drawable.z_heart_10);
         }
 
-        userHeartText.setText(heart + " / 100");
+        if (heart == -1) {
+            userHeartText.setText("아직 마음 온도가 없어요!\n진단테스트를 진행해주세요");
+        } else {
+            userHeartText.setText(heart + " / 100");
+        }
     }
 
     //로그아웃 버튼 클릭 이벤트
