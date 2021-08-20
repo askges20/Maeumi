@@ -264,7 +264,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
     public void showChatBotGuide(View view) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("1:1 상담 이용 안내");
-        dialog.setMessage("상담 기능 목적\n입력 키워드 추천 등\n");
+        dialog.setMessage(R.string.chat_guide);
         dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
