@@ -22,39 +22,42 @@ public class Guide extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
 
-        imageView = (ImageView)findViewById(R.id.guideImg);
+        imageView = (ImageView) findViewById(R.id.guideImg);
         typedArray = getResources().obtainTypedArray(R.array.guide);
 
         i = 0;
         max = typedArray.length();
-        imageView.setImageResource(typedArray.getResourceId(i,-1));
+        imageView.setImageResource(typedArray.getResourceId(i, -1));
 
-        Button left_btn = (Button)findViewById(R.id.left_btn);
+        Button left_btn = (Button) findViewById(R.id.left_btn);
         left_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i--;
-                if(i<=0)
-                    i=0;
-                imageView.setImageResource(typedArray.getResourceId(i,-1));
+                if (i <= 0) {   //맨 첫페이지에서 이전 버튼 클릭
+                    i = max - 1;
+                } else {    //마지막 페이지로 이동
+                    i--;
+                }
+                System.out.println("페이지:" + i);
+                imageView.setImageResource(typedArray.getResourceId(i, -1));
             }
         });
-        Button right_btn = (Button)findViewById(R.id.right_btn);
+        Button right_btn = (Button) findViewById(R.id.right_btn);
         right_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 i++;
-                if(i>max)
-                {
-                    Intent choice1Intent = new  Intent(Guide.this,Guide.class);
-                    Guide.this.startActivity(choice1Intent);
+                if (i >= max) { //맨 마지막 페이지일 때
+                    i = 0;  //맨 첫페이지로 이동
                 }
-                imageView.setImageResource(typedArray.getResourceId(i,-1));
+                System.out.println("페이지:" + i);
+                imageView.setImageResource(typedArray.getResourceId(i, -1));
             }
         });
 
     }
-    public void goToBack(View view){
+
+    public void goToBack(View view) {
         finish();
     }
 }
