@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.type.PostalAddress;
 import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.Notification;
@@ -93,7 +94,7 @@ public class NotificationAdapter extends BaseAdapter {
     //DB에서 알림 읽어오기
     public void readNotifyFromFB() {
         DatabaseReference notifyRef = firebaseDatabase.getReference(pathStr);
-        notifyRef.addValueEventListener(new ValueEventListener() {
+        notifyRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();  //기존 ArrayList 비우기
@@ -257,8 +258,10 @@ public class NotificationAdapter extends BaseAdapter {
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                         if (snap.getKey().equals(postNum)) { //게시글 번호와 일치하는 글
                             PostAdapter.curPost = snap.getValue(Post.class);
+                            PostAdapter.curPost.setLikeUsers(true);
                             Intent intent = new Intent(mContext, PostContent.class);
                             intent.putExtra("boardType", boardType);
+                            intent.putExtra("fromNotify", "yes");
                             mContext.startActivity(intent); //게시글 내용 페이지로 이동
                             find = true;
                         }

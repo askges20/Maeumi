@@ -57,6 +57,7 @@ public class PostContent extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageRef;
     CommentAdapter commentAdapter;
+    boolean fromNotify = false;
 
     Post post = PostAdapter.curPost;    //클릭한 게시글 객체
     String title, content, writeDate, writer, writerUid, boardType;
@@ -102,6 +103,9 @@ public class PostContent extends AppCompatActivity {
 
         Intent prevIntent = getIntent();
         boardType = prevIntent.getStringExtra("boardType");
+        if (prevIntent.getStringExtra("fromNotify") != null) {  //알림 페이지에서 넘어왔으면
+            fromNotify = true;
+        }
 
         switch (boardType) {
             case "free":
@@ -391,11 +395,11 @@ public class PostContent extends AppCompatActivity {
         String userUid = LoginUser.getInstance().getUid();
         if (post.getLikeUsers().contains(userUid)) {  //이미 공감을 눌렀던 사용자이면
             likeHeartImg.setImageResource(R.drawable.heart_icon_1);
-            post.removeLikeUser(userUid);
+            post.removeLikeUser(userUid, fromNotify);
             //공감 취소
         } else {    //공감을 누르지 않았던 사용자이면
             likeHeartImg.setImageResource(R.drawable.heart_icon_2);
-            post.addLikeUser(userUid);
+            post.addLikeUser(userUid, fromNotify);
         }
         likeCntText.setText(post.getLikeUsersCnt() + "");
     }

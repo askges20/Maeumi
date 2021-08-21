@@ -66,7 +66,7 @@ public class Post {
 
     /* 공감 관련 메소드*/
 
-    public void setLikeUsers() {
+    public void setLikeUsers(boolean fromNotify) {
         postNum = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
 
         database = FirebaseDatabase.getInstance();
@@ -77,7 +77,9 @@ public class Post {
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     likeUsers.add(snap.getKey());   //리스트에 uid 추가
                 }
-                postAdapter.notifyDataSetChanged(); //어댑터에 알림
+                if(!fromNotify) {
+                    postAdapter.notifyDataSetChanged(); //어댑터에 알림
+                }
             }
 
             @Override
@@ -92,19 +94,27 @@ public class Post {
     }
 
     //공감하기
-    public void addLikeUser(String uid) {
+    public void addLikeUser(String uid, boolean fromNotify) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         likeUsers.add(uid);
         DatabaseReference likeRef = database.getReference("/공감/" + postNum + "/" + uid);
-        likeRef.setValue("like");
-        postAdapter.notifyDataSetChanged(); //어댑터에 변경 알림
+        likeRef.setValue("like");   //DB 추가
+
+        if(!fromNotify){
+            postAdapter.notifyDataSetChanged(); //어댑터에 변경 알림
+        }
     }
 
     //공감 취소
-    public void removeLikeUser(String uid) {
+    public void removeLikeUser(String uid, boolean fromNotify) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         likeUsers.remove(uid);
         DatabaseReference likeRef = database.getReference("/공감/" + postNum + "/" + uid);
-        likeRef.setValue(null);
-        postAdapter.notifyDataSetChanged(); //어댑터에 변경 알림
+        likeRef.setValue(null); //삭제
+
+        if(!fromNotify){
+            postAdapter.notifyDataSetChanged(); //어댑터에 변경 알림
+        }
     }
 
 
