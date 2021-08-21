@@ -1,6 +1,8 @@
 package com.hanium.android.maeumi.model;
 
 import android.graphics.Bitmap;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -14,7 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.adapters.PostAdapter;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -66,7 +70,7 @@ public class Post {
 
     /* 공감 관련 메소드*/
 
-    public void setLikeUsers(boolean fromNotify) {
+    public void setLikeUsers(boolean fromNotify, TextView likeBtnText, ImageView likeHeartImg) {
         postNum = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
 
         database = FirebaseDatabase.getInstance();
@@ -74,11 +78,17 @@ public class Post {
         likeRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                likeUsers.clear();
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     likeUsers.add(snap.getKey());   //리스트에 uid 추가
                 }
                 if(!fromNotify) {
                     postAdapter.notifyDataSetChanged(); //어댑터에 알림
+                } else {
+                    likeBtnText.setText(""+likeUsers.size());
+                    if (likeUsers.contains(LoginUser.getInstance().getUid())){
+                        likeHeartImg.setImageResource(R.drawable.heart_icon_2);
+                    }
                 }
             }
 

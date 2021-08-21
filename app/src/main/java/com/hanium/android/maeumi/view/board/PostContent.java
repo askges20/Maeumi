@@ -137,7 +137,6 @@ public class PostContent extends AppCompatActivity {
         }
 
         writerUid = post.getWriterUid();
-        likeCntText.setText(post.getLikeUsersCnt() + "");
 
         postCode = writeDate.substring(11, 13) + writeDate.substring(14, 16) + writeDate.substring(17, 19) + writerUid;
 
@@ -150,12 +149,7 @@ public class PostContent extends AppCompatActivity {
             writeCommentArea.setVisibility(View.GONE);
         }
 
-        String userUid = LoginUser.getInstance().getUid();
-        if (post.getLikeUsers().contains(userUid)) {  //이미 공감을 눌렀던 사용자이면
-            likeHeartImg.setImageResource(R.drawable.heart_icon_2);
-        } else {    //공감을 누르지 않았던 사용자이면
-            likeHeartImg.setImageResource(R.drawable.heart_icon_1);
-        }
+        post.setLikeUsers(true, likeCntText, likeHeartImg);   //공감 누른 사람 수 표시, 버튼에 있는 하트 색 칠하기
 
 
         if (!LoginUser.getInstance().getUid().equals(writerUid)) { //로그인한 사용자와 글 작성자의 Uid가 다르면

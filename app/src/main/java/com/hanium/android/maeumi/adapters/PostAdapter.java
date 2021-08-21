@@ -115,7 +115,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
     public void addItem(Post item) {
         item.setAdapter(this);  //각 아이템에 postAdapter 저장
-        item.setLikeUsers(false);    //공감을 누른 사용자 DB로부터 읽어오기
+        item.setLikeUsers(false, null, null);    //공감을 누른 사용자 DB로부터 읽어오기
         item.setCommentCnt();   //댓글 개수 DB로부터 읽어와서 저장
         items.add(0, item); //리스트에 추가, 최신글부터 정렬하도록
     }

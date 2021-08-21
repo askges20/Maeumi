@@ -258,7 +258,6 @@ public class NotificationAdapter extends BaseAdapter {
                     for (DataSnapshot snap : dateSnap.getChildren()) { //하위 구조 (게시글)
                         if (snap.getKey().equals(postNum)) { //게시글 번호와 일치하는 글
                             PostAdapter.curPost = snap.getValue(Post.class);
-                            PostAdapter.curPost.setLikeUsers(true);
                             Intent intent = new Intent(mContext, PostContent.class);
                             intent.putExtra("boardType", boardType);
                             intent.putExtra("fromNotify", "yes");
