@@ -84,7 +84,7 @@
             android:layout_height="match_parent"
             android:onClick="showDeleteChat"
             android:padding="10dp"
-            android:tint="@color/gray"
+            app:tint="@color/gray"
             app:srcCompat="@drawable/delete_icon" />
 
         <ImageView
@@ -93,7 +93,7 @@
             android:layout_height="match_parent"
             android:onClick="showChatBotGuide"
             android:padding="10dp"
-            android:tint="@color/gray"
+            app:tint="@color/gray"
             app:srcCompat="@drawable/question_mark_icon" />
 
     </LinearLayout>
@@ -106,7 +106,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/constraintLayout"
         app:layout_constraintTop_toBottomOf="@id/chatbotTopBar"
-        app:stackFromEnd="true"
+        app:stackFromEnd="false"
         tools:itemCount="2"
         tools:listitem="@layout/adapter_message_one" />
 
