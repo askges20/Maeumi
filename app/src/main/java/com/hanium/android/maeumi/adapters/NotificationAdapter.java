@@ -39,6 +39,8 @@ import java.util.ArrayList;
 
 public class NotificationAdapter extends BaseAdapter {
 
+    NotificationAdapter adapter = this;
+
     String uid = LoginUser.getInstance().getUid();
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -177,21 +179,21 @@ public class NotificationAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //회원가입 축하 알림 -> 이용안내
                 if (title.contains("회원가입")) {
-                    notify.setIsRead(true, "sign");
+                    notify.setIsRead(true, "sign", adapter);
                     mContext.startActivity(new Intent(mContext, Guide.class));  //이용안내 페이지로 이동
                     return;
                 }
 
                 //댓글 알림 -> 게시글로 이동
                 if (title.contains("댓글")) {
-                    notify.setIsRead(true, "comment");   //읽음 여부 수정
+                    notify.setIsRead(true, "comment", adapter);   //읽음 여부 수정
                     findPostFromDB(mContext, notify.getBoardType(), notify.getPostNum());
                     return;
                 }
 
                 //마음온도 60점 달성 -> 게시판 이동
                 if (title.contains("60점")) {
-                    notify.setIsRead(true, "board");   //읽음 여부 수정
+                    notify.setIsRead(true, "board", adapter);   //읽음 여부 수정
                     Intent intent = new Intent(mContext, Board.class);
                     mContext.startActivity(intent);
                     return;
@@ -294,5 +296,7 @@ public class NotificationAdapter extends BaseAdapter {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference notifyRef = database.getReference("/알림/" + uid + "/" + pathDateTime + type);
         notifyRef.setValue(null);   //삭제
+
+        readNotifyFromFB(); //다시 DB에서 읽어오기 (새로 고침)
     }
 }

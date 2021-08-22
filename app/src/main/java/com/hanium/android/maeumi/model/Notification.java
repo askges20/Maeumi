@@ -2,6 +2,7 @@ package com.hanium.android.maeumi.model;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.hanium.android.maeumi.adapters.NotificationAdapter;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 
 import java.util.HashMap;
@@ -74,7 +75,7 @@ public class Notification {
         return isRead;
     }
 
-    public void setIsRead(boolean read, String type) {
+    public void setIsRead(boolean read, String type, NotificationAdapter adapter) {
         isRead = read;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -89,5 +90,7 @@ public class Notification {
         DatabaseReference notifyRef = database.getReference("/알림/" + LoginUser.getInstance().getUid()
                 + "/" + pathDateTime + type + "/isRead/");
         notifyRef.setValue(true);
+
+        adapter.notifyDataSetChanged(); //읽음 표시 업데이트
     }
 }
