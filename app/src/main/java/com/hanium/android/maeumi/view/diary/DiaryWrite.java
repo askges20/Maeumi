@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,8 +27,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -41,11 +50,16 @@ public class DiaryWrite extends AppCompatActivity {
     EditText titleText,contentText;
     String diaryCalDate, diaryEmoticon;
     ConstraintLayout mainContent;
+    LinearLayout diaryDatePickerContainer;
     ImageView imgView;
     Bitmap imgName;
-    Button addImgBtn,deleteImgBtn;
+    Button addImgBtn,deleteImgBtn,completeDateChangeBtn;
     DatePicker diaryDatePicker;
+    int cYear,cMonth,cDay = 0;
     boolean dateCheckResult;
+
+    FirebaseDatabase database;
+    DatabaseReference diaryRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -61,7 +75,9 @@ public class DiaryWrite extends AppCompatActivity {
         mainContent = findViewById(R.id.mainContent);
         addImgBtn = findViewById(R.id.addImgBtn);
         deleteImgBtn = findViewById(R.id.deleteImgBtn);
+        completeDateChangeBtn = findViewById(R.id.completeDateChangeBtn);
         diaryDatePicker = findViewById(R.id.diaryDatePicker);
+        diaryDatePickerContainer = findViewById(R.id.diaryDatePickerContainer);
         titleText = (EditText)findViewById(R.id.diaryTitleWriteText);
         contentText = (EditText)findViewById(R.id.diaryContentWriteText);
         imgView = findViewById(R.id.testImgView);
@@ -88,7 +104,9 @@ public class DiaryWrite extends AppCompatActivity {
         String diaryTitle = titleText.getText().toString();
         String diaryContent = contentText.getText().toString();
 
-        if(diaryEmoticon == null || diaryEmoticon == ""){
+        if(diaryDatePickerContainer.getVisibility() == View.VISIBLE){
+            Toast.makeText(DiaryWrite.this, "날짜 변경 창을 닫아주세요.", Toast.LENGTH_SHORT).show();
+        }else if(diaryEmoticon == null || diaryEmoticon == ""){
             Toast toastView = Toast.makeText(DiaryWrite.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
             toastView.show();
         }else{
@@ -203,32 +221,84 @@ public class DiaryWrite extends AppCompatActivity {
         int year = Integer.parseInt(diaryCalDate.substring(0,4));
         int month = Integer.parseInt(diaryCalDate.substring(6,8))-1;
         int day = Integer.parseInt(diaryCalDate.substring(10,12));
-//        getPickerDate(year,month,day);
 
-
-        diaryDatePicker.setVisibility(View.VISIBLE);
+        diaryDatePickerContainer.setVisibility(View.VISIBLE);
         diaryDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
+                cYear = year;
+                cMonth = monthOfYear;
+                cDay = dayOfMonth;
             }
         });
     }
 
-    public void getPickerDate(int year,int month,int day){
-        String sYear = Integer.toString(year);
-        String sMonth = Integer.toString(month);
-        String sDay = Integer.toString(day);
-        String bDate = sYear +"-" +sMonth+"-" + sDay;
+    public void getPickerDate(String date,String viewDate,String fireDate){
+        database = FirebaseDatabase.getInstance();
+        diaryRef = database.getReference("/일기장/" + LoginUser.getInstance().getUid() + "/"+fireDate);
+
+
 
         SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = sdFormat.parse(bDate);
-            long time = date.getTime();
-            diaryDatePicker.setMaxDate(time);
-        }catch (Exception e){
+        long now = System.currentTimeMillis();
+        Date nowDate = new Date(now);
+        String strToday = sdFormat.format(nowDate);
 
+        try{
+            Date pickDate = sdFormat.parse(date);
+            Date today = sdFormat.parse(strToday);
+            diaryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        Toast.makeText(DiaryWrite.this,"해당 날짜에 이미 일기가 존재합니다.",Toast.LENGTH_SHORT).show();
+                    }else{
+                        if(today.after(pickDate)){
+                            dateText.setText(viewDate);
+                            diaryDatePickerContainer.setVisibility(View.GONE);
+                            Toast.makeText(DiaryWrite.this,"날짜 변경 완료",Toast.LENGTH_SHORT).show();
+                            DiaryModel.setChangedDate(fireDate,viewDate);
+                        }else if(today.equals(pickDate)){
+                            dateText.setText(viewDate);
+                            diaryDatePickerContainer.setVisibility(View.GONE);
+                            Toast.makeText(DiaryWrite.this,"날짜 변경 완료",Toast.LENGTH_SHORT).show();
+                            DiaryModel.setChangedDate(fireDate,viewDate);
+                        }else{
+                            Toast.makeText(DiaryWrite.this,"오늘 이전 날짜에 일기를 작성해주세요.",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
+    }
+
+    public void closeDatePicker(View view){
+        diaryDatePickerContainer.setVisibility(View.GONE);
+    }
+
+    public void getChangedDate(View view){
+        cMonth = cMonth + 1;
+        String year = Integer.toString(cYear);
+        String month = Integer.toString(cMonth);
+        if(month.length()==1){
+            month = "0" + month;
+        }
+        String day = Integer.toString(cDay);
+        if(day.length()==1){
+            day = "0" + day;
+        }
+        String date = year + "-" + month + "-" + day;
+        String viewDate = year + "년 " + month + "월 " + day + "일";
+        String fireDate = "/" + year + month + day +"/";
+        getPickerDate(date,viewDate,fireDate);
 
     }
 

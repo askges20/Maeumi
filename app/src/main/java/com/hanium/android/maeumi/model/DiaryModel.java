@@ -109,6 +109,13 @@ public class DiaryModel {
         saveId = LoginUser.getInstance().getUid() + fireDate;
         getDiaryFromFB(fireDate);
     }
+    public void setChangedDate(String date,String calDate){
+        this.fireDate = date;
+        this.calendarDate = calDate;
+        this.compareMonth = date.substring(1,7);
+        this.day = date.substring(7,9);
+        getDiaryFromFB(fireDate);
+    }
 
     public void compareDay(String date){
         //일기에서 선택한 날짜
