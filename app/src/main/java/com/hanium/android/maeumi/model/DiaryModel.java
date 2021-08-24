@@ -114,6 +114,7 @@ public class DiaryModel {
         this.calendarDate = calDate;
         this.compareMonth = date.substring(1,7);
         this.day = date.substring(7,9);
+        saveId = LoginUser.getInstance().getUid() + date;
         getDiaryFromFB(fireDate);
     }
 
