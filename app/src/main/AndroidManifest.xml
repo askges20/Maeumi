@@ -19,7 +19,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-        <activity android:name=".view.guide.Guide"></activity>
+        <activity android:name=".view.diary.DiaryEmoticonPick"></activity>
+        <activity android:name=".view.guide.Guide" />
         <activity
             android:name=".view.loading.ActivitySplash"
             android:screenOrientation="portrait">
