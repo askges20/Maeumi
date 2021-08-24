@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -371,7 +372,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                dialog.dismiss();
-                showTestPopUp();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showTestPopUp();
+                    }
+                },300);
             }
         });
         helpPopup.setNegativeButton("이동", new DialogInterface.OnClickListener() {
@@ -390,7 +397,13 @@ public class MainActivity extends AppCompatActivity {
                 notifyDateRef = database.getReference("/Users/" + LoginUser.getInstance().getUid() + "/notifyDate/");
                 notifyDateRef.setValue(strCurDate);
                 dialog.dismiss();
-                showTestPopUp();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showTestPopUp();
+                    }
+                },300);
             }
         });
 
@@ -419,6 +432,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //테스트 결과가 존재하지 않으면
         AlertDialog dialog = new AlertDialog.Builder(this)
+                .setCancelable(false)
                 .setMessage("아직 진단테스트를 이용하지 않으셨습니다. 진단테스트를 진행하시겠습니까?") //진단테스트 권유.. 메세지? 내용 수정할수도
                 .setPositiveButton("네", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
