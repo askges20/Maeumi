@@ -143,8 +143,10 @@ public class DiaryModify extends Activity {
             DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
             Toast toastView = Toast.makeText(DiaryModify.this, "수정 완료", Toast.LENGTH_SHORT);
             toastView.show();
+
             Intent intent = new Intent(DiaryModify.this, DiaryMain.class);
             startActivity(intent);
+            finish();   //현재 페이지 닫기
         }
     }
 

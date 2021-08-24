@@ -91,6 +91,7 @@ public class DiaryContent extends AppCompatActivity {
     public void goToDiaryModify(View view) { //수정 버튼 클릭 시
         Intent intent = new Intent(DiaryContent.this, DiaryModify.class);
         startActivity(intent);
+        finish();
     }
 
     public void showDeleteDialog(View view) {    //삭제 버튼 클릭 시
