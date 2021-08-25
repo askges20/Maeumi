@@ -129,13 +129,6 @@
                         android:onClick="openDatePicker"
                         android:textSize="20sp" />
 
-                    <Button
-                        android:id="@+id/dailyEmoticon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="onFilterClick"
-                        android:text="오늘의 기분" />
 
                 </LinearLayout>
 
@@ -158,17 +151,6 @@
                         android:text="제목"
                         android:textSize="20sp" />
 
-
-                    <TextView
-                        android:id="@+id/emoticon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:ems="2"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="기분"
-                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
 

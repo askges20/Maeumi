@@ -43,10 +43,6 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
 
         setMonthView(); //캘린더 표시
     }
-    public void goToEmoticon(View view){
-        Intent intent = new Intent(getApplicationContext(),DiaryEmoticonPick.class);
-        startActivity(intent);
-    }
 
     //activity_diary_main.xml.xml 레이아웃 요소 연결
     private void iniwigets() {

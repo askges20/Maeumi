@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,7 +16,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +46,7 @@ public class DiaryWrite extends AppCompatActivity {
 
     TextView dateText, emoticon;
     EditText titleText, contentText;
-    String diaryCalDate, diaryEmoticon;
+    String diaryCalDate;
     ConstraintLayout mainContent;
     LinearLayout diaryDatePickerContainer;
     ImageView imgView;
@@ -108,60 +106,33 @@ public class DiaryWrite extends AppCompatActivity {
 
         if (diaryDatePickerContainer.getVisibility() == View.VISIBLE) {
             Toast.makeText(DiaryWrite.this, "날짜 변경 창을 닫아주세요.", Toast.LENGTH_SHORT).show();
-        } else if (diaryEmoticon == null || diaryEmoticon == "") {
-            Toast toastView = Toast.makeText(DiaryWrite.this, "기분을 골라주세요.", Toast.LENGTH_SHORT);
-            toastView.show();
+        }else if (diaryTitle.equals("")){
+            Toast.makeText(DiaryWrite.this, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+        } else if (diaryContent.equals("")) {
+            Toast.makeText(DiaryWrite.this, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else {
-            if(imgName != null){
+            if (imgName != null) {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 imgName.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-//                DiaryModel.setImgName(imgName);
-
-
                 Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
                 pickIntent.putExtra("imgName", byteArray);
                 startActivity(pickIntent);
-            }else{
+            } else {
                 Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
                 startActivity(pickIntent);
             }
 
-//            DiaryModel.diaryWrite(diaryTitle,diaryContent,diaryEmoticon);
             finish();   //현재 액티비티 없애기
         }
     }
 
     public void goToBack(View view) {   //목록으로 버튼 클릭 시
         finish();
-    }
-    public void onFilterClick(final View view) {
-        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
-        getMenuInflater().inflate(R.menu.diary_popup_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.action_menu1) {
-                    emoticon.setText("좋음");
-                    diaryEmoticon = "1";
-                    mainContent.setBackgroundResource(R.color.pinkred);
-                } else if (menuItem.getItemId() == R.id.action_menu2) {
-                    emoticon.setText("평범");
-                    diaryEmoticon = "2";
-                    mainContent.setBackgroundResource(R.color.lightgreen);
-                } else {
-                    emoticon.setText("나쁨");
-                    diaryEmoticon = "3";
-                    mainContent.setBackgroundResource(R.color.diaryGray);
-                }
-                return false;
-            }
-        });
-        popupMenu.show();
     }
 
     public void addImg(View view) {   // 사진추가 버튼 클릭 시

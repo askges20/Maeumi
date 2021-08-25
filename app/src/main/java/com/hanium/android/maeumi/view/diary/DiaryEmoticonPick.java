@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
@@ -87,9 +88,15 @@ public class DiaryEmoticonPick extends AppCompatActivity {
     }
 
     public void writeDiary(View view) {
+        if(diaryEmoticonNum == null ){
+            Toast.makeText(DiaryEmoticonPick.this, "기분을 선택해주세요.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(DiaryEmoticonPick.this, "일기 작성완료", Toast.LENGTH_SHORT).show();
         Diarymodel.diaryWrite(diaryTitle,diaryContent,diaryEmoticonNum);
         Diarymodel.setImgName(diaryImgName);
         finish();
+        }
+
     }
 
     public void goToBack(View view) {
