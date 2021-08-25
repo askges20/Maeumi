@@ -26,17 +26,19 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="1"
             android:text="일기 수정하기"
             android:textSize="24sp" />
-        <TextView
-            android:layout_width="50dp"
+        <ImageView
+            android:id="@+id/emoticon"
+            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Button"
-            android:visibility="invisible" />
+            android:layout_marginBottom="10dp"
+            android:adjustViewBounds="true"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,46 +69,22 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/modifyDate"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="7"
                         android:padding="5dp"
                         android:text="0000.00.00"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
-                    <Button
-                        android:id="@+id/dailyEmoticon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="onFilterClick"
-                        android:text="오늘의 기분" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="7dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/diaryTitleModifyText"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="3"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:padding="5dp"
@@ -114,17 +92,6 @@
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/emoticon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:ems="2"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="기분"
-                        android:textSize="20sp" />
-                </LinearLayout>
             </LinearLayout>
 
             <View

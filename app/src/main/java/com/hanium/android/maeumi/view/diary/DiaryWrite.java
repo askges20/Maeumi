@@ -44,7 +44,7 @@ public class DiaryWrite extends AppCompatActivity {
 
     DiaryModel DiaryModel = new DiaryModel();
 
-    TextView dateText, emoticon;
+    TextView dateText;
     EditText titleText, contentText;
     String diaryCalDate;
     ConstraintLayout mainContent;
@@ -69,7 +69,6 @@ public class DiaryWrite extends AppCompatActivity {
         dateCheck();
 
         dateText = findViewById(R.id.writeDate);
-        emoticon = findViewById(R.id.emoticon);
         mainContent = findViewById(R.id.mainContent);
         addImgBtn = findViewById(R.id.addImgBtn);
         deleteImgBtn = findViewById(R.id.deleteImgBtn);

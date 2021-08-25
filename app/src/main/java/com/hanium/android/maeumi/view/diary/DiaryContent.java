@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +29,9 @@ public class DiaryContent extends AppCompatActivity {
     StorageReference storageRef;
 
     String diaryCalDate, diaryTitle, diaryContent, nullDiary, diaryEmoticonNum;
-    TextView dateText, titleText, contentText, emoticon;
+    TextView dateText, titleText, contentText;
     ImageViewZoom imgView;
+    ImageView emoticon;
     ConstraintLayout mainContent;
 
     @Override
@@ -61,16 +63,22 @@ public class DiaryContent extends AppCompatActivity {
         if (diaryEmoticonNum != null) {
             switch (diaryEmoticonNum) {
                 case "1":
-                    emoticon.setText("좋음");
-                    mainContent.setBackgroundResource(R.color.pinkred);
+                    emoticon.setImageResource(R.drawable.diary_glad);
                     break;
                 case "2":
-                    emoticon.setText("평범");
-                    mainContent.setBackgroundResource(R.color.lightgreen);
+                    emoticon.setImageResource(R.drawable.diary_happy);
                     break;
                 case "3":
-                    emoticon.setText("나쁨");
-                    mainContent.setBackgroundResource(R.color.diaryGray);
+                    emoticon.setImageResource(R.drawable.diary_calm);
+                    break;
+                case "4":
+                    emoticon.setImageResource(R.drawable.diary_angry);
+                    break;
+                case "5":
+                    emoticon.setImageResource(R.drawable.diary_sad);
+                    break;
+                case "6":
+                    emoticon.setImageResource(R.drawable.diary_worried);
                     break;
             }
         }

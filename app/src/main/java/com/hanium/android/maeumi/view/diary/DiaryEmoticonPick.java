@@ -5,23 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
 
 public class DiaryEmoticonPick extends AppCompatActivity {
 
-    DiaryModel Diarymodel = new DiaryModel();
+    DiaryModel DiaryModel = new DiaryModel();
 
     LinearLayout glad, happy, calm, angry, sad, worried;
-    String diaryTitle, diaryContent,  diaryEmoticonNum;
+    String diaryTitle, diaryContent, diaryEmoticonNum;
     Bitmap diaryImgName;
     Button diaryEmoticonPickDone;
+    Uri imgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +41,19 @@ public class DiaryEmoticonPick extends AppCompatActivity {
         diaryEmoticonPickDone = findViewById(R.id.diaryEmoticonPickDone);
 
         Intent diaryIntent = getIntent();
-        if(getIntent().getByteArrayExtra("imgName") != null){
+        try {
             byte[] arr = getIntent().getByteArrayExtra("imgName");
-            diaryImgName = BitmapFactory.decodeByteArray(arr,0,arr.length);
+            diaryImgName = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+        } catch (Exception e) {
+            System.out.println("SDKJ - " + e.getMessage());
         }
+
+        try {
+            imgUri = getIntent().getParcelableExtra("imgName");
+        } catch (Exception e) {
+            System.out.println("SDKJ - " + e.getMessage());
+        }
+
         diaryTitle = diaryIntent.getStringExtra("title");
         diaryContent = diaryIntent.getStringExtra("content");
 
@@ -50,53 +63,69 @@ public class DiaryEmoticonPick extends AppCompatActivity {
         int hello = view.getId();
         view.setBackgroundResource(R.color.pinkred);
 
-        if(hello != glad.getId()){
+        if (hello != glad.getId()) {
             glad.setBackgroundResource(R.color.white);
-        }else{
+        } else {
             diaryEmoticonNum = "1";
         }
 
-        if(hello != happy.getId()){
+        if (hello != happy.getId()) {
             happy.setBackgroundResource(R.color.white);
-        }else{
+        } else {
             diaryEmoticonNum = "2";
         }
 
-        if(hello != calm.getId()){
+        if (hello != calm.getId()) {
             calm.setBackgroundResource(R.color.white);
-        }else{
+        } else {
             diaryEmoticonNum = "3";
         }
 
-        if(hello != angry.getId()){
+        if (hello != angry.getId()) {
             angry.setBackgroundResource(R.color.white);
-        }else{
+        } else {
             diaryEmoticonNum = "4";
         }
 
-        if(hello != sad.getId()){
+        if (hello != sad.getId()) {
             sad.setBackgroundResource(R.color.white);
-        }else{
+        } else {
             diaryEmoticonNum = "5";
         }
 
-        if(hello != worried.getId()){
+        if (hello != worried.getId()) {
             worried.setBackgroundResource(R.color.white);
-        }else{
+        } else {
             diaryEmoticonNum = "6";
         }
     }
 
     public void writeDiary(View view) {
-        if(diaryEmoticonNum == null ){
+        if (diaryEmoticonNum == null) {
             Toast.makeText(DiaryEmoticonPick.this, "기분을 선택해주세요.", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
+
+            if (diaryImgName != null) {
+                //사진 추가,변경 되었으면
+                DiaryModel.setImgName(diaryImgName);
+            } else if(imgUri != null){
+                // 기존 이미지 그대로 유지
+            }else{
+                // 사진 없거나 제거했다면
+                deleteImg();
+            }
+
             Toast.makeText(DiaryEmoticonPick.this, "일기 작성완료", Toast.LENGTH_SHORT).show();
-        Diarymodel.diaryWrite(diaryTitle,diaryContent,diaryEmoticonNum);
-        Diarymodel.setImgName(diaryImgName);
-        finish();
+            DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
+            finish();
         }
 
+    }
+    private void deleteImg() {
+        String imgString = DiaryModel.getFireImgName();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference("/diary");
+        storageRef.child(imgString).delete();
     }
 
     public void goToBack(View view) {
