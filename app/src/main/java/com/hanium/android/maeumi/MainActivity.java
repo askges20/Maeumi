@@ -42,6 +42,7 @@ import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {

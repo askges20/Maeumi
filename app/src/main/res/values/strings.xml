@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Maeumi</string>
+    <string name="app_name">마음이</string>
 
     <string-array name="random_text">
         <item>언젠간 너의 노력이 빛낼거야</item>

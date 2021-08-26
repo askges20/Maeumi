@@ -125,9 +125,9 @@ public class SignUpActivity extends AppCompatActivity {
                             String heart = "-1";
 
                             SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-                            long now = System.currentTimeMillis();
-                            Date nowDate = new Date(now);
-                            String notifyDate = sdFormat.format(nowDate);
+                            final Calendar cal = Calendar.getInstance();
+                            cal.add(Calendar.DATE,-1);
+                            String notifyDate = sdFormat.format(cal.getTime());
 
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("uid", uid);
