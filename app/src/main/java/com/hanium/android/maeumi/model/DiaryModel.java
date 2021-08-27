@@ -1,6 +1,7 @@
 package com.hanium.android.maeumi.model;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
@@ -40,7 +41,8 @@ public class DiaryModel {
     public static String calendarDate, fireDate, compareMonth, saveId;
     public static String title, content, nullDiary, emoticonNum, varTitle, varContent, varENum;
     public static String day, year, month, oneTimeDate, oneTimeMonth;
-    public static Bitmap imgName;
+    public static Bitmap imgNameBitmap;
+    public static Uri imgNameUri;
     public static boolean dateCheckResult;
 
     public static ArrayList<String> dates = new ArrayList<>();
@@ -285,12 +287,17 @@ public class DiaryModel {
     }
 
     // 이미지 비트맵 저장, 전달
-    public void setImgName(Bitmap bitmap) {
-        imgName = bitmap;
-
-        if (imgName != null) {
-            saveImg(imgName);
-        }
+    public void setImgNameBitmap(Bitmap bitmap) {
+        imgNameBitmap = bitmap;
+    }
+    public Bitmap getImgNameBitmap(){
+        return this.imgNameBitmap;
+    }
+    public void setImgNameUri(Uri uri){
+        imgNameUri = uri;
+    }
+    public Uri getImgNameUri(){
+        return this.imgNameUri;
     }
 
     // 이미지 삭제
@@ -303,27 +310,33 @@ public class DiaryModel {
     }
 
     public void saveImg(Bitmap imgBitmap) {
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference("/diary");
+        if (imgNameBitmap != null) {
+            System.out.println("Diary Model - "+ imgNameBitmap);
 
-        StorageReference imgSaveRef = storageRef.child(saveId);
+            storage = FirebaseStorage.getInstance();
+            storageRef = storage.getReference("/diary");
 
-        Bitmap bitmap = imgBitmap;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
+            StorageReference imgSaveRef = storageRef.child(saveId);
 
-        UploadTask uploadTask = imgSaveRef.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                System.out.println("error - " + exception.getMessage());
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                System.out.println("성공");
-            }
-        });
+            Bitmap bitmap = imgBitmap;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+
+            UploadTask uploadTask = imgSaveRef.putBytes(data);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    System.out.println("error - " + exception.getMessage());
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    System.out.println("성공");
+                }
+            });
+        }
+
+
     }
 }

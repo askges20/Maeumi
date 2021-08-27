@@ -146,20 +146,17 @@ public class DiaryModify extends Activity {
             Toast.makeText(DiaryModify.this, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else {
             if (imgName != null) {
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imgName.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
+                DiaryModel.setImgNameBitmap(imgName);
                 Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
-                pickIntent.putExtra("imgName", byteArray);
                 startActivity(pickIntent);
             } else {
                 if(imgUri != null){
+                    DiaryModel.setImgNameUri(imgUri);
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                     pickIntent.putExtra("title", diaryTitle);
                     pickIntent.putExtra("content", diaryContent);
-                    pickIntent.putExtra("imgName",imgUri);
                     startActivity(pickIntent);
                 }else{
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);

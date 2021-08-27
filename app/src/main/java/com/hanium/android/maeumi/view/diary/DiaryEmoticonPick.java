@@ -23,9 +23,9 @@ public class DiaryEmoticonPick extends AppCompatActivity {
 
     LinearLayout glad, happy, calm, angry, sad, worried;
     String diaryTitle, diaryContent, diaryEmoticonNum;
-    Bitmap diaryImgName;
+    Bitmap diaryImgBitmap;
     Button diaryEmoticonPickDone;
-    Uri imgUri;
+    Uri diaryImgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,9 @@ public class DiaryEmoticonPick extends AppCompatActivity {
         diaryEmoticonPickDone = findViewById(R.id.diaryEmoticonPickDone);
 
         Intent diaryIntent = getIntent();
-        try {
-            byte[] arr = getIntent().getByteArrayExtra("imgName");
-            diaryImgName = BitmapFactory.decodeByteArray(arr, 0, arr.length);
-        } catch (Exception e) {
-            System.out.println("SDKJ - " + e.getMessage());
-        }
 
-        try {
-            imgUri = getIntent().getParcelableExtra("imgName");
-        } catch (Exception e) {
-            System.out.println("SDKJ - " + e.getMessage());
-        }
+        diaryImgBitmap = DiaryModel.getImgNameBitmap();
+        diaryImgUri = DiaryModel.getImgNameUri();
 
         diaryTitle = diaryIntent.getStringExtra("title");
         diaryContent = diaryIntent.getStringExtra("content");
@@ -104,13 +95,12 @@ public class DiaryEmoticonPick extends AppCompatActivity {
         if (diaryEmoticonNum == null) {
             Toast.makeText(DiaryEmoticonPick.this, "기분을 선택해주세요.", Toast.LENGTH_SHORT).show();
         } else {
-
-            if (diaryImgName != null) {
+            if (diaryImgBitmap != null) {
                 //사진 추가,변경 되었으면
-                DiaryModel.setImgName(diaryImgName);
-            } else if(imgUri != null){
+                DiaryModel.saveImg(diaryImgBitmap);
+            } else if(diaryImgUri != null){
                 // 기존 이미지 그대로 유지
-            }else{
+            }else if(diaryImgBitmap == null && diaryImgUri == null){
                 // 사진 없거나 제거했다면
                 deleteImg();
             }
