@@ -64,6 +64,9 @@ public class DiaryWrite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
+        imgName = null;
+        DiaryModel.setImgNameBitmap(null);
+
         diaryCalDate = DiaryModel.getCalendarDate();
         nullDate();
         dateCheck();
@@ -156,6 +159,8 @@ public class DiaryWrite extends AppCompatActivity {
     public void setEmptyImg(View view) {
         Glide.with(getApplicationContext()).clear(imgView);
         imgName = null;
+        DiaryModel.setImgNameBitmap(null);
+        DiaryModel.setImgNameUri(null);
         addImgBtn.setText("사진 추가");
         deleteImgBtn.setVisibility(View.GONE);
     }

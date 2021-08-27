@@ -45,6 +45,10 @@ public class DiaryModify extends AppCompatActivity {
         setContentView(R.layout.activity_diary_modify);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         // 키보드 화면 밀림 제거
+        imgName = null;
+        imgUri = null;
+        DiaryModel.setImgNameBitmap(null);
+        DiaryModel.setImgNameUri(null);
 
         diaryCalDate = DiaryModel.getCalendarDate();
 
@@ -152,7 +156,7 @@ public class DiaryModify extends AppCompatActivity {
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
                 startActivity(pickIntent);
-            } else {
+            }
                 if(imgUri != null){
                     DiaryModel.setImgNameUri(imgUri);
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
@@ -166,7 +170,7 @@ public class DiaryModify extends AppCompatActivity {
                     startActivity(pickIntent);
                 }
 
-            }
+
 
             finish();   //현재 액티비티 없애기
         }
@@ -176,6 +180,8 @@ public class DiaryModify extends AppCompatActivity {
         Glide.with(getApplicationContext()).clear(imgView);
         imgName = null;
         imgUri = null;
+        DiaryModel.setImgNameUri(null);
+        DiaryModel.setImgNameBitmap(null);
         addImgBtn.setText("사진 추가");
         deleteImgBtn.setVisibility(View.GONE);
     }

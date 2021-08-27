@@ -98,9 +98,8 @@ public class DiaryEmoticonPick extends AppCompatActivity {
             if (diaryImgBitmap != null) {
                 //사진 추가,변경 되었으면
                 DiaryModel.saveImg(diaryImgBitmap);
-            } else if(diaryImgUri != null){
-                // 기존 이미지 그대로 유지
-            }else if(diaryImgBitmap == null && diaryImgUri == null){
+            }
+            if(diaryImgBitmap == null && diaryImgUri == null){
                 // 사진 없거나 제거했다면
                 deleteImg();
             }

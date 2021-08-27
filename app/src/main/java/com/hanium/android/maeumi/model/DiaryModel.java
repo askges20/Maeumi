@@ -311,7 +311,6 @@ public class DiaryModel {
 
     public void saveImg(Bitmap imgBitmap) {
         if (imgNameBitmap != null) {
-            System.out.println("Diary Model - "+ imgNameBitmap);
 
             storage = FirebaseStorage.getInstance();
             storageRef = storage.getReference("/diary");
