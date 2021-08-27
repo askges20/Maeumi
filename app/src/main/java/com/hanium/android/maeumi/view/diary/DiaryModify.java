@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
@@ -26,7 +27,7 @@ import com.hanium.android.maeumi.model.DiaryModel;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-public class DiaryModify extends Activity {
+public class DiaryModify extends AppCompatActivity {
 
     DiaryModel DiaryModel = new DiaryModel();
 

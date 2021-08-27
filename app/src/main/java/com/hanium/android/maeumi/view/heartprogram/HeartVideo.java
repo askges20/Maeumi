@@ -71,15 +71,6 @@ public class HeartVideo extends YouTubeBaseActivity {
         titleText.setText(title);
         TextView descriptionText = findViewById(R.id.youtubeViewDescText);
         descriptionText.setText(description);
-
-        btn = findViewById(R.id.videoPlayBtn);
-        btn.setOnClickListener(new View.OnClickListener() { //버튼 클릭 이벤트
-            @Override
-            public void onClick(View v) {
-                playOrPause();  //영상 재생 (또는 일시정지)
-                Toast.makeText(HeartVideo.this, "마음채우기 +1", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     //영상 재생 또는 일시정지

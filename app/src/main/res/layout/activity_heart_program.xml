@@ -39,7 +39,7 @@
             android:onClick="showHeartGuide"
             android:padding="10dp"
             android:src="@drawable/question_mark_icon"
-            android:tint="@color/gray" />
+            app:tint="@color/gray" />
 
     </LinearLayout>
 
@@ -72,6 +72,7 @@
         android:id="@+id/heartVideoListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:backgroundTint="@color/white"
         android:orientation="vertical"
         android:padding="10dp"
         android:scrollbars="none"

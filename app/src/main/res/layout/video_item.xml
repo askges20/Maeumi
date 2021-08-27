@@ -30,7 +30,8 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="영상 설명" />
+        android:text="영상 설명"
+        android:textColor="@color/gray" />
 
     <LinearLayout
         android:id="@+id/isWatchedView"
