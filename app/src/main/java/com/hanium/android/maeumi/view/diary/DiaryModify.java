@@ -1,6 +1,5 @@
 package com.hanium.android.maeumi.view.diary;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,7 +23,6 @@ import com.google.firebase.storage.StorageReference;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class DiaryModify extends AppCompatActivity {
@@ -156,7 +154,7 @@ public class DiaryModify extends AppCompatActivity {
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
                 startActivity(pickIntent);
-            }
+            }else{
                 if(imgUri != null){
                     DiaryModel.setImgNameUri(imgUri);
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
@@ -169,8 +167,7 @@ public class DiaryModify extends AppCompatActivity {
                     pickIntent.putExtra("content", diaryContent);
                     startActivity(pickIntent);
                 }
-
-
+            }
 
             finish();   //현재 액티비티 없애기
         }

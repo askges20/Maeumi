@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
 
@@ -80,58 +80,68 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     public void login(String email, String password) {
-        firebaseAuth = FirebaseAuth.getInstance();
+        AlertDialog.Builder helpPopup = new AlertDialog.Builder(LoginActivity.this);
+        AlertDialog ad = helpPopup.create();
+        ad.setTitle("로그인");
+        ad.setIcon(R.drawable.maeumi_main_img);
+        ad.setMessage("잠시만 기다려주세요.");
+        ad.setCancelable(false);
 
+        ad.show();
+
+        firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    String loginUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); //로그인한 계정의 uid
-                    LoginUser user = LoginUser.getInstance();    //싱글톤 패턴
-                    user.setUid(loginUserUid);  //사용자 uid
-                    mUser = firebaseAuth.getInstance().getCurrentUser();
+                    if (task.isSuccessful()) {
 
-                    //DB에서 사용자 정보 가져와서 싱글톤 객체에 저장
-                    database = FirebaseDatabase.getInstance();
-                    userRef = database.getReference("/Users/" + loginUserUid + "/");
-                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot snapshot) {
-                            user.setName(snapshot.child("name").getValue(String.class)); //사용자 이름
-                            user.setEmail(snapshot.child("email").getValue(String.class));  //사용자 이메일
-                            user.setAlias(snapshot.child("alias").getValue(String.class));
-                            user.setGender(snapshot.child("gender").getValue(String.class));
-                            user.setSchool(snapshot.child("school").getValue(String.class));
-                            user.setNotifyDate(snapshot.child("notifyDate").getValue(String.class));
-                            if(snapshot.child("heart").getValue(String.class) == null){
-                                user.setHeart("-1");
-                            }else{
-                                user.setHeart(snapshot.child("heart").getValue(String.class));
-                            }
-                        }
+                        ad.dismiss();
+                        String loginUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); //로그인한 계정의 uid
+                        LoginUser user = LoginUser.getInstance();    //싱글톤 패턴
+                        user.setUid(loginUserUid);  //사용자 uid
+                        mUser = firebaseAuth.getInstance().getCurrentUser();
 
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-
-                        }
-                    });
-                    if(mUser != null){
-                        firebaseAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        //DB에서 사용자 정보 가져와서 싱글톤 객체에 저장
+                        database = FirebaseDatabase.getInstance();
+                        userRef = database.getReference("/Users/" + loginUserUid + "/");
+                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                if(mUser.isEmailVerified()){
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class); //메인 화면으로 이동
-                                    startActivity(intent);
-                                    finish();   //현재 액티비티(로그인 화면) 종료
-                                }else{
-                                    Toast.makeText(LoginActivity.this, "이메일 인증 후 로그인 해주세요.", Toast.LENGTH_LONG).show();
+                            public void onDataChange(DataSnapshot snapshot) {
+                                user.setName(snapshot.child("name").getValue(String.class)); //사용자 이름
+                                user.setEmail(snapshot.child("email").getValue(String.class));  //사용자 이메일
+                                user.setAlias(snapshot.child("alias").getValue(String.class));
+                                user.setGender(snapshot.child("gender").getValue(String.class));
+                                user.setSchool(snapshot.child("school").getValue(String.class));
+                                user.setNotifyDate(snapshot.child("notifyDate").getValue(String.class));
+                                if (snapshot.child("heart").getValue(String.class) == null) {
+                                    user.setHeart("-1");
+                                } else {
+                                    user.setHeart(snapshot.child("heart").getValue(String.class));
                                 }
                             }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+
+                            }
                         });
+                        if (mUser != null) {
+                            firebaseAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    if (mUser.isEmailVerified()) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class); //메인 화면으로 이동
+                                        startActivity(intent);
+                                        finish();   //현재 액티비티(로그인 화면) 종료
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "이메일 인증 후 로그인 해주세요.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        Toast.makeText(LoginActivity.this, "아이디 혹은 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(LoginActivity.this, "아이디 혹은 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                }
             }
         });
     }
