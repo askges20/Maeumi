@@ -22,7 +22,7 @@ public class DiaryEmoticonPick extends AppCompatActivity {
     DiaryModel DiaryModel = new DiaryModel();
 
     LinearLayout glad, happy, calm, angry, sad, worried;
-    String diaryTitle, diaryContent, diaryEmoticonNum;
+    String diaryTitle, diaryContent, diaryEmoticonNum,diaryFrom;
     Bitmap diaryImgBitmap;
     Button diaryEmoticonPickDone;
     Uri diaryImgUri;
@@ -47,6 +47,7 @@ public class DiaryEmoticonPick extends AppCompatActivity {
 
         diaryTitle = diaryIntent.getStringExtra("title");
         diaryContent = diaryIntent.getStringExtra("content");
+        diaryFrom = diaryIntent.getStringExtra("from");
 
     }
 
@@ -104,9 +105,15 @@ public class DiaryEmoticonPick extends AppCompatActivity {
                 deleteImg();
             }
 
-            Toast.makeText(DiaryEmoticonPick.this, "일기 작성완료", Toast.LENGTH_SHORT).show();
-            DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
-            finish();
+            if(diaryFrom.equals("write")){
+                Toast.makeText(DiaryEmoticonPick.this, "일기 작성완료", Toast.LENGTH_SHORT).show();
+                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
+                finish();
+            }else{
+                Toast.makeText(DiaryEmoticonPick.this, "일기 수정완료", Toast.LENGTH_SHORT).show();
+                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
+                finish();
+            }
         }
 
     }

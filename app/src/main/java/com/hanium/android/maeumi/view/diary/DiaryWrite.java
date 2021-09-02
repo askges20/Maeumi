@@ -118,11 +118,13 @@ public class DiaryWrite extends AppCompatActivity {
                 Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
+                pickIntent.putExtra("from", "write");
                 startActivity(pickIntent);
             } else {
                 Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
+                pickIntent.putExtra("from", "write");
                 startActivity(pickIntent);
             }
 

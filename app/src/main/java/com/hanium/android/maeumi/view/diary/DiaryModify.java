@@ -153,6 +153,7 @@ public class DiaryModify extends AppCompatActivity {
                 Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
+                pickIntent.putExtra("from", "modify");
                 startActivity(pickIntent);
             }else{
                 if(imgUri != null){
@@ -160,11 +161,13 @@ public class DiaryModify extends AppCompatActivity {
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                     pickIntent.putExtra("title", diaryTitle);
                     pickIntent.putExtra("content", diaryContent);
+                    pickIntent.putExtra("from", "modify");
                     startActivity(pickIntent);
                 }else{
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                     pickIntent.putExtra("title", diaryTitle);
                     pickIntent.putExtra("content", diaryContent);
+                    pickIntent.putExtra("from", "modify");
                     startActivity(pickIntent);
                 }
             }
