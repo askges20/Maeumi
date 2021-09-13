@@ -42,22 +42,4 @@
         android:icon="@drawable/question_mark_icon"
         android:title="이용안내" />
 
-    <item
-        android:icon="@drawable/settings_icon"
-        android:title="환경설정" />
-
-    <!--
-    <item android:title="remote">
-        <menu>
-            <item
-                android:id="@+id/nav_remote"
-                android:icon="@drawable/heart_icon_1"
-                android:title="remote_control"/>
-            <item
-                android:id="@+id/nav_addremote"
-                android:icon="@drawable/heart_icon_2"
-                android:title="remote_control"/>
-        </menu>
-    </item>
-    -->
 </menu>
