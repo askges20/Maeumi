@@ -151,9 +151,9 @@ public class NotificationAdapter extends BaseAdapter {
         if (title.contains("회원가입")) {
             notifyImg.setImageResource(R.drawable.maeumi_happy);
         } else if (title.contains("댓글")) {
-            notifyImg.setImageResource(R.drawable.comment_icon);
+            notifyImg.setImageResource(R.drawable.notification_comment);
         } else {
-            notifyImg.setImageResource(R.drawable.heart_icon_2);
+            notifyImg.setImageResource(R.drawable.notification_heart);
         }
 
         //알림 정보 화면에 표시
