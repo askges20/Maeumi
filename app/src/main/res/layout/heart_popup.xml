@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/maeumi_main_img" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:text="마음 채우기에 대해서 알아볼까요?"
         android:textAlignment="center" />

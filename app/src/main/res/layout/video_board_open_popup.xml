@@ -24,7 +24,7 @@
         android:src="@drawable/menu_board_icon" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:text="마음 채우기 60점 달성! 게시판을 이용할 수 있게 되었어요. 게시판에서 마음이 이용자들과 소통해보세요~"
         android:textAlignment="center" />

@@ -24,7 +24,7 @@
         android:src="@drawable/maeumi_unwatched" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:text="영상 시청을 종료할까요?\n(완료하지 않으면 영상 시청 기록이 남지 않아요.)"
         android:textAlignment="center" />

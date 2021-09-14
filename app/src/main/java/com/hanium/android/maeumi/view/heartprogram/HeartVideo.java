@@ -7,7 +7,9 @@ import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -261,14 +263,12 @@ public class HeartVideo extends YouTubeBaseActivity {
         dialog.show();
 
         //팝업 사이즈
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-
-        int x = (int) (size.x * 0.7f);
-        int y = (int) (size.y * 0.4f);
-
-        dialog.getWindow().setLayout(x, y);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.gravity = Gravity.CENTER;
+        dialog.getWindow().setAttributes(layoutParams);
     }
 
     //영상 시청 완료X 팝업
@@ -302,14 +302,12 @@ public class HeartVideo extends YouTubeBaseActivity {
         });
 
         //팝업 사이즈
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-
-        int x = (int) (size.x * 0.7f);
-        int y = (int) (size.y * 0.5f);
-
-        dialog.getWindow().setLayout(x, y);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.gravity = Gravity.CENTER;
+        dialog.getWindow().setAttributes(layoutParams);
     }
 
     //마음 온도 60점 달성 시 게시판 기능 해제 팝업
@@ -337,14 +335,12 @@ public class HeartVideo extends YouTubeBaseActivity {
         dialog.show();
 
         //팝업 사이즈
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-
-        int x = (int) (size.x * 0.7f);
-        int y = (int) (size.y * 0.6f);
-
-        dialog.getWindow().setLayout(x, y);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.gravity = Gravity.CENTER;
+        dialog.getWindow().setAttributes(layoutParams);
     }
 
     //60점 달성 시 알림 추가
