@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="마음이"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
 
             <ImageView
                 android:id="@+id/goToNotification"
@@ -47,7 +47,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                android:tint="@color/gray"
+                app:tint="@color/gray"
                 app:srcCompat="@drawable/notification_icon" />
 
         </LinearLayout>
@@ -118,128 +118,142 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/btnTest"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="5dp"
+                android:layout_height="200dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/alert_white_border"
                 android:backgroundTint="@color/yellow"
                 android:gravity="center"
                 android:onClick="goToSelfTest"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     app:srcCompat="@drawable/menu_test_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:paddingHorizontal="30dp"
+                    android:layout_margin="15dp"
                     android:text="학교폭력\n진단테스트"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/btnChat"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/alert_white_border"
                 android:backgroundTint="@color/lightgreen"
                 android:gravity="center"
                 android:onClick="goToChatBot"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     app:srcCompat="@drawable/menu_chat_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:paddingHorizontal="40dp"
+                    android:layout_margin="15dp"
                     android:text="상담하기"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/btnHeartProgram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/alert_white_border"
+                android:backgroundTint="#FFDDF4"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="마음 채우기"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/menu_heart_icon" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/btnDiary"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/alert_white_border"
                 android:backgroundTint="#A7E4FF"
                 android:gravity="center"
                 android:onClick="goToDiary"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="나만의 일기장"
-                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_margin="10dp"
                     app:srcCompat="@drawable/menu_diary_icon" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/btnBoard"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/alert_white_border"
                 android:backgroundTint="#FFD963"
                 android:gravity="center"
                 android:onClick="goToBoard"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="게시판"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_margin="10dp"
                     app:srcCompat="@drawable/menu_board_icon" />
             </LinearLayout>
