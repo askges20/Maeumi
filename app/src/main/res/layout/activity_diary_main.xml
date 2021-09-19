@@ -35,11 +35,14 @@
             android:text="나만의 일기장"
             android:textSize="20sp" />
 
-        <TextView
+        <ImageView
+            android:id="@+id/diaryGuideBtn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:text="Button"
-            android:visibility="invisible" />
+            android:onClick="showDiaryGuide"
+            android:padding="10dp"
+            app:tint="@color/gray"
+            app:srcCompat="@drawable/question_mark_icon" />
     </LinearLayout>
 
     <LinearLayout

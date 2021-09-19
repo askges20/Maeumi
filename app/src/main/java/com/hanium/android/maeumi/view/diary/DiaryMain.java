@@ -1,11 +1,14 @@
 package com.hanium.android.maeumi.view.diary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +46,18 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         CalendarUtils.selectDate = LocalDate.now(); //CalendarUtils에 오늘 날짜 전달
 
         setMonthView(); //캘린더 표시
+    }
+    // 일기 안내 팝업 버튼
+    public void showDiaryGuide(View view){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("나만의 일기장");
+        dialog.setMessage("일기장 이용 안내 메세지 내용을 넣어야 해요");
+        dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+            }
+        });
+        dialog.show();
     }
 
     //activity_diary_main.xml.xml 레이아웃 요소 연결
