@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.DayOfWeek;
+
+import static java.time.temporal.TemporalAdjusters.firstInMonth;
 
 public class CalendarUtils {
 
@@ -33,6 +36,32 @@ public class CalendarUtils {
         }
 
         return dayInMonthArray;
+    }
+
+    public static ArrayList<String> dayGetWeekend() {
+        ArrayList<String> weekend = new ArrayList<>();
+
+        LocalDate firstWeekend = CalendarUtils.selectDate.with(firstInMonth(DayOfWeek.SUNDAY));
+        String fw = firstWeekend.toString().substring(8, 10);
+
+        int intFW = Integer.parseInt(fw);
+        if (intFW < 10) {
+            String date = Integer.toString(intFW);
+            date = date.substring(date.length()-1);
+
+            weekend.add(date);
+        }
+
+        while (intFW <= 32) {
+            intFW += 7;
+            if (intFW >= 32) {
+                break;
+            } else {
+                String date = Integer.toString(intFW);
+                weekend.add(date);
+            }
+        }
+        return weekend;
     }
 
 }

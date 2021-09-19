@@ -31,6 +31,7 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     DiaryModel DiaryModel;
 
     ArrayList<String> daysInMonth = new ArrayList<String>();
+    ArrayList<String> weekends = new ArrayList<String>();
     public static ArrayList<String> diaryDates = new ArrayList<>();
 
     @Override
@@ -55,8 +56,9 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectDate)); //년, 월 표시
         daysInMonth = daysInMonthArray(CalendarUtils.selectDate); //캘린더 날짜 배열 세팅
+        weekends = CalendarUtils.dayGetWeekend();
 
-        calendarAdapter = new CalendarAdapter(daysInMonth,this);    //어댑터 생성
+        calendarAdapter = new CalendarAdapter(weekends,daysInMonth,this);    //어댑터 생성
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);   //레이아웃 매니저 설정
         calendarRecyclerView.setAdapter(calendarAdapter);   //캘린더 어댑터 등록
