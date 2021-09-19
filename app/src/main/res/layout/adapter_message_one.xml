@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="yyyy년 MM월 dd일"
-        android:textSize="16sp" />
+        android:text="yyyy년 MM월 dd일" />
 
     <TextView
         android:id="@+id/message_send"
@@ -24,8 +23,7 @@
         android:background="@drawable/bg_chat_send"
         android:minHeight="50dp"
         android:padding="15dp"
-        android:textColor="@android:color/white"
-        android:textSize="20sp">
+        android:textColor="@android:color/white">
 
     </TextView>
 
@@ -50,8 +48,7 @@
             android:background="@drawable/bg_chat_receive"
             android:minHeight="50dp"
             android:padding="15dp"
-            android:textColor="@android:color/black"
-            android:textSize="20sp">
+            android:textColor="@android:color/black">
 
         </TextView>
 

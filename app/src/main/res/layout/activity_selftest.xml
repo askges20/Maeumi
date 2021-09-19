@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="진단테스트"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
@@ -53,8 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/test_guide"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textColor="#000000" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -80,7 +79,7 @@
             android:onClick="goToHistory"
             android:text="지난 테스트 결과 확인"
             android:textColor="#000000"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/startTestBtn"
@@ -89,7 +88,7 @@
             android:layout_marginTop="10dp"
             android:text="테스트 시작하기"
             android:textColor="#000000"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:backgroundTint="@color/lightgreen" />
 
     </LinearLayout>

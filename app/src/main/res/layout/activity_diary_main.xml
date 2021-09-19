@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="나만의 일기장"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
@@ -72,7 +72,7 @@
             android:gravity="center"
             android:text="Feb 2021"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <Button
             android:layout_width="0dp"

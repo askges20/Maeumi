@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="영상 시청하기"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
@@ -57,7 +57,7 @@
             android:layout_marginBottom="15dp"
             android:text="영상 제목"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
         <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/youtubeView"
@@ -98,7 +98,7 @@
             android:id="@+id/youtubeViewDescText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:text="영상 설명" />
 
         <ImageView

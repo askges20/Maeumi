@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="일기 작성하기"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
@@ -124,10 +124,9 @@
                         android:layout_marginRight="3dp"
                         android:layout_weight="7"
                         android:background="#EDEDED"
-                        android:padding="5dp"
-                        android:text="0000/00/00"
                         android:onClick="openDatePicker"
-                        android:textSize="20sp" />
+                        android:padding="5dp"
+                        android:text="0000/00/00" />
 
 
                 </LinearLayout>
@@ -149,7 +148,7 @@
                         android:inputType="textPersonName"
                         android:padding="5dp"
                         android:text="제목"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -190,7 +189,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
                                 android:ems="10"
-                                android:textSize="20dp"
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
                                 android:padding="15dp" />

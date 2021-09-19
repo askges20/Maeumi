@@ -26,12 +26,12 @@
         <TextView
             android:id="@+id/contentDate"
             android:layout_width="wrap_content"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
             android:onClick="goToBack"
             android:text="이모티콘 선택하기"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
@@ -60,9 +60,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="기분을 선택해주세요"
-                android:textSize="24sp" />
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -87,18 +87,19 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/diary_glad_removebg"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        android:layout_height="wrap_content"/>
+                        android:src="@drawable/diary_glad_removebg" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="기쁨"
                         android:textColor="@color/black"
-                        android:gravity="center"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,16 +113,17 @@
                     <ImageView
                         android:src="@drawable/diary_happy_removebg"
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="행복"
                         android:gravity="center"
+                        android:text="행복"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -136,16 +138,17 @@
                     <ImageView
                         android:src="@drawable/diary_calm_removebg"
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="평온"
                         android:textColor="@color/black"
-                        android:gravity="center"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -167,16 +170,17 @@
                     <ImageView
                         android:src="@drawable/diary_angry_removebg"
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="화남"
                         android:textColor="@color/black"
-                        android:gravity="center"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -191,16 +195,17 @@
                     <ImageView
                         android:src="@drawable/diary_sad_removebg"
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="슬픔"
                         android:textColor="@color/black"
-                        android:gravity="center"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -215,16 +220,17 @@
                     <ImageView
                         android:src="@drawable/diary_worried_removebg"
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="불안"
                         android:textColor="@color/black"
-                        android:gravity="center"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
 

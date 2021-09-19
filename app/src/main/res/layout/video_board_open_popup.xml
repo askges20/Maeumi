@@ -15,7 +15,7 @@
         android:text="게시판 기능이 해제되었어요!"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <ImageView
         android:layout_width="100dp"
@@ -43,7 +43,7 @@
             android:text="게시판으로 이동하기"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

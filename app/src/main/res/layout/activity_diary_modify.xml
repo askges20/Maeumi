@@ -25,13 +25,12 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="일기 수정하기"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
         <ImageView
             android:id="@+id/emoticon"
             android:layout_weight="0.5"
@@ -70,27 +69,26 @@
                 android:padding="10dp">
 
 
-                    <TextView
-                        android:id="@+id/modifyDate"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="0000.00.00"
-                        android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/modifyDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:text="0000.00.00" />
 
 
-                    <EditText
-                        android:id="@+id/diaryTitleModifyText"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:padding="5dp"
-                        android:text="제목"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/diaryTitleModifyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="5dp"
+                    android:text="제목"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -132,8 +130,7 @@
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
                                 android:padding="15dp"
-                                android:textColor="@color/black"
-                                android:textSize="20dp" />
+                                android:textColor="@color/black" />
 
                             <ImageView
                                 android:id="@+id/testImgView"

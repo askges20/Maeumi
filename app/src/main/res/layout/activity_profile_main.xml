@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="마이페이지"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/signOutBtn"
@@ -51,7 +51,7 @@
             android:gravity="center"
             android:text="프로필"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <View
             android:layout_width="match_parent"
@@ -75,35 +75,32 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="이름 :" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
                     android:text="이메일 :" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="닉네임 :" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="학교 :" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="성별 :" />
 
             </LinearLayout>
@@ -119,35 +116,35 @@
                     android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="홍길동" />
 
                 <TextView
                     android:id="@+id/userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="email@naver.com" />
 
                 <TextView
                     android:id="@+id/userAlias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="길동이" />
 
                 <TextView
                     android:id="@+id/userSchool"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="고등학교" />
 
                 <TextView
                     android:id="@+id/userGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:text="남" />
 
             </LinearLayout>
@@ -173,7 +170,7 @@
                 android:gravity="center"
                 android:text="마음 온도"
                 android:textColor="@color/black"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/heartProgress"
@@ -191,8 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0 / 100"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textAlignment="center" />
 
             <Button
                 android:id="@+id/goToHeartProgramBtn"

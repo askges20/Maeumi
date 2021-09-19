@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="닉네임"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/mainUserSchoolText"
@@ -37,7 +37,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="OO고등학교"
-            android:textSize="16sp"
             android:textStyle="bold" />
 
         <LinearLayout

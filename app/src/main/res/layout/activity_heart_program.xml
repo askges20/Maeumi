@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="마음 채우기"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/heartProgramGuideBtn"
@@ -39,7 +39,7 @@
             android:onClick="showHeartGuide"
             android:padding="10dp"
             android:src="@drawable/question_mark_icon"
-            app:tint="@color/gray" />
+            android:tint="@color/gray" />
 
     </LinearLayout>
 

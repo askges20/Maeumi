@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="내 알림"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"

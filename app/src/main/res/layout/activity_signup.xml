@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:text="회원가입"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="18sp" />
 
         <View
             android:layout_width="250dp"
@@ -99,7 +99,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:layout_marginRight="15dp"
                 android:text="성별" />
 
@@ -155,8 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="이미 계정이 있다면"
-            android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textColor="@android:color/black" />
 
 
         <Button

@@ -76,7 +76,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="상담하기"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/deleteChatBtn"

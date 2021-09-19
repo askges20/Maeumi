@@ -78,7 +78,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="오늘 하루도 고생 많았어" />
+                    android:text="오늘 하루도 고생 많았어"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 

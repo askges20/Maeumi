@@ -28,11 +28,11 @@
         <TextView
             android:id="@+id/contentDate"
             android:layout_width="wrap_content"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="0000년 00월 00일"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/emoticon"
@@ -72,16 +72,16 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/diaryTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="3"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:text="제목"
-                        android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/diaryTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="제목"
+                    android:textSize="18sp" />
 
 
 
@@ -122,7 +122,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
                                 android:ems="10"
-                                android:textSize="20dp"
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
                                 android:padding="15dp" />
