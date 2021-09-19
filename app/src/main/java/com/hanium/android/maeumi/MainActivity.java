@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.drawer_menu_mypage) {
                     startActivity(new Intent(MainActivity.this, Profile.class));
                 } else if (id == R.id.drawer_menu_youtube) {
-                    prohibitBeforeTestMessage();
+                    prohibitBeforeTestMessage(null);
                 } else if (id == R.id.guide) {
                     startActivity(new Intent(MainActivity.this, Guide.class));
                 }
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void prohibitBeforeTestMessage() {
+    public void prohibitBeforeTestMessage(View view) {
         int heart = Integer.parseInt(LoginUser.getInstance().getHeart());
         if (heart == -1) {  //진단테스트를 이용하지 않은 경우
             AlertDialog dialog = new AlertDialog.Builder(this)

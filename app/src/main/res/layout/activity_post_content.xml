@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="게시글내역"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="60dp"
@@ -80,7 +80,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"
-                            android:layout_weight="7"
                             android:text="작성자"
                             android:textSize="18sp" />
 
@@ -88,7 +87,6 @@
                             android:id="@+id/postDateText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="7"
                             android:text="2021/01/01"
                             android:textSize="18sp"
                             tools:layout_marginBottom="15dp" />
@@ -98,10 +96,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:layout_weight="3"
                             android:gravity="center_vertical"
                             android:text="제목"
-                            android:textSize="22sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -119,7 +116,7 @@
                             android:inputType="textMultiLine"
                             android:paddingVertical="15dp"
                             android:text="게시글 내용"
-                            android:textSize="20sp" />
+                            android:textSize="16sp" />
 
                         <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
                             android:id="@+id/imgView"

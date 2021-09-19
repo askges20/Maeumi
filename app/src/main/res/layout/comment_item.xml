@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="작성자"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/commentContentText"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="내용"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,7 +41,8 @@
                     android:id="@+id/commentWriteDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2021.01.01" />
+                    android:text="2021.01.01"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -54,7 +55,8 @@
                     android:id="@+id/commentDeleteBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="삭제" />
+                    android:text="삭제"
+                    android:textSize="14sp" />
             </LinearLayout>
 
         </LinearLayout>

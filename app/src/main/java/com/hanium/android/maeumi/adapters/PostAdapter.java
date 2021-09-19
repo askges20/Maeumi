@@ -61,6 +61,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         String boardType;
 
         TextView titleView;
+        TextView contentThumbView;
         TextView writerView;
         TextView dateView;
         ImageView postItemCommentImg;
@@ -73,6 +74,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             this.boardType = boardType;
 
             titleView = itemView.findViewById(R.id.postTitle);
+            contentThumbView = itemView.findViewById(R.id.postContentThumb);
             writerView = itemView.findViewById(R.id.postWriter);
             dateView = itemView.findViewById(R.id.postDateText);
             postItemCommentImg = itemView.findViewById(R.id.postItemCommentImg);
@@ -99,6 +101,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
 
         public void setItem(Post item) {
             titleView.setText(item.getTitle());
+            contentThumbView.setText(item.getContent());
 
             //익명게시판은 사용자 닉네임 표시 X
             if (boardType.equals("anonymous")) {

@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="마음이"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/goToNotification"
@@ -190,6 +190,7 @@
                 android:background="@drawable/alert_white_border"
                 android:backgroundTint="#FFDDF4"
                 android:gravity="center"
+                android:onClick="prohibitBeforeTestMessage"
                 android:orientation="horizontal">
 
                 <TextView
