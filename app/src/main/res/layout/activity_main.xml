@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#E4D8DC"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -54,58 +55,43 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:paddingHorizontal="15dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:contentDescription="mainIcon"
-                app:srcCompat="@drawable/maeumi_main_img"
-                tools:ignore="VectorDrawableCompat" />
+            android:layout_height="250dp"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="10dp">
 
-                <TextView
-                    android:id="@+id/mainRandomText"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/maeumi_main"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="오늘 하루도 고생 많았어"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/mainRandomText"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="오늘 하루도 고생 많았어"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#E6E6E6"
-            android:orientation="vertical"
-            android:onClick="goToProfile"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="마음 채우기" />
-
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:max="100"
-                android:progress="0"
-                android:progressTint="@color/pinkred"/>
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -125,10 +111,10 @@
             <LinearLayout
                 android:id="@+id/btnTest"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="170dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/alert_white_border"
+                android:background="@drawable/main_btn_border"
                 android:backgroundTint="@color/yellow"
                 android:gravity="center"
                 android:onClick="goToSelfTest"
@@ -152,10 +138,10 @@
             <LinearLayout
                 android:id="@+id/btnChat"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="170dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/alert_white_border"
+                android:background="@drawable/main_btn_border"
                 android:backgroundTint="@color/lightgreen"
                 android:gravity="center"
                 android:onClick="goToChatBot"
@@ -188,8 +174,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/alert_white_border"
-                android:backgroundTint="#FFDDF4"
+                android:background="@drawable/main_btn_border"
+                android:backgroundTint="#FDC5F1"
                 android:gravity="center"
                 android:onClick="prohibitBeforeTestMessage"
                 android:orientation="horizontal">
@@ -214,8 +200,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/alert_white_border"
-                android:backgroundTint="#A7E4FF"
+                android:background="@drawable/main_btn_border"
+                android:backgroundTint="#FDC5F1"
                 android:gravity="center"
                 android:onClick="goToDiary"
                 android:orientation="horizontal">
@@ -240,8 +226,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/alert_white_border"
-                android:backgroundTint="#FFD963"
+                android:background="@drawable/main_btn_border"
+                android:backgroundTint="#FDC5F1"
                 android:gravity="center"
                 android:onClick="goToBoard"
                 android:orientation="horizontal">

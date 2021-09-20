@@ -4,13 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +42,6 @@ import com.hanium.android.maeumi.view.profile.Profile;
 import com.hanium.android.maeumi.view.selftest.SelfTest;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         }
          */
-        progressBar = findViewById(R.id.progressBar);
 
         mDrawerLayout = findViewById(R.id.main_drawer_layout);
 
@@ -165,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         setRandomText();
 
         showHelpPopUp(); //이용안내 팝업
-        getHeart(); // 마음채우기
 
         notifyAdapter = new NotificationAdapter(this, goToNotificationBtn);
     }
@@ -455,23 +450,4 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //마음 채우기
-    public void getHeart() {
-        database = FirebaseDatabase.getInstance();
-        heartRef = database.getReference("/Users/" + LoginUser.getInstance().getUid() + "/heart/");
-
-        heartRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                progressBar.setProgress(Integer.parseInt(snapshot.getValue(String.class)));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
-
-
-    }
 }
