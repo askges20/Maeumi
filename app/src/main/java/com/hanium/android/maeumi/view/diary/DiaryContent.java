@@ -28,8 +28,8 @@ public class DiaryContent extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageRef;
 
-    String diaryCalDate, diaryTitle, diaryContent, nullDiary, diaryEmoticonNum;
-    TextView dateText, titleText, contentText;
+    String diaryCalDate, diaryTitle, diaryContent, nullDiary, diaryEmoticonNum,diaryWriteDate;
+    TextView dateText, titleText, contentText,diaryWDate;
     ImageViewZoom imgView;
     ImageView emoticon;
     ConstraintLayout mainContent;
@@ -44,6 +44,7 @@ public class DiaryContent extends AppCompatActivity {
         nullDiary = DiaryModel.getNullDiary();
 
         dateText = findViewById(R.id.contentDate);
+        diaryWDate = findViewById(R.id.diaryWriteDate);
         titleText = findViewById(R.id.diaryTitle);
         contentText = findViewById(R.id.diaryContent);
         emoticon = findViewById(R.id.emoticon);
@@ -54,12 +55,18 @@ public class DiaryContent extends AppCompatActivity {
         diaryTitle = DiaryModel.getTitleTwo();
         diaryContent = DiaryModel.getContent();
         diaryEmoticonNum = DiaryModel.getEmoticonNum();
+        diaryWriteDate = DiaryModel.getDiaryWriteDate();
 
         checkNull();
 
         dateText.setText(diaryCalDate);
         titleText.setText(diaryTitle);
         contentText.setText(diaryContent);
+        if(diaryWriteDate == null){
+            diaryWDate.setText("작성일 조회 실패");
+        }else{
+            diaryWDate.setText("작성일: "+diaryWriteDate);
+        }
         if (diaryEmoticonNum != null) {
             switch (diaryEmoticonNum) {
                 case "1":

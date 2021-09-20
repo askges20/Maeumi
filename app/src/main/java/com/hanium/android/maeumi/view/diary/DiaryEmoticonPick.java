@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +21,7 @@ public class DiaryEmoticonPick extends AppCompatActivity {
     DiaryModel DiaryModel = new DiaryModel();
 
     LinearLayout glad, happy, calm, angry, sad, worried;
-    String diaryTitle, diaryContent, diaryEmoticonNum,diaryFrom;
+    String diaryTitle, diaryContent, diaryEmoticonNum,diaryFrom,diaryWriteDate;
     Bitmap diaryImgBitmap;
     Button diaryEmoticonPickDone;
     Uri diaryImgUri;
@@ -48,7 +47,13 @@ public class DiaryEmoticonPick extends AppCompatActivity {
         diaryTitle = diaryIntent.getStringExtra("title");
         diaryContent = diaryIntent.getStringExtra("content");
         diaryFrom = diaryIntent.getStringExtra("from");
+        diaryWriteDate = diaryIntent.getStringExtra("wDate");
 
+        if(diaryFrom.equals("write")){
+            diaryEmoticonPickDone.setText("일기 작성 완료");
+        }else{
+            diaryEmoticonPickDone.setText("일기 수정 완료");
+        }
     }
 
     public void onEmoticonClick(View view) {
@@ -107,11 +112,11 @@ public class DiaryEmoticonPick extends AppCompatActivity {
 
             if(diaryFrom.equals("write")){
                 Toast.makeText(DiaryEmoticonPick.this, "일기 작성완료", Toast.LENGTH_SHORT).show();
-                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
+                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum,diaryWriteDate);
                 finish();
             }else{
                 Toast.makeText(DiaryEmoticonPick.this, "일기 수정완료", Toast.LENGTH_SHORT).show();
-                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum);
+                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum,diaryWriteDate);
                 finish();
             }
         }

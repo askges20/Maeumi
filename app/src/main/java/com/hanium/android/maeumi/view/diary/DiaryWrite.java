@@ -101,6 +101,10 @@ public class DiaryWrite extends AppCompatActivity {
     }
 
     public void processAdd(View view) {
+        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd-hh:mm");
+        long now = System.currentTimeMillis();
+        Date nowDate = new Date(now);
+        String strToday = sdFormat.format(nowDate);
 
         //작성한 일기 제목, 내용
         String diaryTitle = titleText.getText().toString();
@@ -118,12 +122,14 @@ public class DiaryWrite extends AppCompatActivity {
                 Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
+                pickIntent.putExtra("wDate", strToday);
                 pickIntent.putExtra("from", "write");
                 startActivity(pickIntent);
             } else {
                 Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
+                pickIntent.putExtra("wDate", strToday);
                 pickIntent.putExtra("from", "write");
                 startActivity(pickIntent);
             }

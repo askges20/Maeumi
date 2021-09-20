@@ -24,6 +24,8 @@ import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DiaryModify extends AppCompatActivity {
 
@@ -139,6 +141,11 @@ public class DiaryModify extends AppCompatActivity {
 
     //수정 완료 버튼 클릭 시
     public void processModify(View view) {
+        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd-hh:mm");
+        long now = System.currentTimeMillis();
+        Date nowDate = new Date(now);
+        String strToday = sdFormat.format(nowDate);
+
         //작성한 일기 제목, 내용
         String diaryTitle = titleText.getText().toString();
         String diaryContent = contentText.getText().toString();
@@ -153,6 +160,7 @@ public class DiaryModify extends AppCompatActivity {
                 Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                 pickIntent.putExtra("title", diaryTitle);
                 pickIntent.putExtra("content", diaryContent);
+                pickIntent.putExtra("wDate", strToday);
                 pickIntent.putExtra("from", "modify");
                 startActivity(pickIntent);
             }else{
@@ -161,12 +169,14 @@ public class DiaryModify extends AppCompatActivity {
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                     pickIntent.putExtra("title", diaryTitle);
                     pickIntent.putExtra("content", diaryContent);
+                    pickIntent.putExtra("wDate", strToday);
                     pickIntent.putExtra("from", "modify");
                     startActivity(pickIntent);
                 }else{
                     Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
                     pickIntent.putExtra("title", diaryTitle);
                     pickIntent.putExtra("content", diaryContent);
+                    pickIntent.putExtra("wDate", strToday);
                     pickIntent.putExtra("from", "modify");
                     startActivity(pickIntent);
                 }

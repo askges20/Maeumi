@@ -39,7 +39,7 @@ public class DiaryModel {
     LoginUser loginUser = LoginUser.getInstance();
 
     public static String calendarDate, fireDate, compareMonth, saveId;
-    public static String title, content, nullDiary, emoticonNum, varTitle, varContent, varENum;
+    public static String title, content, nullDiary, emoticonNum,diaryWriteDate, varTitle, varContent, varENum,varWDate;
     public static String day, year, month, oneTimeDate, oneTimeMonth;
     public static Bitmap imgNameBitmap;
     public static Uri imgNameUri;
@@ -161,6 +161,7 @@ public class DiaryModel {
             title = getTitleTwo();
             content = getContentTwo();
             emoticonNum = getEmoticonNumTwo();
+            diaryWriteDate = getDiaryWriteDateTwo();
         }
     }
 
@@ -185,6 +186,14 @@ public class DiaryModel {
 
     public String getTitleTwo() {
         return varTitle;
+    }
+
+    public String getDiaryWriteDate() {
+        return diaryWriteDate;
+    }
+
+    public String getDiaryWriteDateTwo() {
+        return varWDate;
     }
 
     public String getContentTwo() {
@@ -228,6 +237,7 @@ public class DiaryModel {
                     varTitle = value.title;
                     varContent = value.content;
                     varENum = value.emoticonNum;
+                    varWDate = value.writeDate;
                     setNullDiary("Diary Not Null");
                 } catch (Exception e) {
                     setNullDiary(null);
@@ -243,8 +253,8 @@ public class DiaryModel {
     }
 
     // 일기 작성 & 수정
-    public void diaryWrite(String title, String content,String diaryEmoticon) {
-        Diary value = new Diary(title, content, diaryEmoticon, this.day);
+    public void diaryWrite(String title, String content,String diaryEmoticon,String wDate) {
+        Diary value = new Diary(title, content, diaryEmoticon, this.day,wDate);
         diaryHelloWrite(value);
     }
 
@@ -257,7 +267,7 @@ public class DiaryModel {
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> diaryValues = null;
 
-        Diary diary = new Diary(value.title, value.content, value.emoticonNum, value.date);   //model Diary 객체
+        Diary diary = new Diary(value.title, value.content, value.emoticonNum, value.date,value.writeDate);   //model Diary 객체
         diaryValues = diary.toMap();
         childUpdates.put(fireDate, diaryValues); //diaryValues가 null이면 기존 데이터 삭제됨
         diaryRef.updateChildren(childUpdates);
