@@ -10,7 +10,7 @@
     </style>
 
     <style name="ButtonStyle" parent="@android:style/Widget.DeviceDefault.Button">
-        <item name="android:backgroundTint">@color/lightgreen</item>
+        <item name="android:background">@drawable/diary_btn</item>
         <item name="android:fontFamily">@font/custom_font_family</item>
         <item name="android:padding">5dp</item>
         <item name="android:textSize">16dp</item>

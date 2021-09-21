@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="7"
+    android:background="#FFE3E3"
     tools:context=".view.diary.DiaryMain" >
 
     <LinearLayout
@@ -61,7 +62,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
             android:onClick="previousMonthAction"
             android:text="◀"
             android:textSize="20sp"
@@ -81,7 +81,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
             android:onClick="nextMonthAction"
             android:text="▶"
             android:textSize="20sp"
@@ -186,6 +185,7 @@
         android:paddingVertical="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <Button
             android:id="@+id/diaryWriteBtn"
             android:layout_width="wrap_content"
