@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E4D8DC"
+    android:background="#FFE3E3"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -54,6 +54,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/midContainer"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:orientation="horizontal">
@@ -96,7 +97,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/mainContent"
+        android:id="@+id/btnContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
@@ -114,8 +115,7 @@
                 android:layout_height="170dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_btn_border"
-                android:backgroundTint="@color/yellow"
+                android:background="@drawable/main_test_btn"
                 android:gravity="center"
                 android:onClick="goToSelfTest"
                 android:orientation="vertical">
@@ -141,8 +141,7 @@
                 android:layout_height="170dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_btn_border"
-                android:backgroundTint="@color/lightgreen"
+                android:background="@drawable/main_chat_btn"
                 android:gravity="center"
                 android:onClick="goToChatBot"
                 android:orientation="vertical">
@@ -175,7 +174,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/main_btn_border"
-                android:backgroundTint="#FDC5F1"
                 android:gravity="center"
                 android:onClick="prohibitBeforeTestMessage"
                 android:orientation="horizontal">
@@ -201,7 +199,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/main_btn_border"
-                android:backgroundTint="#FDC5F1"
                 android:gravity="center"
                 android:onClick="goToDiary"
                 android:orientation="horizontal">
@@ -227,7 +224,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/main_btn_border"
-                android:backgroundTint="#FDC5F1"
                 android:gravity="center"
                 android:onClick="goToBoard"
                 android:orientation="horizontal">

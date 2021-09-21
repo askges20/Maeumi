@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
     //랜덤 문구 출력
     public void setRandomText() {
         String[] arr = getResources().getStringArray(R.array.random_text);
-        int randNum = (int) (Math.random() * 20);
+        int randNum = (int) (Math.random() * 20 -1);
         randomText.setText(arr[randNum]);
     }
 
