@@ -2,24 +2,24 @@ package com.hanium.android.maeumi.view.guide;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hanium.android.maeumi.MainActivity;
 import com.hanium.android.maeumi.R;
 
 public class Guide extends AppCompatActivity {
 
     int i, max;
     ImageView imageView;
+    TextView imgNum;
     TypedArray typedArray;
 
     @Override
@@ -28,11 +28,15 @@ public class Guide extends AppCompatActivity {
         setContentView(R.layout.activity_guide);
 
         imageView = (ImageView) findViewById(R.id.guideImg);
+        imgNum = findViewById(R.id.imgNum);
         typedArray = getResources().obtainTypedArray(R.array.guide);
 
         i = 0;
         max = typedArray.length();
+        String maxPage = " / "+ max;
         imageView.setImageResource(typedArray.getResourceId(i, -1));
+
+        imgNum.setText(i+1 + maxPage);
 
         Button left_btn = (Button) findViewById(R.id.left_btn);
         left_btn.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +46,7 @@ public class Guide extends AppCompatActivity {
                     Toast.makeText(Guide.this,"첫 페이지 입니다.",Toast.LENGTH_SHORT).show();
                 } else {    //마지막 페이지로 이동
                     i--;
+                    imgNum.setText(i+1 + maxPage);
                 }
                 imageView.setImageResource(typedArray.getResourceId(i, -1));
             }
@@ -50,11 +55,12 @@ public class Guide extends AppCompatActivity {
         right_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (i == max-1) { //맨 마지막 페이지일 때
+                if (i >= max-1) { //맨 마지막 페이지일 때
                     donePopUp();
                 }else{
                     i++;
                 }
+                imgNum.setText(i+1 + maxPage);
                 imageView.setImageResource(typedArray.getResourceId(i, -1));
             }
         });
