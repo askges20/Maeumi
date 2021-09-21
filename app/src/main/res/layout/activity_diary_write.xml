@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFE3E3"
     tools:context=".view.diary.DiaryWrite">
 
     <LinearLayout
@@ -123,7 +124,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="3dp"
                         android:layout_weight="7"
-                        android:background="#EDEDED"
                         android:onClick="openDatePicker"
                         android:padding="5dp"
                         android:text="0000/00/00" />
