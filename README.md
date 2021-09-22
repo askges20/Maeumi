@@ -1,64 +1,125 @@
-# 마음이
-2021 한이음 ICT 멘토링 프로젝트 [21_HF114] : 학교폭력 문제 해결을 위한 앱, <b>“마음이”</b>
+# 학교폭력 문제 해결을 위한 앱, “마음이”
+2021 한이음 ICT 멘토링 프로젝트 [21_HF114] (2021.04 ~ )
 
-<h2>주요 기능</h2>
-<p>1) 학교폭력 진단테스트</p>
-<p>2) 학교폭력 AI 상담 채팅 (챗봇)</p>
-<p>3) 교화 프로그램 시청 (유튜브 영상 시청)</p>
-<p>4) 일기장</p>
-<p>5) 게시판</p>
+<h2>개발 배경 및 필요성</h2>
+
+- 학교폭력 피해 사례가 꾸준히 증가하는 추세를 보임
+- 통계 조사 결과 2020년도 학교폭력 피해경험이 있는 학생은 2.7만명 이상으로 나타남
+- 또한 학교폭력 가해 이유의 약 30%는 장난, 피해 미신고는 약 30%가 별일이 아니라 생각했기 때문이라고 응답한 것으로 나타남<br>
+▶ 학생들의 본인 행동에 대한 인지능력과 객관화의 미흡함을 알 수 있음
+- 따라서 학교폭력이라는 사회적 문제를 해결하기 위한 서비스를 개발하여 제공하고자 함
+
+<h2>제공 기능</h2>
+<h3>1) 학교폭력 진단테스트</h3>
+
+- 학교폭력 피해, 가해 정도를 파악할 수 있는 테스트
+- 테스트 문항은 1388 청소년사이버상담센터와 유멘시아의 데이터를 조합하여 구성함
+- 관련 학과 교수님의 센터 산하에 있는 상담가들의 의견하에 신뢰성을 검증받음
+
+<h3>2) 학교폭력 AI 상담 채팅</h3>
+
+- Google Dialogflow 챗봇 API를 활용한 학교폭력 상담 시스템으로, 사용자의 채팅에 실시간으로 응답함
+- 앱 이용자에게 학교폭력 관련 법률적 조언, 상담 기관 안내 등의 정보를 제공하여 학교폭력 피해 학생을 지원함
+
+<h3>3) 교화 프로그램 시청</h3>
+
+- YouTube API를 활용한 학교폭력 관련 유튜브 영상 시청 기능
+
+<h3>4) 일기장</h3>
+
+- 일기 내용 작성 및 사진 첨부 가능
+- 학교폭력 피해 증거 자료로서 활용하는 목적으로 제공하는 기능
+
+<h3>5) 게시판</h3>
+
+- 앱 이용자의 커뮤니케이션 공간 제공
+- 게시글 및 댓글 작성, 공감 기능으로 소통 가능
 
 <h2>개발 환경</h2>
-<p>- <b>IDE</b> : Android Studio</p>
-<p>- <b>개발 언어</b> : Java, XML</p>
-<p>- <b>서버 및 DB</b> : Google Firebase (Authentication, Realtime Database, Storage)</p>
-<p>- <b>API</b> : Google DialogFlow 챗봇 API, YouTube API</p>
-<p>- <b>형상 관리</b>: GitHub, GitLab</p>
+
+- IDE : Android Studio
+
+- 개발 언어 : Java, XML
+- 서버 및 DB : Google Firebase Authentication / Realtime Database / Storage
+- API : Google DialogFlow, YouTube API
+- 협업툴 : GitHub(GitLab), Figma, Google Drive
+
+
+<h2>주요 적용 기술</h2>
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/75527311/134390062-d2a2e572-7355-4514-9cc0-4184310e71f2.png">
+</div>
+<h3>1. Google Dialogflow</h3>
+
+- NLP(자연어 처리)를 기반으로 구성된 챗봇
+- 최종 사용자의 표현을 Agent(자연어 이해 모듈)에서 가장 유사한 Intent와 일치시키는 원리로 동작함
+- 앱 내에서 학교폭력 상담 기능 구현 시 Dialogflow 챗봇 API를 사용함
+- 앱 이용자의 학교폭력 예상 질문들과 그에 대한 답변 내용을 선별하여 Dialogflow의 Intent를 구성함
+- 사용자가 앱에서 채팅을 보내면 Dialogflow 서비스에 해당 내용이 전송되고, Agent가 적절한 답변을 선택하여 앱으로 보내면 화면에 출력됨
+
+<h3>2. Google Firebase - Authentication</h3>
+
+- Firebase 인증 SDK에 사용자 인증 정보를 전달함
+- 앱 내에서 회원가입 및 로그인 기능 제공 시 사용함
+
+<h3>3. Google Firebase - Realtime Database</h3>
+
+- NoSQL 클라우드 호스팅 데이터베이스로 실시간 데이터 동기화 기능을 제공함
+- JSON 트리 구조로 데이터를 관리함
+- 앱에서 사용되는 데이터(일기, 게시글, 테스트 결과 등) 저장 용도로 사용함
+
+<h3>4. Google Firebase - Storage</h3>
+
+- 선언적 보안 모델을 사용하여 사진, 동영상 등의 사용자 제작 콘텐츠를 저장하고 제공할 수 있음
+- 일기장, 게시판 글 등록 시 첨부하는 사진을 저장하는 용도로 사용함
+
 
 <h2>앱 화면 캡쳐</h2>
 <h3>메인 화면</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/130937021-9f3a408f-b0ac-4e7e-b121-a78d457aad67.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/130937246-27e7a27d-1112-4304-8c47-8253058247c4.jpg" width="300">
-  <p>메인 화면에 주요 기능들로 이동하는 버튼과 마음 온도 확인 가능, 사이드바 메뉴도 이용 가능</p>
+
+  <img src="https://user-images.githubusercontent.com/75527311/134384614-79878ee1-fb1c-496f-86a5-6853e5d4b657.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/134384641-07895109-b147-4098-aaa8-1a51c9272cfb.jpg" width="300">
+  <p>앱의 메인 화면 및 사이드바</p>
 </div>
 
 <h3>학교폭력 진단테스트</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/130937904-b4c096ad-70a9-409a-9bed-2f6fabfb2caf.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/130937961-67f21a43-7989-495f-bc34-2290a1fc9758.jpg" width="300">
-  <p>학교폭력 피해, 가해 정도를 스스로 파악할 수 있는 진단테스트</p>
+  <img src="https://user-images.githubusercontent.com/75527311/134384701-da12f64d-4d99-4de2-bb0b-3ee12e359e77.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/134384731-ada6c1d3-a939-4a23-8281-e2742bf01c53.jpg" width="300">
+  <p>학교폭력 진단테스트 진행 및 결과 화면</p>
 </div>
 
 <h3>학교폭력 AI 상담 채팅</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/130938574-3868d5af-0a4a-40b7-8e92-b26a193c112c.jpg" width="300">
-  <p>학교폭력 관련 상담을 진행할 수 있는 채팅 기능, 챗봇 API를 활용하여 24시간 상담 가능</p>
+  <img src="https://user-images.githubusercontent.com/75527311/134384942-5417ea85-3948-4a51-8888-03ba8cc3213e.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/134391026-6cb523d9-a5b9-410c-a3f8-4666f1e7458a.jpg" width="300">
+  <p>예상 질문을 제시함으로써 원활한 상담 진행을 유도하고, 진행 과정에서 학교폭력 상담 기관 안내 등의 정보를 제공함</p>
 </div>
 
 <h3>교화 프로그램 시청</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/130939302-05675c3b-4ae3-422c-92ba-f0bfd32f76a8.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/130939618-8b146ed4-b40f-4e5b-985b-e9e89fc3a419.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/130939649-24478538-2aad-4d38-8d6b-9204f4d28141.jpg" width="300">
-  <p>YouTube API를 이용하여 앱 내에서 유튜브 영상 시청 가능, 시청 완료 시 마음 온도 증가</p>
+  <img src="https://user-images.githubusercontent.com/75527311/134384795-e895fd0a-eb62-4196-8d31-00e16f74e9e5.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/134384821-d67db2b5-2cbd-4317-937e-70e399df57a3.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/134384858-4c7bc821-1ad2-4e85-93e1-4cce672fba48.jpg" width="300">
+  <p>학교폭력 유튜브 영상 시청 시 마음 온도 증가</p>
 </div>
 
 <h3>나만의 일기장</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/130942297-13cfb6b2-2c80-4f6b-954c-e845977e51f6.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/130942531-a791b2ba-9edf-4d78-8d5f-fa5028dc9d22.jpg" width="300">
-  <p>사용자 본인만 조회할 수 있는 일기 작성 기능, 일기 내용 작성 및 사진 첨부 가능</p>
+  <img src="https://user-images.githubusercontent.com/75527311/134384964-cbc29995-bf17-45a7-a77e-291f0188faa8.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/134384994-796d9d73-6635-4dab-80e5-56b586238cb2.jpg" width="300">
+  <p>일기 내용 작성 및 사진 첨부를 통해 학교폭력 피해 기록을 남길 수 있음</p>
 </div>
 
 <h3>게시판</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/130942782-d162d46c-3562-4ad9-8f9d-bd9ce5c45c4b.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/130943002-79b7017e-fb8a-4fa5-9064-86855615a937.jpg" width="300">
-  <p>앱 이용자들과 소통할 수 있는 커뮤니티 기능, 게시글 작성 / 댓글 작성 / 공감 기능</p>
+  <img src="https://user-images.githubusercontent.com/75527311/134385028-74779912-3981-4a25-a311-a87771000ce5.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/134385066-dd10747a-78d0-4a6d-b6dd-5e324a8624e4.jpg" width="300">
+  <p>4개의 카테고리가 있는 게시판 기능</p>
 </div>
 
-<h2>개발 일정 관리</h2>
+<h2>개발 진행 프로세스</h2>
 <h3>5월</h3>
 
 - Android Studio - Github 연동 ✔
@@ -73,7 +134,7 @@
 <h3>7월</h3>
 
 - 사용자 계정 관리 ✔
-  - 회원가입/로그인 기능 구현 (Firebase Authentication)
+  - 회원가입/로그인 기능 구현
 
 - 진단테스트 기능 구현 완료 ✔
   - 테스트 문항 구성 완료
