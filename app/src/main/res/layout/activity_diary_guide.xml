@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/heartGuideTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/shadow"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:onClick="goToBack"
+            android:text="←"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="일기장 안내"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="Button"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/heartGuideScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heartGuideTopBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="마음이의 일기장이란 무엇인가요?"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="35dp"
+                android:text="@string/diary_guide_purpose" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="일기장에 들어가면.."
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:text="캘린더에 그날 기록했던 이모티콘을 한 눈에 볼 수 있습니다." />
+
+            <ImageView
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:layout_marginBottom="35dp"
+                app:srcCompat="@drawable/diary_guide1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:text="하루 있었던 일을 적을 수 있고, 사진을 추가할 수 있습니다. (사진은 한장만 가능)" />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginBottom="35dp"
+                app:srcCompat="@drawable/diary_guide2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="35dp"
+                android:text="일기를 다 작성하면 이모티콘을 선택할 수 있습니다. 이 이모티콘은 캘린더에서 보여집니다." />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginBottom="35dp"
+                app:srcCompat="@drawable/diary_guide3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="어떻게 활용할 수 있나요?"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:text="추후 학교폭력에 대응하여 증거로 제출할 수 있습니다. \n 증거로 활용하기 위해서 꺼림직했던 일이라도 시간과 정황을 상세하게 적는 것이 중요합니다." />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="320dp"
+                android:layout_marginBottom="35dp"
+                app:srcCompat="@drawable/diary_guide4" />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="320dp"
+                android:layout_marginBottom="35dp"
+                app:srcCompat="@drawable/diary_guide5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="하루를 기록해 보아요~"
+                android:textSize="18sp" />
+
+            </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
