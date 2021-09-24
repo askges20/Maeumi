@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFE3E3"
+    android:background="#f8ecc9"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -64,6 +64,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="#eb9f9f"
                 android:paddingHorizontal="10dp">
 
                 <ImageView
@@ -115,7 +116,7 @@
                 android:layout_height="170dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_test_btn"
+                android:background="#a79c8e"
                 android:gravity="center"
                 android:onClick="goToSelfTest"
                 android:orientation="vertical">
@@ -141,7 +142,7 @@
                 android:layout_height="170dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_chat_btn"
+                android:background="#a79c8e"
                 android:gravity="center"
                 android:onClick="goToChatBot"
                 android:orientation="vertical">
@@ -173,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_btn_border"
+                android:background="#a79c8e"
                 android:gravity="center"
                 android:onClick="prohibitBeforeTestMessage"
                 android:orientation="horizontal">
@@ -198,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_btn_border"
+                android:background="#a79c8e"
                 android:gravity="center"
                 android:onClick="goToDiary"
                 android:orientation="horizontal">
@@ -223,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_btn_border"
+                android:background="#a79c8e"
                 android:gravity="center"
                 android:onClick="goToBoard"
                 android:orientation="horizontal">
