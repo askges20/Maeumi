@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f8ecc9"
+    android:background="#F2E2CE"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:id="@+id/mainToolBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="#eb9f9f"
+            android:background="#F2AEAE"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp"
@@ -48,8 +48,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                app:tint="@color/gray"
-                app:srcCompat="@drawable/notification_icon" />
+                app:srcCompat="@drawable/notification_icon"
+                app:tint="@color/gray" />
 
         </LinearLayout>
 
@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:background="#f1bbba"
+                android:background="#B6E1F2"
                 android:paddingHorizontal="10dp">
 
                 <ImageView
@@ -116,7 +116,7 @@
                 android:layout_height="170dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="#a79c8e"
+                android:background="#F1C4F2"
                 android:gravity="center"
                 android:onClick="goToSelfTest"
                 android:orientation="vertical">
@@ -142,7 +142,7 @@
                 android:layout_height="170dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="#a79c8e"
+                android:background="#F1C4F2"
                 android:gravity="center"
                 android:onClick="goToChatBot"
                 android:orientation="vertical">
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="#a79c8e"
+                android:background="#F29BBB"
                 android:gravity="center"
                 android:onClick="prohibitBeforeTestMessage"
                 android:orientation="horizontal">
@@ -199,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="#a79c8e"
+                android:background="#F29BBB"
                 android:gravity="center"
                 android:onClick="goToDiary"
                 android:orientation="horizontal">
@@ -224,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="#a79c8e"
+                android:background="#F29BBB"
                 android:gravity="center"
                 android:onClick="goToBoard"
                 android:orientation="horizontal">
