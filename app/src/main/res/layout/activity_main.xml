@@ -18,7 +18,7 @@
             android:id="@+id/mainToolBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@drawable/shadow"
+            android:background="#eb9f9f"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp"
@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:background="#eb9f9f"
+                android:background="#f1bbba"
                 android:paddingHorizontal="10dp">
 
                 <ImageView
