@@ -53,4 +53,7 @@
     <style name="tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="DatePicker" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
 </resources>

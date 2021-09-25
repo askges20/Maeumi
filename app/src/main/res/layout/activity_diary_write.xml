@@ -54,14 +54,15 @@
         <DatePicker
             android:id="@+id/diaryDatePicker"
             android:layout_width="0dp"
-            android:layout_weight="2.3"
+            android:layout_weight="2.5"
             android:layout_height="100dp"
             android:datePickerMode="spinner"
+            android:theme="@style/DatePicker"
             android:calendarViewShown="false"/>
 
        <LinearLayout
            android:layout_width="0dp"
-           android:layout_weight="0.7"
+           android:layout_weight="0.5"
            android:paddingHorizontal="10dp"
            android:layout_height="wrap_content"
            android:orientation="vertical">
@@ -71,7 +72,8 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:onClick="getChangedDate"
-               android:text="수정 완료" />
+               android:layout_marginBottom="3dp"
+               android:text="완료" />
 
            <Button
                android:layout_width="wrap_content"
@@ -124,9 +126,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="3dp"
                         android:layout_weight="7"
-                        android:onClick="openDatePicker"
                         android:padding="5dp"
                         android:text="0000/00/00" />
+
+                    <Button
+                        android:id="@+id/diaryDateChangeOpenBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="openDatePicker"
+                        android:text="날짜 변경" />
 
 
                 </LinearLayout>

@@ -35,7 +35,6 @@ import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.model.DiaryModel;
 import com.hanium.android.maeumi.view.loading.LoginUser;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,7 +50,7 @@ public class DiaryWrite extends AppCompatActivity {
     LinearLayout diaryDatePickerContainer;
     ImageView imgView;
     Bitmap imgName;
-    Button addImgBtn, deleteImgBtn, completeDateChangeBtn;
+    Button addImgBtn, deleteImgBtn, completeDateChangeBtn,diaryDateChangeOpenBtn;
     DatePicker diaryDatePicker;
     int cYear, cMonth, cDay = 0;
     boolean dateCheckResult;
@@ -76,6 +75,7 @@ public class DiaryWrite extends AppCompatActivity {
         addImgBtn = findViewById(R.id.addImgBtn);
         deleteImgBtn = findViewById(R.id.deleteImgBtn);
         completeDateChangeBtn = findViewById(R.id.completeDateChangeBtn);
+        diaryDateChangeOpenBtn = findViewById(R.id.diaryDateChangeOpenBtn);
         diaryDatePicker = findViewById(R.id.diaryDatePicker);
         diaryDatePickerContainer = findViewById(R.id.diaryDatePickerContainer);
         titleText = (EditText) findViewById(R.id.diaryTitleWriteText);
@@ -215,6 +215,7 @@ public class DiaryWrite extends AppCompatActivity {
 
     // DatePicker
     public void openDatePicker(View view) {
+        diaryDateChangeOpenBtn.setVisibility(View.GONE);
         int year = Integer.parseInt(diaryCalDate.substring(0, 4));
         int month = Integer.parseInt(diaryCalDate.substring(6, 8)) - 1;
         int day = Integer.parseInt(diaryCalDate.substring(10, 12));
@@ -254,11 +255,13 @@ public class DiaryWrite extends AppCompatActivity {
                             diaryDatePickerContainer.setVisibility(View.GONE);
                             Toast.makeText(DiaryWrite.this, "날짜 변경 완료", Toast.LENGTH_SHORT).show();
                             DiaryModel.setChangedDate(fireDate, viewDate);
+                            diaryDateChangeOpenBtn.setVisibility(View.VISIBLE);
                         } else if (today.equals(pickDate)) {
                             dateText.setText(viewDate);
                             diaryDatePickerContainer.setVisibility(View.GONE);
                             Toast.makeText(DiaryWrite.this, "날짜 변경 완료", Toast.LENGTH_SHORT).show();
                             DiaryModel.setChangedDate(fireDate, viewDate);
+                            diaryDateChangeOpenBtn.setVisibility(View.VISIBLE);
                         } else {
                             Toast.makeText(DiaryWrite.this, "오늘 이전 날짜에 일기를 작성해주세요.", Toast.LENGTH_SHORT).show();
                         }
