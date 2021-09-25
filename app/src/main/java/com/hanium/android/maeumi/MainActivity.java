@@ -24,11 +24,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hanium.android.maeumi.adapters.NotificationAdapter;
 import com.hanium.android.maeumi.view.board.Board;
 import com.hanium.android.maeumi.view.chatbot.ChatBot;
@@ -63,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        상태바 없애기
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main_include_drawer);
 
         /*
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
     //랜덤 문구 출력
     public void setRandomText() {
         String[] arr = getResources().getStringArray(R.array.random_text);
-        int randNum = (int) (Math.random() * 20 -1);
+        int randNum = (int) (Math.random() * arr.length);
         randomText.setText(arr[randNum]);
     }
 

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F2E2CE"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -18,7 +17,7 @@
             android:id="@+id/mainToolBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="#F2AEAE"
+            android:background="@drawable/shadow"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp"
@@ -56,40 +55,34 @@
         <LinearLayout
             android:id="@+id/midContainer"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:background="#B6E1F2"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:paddingHorizontal="10dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
                     android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/maeumi_main"
+                    app:srcCompat="@drawable/maeumi_watched"
                     tools:ignore="VectorDrawableCompat" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/mainRandomText"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:gravity="center_vertical"
+                    android:maxWidth="400dp"
+                    android:text="오늘 하루도 고생 많았어"
+                    android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/mainRandomText"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="오늘 하루도 고생 많았어"
-                        android:textSize="14sp" />
-                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -116,7 +109,7 @@
                 android:layout_height="170dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="#F1C4F2"
+                android:background="@drawable/btn_border_1"
                 android:gravity="center"
                 android:onClick="goToSelfTest"
                 android:orientation="vertical">
@@ -132,7 +125,7 @@
                     android:layout_margin="15dp"
                     android:text="학교폭력\n진단테스트"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="#4C4C4C"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -142,7 +135,7 @@
                 android:layout_height="170dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="#F1C4F2"
+                android:background="@drawable/btn_border_2"
                 android:gravity="center"
                 android:onClick="goToChatBot"
                 android:orientation="vertical">
@@ -158,7 +151,7 @@
                     android:layout_margin="15dp"
                     android:text="상담하기"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="#4C4C4C"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
@@ -174,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="#F29BBB"
+                android:background="@drawable/btn_border_3"
                 android:gravity="center"
                 android:onClick="prohibitBeforeTestMessage"
                 android:orientation="horizontal">
@@ -183,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="마음 채우기"
-                    android:textColor="@color/black"
+                    android:textColor="#4C4C4C"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -199,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="#F29BBB"
+                android:background="@drawable/btn_border_3"
                 android:gravity="center"
                 android:onClick="goToDiary"
                 android:orientation="horizontal">
@@ -208,7 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="나만의 일기장"
-                    android:textColor="@color/black"
+                    android:textColor="#4C4C4C"
                     android:textSize="18sp" />
 
                 <ImageView
@@ -224,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="#F29BBB"
+                android:background="@drawable/btn_border_3"
                 android:gravity="center"
                 android:onClick="goToBoard"
                 android:orientation="horizontal">
@@ -233,7 +226,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="게시판"
-                    android:textColor="@color/black"
+                    android:textColor="#4C4C4C"
                     android:textSize="18sp" />
 
                 <ImageView
