@@ -101,10 +101,9 @@ public class DiaryWrite extends AppCompatActivity {
     }
 
     public void processAdd(View view) {
-        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd-hh:mm");
-        long now = System.currentTimeMillis();
-        Date nowDate = new Date(now);
-        String strToday = sdFormat.format(nowDate);
+        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd a hh:mm");
+        Date date = new Date();
+        String strToday = sdFormat.format(date);
 
         //작성한 일기 제목, 내용
         String diaryTitle = titleText.getText().toString();
