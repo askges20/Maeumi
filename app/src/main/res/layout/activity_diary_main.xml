@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="7"
-    android:background="#FFE3E3"
     tools:context=".view.diary.DiaryMain" >
 
     <LinearLayout
@@ -58,14 +57,15 @@
         app:layout_constraintTop_toBottomOf="@id/diaryTopBar"
         >
 
-        <Button
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="previousMonthAction"
             android:text="◀"
+            android:gravity="center"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/monthYearTV"
@@ -77,14 +77,15 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <Button
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:onClick="nextMonthAction"
             android:text="▶"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
