@@ -215,19 +215,31 @@ public class DiaryWrite extends AppCompatActivity {
     // DatePicker
     public void openDatePicker(View view) {
         diaryDateChangeOpenBtn.setVisibility(View.GONE);
-        int year = Integer.parseInt(diaryCalDate.substring(0, 4));
-        int month = Integer.parseInt(diaryCalDate.substring(6, 8)) - 1;
-        int day = Integer.parseInt(diaryCalDate.substring(10, 12));
-
         diaryDatePickerContainer.setVisibility(View.VISIBLE);
-        diaryDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                cYear = year;
-                cMonth = monthOfYear +1;
-                cDay = dayOfMonth;
-            }
-        });
+
+        if(cYear == 0 && cDay == 0){
+            int year = Integer.parseInt(diaryCalDate.substring(0, 4));
+            int month = Integer.parseInt(diaryCalDate.substring(6, 8)) - 1;
+            int day = Integer.parseInt(diaryCalDate.substring(10, 12));
+
+            diaryDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    cYear = year;
+                    cMonth = monthOfYear +1;
+                    cDay = dayOfMonth;
+                }
+            });
+        }else{
+            diaryDatePicker.init(cYear, cMonth-1, cDay, new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    cYear = year;
+                    cMonth = monthOfYear +1;
+                    cDay = dayOfMonth;
+                }
+            });
+        }
     }
 
     public void getPickerDate(String date, String viewDate, String fireDate) {
@@ -239,8 +251,6 @@ public class DiaryWrite extends AppCompatActivity {
         long now = System.currentTimeMillis();
         Date nowDate = new Date(now);
         String strToday = sdFormat.format(nowDate);
-        System.out.println("today - "+strToday);
-        System.out.println("pick - "+date);
 
         try {
             Date pickDate = sdFormat.parse(date);
