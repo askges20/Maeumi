@@ -137,8 +137,8 @@ public class TestClick extends AppCompatActivity {
 
         //이미지 이동 애니메이션
         TranslateAnimation ani = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, (float)(cntChecked - 1) * 0.39f,
-                Animation.RELATIVE_TO_SELF, (float)cntChecked * 0.39f,
+                Animation.RELATIVE_TO_SELF, (float)(cntChecked - 1) * 0.37f,
+                Animation.RELATIVE_TO_SELF, (float)cntChecked * 0.37f,
                 Animation.RELATIVE_TO_SELF, 0.0f,
                 Animation.RELATIVE_TO_SELF, 0.0f);
         ani.setFillAfter(true);
