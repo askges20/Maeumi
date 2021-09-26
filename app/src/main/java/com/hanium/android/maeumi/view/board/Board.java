@@ -127,7 +127,7 @@ public class Board extends AppCompatActivity {
         }).show();
 
         TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
-        dialogMessage.setTextSize(18);
+        dialogMessage.setTextSize(16);
     }
 
     public void goToBack(View view) {

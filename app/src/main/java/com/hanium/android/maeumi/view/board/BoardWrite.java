@@ -242,7 +242,7 @@ public class BoardWrite extends AppCompatActivity {
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(18);
+        textView.setTextSize(16);
     }
 
     @Override

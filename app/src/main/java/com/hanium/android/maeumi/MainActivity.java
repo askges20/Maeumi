@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                     .show();
 
             TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
-            dialogMessage.setTextSize(18);
+            dialogMessage.setTextSize(16);
         } else if (heart < 60) {   //마음 온도가 60 미만인 경우 게시판 이용 불가
             showBoardBeforeHeartPopup(R.layout.board_before_heart_popup);    //마음 채우기 안내 팝업
         } else {
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     .show();
 
             TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
-            dialogMessage.setTextSize(18);
+            dialogMessage.setTextSize(16);
         } else {
             startActivity(new Intent(MainActivity.this, HeartProgram.class));
         }
@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(18);
+        textView.setTextSize(16);
     }
 
     //로그아웃 버튼 클릭 이벤트
@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(18);
+        textView.setTextSize(16);
     }
 
     //로그아웃 진행
@@ -445,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(18);
+        textView.setTextSize(16);
 
         return true;
     }

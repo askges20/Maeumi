@@ -29,7 +29,7 @@
     </style>
 
     <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:textSize">18sp</item>   <!-- 버튼 텍스트 사이즈 지정, 메세지 텍스트 크기는 java 파일에서 지정해줘야함 -->
+        <item name="android:textSize">14sp</item>   <!-- 버튼 텍스트 사이즈 지정, 메세지 텍스트 크기는 java 파일에서 지정해줘야함 -->
         <item name="android:fontFamily">@font/custom_font_family</item>
         <item name="android:textAppearanceSmall">@font/custom_font_family</item>
         <item name="android:textAppearanceMedium">@font/custom_font_family</item>

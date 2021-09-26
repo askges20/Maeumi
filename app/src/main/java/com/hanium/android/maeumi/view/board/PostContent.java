@@ -246,7 +246,7 @@ public class PostContent extends AppCompatActivity {
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(18);
+        textView.setTextSize(16);
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
@@ -359,7 +359,7 @@ public class PostContent extends AppCompatActivity {
 
         //폰트 크기 조정
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(18);
+        textView.setTextSize(16);
     }
 
     public void processDeleteComment(Comment comment) { //삭제할 댓글을 파라미터로 받음
