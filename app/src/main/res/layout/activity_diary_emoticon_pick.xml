@@ -10,6 +10,7 @@
         android:id="@+id/diaryMainTop"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:background="@drawable/shadow"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +26,7 @@
 
         <TextView
             android:id="@+id/contentDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -44,17 +45,16 @@
         android:id="@+id/diaryMainContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/diaryMainTop"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:weightSum="10"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@+id/diaryMainTop">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -68,22 +68,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="8"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/glad"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:onClick="onEmoticonClick"
                     android:layout_weight="1"
+                    android:onClick="onEmoticonClick"
                     android:orientation="vertical">
 
                     <ImageView
@@ -106,16 +107,16 @@
                     android:id="@+id/happy"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:onClick="onEmoticonClick"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/diary_happy_removebg"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        android:layout_height="wrap_content"/>
+                        android:src="@drawable/diary_happy_removebg" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -131,16 +132,16 @@
                     android:id="@+id/calm"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:onClick="onEmoticonClick"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/diary_calm_removebg"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        android:layout_height="wrap_content"/>
+                        android:src="@drawable/diary_calm_removebg" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -157,22 +158,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/angry"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:onClick="onEmoticonClick"
                     android:layout_weight="1"
+                    android:onClick="onEmoticonClick"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/diary_angry_removebg"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        android:layout_height="wrap_content"/>
+                        android:src="@drawable/diary_angry_removebg" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -188,16 +190,16 @@
                     android:id="@+id/sad"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:onClick="onEmoticonClick"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/diary_sad_removebg"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        android:layout_height="wrap_content"/>
+                        android:src="@drawable/diary_sad_removebg" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -213,16 +215,16 @@
                     android:id="@+id/worried"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:onClick="onEmoticonClick"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/diary_worried_removebg"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:adjustViewBounds="true"
-                        android:layout_height="wrap_content"/>
+                        android:src="@drawable/diary_worried_removebg" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -241,17 +243,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/diaryEmoticonPickDone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:onClick="writeDiary"
+                android:padding="10dp"
                 android:text="일기 작성완료" />
 
 

@@ -27,7 +27,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -45,7 +45,9 @@
         android:id="@+id/diaryMainContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="20dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/diary_border"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
@@ -55,181 +57,153 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/diary_border"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="10dp">
 
+            <TextView
+                android:id="@+id/writeDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0000/00/00" />
+
+            <Button
+                android:id="@+id/diaryDateChangeOpenBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openDatePicker"
+                android:text="날짜 변경" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/diaryDatePickerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <DatePicker
+                android:id="@+id/diaryDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:theme="@style/DatePicker" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/writeDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0000/00/00" />
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp">
 
                 <Button
-                    android:id="@+id/diaryDateChangeOpenBtn"
+                    android:id="@+id/completeDateChangeBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="openDatePicker"
-                    android:text="날짜 변경" />
+                    android:layout_marginBottom="3dp"
+                    android:onClick="getChangedDate"
+                    android:text="완료" />
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/diaryDatePickerContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <DatePicker
-                    android:id="@+id/diaryDatePicker"
+                <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner"
-                    android:theme="@style/DatePicker" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="10dp">
-
-                    <Button
-                        android:id="@+id/completeDateChangeBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="3dp"
-                        android:onClick="getChangedDate"
-                        android:text="완료" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="closeDatePicker"
-                        android:text="닫기" />
-                </LinearLayout>
-
-
+                    android:onClick="closeDatePicker"
+                    android:text="닫기" />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/diaryTitleWriteText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="제목"
-                android:inputType="textPersonName"
-                android:padding="15dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/new_gray" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/diaryTitleWriteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="제목"
+            android:background="@null"
+            android:ems="10"
+            android:hint="제목"
+            android:inputType="textPersonName"
+            android:padding="15dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/new_gray" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/diaryContentWriteText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="내용"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="내용"
+                    android:inputType="textMultiLine"
+                    android:minLines="10"
+                    android:padding="15dp"
+                    tools:inputType="textMultiLine" />
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <EditText
-                                android:id="@+id/diaryContentWriteText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:background="@null"
-                                android:ems="10"
-                                android:gravity="start|top"
-                                android:hint="내용"
-                                android:inputType="textMultiLine"
-                                android:minLines="10"
-                                tools:inputType="textMultiLine" />
-
-                            <ImageView
-                                android:id="@+id/testImgView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:adjustViewBounds="true" />
-
-                        </LinearLayout>
-
-
-                    </ScrollView>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/testImgView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:onClick="processAdd"
-                        android:text="작성 완료" />
-
-                    <Button
-                        android:id="@+id/addImgBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:onClick="addImg"
-                        android:text="사진 추가" />
-
-                    <Button
-                        android:id="@+id/deleteImgBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:onClick="setEmptyImg"
-                        android:text="사진 없애기"
-                        android:visibility="gone" />
-                </LinearLayout>
+                    android:adjustViewBounds="true" />
 
             </LinearLayout>
 
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:onClick="processAdd"
+                android:text="작성 완료" />
+
+            <Button
+                android:id="@+id/addImgBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:onClick="addImg"
+                android:text="사진 추가" />
+
+            <Button
+                android:id="@+id/deleteImgBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:onClick="setEmptyImg"
+                android:text="사진 없애기"
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>

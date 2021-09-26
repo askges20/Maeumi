@@ -34,7 +34,7 @@
                 app:srcCompat="@drawable/menu_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -56,35 +56,28 @@
             android:id="@+id/midContainer"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:orientation="horizontal">
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="10dp">
+                android:layout_marginEnd="15dp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/maeumi_watched"
+                tools:ignore="VectorDrawableCompat" />
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="15dp"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/maeumi_watched"
-                    tools:ignore="VectorDrawableCompat" />
-
-                <TextView
-                    android:id="@+id/mainRandomText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:maxWidth="400dp"
-                    android:text="오늘 하루도 고생 많았어"
-                    android:textAlignment="center"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/mainRandomText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:maxWidth="400dp"
+                android:text="오늘 하루도 고생 많았어"
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -102,13 +95,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/btnTest"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_border_1"
                 android:gravity="center"
@@ -134,7 +128,7 @@
                 android:id="@+id/btnChat"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_border_2"
                 android:gravity="center"

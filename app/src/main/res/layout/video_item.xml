@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="right"
+        android:gravity="end"
         android:orientation="horizontal"
         android:visibility="gone">
 
@@ -52,7 +52,7 @@
             android:id="@+id/imageView"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/check_icon"
             android:tint="@android:color/holo_green_dark" />
     </LinearLayout>

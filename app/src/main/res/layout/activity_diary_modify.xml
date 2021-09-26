@@ -27,7 +27,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -46,136 +46,122 @@
         android:id="@+id/diaryMainContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="20dp"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/diary_border"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/diaryMainTop">
+        app:layout_constraintTop_toBottomOf="@id/diaryMainTop"
+        tools:layout_editor_absoluteX="20dp">
+
+        <TextView
+            android:id="@+id/modifyDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:text="0000/00/00" />
+
+        <EditText
+            android:id="@+id/diaryTitleModifyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="제목"
+            android:background="@null"
+            android:ems="10"
+            android:hint="제목"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/new_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/diary_border"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/modifyDate"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:text="0000/00/00" />
-
-            <EditText
-                android:id="@+id/diaryTitleModifyText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="제목"
-                android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textSize="18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/new_gray" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="4"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <EditText
-                                android:id="@+id/diaryContentModifyText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:background="@null"
-                                android:ems="10"
-                                android:gravity="start|top"
-                                android:hint="내용"
-                                android:inputType="textMultiLine"
-                                android:minLines="10" />
-
-                            <ImageView
-                                android:id="@+id/testImgView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:adjustViewBounds="true" />
-
-                        </LinearLayout>
-
-
-                    </ScrollView>
-                </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/button"
+                    <EditText
+                        android:id="@+id/diaryContentModifyText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:autofillHints="내용"
+                        android:background="@null"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:hint="내용"
+                        android:inputType="textMultiLine"
+                        android:minLines="10"
+                        android:padding="15dp" />
+
+                    <ImageView
+                        android:id="@+id/testImgView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:onClick="processModify"
-                        android:text="수정 완료" />
+                        android:adjustViewBounds="true" />
 
-                    <Button
-                        android:id="@+id/addImgBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:onClick="changeImg"
-                        android:text="사진 추가" />
-
-                    <Button
-                        android:id="@+id/deleteImgBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:onClick="setEmptyImg"
-                        android:text="사진 없애기"
-                        android:visibility="gone" />
                 </LinearLayout>
 
 
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:onClick="processModify"
+                    android:text="수정 완료" />
+
+                <Button
+                    android:id="@+id/addImgBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:onClick="changeImg"
+                    android:text="사진 추가" />
+
+                <Button
+                    android:id="@+id/deleteImgBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:onClick="setEmptyImg"
+                    android:text="사진 없애기"
+                    android:visibility="gone" />
             </LinearLayout>
 
+
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

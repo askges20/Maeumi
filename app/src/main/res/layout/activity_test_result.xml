@@ -26,7 +26,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -48,146 +48,139 @@
         app:layout_constraintTop_toBottomOf="@id/testResultTop">
 
         <LinearLayout
+            android:id="@+id/testResultContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <LinearLayout
-                android:id="@+id/testResultContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="15dp"
+                    app:srcCompat="@drawable/victim_maeumi" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginRight="15dp"
-                        app:srcCompat="@drawable/victim_maeumi" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center_horizontal"
-                            android:text="피해 정도"
-                            android:textColor="#070707" />
-
-                        <TextView
-                            android:id="@+id/victimScore"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center_horizontal"
-                            android:text="0"
-                            android:textSize="18sp" />
-
-                        <ProgressBar
-                            android:id="@+id/victimProgressBar"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:progressDrawable="@drawable/victim_progress_background" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginRight="15dp"
-                        app:srcCompat="@drawable/perpetration_maeumi" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center_horizontal"
-                            android:text="가해 정도"
-                            android:textColor="#070707" />
-
-                        <TextView
-                            android:id="@+id/perpetrationScore"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center_horizontal"
-                            android:text="0"
-                            android:textSize="18sp" />
-
-                        <ProgressBar
-                            android:id="@+id/perpetrationProgressBar"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:progressDrawable="@drawable/perpetration_progress_background" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/victimResultText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="15dp"
-                        android:text="피해 정도 결과"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="피해 정도"
+                        android:textColor="#070707" />
+
+                    <TextView
+                        android:id="@+id/victimScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="0"
                         android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/victimResultDetailText"
+                    <ProgressBar
+                        android:id="@+id/victimProgressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:text="당신의 피해 정도 결과" />
-
-                    <TextView
-                        android:id="@+id/perpetrationResultText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="15dp"
-                        android:text="가해 정도 결과"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/perpetrationResultDetailText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="당신의 가해 정도 결과" />
+                        android:progressDrawable="@drawable/victim_progress_background" />
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="15dp"
+                    app:srcCompat="@drawable/perpetration_maeumi" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="가해 정도"
+                        android:textColor="#070707" />
+
+                    <TextView
+                        android:id="@+id/perpetrationScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp" />
+
+                    <ProgressBar
+                        android:id="@+id/perpetrationProgressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progressDrawable="@drawable/perpetration_progress_background" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/victimResultText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:text="피해 정도 결과"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/victimResultDetailText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="당신의 피해 정도 결과" />
+
+                <TextView
+                    android:id="@+id/perpetrationResultText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:text="가해 정도 결과"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/perpetrationResultDetailText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="당신의 가해 정도 결과" />
             </LinearLayout>
 
             <!--

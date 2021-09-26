@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFE3E3"
     tools:context=".view.guide.Guide">
 
     <LinearLayout
@@ -26,11 +25,11 @@
             android:textSize="24sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="이용안내"
+            android:text="이용 안내"
             android:textSize="20sp" />
 
         <TextView
@@ -55,24 +54,23 @@
 
         <Button
             android:id="@+id/left_btn"
-            android:layout_marginLeft="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="이전" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_weight="1"
-                android:id="@+id/imgNum"/>
+        <TextView
+            android:id="@+id/imgNum"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" />
 
         <Button
             android:id="@+id/right_btn"
-            android:layout_marginRight="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:text="다음" />
     </LinearLayout>
 
