@@ -107,7 +107,7 @@ public class DiaryModel {
         } else {
             this.calendarDate = this.year + "년 " + this.month + "월 " + this.day + "일";
         }
-
+        System.out.println("선택된 날짜 :" +this.calendarDate);
         saveId = LoginUser.getInstance().getUid() + fireDate;
         getDiaryFromFB(fireDate);
     }

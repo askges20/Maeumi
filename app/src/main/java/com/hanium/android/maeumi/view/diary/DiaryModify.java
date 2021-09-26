@@ -163,22 +163,15 @@ public class DiaryModify extends AppCompatActivity {
                 pickIntent.putExtra("from", "modify");
                 startActivity(pickIntent);
             }else{
-                if(imgUri != null){
+                if(imgUri != null) {
                     DiaryModel.setImgNameUri(imgUri);
-                    Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
-                    pickIntent.putExtra("title", diaryTitle);
-                    pickIntent.putExtra("content", diaryContent);
-                    pickIntent.putExtra("wDate", strToday);
-                    pickIntent.putExtra("from", "modify");
-                    startActivity(pickIntent);
-                }else{
-                    Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
-                    pickIntent.putExtra("title", diaryTitle);
-                    pickIntent.putExtra("content", diaryContent);
-                    pickIntent.putExtra("wDate", strToday);
-                    pickIntent.putExtra("from", "modify");
-                    startActivity(pickIntent);
                 }
+                Intent pickIntent = new Intent(DiaryModify.this, DiaryEmoticonPick.class);
+                pickIntent.putExtra("title", diaryTitle);
+                pickIntent.putExtra("content", diaryContent);
+                pickIntent.putExtra("wDate", strToday);
+                pickIntent.putExtra("from", "modify");
+                startActivity(pickIntent);
             }
 
             finish();   //현재 액티비티 없애기

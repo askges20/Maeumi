@@ -1,14 +1,11 @@
 package com.hanium.android.maeumi.view.diary;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +16,10 @@ import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.adapters.CalendarAdapter;
 import com.hanium.android.maeumi.model.DiaryModel;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.hanium.android.maeumi.view.diary.CalendarUtils.daysInMonthArray;
 import static com.hanium.android.maeumi.view.diary.CalendarUtils.monthYearFromDate;
@@ -72,6 +71,11 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
         calendarRecyclerView.setAdapter(calendarAdapter);   //캘린더 어댑터 등록
 
         DiaryModel = new DiaryModel(this, calendarAdapter);
+        String defaultDate = new SimpleDateFormat("dd").format(new Date());
+        if (defaultDate.substring(0, 1) == "0") {
+            defaultDate = defaultDate.substring(1);
+        }
+        DiaryModel.setDate(CalendarUtils.selectDate, defaultDate);
         DiaryModel.setCompareMonth(CalendarUtils.selectDate);   //DiaryModel에 전달 후 DB 읽기
     }
 
@@ -107,16 +111,9 @@ public class DiaryMain extends AppCompatActivity implements CalendarAdapter.OnIt
     @Override
     public void onItemClick(int position, String dayText) {
         DiaryModel.setDate(CalendarUtils.selectDate,dayText);
-        if(dayText != ""){
-            diaryButton.setText(dayText + "일 일기 작성하기");
-        }else{
-            diaryButton.setText("날짜를 선택하세요");
-        }
         Intent intent = new Intent(getApplicationContext(), DiaryContent.class);
         startActivity(intent);
     }
-
-
 
     //일기 작성 페이지로 이동
     public void diaryWrite(View view) {

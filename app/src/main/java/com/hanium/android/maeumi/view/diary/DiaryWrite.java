@@ -66,9 +66,10 @@ public class DiaryWrite extends AppCompatActivity {
         imgName = null;
         DiaryModel.setImgNameBitmap(null);
 
-        diaryCalDate = DiaryModel.getCalendarDate();
-        nullDate();
-        dateCheck();
+        SimpleDateFormat dateFormat = new SimpleDateFormat ( "yyyy년 MM월 dd일");
+        diaryCalDate = dateFormat.format(new Date());
+//        nullDate();
+//        dateCheck();
 
         dateText = findViewById(R.id.writeDate);
         mainContent = findViewById(R.id.mainContent);
@@ -85,20 +86,21 @@ public class DiaryWrite extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         //키보드 밀림 현상 제거
     }
-    // 빈곳 클릭 시 이벤트
-    public void nullDate() {
-        if (diaryCalDate == null) {
-            Toast.makeText(DiaryWrite.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
-    public void dateCheck() {
-        dateCheckResult = DiaryModel.getDateCheckResult();
-        if (dateCheckResult == false) {
-            Toast.makeText(DiaryWrite.this, "오늘 이전 날짜에 일기를 작성해주세요.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
+
+//    // 빈곳 클릭 시 이벤트
+//    public void nullDate() {
+//        if (diaryCalDate == null) {
+//            Toast.makeText(DiaryWrite.this, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
+//    }
+//    public void dateCheck() {
+//        dateCheckResult = DiaryModel.getDateCheckResult();
+//        if (dateCheckResult == false) {
+//            Toast.makeText(DiaryWrite.this, "오늘 이전 날짜에 일기를 작성해주세요.", Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
+//    }
 
     public void processAdd(View view) {
         SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd a hh:mm");
@@ -118,20 +120,13 @@ public class DiaryWrite extends AppCompatActivity {
         } else {
             if (imgName != null) {
                 DiaryModel.setImgNameBitmap(imgName);
-                Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
-                pickIntent.putExtra("title", diaryTitle);
-                pickIntent.putExtra("content", diaryContent);
-                pickIntent.putExtra("wDate", strToday);
-                pickIntent.putExtra("from", "write");
-                startActivity(pickIntent);
-            } else {
-                Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
-                pickIntent.putExtra("title", diaryTitle);
-                pickIntent.putExtra("content", diaryContent);
-                pickIntent.putExtra("wDate", strToday);
-                pickIntent.putExtra("from", "write");
-                startActivity(pickIntent);
             }
+            Intent pickIntent = new Intent(DiaryWrite.this, DiaryEmoticonPick.class);
+            pickIntent.putExtra("title", diaryTitle);
+            pickIntent.putExtra("content", diaryContent);
+            pickIntent.putExtra("wDate", strToday);
+            pickIntent.putExtra("from", "write");
+            startActivity(pickIntent);
 
             finish();   //현재 액티비티 없애기
         }
