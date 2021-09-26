@@ -224,7 +224,7 @@ public class DiaryWrite extends AppCompatActivity {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 cYear = year;
-                cMonth = monthOfYear;
+                cMonth = monthOfYear +1;
                 cDay = dayOfMonth;
             }
         });
@@ -239,6 +239,8 @@ public class DiaryWrite extends AppCompatActivity {
         long now = System.currentTimeMillis();
         Date nowDate = new Date(now);
         String strToday = sdFormat.format(nowDate);
+        System.out.println("today - "+strToday);
+        System.out.println("pick - "+date);
 
         try {
             Date pickDate = sdFormat.parse(date);
@@ -246,6 +248,7 @@ public class DiaryWrite extends AppCompatActivity {
             diaryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
+                    // 일기가 이미 있는경우
                     if (snapshot.exists()) {
                         Toast.makeText(DiaryWrite.this, "해당 날짜에 이미 일기가 존재합니다.", Toast.LENGTH_SHORT).show();
                     } else {
@@ -279,11 +282,12 @@ public class DiaryWrite extends AppCompatActivity {
     }
 
     public void closeDatePicker(View view) {
+        diaryDateChangeOpenBtn.setVisibility(View.VISIBLE);
         diaryDatePickerContainer.setVisibility(View.GONE);
     }
 
     public void getChangedDate(View view) {
-        cMonth = cMonth + 1;
+
         String year = Integer.toString(cYear);
         String month = Integer.toString(cMonth);
         if (month.length() == 1) {
@@ -293,6 +297,12 @@ public class DiaryWrite extends AppCompatActivity {
         if (day.length() == 1) {
             day = "0" + day;
         }
+        if(year.equals("0") || day.equals("00")){
+            year = diaryCalDate.substring(0, 4);
+            month = Integer.toString(Integer.parseInt(diaryCalDate.substring(6, 8)));
+            day = diaryCalDate.substring(10, 12);
+        }
+
         String date = year + "-" + month + "-" + day;
         String viewDate = year + "년 " + month + "월 " + day + "일";
         String fireDate = "/" + year + month + day + "/";
