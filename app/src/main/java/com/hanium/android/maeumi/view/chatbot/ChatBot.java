@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,7 +58,7 @@ public class ChatBot extends AppCompatActivity implements BotReply {
     ChatAdapter chatAdapter;
     List<Message> messageList = new ArrayList<>();  //채팅 내역
     EditText editMessage;
-    Button btnSend;
+    TextView btnSend;
     ImageView chatBotGuideBtn;
 
     //dialogFlow

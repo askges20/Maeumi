@@ -39,6 +39,8 @@ import com.hanium.android.maeumi.model.Comment;
 import com.hanium.android.maeumi.adapters.CommentAdapter;
 import com.hanium.android.maeumi.model.Post;
 
+import org.w3c.dom.Text;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -70,7 +72,7 @@ public class PostContent extends AppCompatActivity {
     ListView commentList; //댓글 목록
     LinearLayout writeCommentArea;  //댓글 작성 영역
     EditText writtenCommentText;    //댓글 작성칸
-    Button addCommentBtn;   //댓글 등록 버튼
+    TextView addCommentBtn;   //댓글 등록 버튼
 
     InputMethodManager imm; //키보드 제어
 

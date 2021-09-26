@@ -134,7 +134,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/photo_icon"
-                        app:tint="@android:color/holo_green_dark" />
+                        app:tint="@color/chat_blue" />
 
                     <TextView
                         android:id="@+id/addPhotoBtn"
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="사진 첨부"
-                        android:textColor="@android:color/holo_green_dark" />
+                        android:textColor="@color/chat_blue" />
 
                 </LinearLayout>
 

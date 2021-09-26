@@ -27,7 +27,7 @@
         android:id="@+id/boardWriteAnonymousBtnArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical|end"
+        android:gravity="right|center_vertical"
         android:orientation="horizontal"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

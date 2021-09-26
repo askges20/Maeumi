@@ -71,7 +71,7 @@
     <!-- Background -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/lightgreen"/>
+            <solid android:color="@color/new_beige"/>
             <size android:width="200dp" android:height="200dp"/>
             <padding android:top="10dp" android:bottom="10dp"
                 android:left="10dp" android:right="10dp"/>

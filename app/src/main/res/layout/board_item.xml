@@ -30,7 +30,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="제목"
-                android:textColor="#8BC34A"
+                android:textColor="@color/new_beige"
                 android:textSize="18sp" />
 
             <TextView

@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시청 완료"
-            android:textColor="@android:color/holo_green_dark" />
+            android:textColor="@color/chat_blue" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -54,7 +54,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
             android:src="@drawable/check_icon"
-            android:tint="@android:color/holo_green_dark" />
+            android:tint="@color/chat_blue" />
     </LinearLayout>
 
 </LinearLayout>
