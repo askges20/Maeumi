@@ -19,7 +19,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maeumi">
-        <activity android:name=".view.diary.DiaryEmoticonPick"></activity>
+        <activity android:name=".view.diary.DiaryGuide"></activity>
+        <activity android:name=".view.diary.DiaryEmoticonPick" />
         <activity android:name=".view.guide.Guide" />
         <activity
             android:name=".view.loading.ActivitySplash"
@@ -54,12 +55,11 @@
         <activity
             android:name=".view.diary.DiaryModify"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" /> <!--키보드 밀림 현상 제거-->/>
-
+            android:windowSoftInputMode="adjustNothing" /> <!-- 키보드 밀림 현상 제거 -->
         <activity
             android:name=".view.diary.DiaryWrite"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" /> <!--키보드 밀림 현상 제거-->
+            android:windowSoftInputMode="adjustNothing" /> <!-- 키보드 밀림 현상 제거 -->
         <activity
             android:name=".view.chatbot.ChatBot"
             android:screenOrientation="portrait" />
