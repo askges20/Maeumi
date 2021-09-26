@@ -20,9 +20,9 @@ import com.hanium.android.maeumi.R;
 
 public class Profile extends AppCompatActivity {
 
-    Button logoutBtn,goToHeartProgramBtn;
+    Button goToHeartProgramBtn;
     TextView userName, userEmail, userAlias, userSchool, userGender, userHeartText;
-    ImageView heartProgress;
+    ImageView heartProgress, logoutBtn;
     private String name, email, alias, gender, school;
 
     @Override
@@ -96,7 +96,7 @@ public class Profile extends AppCompatActivity {
     public void signOutBtnEvent(View view) {
         new AlertDialog.Builder(this)
                 .setMessage("로그아웃 하시겠습니까?")
-                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //네 클릭
                         processSignOut();
