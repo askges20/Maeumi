@@ -12,6 +12,7 @@
         android:id="@+id/diaryMainTop"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:background="@drawable/shadow"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,145 +42,117 @@
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/diaryDatePickerContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/diaryMainTop"
-        app:layout_constraintBottom_toTopOf="@+id/diaryMainContent"
-        android:weightSum="3"
-        android:orientation="horizontal">
-
-        <DatePicker
-            android:id="@+id/diaryDatePicker"
-            android:layout_width="0dp"
-            android:layout_weight="2.5"
-            android:layout_height="100dp"
-            android:datePickerMode="spinner"
-            android:theme="@style/DatePicker"
-            android:calendarViewShown="false"/>
-
-       <LinearLayout
-           android:layout_width="0dp"
-           android:layout_weight="0.5"
-           android:paddingHorizontal="10dp"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
-
-           <Button
-               android:id="@+id/completeDateChangeBtn"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:onClick="getChangedDate"
-               android:layout_marginBottom="3dp"
-               android:text="완료" />
-
-           <Button
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:onClick="closeDatePicker"
-               android:text="닫기" />
-       </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/diaryMainContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/diaryDatePickerContainer">
+        app:layout_constraintTop_toBottomOf="@id/diaryMainTop">
 
         <LinearLayout
-            android:background="@drawable/diary_border"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
-            android:layout_weight="7"
+            android:background="@drawable/diary_border"
             android:orientation="vertical"
             android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="7"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:padding="10dp">
 
+                <TextView
+                    android:id="@+id/writeDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0000/00/00" />
+
+                <Button
+                    android:id="@+id/diaryDateChangeOpenBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="openDatePicker"
+                    android:text="날짜 변경" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/diaryDatePickerContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <DatePicker
+                    android:id="@+id/diaryDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    android:theme="@style/DatePicker" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/writeDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="7"
-                        android:padding="5dp"
-                        android:text="0000/00/00" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp">
 
                     <Button
-                        android:id="@+id/diaryDateChangeOpenBtn"
+                        android:id="@+id/completeDateChangeBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="openDatePicker"
-                        android:text="날짜 변경" />
+                        android:layout_marginBottom="3dp"
+                        android:onClick="getChangedDate"
+                        android:text="완료" />
 
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="7dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/diaryTitleWriteText"
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="3"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:padding="5dp"
-                        android:text="제목"
-                        android:textSize="18sp" />
-
+                        android:onClick="closeDatePicker"
+                        android:text="닫기" />
                 </LinearLayout>
+
+
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/diaryTitleWriteText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="제목"
+                android:inputType="textPersonName"
+                android:padding="15dp" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/black" />
-
+                android:layout_height="1dp"
+                android:background="@color/new_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:padding="3dp"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <ScrollView
                         android:layout_width="match_parent"
@@ -195,10 +168,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
+                                android:background="@null"
                                 android:ems="10"
                                 android:gravity="start|top"
+                                android:hint="내용"
                                 android:inputType="textMultiLine"
-                                android:padding="15dp" />
+                                android:minLines="10"
+                                tools:inputType="textMultiLine" />
 
                             <ImageView
                                 android:id="@+id/testImgView"
@@ -207,7 +183,6 @@
                                 android:adjustViewBounds="true" />
 
                         </LinearLayout>
-
 
 
                     </ScrollView>
@@ -219,7 +194,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="bottom"
                     android:orientation="horizontal">
 
@@ -248,10 +222,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:visibility="gone"
                         android:layout_weight="1"
                         android:onClick="setEmptyImg"
-                        android:text="사진 없애기" />
+                        android:text="사진 없애기"
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </LinearLayout>

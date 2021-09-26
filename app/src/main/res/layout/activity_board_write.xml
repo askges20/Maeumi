@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="게시글 작성"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
@@ -44,19 +44,19 @@
         android:id="@+id/boardWriteContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="20dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/writePostTop"
         tools:layout_editor_absoluteX="20dp">
 
         <LinearLayout
-            android:background="@drawable/diary_border"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
-            android:layout_weight="7"
+            android:background="@drawable/diary_border"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -69,13 +69,12 @@
                 android:ems="10"
                 android:hint="제목"
                 android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textSize="20sp" />
+                android:padding="15dp" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/diaryGray" />
+                android:layout_height="1dp"
+                android:background="@color/new_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,8 +104,7 @@
                             android:gravity="start|top"
                             android:hint="내용"
                             android:inputType="textMultiLine"
-                            android:textSize="20dp"
-                            android:minLines="10"/>
+                            android:minLines="10" />
 
                         <ImageView
                             android:id="@+id/imgView"
@@ -125,29 +123,29 @@
                     android:gravity="bottom"
                     android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:id="@+id/addPhoto"
+                    <LinearLayout
+                        android:id="@+id/addPhoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            app:srcCompat="@drawable/photo_icon"
+                            app:tint="@android:color/holo_green_dark" />
+
+                        <TextView
+                            android:id="@+id/addPhotoBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_weight="1"
-                            android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                app:srcCompat="@drawable/photo_icon"
-                                app:tint="@android:color/holo_green_dark" />
-
-                            <TextView
-                                android:id="@+id/addPhotoBtn"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginLeft="5dp"
-                                android:text="사진 첨부"
-                                android:textColor="@android:color/holo_green_dark"
-                                android:textSize="20sp" />
+                            android:layout_marginStart="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:text="사진 첨부"
+                            android:textColor="@android:color/holo_green_dark" />
 
                     </LinearLayout>
 
@@ -182,8 +180,8 @@
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            app:tint="@color/pinkred"
-                            app:srcCompat="@drawable/pen_icon" />
+                            app:srcCompat="@drawable/pen_icon"
+                            app:tint="@color/pinkred" />
 
                         <TextView
                             android:id="@+id/saveWrite"
@@ -193,7 +191,6 @@
                             android:padding="10dp"
                             android:text="작성 완료"
                             android:textColor="@color/pinkred"
-                            android:textSize="20sp"
                             app:tint="@color/gray" />
                     </LinearLayout>
 
