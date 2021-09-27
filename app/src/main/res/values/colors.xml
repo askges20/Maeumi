@@ -29,4 +29,15 @@
     <color name="accent">#997A7A</color>
     <color name="new_gray">#BDBDBD</color>
     <color name="new_beige">#CCA3A3</color>
+
+    <!-- 메인화면 버튼 테스트 색상  -->
+    <color name="main_test_pink">#E8CCCC </color>
+    <color name="main_test_blue">#CED2E0 </color>
+    <color name="main_test_beige">#E6D8DD </color>
+
+    <!-- 버튼 테스트 색상  -->
+    <color name="btn_1">#D1CDD1</color>
+    <color name="btn_2">#dedcde</color>
+    <color name="btn_3">#D6D3C9</color>
+
 </resources>
