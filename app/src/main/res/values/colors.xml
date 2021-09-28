@@ -26,8 +26,7 @@
     <color name="main_blue">#D3D7E6</color>
     <color name="main_beige">#EBDDE1</color>
     <color name="chat_blue">#8F9CCC</color>
-    <!--<color name="accent">#997A7A</color>-->
-    <color name="accent">#A0BAED</color>
+    <color name="accent">#0054FF</color>
 
     <color name="new_gray">#BDBDBD</color>
     <color name="new_beige">#CCA3A3</color>
