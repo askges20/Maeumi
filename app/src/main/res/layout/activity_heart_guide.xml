@@ -148,7 +148,8 @@
                     app:srcCompat="@drawable/z_heart_10" />
             </LinearLayout>
 
-            <TextView
+            <Button
+                android:layout_marginTop="5dp"
                 android:id="@+id/goToHeartProgramBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -157,7 +158,7 @@
                 android:padding="20dp"
                 android:text="마음 채우러 가기"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
         </LinearLayout>
     </ScrollView>
