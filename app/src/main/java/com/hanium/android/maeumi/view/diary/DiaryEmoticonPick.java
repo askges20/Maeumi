@@ -58,7 +58,7 @@ public class DiaryEmoticonPick extends AppCompatActivity {
 
     public void onEmoticonClick(View view) {
         int hello = view.getId();
-        view.setBackgroundResource(R.color.pinkred);
+        view.setBackgroundResource(R.color.diary_pinkred);
 
         if (hello != glad.getId()) {
             glad.setBackgroundResource(R.color.white);

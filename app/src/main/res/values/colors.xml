@@ -13,6 +13,7 @@
     <color name="lightgreen">#BCE067</color>
     <color name="lightgray">#EAEAEA</color>
     <color name="pinkred">#FF9999</color>
+    <color name="diary_pinkred">#FFB3B3</color>
 
     <color name="diaryGray">#a6a6a6</color>
 
@@ -31,10 +32,7 @@
     <color name="new_gray">#BDBDBD</color>
     <color name="new_beige">#CCA3A3</color>
 
-    <!-- 버튼 테스트 색상  -->
-    <color name="btn_1">#D1CDD1</color>
-    <color name="btn_2">#dedcde</color>
-    <!--color name="btn_3">#FFF2E6</color>1번 희미한 색-->
-    <color name="btn_3">#FAE7D4</color>
+    <!-- 버튼 색상  -->
+    <color name="btn_beige">#FAEDE1</color>
 
 </resources>
