@@ -85,6 +85,9 @@ public class DiaryWrite extends AppCompatActivity {
         dateText.setText(diaryCalDate);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         //키보드 밀림 현상 제거
+
+
+        getChangedDate(null);   //오늘 날짜로 초기화
     }
 
 //    // 빈곳 클릭 시 이벤트
@@ -257,13 +260,7 @@ public class DiaryWrite extends AppCompatActivity {
                     if (snapshot.exists()) {
                         Toast.makeText(DiaryWrite.this, "해당 날짜에 이미 일기가 존재합니다.", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (today.after(pickDate)) {
-                            dateText.setText(viewDate);
-                            diaryDatePickerContainer.setVisibility(View.GONE);
-                            Toast.makeText(DiaryWrite.this, "날짜 변경 완료", Toast.LENGTH_SHORT).show();
-                            DiaryModel.setChangedDate(fireDate, viewDate);
-                            diaryDateChangeOpenBtn.setVisibility(View.VISIBLE);
-                        } else if (today.equals(pickDate)) {
+                        if (today.after(pickDate) || today.equals(pickDate)) {
                             dateText.setText(viewDate);
                             diaryDatePickerContainer.setVisibility(View.GONE);
                             Toast.makeText(DiaryWrite.this, "날짜 변경 완료", Toast.LENGTH_SHORT).show();
@@ -304,7 +301,7 @@ public class DiaryWrite extends AppCompatActivity {
         }
         if(year.equals("0") || day.equals("00")){
             year = diaryCalDate.substring(0, 4);
-            month = Integer.toString(Integer.parseInt(diaryCalDate.substring(6, 8)));
+            month = diaryCalDate.substring(6, 8);
             day = diaryCalDate.substring(10, 12);
         }
 

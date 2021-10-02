@@ -112,13 +112,11 @@ public class DiaryEmoticonPick extends AppCompatActivity {
 
             if(diaryFrom.equals("write")){
                 Toast.makeText(DiaryEmoticonPick.this, "일기 작성완료", Toast.LENGTH_SHORT).show();
-                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum,diaryWriteDate);
-                finish();
             }else{
                 Toast.makeText(DiaryEmoticonPick.this, "일기 수정완료", Toast.LENGTH_SHORT).show();
-                DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum,diaryWriteDate);
-                finish();
             }
+            DiaryModel.diaryWrite(diaryTitle, diaryContent, diaryEmoticonNum,diaryWriteDate);
+            finish();
         }
 
     }
