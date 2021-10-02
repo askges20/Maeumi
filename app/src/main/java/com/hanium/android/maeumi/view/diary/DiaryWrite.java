@@ -58,6 +58,8 @@ public class DiaryWrite extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference diaryRef;
 
+    boolean isWrittenDate = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +122,9 @@ public class DiaryWrite extends AppCompatActivity {
             Toast.makeText(DiaryWrite.this, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else if (diaryContent.equals("")) {
             Toast.makeText(DiaryWrite.this, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (isWrittenDate) {
+            Toast.makeText(DiaryWrite.this, "해당 날짜에 이미 일기가 존재합니다.", Toast.LENGTH_SHORT).show();
+        }else {
             if (imgName != null) {
                 DiaryModel.setImgNameBitmap(imgName);
             }
@@ -259,6 +263,7 @@ public class DiaryWrite extends AppCompatActivity {
                     // 일기가 이미 있는경우
                     if (snapshot.exists()) {
                         Toast.makeText(DiaryWrite.this, "해당 날짜에 이미 일기가 존재합니다.", Toast.LENGTH_SHORT).show();
+                        isWrittenDate = true;    //해당 날짜에 이미 일기가 있음
                     } else {
                         if (today.after(pickDate) || today.equals(pickDate)) {
                             dateText.setText(viewDate);
