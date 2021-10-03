@@ -91,7 +91,6 @@ public class ActivitySplash extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 if (userFromFB.isEmailVerified()) {
-                    // Toast.makeText(ActivitySplash.this, "로그인 성공", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(ActivitySplash.this, MainActivity.class)); //메인 화면으로 이동
                     Log.d(TAG, "로그인 계정 uid : " + userFromFB.getUid());
                     finish();   //현재 액티비티(로그인 화면) 종료
