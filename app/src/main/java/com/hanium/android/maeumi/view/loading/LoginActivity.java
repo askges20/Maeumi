@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         }
                     } else {
+                        ad.dismiss();
                         Toast.makeText(LoginActivity.this, "아이디 혹은 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                     }
             }
