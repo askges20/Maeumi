@@ -2,10 +2,8 @@ package com.hanium.android.maeumi.view.selftest;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,10 +13,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hanium.android.maeumi.view.heartprogram.HeartGuide;
-import com.hanium.android.maeumi.view.loading.LoginUser;
 import com.hanium.android.maeumi.R;
 import com.hanium.android.maeumi.view.board.Board;
+import com.hanium.android.maeumi.view.heartprogram.HeartGuide;
+import com.hanium.android.maeumi.view.loading.LoginUser;
 
 public class TestResult extends AppCompatActivity {
 
@@ -35,7 +33,6 @@ public class TestResult extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_result);
-        System.out.println("테스트 결과 화면");
 
         victimScoreText = findViewById(R.id.victimScore);
         perpetrationScoreText = findViewById(R.id.perpetrationScore);
@@ -72,39 +69,41 @@ public class TestResult extends AppCompatActivity {
     }
 
     public void setTestResult() {
+        String alias = LoginUser.getInstance().getAlias();  //사용자 닉네임
+
         //피해 정도 결과
         if (victimScore <= 6) {  //0~6점 아주 약함
-            victimResultDetailText.setText(R.string.test_result_victim_1);
+            victimResultDetailText.setText(alias + getString(R.string.test_result_victim_1));
             victimScoreText.setText("아주 약함");
         } else if (victimScore <= 13) {  //7~13점 약함
-            victimResultDetailText.setText(R.string.test_result_victim_2);
+            victimResultDetailText.setText(alias + getString(R.string.test_result_victim_2));
             victimScoreText.setText("약함");
         } else if (victimScore <= 22) {  //14~22점 보통
-            victimResultDetailText.setText(R.string.test_result_victim_3);
+            victimResultDetailText.setText(alias + getString(R.string.test_result_victim_3));
             victimScoreText.setText("보통");
         } else if (victimScore <= 29) {  //23~29점 심함
-            victimResultDetailText.setText(R.string.test_result_victim_4);
+            victimResultDetailText.setText(alias + getString(R.string.test_result_victim_4));
             victimScoreText.setText("심함");
         } else {    //30~36점 아주 심함
-            victimResultDetailText.setText(R.string.test_result_victim_5);
+            victimResultDetailText.setText(alias + getString(R.string.test_result_victim_5));
             victimScoreText.setText("아주 심함");
         }
 
         //가해 정도 결과
         if (perpetrationScore <= 6) {
-            perpetrationResultDetailText.setText(R.string.test_result_perpetration_1);
+            perpetrationResultDetailText.setText(alias + getString(R.string.test_result_perpetration_1));
             perpetrationScoreText.setText("아주 약함");
         } else if (perpetrationScore <= 13) {
-            perpetrationResultDetailText.setText(R.string.test_result_perpetration_2);
+            perpetrationResultDetailText.setText(alias + getString(R.string.test_result_perpetration_2));
             perpetrationScoreText.setText("약함");
         } else if (perpetrationScore <= 22) {
-            perpetrationResultDetailText.setText(R.string.test_result_perpetration_3);
+            perpetrationResultDetailText.setText(alias + getString(R.string.test_result_perpetration_3));
             perpetrationScoreText.setText("보통");
         } else if (perpetrationScore <= 29) {
-            perpetrationResultDetailText.setText(R.string.test_result_perpetration_4);
+            perpetrationResultDetailText.setText(alias + getString(R.string.test_result_perpetration_4));
             perpetrationScoreText.setText("심함");
         } else {
-            perpetrationResultDetailText.setText(R.string.test_result_perpetration_5);
+            perpetrationResultDetailText.setText(alias + getString(R.string.test_result_perpetration_5));
             perpetrationScoreText.setText("아주 심함");
         }
     }
