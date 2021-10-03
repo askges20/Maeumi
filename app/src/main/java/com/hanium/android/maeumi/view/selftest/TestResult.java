@@ -47,9 +47,6 @@ public class TestResult extends AppCompatActivity {
             perpetrationScore = Integer.parseInt(LoginUser.getInstance().getPerpetrationScore());
         }
 
-        System.out.println("피해정도:"+victimScore);
-        System.out.println("가해정도:"+perpetrationScore);
-
         //프로그레스바 나타내기
         victimProgress = findViewById(R.id.victimProgressBar);
         victimProgress.setMax(36);
@@ -111,7 +108,6 @@ public class TestResult extends AppCompatActivity {
     public void goToBoard(View view) {
         Intent intent = new Intent(TestResult.this, Board.class);
         startActivity(intent);
-        System.out.println("Move To Board");
     }
 
     //이전 화면으로 이동

@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +19,6 @@ import com.hanium.android.maeumi.R;
 
 public class Profile extends AppCompatActivity {
 
-    Button goToHeartProgramBtn;
     TextView userName, userEmail, userAlias, userSchool, userGender, userHeartText;
     ImageView heartProgress, logoutBtn;
     private String name, email, alias, gender, school;
