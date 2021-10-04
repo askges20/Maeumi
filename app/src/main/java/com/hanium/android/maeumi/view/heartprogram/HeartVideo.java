@@ -3,17 +3,13 @@ package com.hanium.android.maeumi.view.heartprogram;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,7 +38,6 @@ public class HeartVideo extends YouTubeBaseActivity {
     YouTubePlayerView youTubePlayerView;
     YouTubePlayer youtubePlayer;
     SeekBar seekBar;
-    Button btn; //영상 재생(일시정지) 버튼
 
     private boolean isWatched;
     private static String API_KEY;
@@ -88,6 +83,13 @@ public class HeartVideo extends YouTubeBaseActivity {
 
     //플레이어 초기화
     private void initPlayer() {
+        AlertDialog.Builder helpPopup = new AlertDialog.Builder(HeartVideo.this);
+        AlertDialog ad = helpPopup.create();
+        ad.setTitle("영상 로딩 중");
+        ad.setIcon(R.drawable.maeumi_main_img);
+        ad.setMessage("잠시만 기다려주세요.");
+        ad.setCancelable(false);
+
         youTubePlayerView = findViewById(R.id.youtubeView);
         youTubePlayerView.initialize(API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -98,20 +100,17 @@ public class HeartVideo extends YouTubeBaseActivity {
                 player.setPlaybackEventListener(new YouTubePlayer.PlaybackEventListener() {
                     @Override
                     public void onPlaying() {   //play() 또는 사용자 작업으로 재생이 시작될 때
-                        System.out.println("다시 재생");
                         timer.finishPause();    //다시 시간 카운트
                     }
 
                     @Override
                     public void onPaused() {    //pause() 또는 사용자 작업으로 재생이 일시중지될 때
-                        System.out.println("일시정지");
                         timer.pause();  //스레드 일시중지 (시간 카운트 멈춤)
                     }
 
                     @Override
                     public void onStopped() {   //일시중지 외의 이유로 재생이 중지될 때
                         System.out.println("영상 정지됨");
-                        //timer.pause();
                     }
 
                     @Override
@@ -128,16 +127,14 @@ public class HeartVideo extends YouTubeBaseActivity {
                 player.setPlayerStateChangeListener(new YouTubePlayer.PlayerStateChangeListener() {
                     @Override
                     public void onLoading() {
-                        System.out.println("영상 로딩 중");
+                        ad.show();
                     }
 
                     @Override
                     public void onLoaded(String s) {
-                        System.out.println("영상 로딩 완료");
+                        ad.dismiss();
                         int videoTimemillis = youtubePlayer.getDurationMillis();
                         long videoTimeSec = TimeUnit.MILLISECONDS.toSeconds(videoTimemillis);
-                        System.out.println("영상 길이 : " + videoTimeSec + "초");
-
                         setSeekbar(videoTimeSec);
                     }
 
@@ -150,7 +147,6 @@ public class HeartVideo extends YouTubeBaseActivity {
                     public void onVideoStarted() {
                         System.out.println("영상 시작");
                         if(timer.getState() == Thread.State.TERMINATED) { //이미 스레드가 종료된 상태(시청을 완료한 상태)
-                            System.out.println("이미 시청을 완료한 영상, 스레드 시작하지 않음");
                             return;
                         }
                         timer.start();    //스레드 생성, 시작
@@ -158,7 +154,6 @@ public class HeartVideo extends YouTubeBaseActivity {
 
                     @Override
                     public void onVideoEnded() {
-                        System.out.println("영상 끝");
                         timer.pause();
                     }
 

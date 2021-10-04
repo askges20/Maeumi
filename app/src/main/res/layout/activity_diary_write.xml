@@ -89,7 +89,7 @@
             <DatePicker
                 android:id="@+id/diaryDatePicker"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="150dp"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
                 android:theme="@style/DatePicker" />

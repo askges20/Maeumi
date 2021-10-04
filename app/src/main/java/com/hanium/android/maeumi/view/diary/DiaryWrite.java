@@ -268,7 +268,6 @@ public class DiaryWrite extends AppCompatActivity {
                         if (today.after(pickDate) || today.equals(pickDate)) {
                             dateText.setText(viewDate);
                             diaryDatePickerContainer.setVisibility(View.GONE);
-                            Toast.makeText(DiaryWrite.this, "날짜 변경 완료", Toast.LENGTH_SHORT).show();
                             DiaryModel.setChangedDate(fireDate, viewDate);
                             diaryDateChangeOpenBtn.setVisibility(View.VISIBLE);
                         } else {
