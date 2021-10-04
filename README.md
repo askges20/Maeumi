@@ -78,22 +78,22 @@
 <h3>메인 화면</h3>
 <div align="center">
 
-  <img src="https://user-images.githubusercontent.com/75527311/134384614-79878ee1-fb1c-496f-86a5-6853e5d4b657.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/134384641-07895109-b147-4098-aaa8-1a51c9272cfb.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826539-8c03e4c0-0e19-47af-b751-192e593bc2ab.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826572-d5aaf8a0-6bd0-4bf0-a9ae-27da423af555.jpg" width="300">
   <p>앱의 메인 화면 및 사이드바</p>
 </div>
 
 <h3>학교폭력 진단테스트</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/134384701-da12f64d-4d99-4de2-bb0b-3ee12e359e77.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/134384731-ada6c1d3-a939-4a23-8281-e2742bf01c53.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826607-4d25b43d-027b-4169-ad23-9d21332b0a56.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826635-d4ba68c6-6d0b-499b-a0b0-952ad85f3481.jpg" width="300">
   <p>학교폭력 진단테스트 진행 및 결과 화면</p>
 </div>
 
 <h3>학교폭력 AI 상담 채팅</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/134384942-5417ea85-3948-4a51-8888-03ba8cc3213e.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/134391026-6cb523d9-a5b9-410c-a3f8-4666f1e7458a.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826678-ce4b89d3-b056-4e60-8806-0d7ee8917a6e.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826707-be17e7c7-ce5f-44dd-b501-b46feec5cb77.jpg" width="300">
   <p>예상 질문을 제시함으로써 원활한 상담 진행을 유도하고, 진행 과정에서 학교폭력 상담 기관 안내 등의 정보를 제공함</p>
 </div>
 
@@ -107,15 +107,15 @@
 
 <h3>나만의 일기장</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/134384964-cbc29995-bf17-45a7-a77e-291f0188faa8.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/134384994-796d9d73-6635-4dab-80e5-56b586238cb2.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826747-87389a0c-f622-4a6c-bb40-dbe1f5a4252d.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135827294-af9da3be-dbda-4d8e-9856-8d64ca5d4bf4.jpg" width="300">
   <p>일기 내용 작성 및 사진 첨부를 통해 학교폭력 피해 기록을 남길 수 있음</p>
 </div>
 
 <h3>게시판</h3>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/75527311/134385028-74779912-3981-4a25-a311-a87771000ce5.jpg" width="300">
-  <img src="https://user-images.githubusercontent.com/75527311/134385066-dd10747a-78d0-4a6d-b6dd-5e324a8624e4.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826802-03c50e57-4818-40e2-b0bc-c60a28cce601.jpg" width="300">
+  <img src="https://user-images.githubusercontent.com/75527311/135826836-46922584-2edd-4233-b879-972220f17943.jpg" width="300">
   <p>4개의 카테고리가 있는 게시판 기능</p>
 </div>
 
@@ -173,6 +173,7 @@
 
 <h3>9월 이후 계획</h3>
 
-- 사용자 테스트와 자체 피드백을 통한 앱 개선 방안 논의
-- 지속적인 디버깅 및 오류 픽스, UI/UX 개선
-- 2021 한이음 공모전 참가 (1차 서면평가 합격)
+- 사용자 테스트와 자체 피드백을 통한 앱 개선 방안 논의 ✔
+- 지속적인 디버깅 및 오류 픽스, UI/UX 개선 ✔
+- 2021 한이음 공모전 참가 - 현재 1차 서면평가 합격, 2차 준비 중 ✔
+- ACK 2021 학술대회 참가 - 논문 작성 중 ✔
