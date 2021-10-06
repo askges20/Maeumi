@@ -133,11 +133,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/white"
             android:onClick="onSignUpClick"
             android:layout_marginTop="20dp"
-            android:text="회원가입"
-            android:textColor="@android:color/black" />
+            android:text="회원가입" />
 
 
     </LinearLayout>
@@ -169,10 +167,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/white"
             android:onClick="onLoginClick"
-            android:text="로그인 하러가기"
-            android:textColor="@android:color/black" />
+            android:text="로그인 하러가기" />
 
 
     </LinearLayout>
