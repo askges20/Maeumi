@@ -207,6 +207,19 @@
         <item>@drawable/guide16</item>
         <item>@drawable/guide17</item>
         <item>@drawable/guide18</item>
+        <item>@drawable/guide19</item>
+        <item>@drawable/guide20</item>
+        <item>@drawable/guide21</item>
+        <item>@drawable/guide22</item>
+        <item>@drawable/guide23</item>
+        <item>@drawable/guide24</item>
+        <item>@drawable/guide25</item>
+        <item>@drawable/guide26</item>
+        <item>@drawable/guide27</item>
+        <item>@drawable/guide28</item>
+        <item>@drawable/guide29</item>
+        <item>@drawable/guide30</item>
+        <item>@drawable/guide31</item>
     </array>
 
 </resources>

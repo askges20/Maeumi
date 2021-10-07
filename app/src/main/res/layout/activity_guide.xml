@@ -39,12 +39,12 @@
             android:visibility="invisible" />
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
 
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -74,23 +74,22 @@
             android:text="다음" />
     </LinearLayout>
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="71dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideTopBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideTopBar"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/guideImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_gravity="center"
             app:srcCompat="@drawable/guide1" />
     </FrameLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
