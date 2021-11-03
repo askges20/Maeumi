@@ -46,6 +46,7 @@ public class HeartVideo extends YouTubeBaseActivity {
     private static String description;
 
     int heartNum;
+    TextView watchedText;
 
     YoutubeCounter timer = new YoutubeCounter(this);
     boolean isCompleted = false;
@@ -68,6 +69,7 @@ public class HeartVideo extends YouTubeBaseActivity {
         titleText.setText(title);
         TextView descriptionText = findViewById(R.id.youtubeViewDescText);
         descriptionText.setText(description);
+        watchedText = findViewById(R.id.watchedText);  // 시청 완료 텍스트
     }
 
     //영상 재생 또는 일시정지
@@ -184,6 +186,7 @@ public class HeartVideo extends YouTubeBaseActivity {
             seekBar.setProgress(seekBar.getMax());  //최대로 표시
             timer.finish(); //타이머 정지
             isCompleted = true;
+            watchedText.setTextColor(Color.parseColor("#FF9999"));
 
             updateFBVideo();
             return;
@@ -244,7 +247,7 @@ public class HeartVideo extends YouTubeBaseActivity {
             @Override
             public void onClick(View v) {
                 //마음 온도 60점 달성 시 게시판 기능 해제 알림
-                if (heartNum == 60) {
+                if (heartNum == 25) {   //60
                     showBoardOpenPopup();
                     addNotifyToDB();    //DB에 알림 저장
                 } else {

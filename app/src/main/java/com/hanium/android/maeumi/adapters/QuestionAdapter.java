@@ -103,16 +103,16 @@ public class QuestionAdapter extends BaseAdapter {
                 int selectedNum = 0;
                 switch (checkedId) {
                     case R.id.option1:
-                        selectedNum = 0;
+                        selectedNum = 0;    // 0
                         break;
                     case R.id.option2:
-                        selectedNum = 1;
+                        selectedNum = 5;    // 1
                         break;
                     case R.id.option3:
-                        selectedNum = 2;
+                        selectedNum = 10;    // 2
                         break;
                     case R.id.option4:
-                        selectedNum = 3;
+                        selectedNum = 15;    // 3
                         break;
                 }
                 setSelectedNum(position, selectedNum);  //선택 반영
@@ -148,12 +148,12 @@ public class QuestionAdapter extends BaseAdapter {
     public void calSelectedOptions() {
         System.out.println("테스트 결과 계산하기");
         int optionNum;
-        for (int i = 0; i <= 11; i++) {
+        for (int i = 0; i <= 1; i++) { //i <= 11
             optionNum = items.get(i).getSelectedOption();
             victimValue += optionNum;    //피해 정도 합산
             answers += optionNum;   //문자열 마지막에 추가
         }
-        for (int j = 12; j < items.size(); j++) {
+        for (int j = 2; j <= 3; j++) {   // j = 12; j < items.size()
             optionNum = items.get(j).getSelectedOption();
             perpetrationValue += optionNum;  //가해 정도 합산
             answers += optionNum;   //문자열 마지막에 추가

@@ -87,7 +87,7 @@
                 android:thumb="@drawable/video_seekbar_thumb" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/watchedText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="시청 완료" />
