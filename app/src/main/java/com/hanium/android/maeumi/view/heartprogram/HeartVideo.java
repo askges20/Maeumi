@@ -247,7 +247,7 @@ public class HeartVideo extends YouTubeBaseActivity {
             @Override
             public void onClick(View v) {
                 //마음 온도 60점 달성 시 게시판 기능 해제 알림
-                if (heartNum == 25) {   //60
+                if (heartNum == 60) {
                     showBoardOpenPopup();
                     addNotifyToDB();    //DB에 알림 저장
                 } else {

@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
             TextView dialogMessage = (TextView) dialog.findViewById(android.R.id.message);
             dialogMessage.setTextSize(16);
-        } else if (heart < 25) {   //마음 온도가 60 미만인 경우 게시판 이용 불가
+        } else if (heart < 60) {   //마음 온도가 60 미만인 경우 게시판 이용 불가
             showBoardBeforeHeartPopup(R.layout.board_before_heart_popup);    //마음 채우기 안내 팝업
         } else {
             Intent intent = new Intent(MainActivity.this, Board.class);

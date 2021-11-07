@@ -81,7 +81,7 @@ public class TestClick extends AppCompatActivity {
         String json = "";
 
         try {
-            InputStream is = getAssets().open("questions_tmp.json");    // 원본은 questions.json
+            InputStream is = getAssets().open("questions.json");    // 원본은 questions.json
             int fileSize = is.available();
 
             byte[] buffer = new byte[fileSize];
@@ -137,36 +137,6 @@ public class TestClick extends AppCompatActivity {
 
         //이미지 이동 애니메이션
         TranslateAnimation ani = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, (float)(cntChecked - 1) * 2.2f,
-                Animation.RELATIVE_TO_SELF, (float)cntChecked * 2.2f,
-                Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f);
-        ani.setFillAfter(true);
-        ani.setDuration(1000);
-        maeumiImg.startAnimation(ani);
-
-        /*
-        double progressGoal = (double) cntChecked / (double) total * 100;
-        System.out.println("진행 정도 : " + progress);
-
-        //프로그레스바 반영
-        final Timer t = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                progress += 0.1;
-                if (progress >= progressGoal){
-                    progress = progressGoal;
-                    t.cancel();
-                }
-                progressBar.setProgress((int)progress);
-            }
-        };
-
-        t.schedule(timerTask, 0, 4);
-
-        //이미지 이동 애니메이션
-        TranslateAnimation ani = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, (float)(cntChecked - 1) * 0.37f,
                 Animation.RELATIVE_TO_SELF, (float)cntChecked * 0.37f,
                 Animation.RELATIVE_TO_SELF, 0.0f,
@@ -174,7 +144,6 @@ public class TestClick extends AppCompatActivity {
         ani.setFillAfter(true);
         ani.setDuration(500);
         maeumiImg.startAnimation(ani);
-         */
     }
 
     public void goToBack(View view) {   //뒤로가기 버튼 클릭 시
